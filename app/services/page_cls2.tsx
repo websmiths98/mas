@@ -51,11 +51,11 @@ export default function ServicesPage() {
 
       <div className="relative z-10 flex flex-1 pt-32 px-10 pb-10 gap-8 overflow-hidden">
         
-        {/* LEFT COLUMN */}
-        <div className="flex w-[320px] flex-col gap-8 shrink-0 overflow-y-auto no-scrollbar border-r border-white/5 pr-8">
+        {/* LEFT COLUMN: CONTROLLED BORDERS MENU */}
+        <div className="flex w-[320px] flex-col gap-6 shrink-0 overflow-y-auto no-scrollbar border-r border-white/5 pr-6">
           <div className="space-y-2 shrink-0">
             <span className="text-[10px] font-black tracking-[0.4em] uppercase text-cyan-500">Logistics Excellence</span>
-            <h1 className="text-4xl font-black tracking-tighter uppercase text-white leading-none">Our<br />Services</h1>
+            <h1 className="text-4xl font-black tracking-tighter uppercase text-white">Our Services</h1>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -69,7 +69,7 @@ export default function ServicesPage() {
                   className={cn(
                     "relative flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 cursor-pointer",
                     isActive 
-                      ? "border-cyan-500/30 bg-white/5 shadow-[0_0_20px_rgba(6,182,212,0.05)] translate-x-2" 
+                      ? "border-cyan-500/40 bg-white/5 shadow-[0_0_15px_rgba(6,182,212,0.1)]" 
                       : "border-transparent hover:bg-white/[0.02]"
                   )}
                 >
@@ -80,14 +80,14 @@ export default function ServicesPage() {
                     <Icon className="h-5 w-5" />
                   </div>
                   
-                  <h3 className={cn("text-xs font-bold uppercase tracking-widest transition-all", isActive ? "text-white" : "text-white/30")}>
+                  <h3 className={cn("text-sm font-bold uppercase tracking-tight transition-all", isActive ? "text-white" : "text-white/30")}>
                     {item.title}
                   </h3>
 
                   {isActive && (
                     <motion.div 
                       layoutId="nav-glow" 
-                      className="absolute right-3 h-1 w-1 bg-cyan-500 rounded-full shadow-[0_0_8px_#06b6d4]" 
+                      className="absolute right-3 h-1.5 w-1.5 bg-cyan-500 rounded-full shadow-[0_0_8px_#06b6d4]" 
                     />
                   )}
                 </div>
@@ -96,79 +96,80 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN */}
-        <div className="relative flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-black">
+        {/* RIGHT COLUMN: CONTROLLED ACTIVE CARD */}
+        <div className="relative flex-1 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-black/20">
+          {/* Image Container */}
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 overflow-hidden"
+              transition={{ duration: 0.7 }}
+              className="absolute inset-0"
             >
-              {/* This inner div handles the slow drift to prevent exit stuttering */}
-              <motion.div
-                initial={{ scale: 1.15, x: "1%" }}
-                animate={{ scale: 1.05, x: "-1%" }}
-                transition={{ duration: 10, ease: "linear" }}
-                className="absolute inset-0"
-              >
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${SERVICES[active].image})` }}
-                />
-              </motion.div>
-              
-              {/* Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 opacity-90" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${SERVICES[active].image})` }}
+              />
+              {/* Subtle radial and linear overlays to help text pop without obscuring the image */}
+              <div className="absolute inset-0 bg-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             </motion.div>
           </AnimatePresence>
 
-          {/* Details */}
-          <div className="relative h-full flex flex-col justify-end p-20">
+          {/* Details Content */}
+          <div className="relative h-full flex flex-col justify-end p-16">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active + "desc"}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ duration: 0.4 }}
                 className="max-w-2xl"
               >
-                <div className="flex gap-4 mb-6">
+                <div className="flex gap-2 mb-6">
                   {SERVICES[active].highlights.map((h) => (
-                    <span key={h} className="text-[9px] font-black uppercase tracking-[0.3em] text-cyan-500">
+                    <span key={h} className="px-3 py-1 border border-cyan-500/30 bg-black/60 text-[9px] font-black uppercase tracking-widest text-cyan-400 rounded-md">
                       {h}
                     </span>
                   ))}
                 </div>
 
-                <h2 className="text-6xl font-extrabold uppercase tracking-[0.15em] leading-[1.1] mb-10 text-white drop-shadow-2xl">
+                <h2 className="text-7xl font-black uppercase tracking-tighter leading-[0.8] mb-8 text-white drop-shadow-xl">
                   {SERVICES[active].title}
                 </h2>
 
-                <div className="relative pl-10">
-                  <div className="absolute left-0 top-1 bottom-1 w-[1px] bg-gradient-to-b from-transparent via-cyan-500/60 to-transparent" />
-                  <p className="text-base font-light leading-relaxed text-white/90 whitespace-pre-line tracking-wide drop-shadow-lg">
+                {/* Fully Transparent Content Box with a left-accent border */}
+                <div className="relative p-8 border-l-2 border-white/10">
+                   {/* This specific gradient makes the background image visible but protects the text */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent -z-10" />
+                  <p className="text-base font-medium leading-relaxed text-white whitespace-pre-line drop-shadow-md">
                     {SERVICES[active].description}
                   </p>
                 </div>
 
-                <div className="mt-12 flex items-center gap-6">
-                   <div className="h-[1px] w-16 bg-cyan-500/50" />
-                   <span className="text-[9px] font-bold text-white/30 uppercase tracking-[0.5em]">System Archive 0{active + 1}</span>
-                   <div className="flex-1 h-[1px] bg-white/5" />
+                <div className="mt-8 h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
+                   <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    key={active + "progress"}
+                    transition={{ duration: 2, ease: "linear" }}
+                    className="h-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]"
+                   />
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          <div className="absolute top-12 right-12 opacity-5 pointer-events-none select-none">
-             <span className="text-9xl font-black tracking-tighter text-white">0{active + 1}</span>
+          {/* Bottom Watermark */}
+          <div className="absolute bottom-8 right-12 opacity-10 pointer-events-none">
+             <span className="text-8xl font-black tracking-tighter text-white">0{active + 1}</span>
           </div>
         </div>
+
       </div>
     </main>
   );

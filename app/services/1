@@ -51,7 +51,7 @@ export default function ServicesPage() {
 
       <div className="relative z-10 flex flex-1 pt-32 px-10 pb-10 gap-8 overflow-hidden">
         
-        {/* LEFT COLUMN */}
+        {/* LEFT COLUMN: CONTROLLED BORDERS MENU */}
         <div className="flex w-[320px] flex-col gap-8 shrink-0 overflow-y-auto no-scrollbar border-r border-white/5 pr-8">
           <div className="space-y-2 shrink-0">
             <span className="text-[10px] font-black tracking-[0.4em] uppercase text-cyan-500">Logistics Excellence</span>
@@ -96,37 +96,35 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN */}
+        {/* RIGHT COLUMN: CINEMATIC ACTIVE CARD WITH SLIDING BACKGROUND */}
         <div className="relative flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-black">
+          {/* Image Container with Cinematic Slide & Scale */}
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 overflow-hidden"
+              initial={{ opacity: 0, scale: 1.2, x: "2%" }} // Start slightly offset and zoomed
+              animate={{ opacity: 1, scale: 1.1, x: "-2%" }} // Slow drift to the left
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ 
+                duration: 8, // Very slow, continuous slide
+                ease: "linear",
+                opacity: { duration: 0.8 } // Fade in faster than the slide
+              }}
+              className="absolute inset-0"
             >
-              {/* This inner div handles the slow drift to prevent exit stuttering */}
-              <motion.div
-                initial={{ scale: 1.15, x: "1%" }}
-                animate={{ scale: 1.05, x: "-1%" }}
-                transition={{ duration: 10, ease: "linear" }}
-                className="absolute inset-0"
-              >
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${SERVICES[active].image})` }}
-                />
-              </motion.div>
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${SERVICES[active].image})` }}
+              />
               
-              {/* Overlays */}
+              {/* Cinematic Vignette Layers */}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 opacity-90" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-black/20" />
             </motion.div>
           </AnimatePresence>
 
-          {/* Details */}
+          {/* Details Content */}
           <div className="relative h-full flex flex-col justify-end p-20">
             <AnimatePresence mode="wait">
               <motion.div
@@ -134,7 +132,7 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="max-w-2xl"
               >
                 <div className="flex gap-4 mb-6">
@@ -149,13 +147,17 @@ export default function ServicesPage() {
                   {SERVICES[active].title}
                 </h2>
 
+                {/* Classic Transparent Content with Left Vertical Accent */}
                 <div className="relative pl-10">
+                   {/* Vertical Accent Line */}
                   <div className="absolute left-0 top-1 bottom-1 w-[1px] bg-gradient-to-b from-transparent via-cyan-500/60 to-transparent" />
+                  
                   <p className="text-base font-light leading-relaxed text-white/90 whitespace-pre-line tracking-wide drop-shadow-lg">
                     {SERVICES[active].description}
                   </p>
                 </div>
 
+                {/* Bottom Minimalist Status Bar */}
                 <div className="mt-12 flex items-center gap-6">
                    <div className="h-[1px] w-16 bg-cyan-500/50" />
                    <span className="text-[9px] font-bold text-white/30 uppercase tracking-[0.5em]">System Archive 0{active + 1}</span>
@@ -165,10 +167,12 @@ export default function ServicesPage() {
             </AnimatePresence>
           </div>
 
+          {/* Discreet Watermark */}
           <div className="absolute top-12 right-12 opacity-5 pointer-events-none select-none">
              <span className="text-9xl font-black tracking-tighter text-white">0{active + 1}</span>
           </div>
         </div>
+
       </div>
     </main>
   );

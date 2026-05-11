@@ -81,6 +81,7 @@ const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Solutions", href: "/solutions" },
+    { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },
 ];
@@ -151,7 +152,7 @@ export default function Industry() {
     }, [selectedIndustry]);
 
     return (
-        <main className="min-h-screen bg-white text-zinc-900 overflow-x-hidden selection:bg-black selection:text-white">
+        <main className="min-h-screen bg-[#E5E4E2] text-zinc-900 overflow-x-hidden selection:bg-black selection:text-white">
             <nav className="flex items-center justify-center gap-6 py-6 border-b border-zinc-200">
                 {NAV_LINKS.map((l) => (
                     <a key={l.href} href={l.href} className="text-sm text-zinc-700 hover:text-black transition-colors">
@@ -160,7 +161,7 @@ export default function Industry() {
                 ))}
             </nav>
 
-            <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto opacity-0 pointer-events-none">
+            <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
                 <div className="relative">
                     <AppleGlassNav items={NAV_LINKS} theme="light" />
                 </div>

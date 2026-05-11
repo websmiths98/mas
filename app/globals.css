@@ -270,3 +270,101 @@ body {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+/* ─── Custom Quote Button (Flying Plane) ─── */
+.hero-quote-btn {
+  font-family: inherit;
+  font-size: 16px;
+  background: #4169e1; /* Royal Blue */
+  color: white;
+  padding: 0.8rem 1.2rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero-quote-btn span {
+  display: block;
+  margin-left: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.hero-quote-btn svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.hero-quote-btn:hover .svg-wrapper {
+  animation: fly-plane 0.6s ease-in-out infinite alternate;
+}
+
+.hero-quote-btn:hover svg {
+  transform: translateX(1.5em) rotate(45deg) scale(1.1);
+}
+
+.hero-quote-btn:hover span {
+  transform: translateX(6em);
+}
+
+.hero-quote-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-plane {
+  from {
+    transform: translateY(0.1em);
+  }
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+/* ─── Cobe Globe Anchored Labels ─── */
+.marker-label {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 20;
+  transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chrome 125+ Anchor Positioning */
+@supports (anchor-name: --cobe-anchor) {
+  .marker-label {
+    position-anchor: var(--anchor-name);
+    top: anchor(top);
+    left: anchor(center);
+    transform: translate(-50%, -100%) translateY(-10px);
+  }
+}
+
+/* Fallback for older browsers: Cobe also provides top/left vars if needed, 
+   but for now we'll focus on the modern implementation the user requested */
+/* Fullscreen Layout Utilities */
+.page-container-fixed {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.content-flex-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}

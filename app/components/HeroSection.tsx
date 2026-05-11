@@ -129,7 +129,7 @@ export default function HeroSection() {
 
 
   return (
-    <div ref={containerRef} className="relative bg-black" style={{ height: "220vh" }}>
+    <div ref={containerRef} className="relative bg-[#E5E4E2]" style={{ height: "120vh" }}>
       {/* ── Sticky viewport ── */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
@@ -212,11 +212,40 @@ export default function HeroSection() {
           {/* ─ CTAs ─ */}
           <RevealLine delay={1.1} direction="up">
             <div className="hero-cta-row">
-              <a href="#quote" className="hero-cta-primary">
-                Get a Quote
+              <a href="#quote" className="hero-quote-btn">
+                <div className="svg-wrapper-1">
+                  <div className="svg-wrapper">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                    >
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path
+                        fill="currentColor"
+                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <span>Get a Quote</span>
               </a>
-              <a href="#services" className="hero-cta-secondary">
+              <a
+                href="#services"
+                className="flex justify-center gap-2 items-center mx-auto shadow-xl text-sm bg-gray-50/10 backdrop-blur-md font-semibold isolation-auto border-white/20 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-6 py-3 overflow-hidden border-2 rounded-full group transition-all duration-300"
+              >
                 Explore Services
+                <svg
+                  className="w-5 h-5 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-white/30 group-hover:border-none p-1 rotate-45"
+                  viewBox="0 0 16 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                    className="fill-white group-hover:fill-gray-800"
+                  ></path>
+                </svg>
               </a>
             </div>
           </RevealLine>
