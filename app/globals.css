@@ -26,6 +26,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+  p {
+    @apply text-base leading-relaxed;
+  }
+}
+
 /* Hide scrollbar for all elements while maintaining scroll functionality */
 * {
   -ms-overflow-style: none; /* IE and Edge */
@@ -40,11 +49,11 @@ body {
 
 .hero-h1 {
   font-size: clamp(1.75rem, 5vw + 1rem, 4.5rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   text-align: center;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+  background: linear-gradient(180deg, #E5E4E2 0%, rgba(229, 228, 226, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -73,13 +82,13 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(229, 228, 226, 0.05);
+  border: 1px solid rgba(229, 228, 226, 0.15);
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.9);
+  color: #E5E4E2;
   margin-bottom: 1rem;
   text-transform: uppercase;
   backdrop-filter: blur(10px);
@@ -95,9 +104,10 @@ body {
 
 .hero-h2 {
   font-size: clamp(0.875rem, 1.2vw, 1.125rem);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.015em;
+  color: rgba(229, 228, 226, 0.6);
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
@@ -105,9 +115,9 @@ body {
 
 .hero-h3 {
   font-size: clamp(0.75rem, 1vw, 0.875rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgb(230, 236, 242);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #E5E4E2;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -115,7 +125,7 @@ body {
 }
 
 .hero-h3-sep {
-  color: rgba(230, 236, 242, 0.3);
+  color: rgba(229, 228, 226, 0.3);
 }
 
 .hero-highlights {
@@ -130,15 +140,15 @@ body {
   align-items: center;
   gap: 0.75rem;
   font-size: clamp(0.875rem, 1.5vw, 1.125rem);
-  color: rgba(230, 236, 242, 0.8);
+  color: rgba(229, 228, 226, 0.8);
 }
 
 .hero-bullet {
   width: 6px;
   height: 6px;
-  background: rgb(230, 236, 242);
+  background: #E5E4E2;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(230, 236, 242, 0.6);
+  box-shadow: 0 0 10px rgba(229, 228, 226, 0.6);
 }
 
 .hero-cta-row {
@@ -167,7 +177,7 @@ body {
 
 .hero-cta-primary {
   background: linear-gradient(135deg, #a99b9b 0%, #1c01a0 100%);
-  color: #fcf5f5;
+  color: #E5E4E2;
   padding: 1.15rem 2.75rem;
   border-radius: 9999px;
   font-weight: 600;
@@ -177,7 +187,7 @@ body {
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(229, 228, 226, 0.1);
 }
 
 .hero-cta-primary:hover {
@@ -187,9 +197,9 @@ body {
 }
 
 .hero-cta-secondary {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background: rgba(229, 228, 226, 0.02);
+  border: 1px solid rgba(229, 228, 226, 0.08);
+  color: #E5E4E2;
   padding: 1.15rem 2.75rem;
   border-radius: 9999px;
   font-weight: 600;
@@ -202,8 +212,8 @@ body {
 }
 
 .hero-cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(229, 228, 226, 0.08);
+  border-color: rgba(229, 228, 226, 0.2);
   transform: translateY(-2px);
 }
 
@@ -217,7 +227,7 @@ body {
 
 .hero-trust {
   font-size: 0.875rem;
-  color: rgba(230, 236, 242, 0.5);
+  color: rgba(229, 228, 226, 0.5);
   margin-top: 1.5rem;
   max-width: 500px;
 }
@@ -230,7 +240,7 @@ body {
   transform: translateX(-50%);
   width: 24px;
   height: 40px;
-  border: 1px solid rgba(230, 236, 242, 0.3);
+  border: 1px solid rgba(229, 228, 226, 0.3);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -241,7 +251,7 @@ body {
 .hero-scroll-dot {
   width: 4px;
   height: 8px;
-  background: rgba(230, 236, 242, 0.8);
+  background: rgba(229, 228, 226, 0.8);
   border-radius: 2px;
   animation: scrollDot 2s infinite ease-in-out;
 }
@@ -273,15 +283,14 @@ body {
 /* ─── Custom Quote Button (Flying Plane) ─── */
 .hero-quote-btn {
   font-family: inherit;
-  font-size: 16px;
+  font-size: 14px;
   background: #4169e1; /* Royal Blue */
-  color: white;
-  padding: 0.8rem 1.2rem;
-  padding-left: 1rem;
+  color: #E5E4E2;
+  padding: 0.6rem 1rem;
   display: flex;
   align-items: center;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   transition: all 0.2s;
   cursor: pointer;

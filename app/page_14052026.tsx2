@@ -33,7 +33,7 @@ export default function Home() {
                    fitting inside the bar without increasing its layout size.
                    w-32 makes it double-width (128px).
                 */
-                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                className="h-9 w-15 object-contain" 
                 priority
               />
             </Link>

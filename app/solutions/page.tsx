@@ -27,29 +27,35 @@ const RevealText = ({
     text,
     className = "",
     delay = 0,
-    direction = "up"
+    direction = "up",
+    as: Tag = "p",
 }: {
     text: string;
     className?: string;
     delay?: number;
-    direction?: "up" | "down"
+    direction?: "up" | "down";
+    as?: "p" | "h1" | "h2" | "h3";
 }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false, amount: 0.1 });
 
+    const MotionTag =
+        Tag === "h1" ? motion.h1 : Tag === "h2" ? motion.h2 : Tag === "h3" ? motion.h3 : motion.p;
+
     return (
-        <div ref={ref} className={`overflow-hidden ${className}`}>
-            <motion.p
+        <div ref={ref} className="overflow-hidden">
+            <MotionTag
+                className={className}
                 initial={{ y: direction === "up" ? "100%" : "-100%", opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : { y: direction === "up" ? "100%" : "-100%", opacity: 0 }}
                 transition={{
                     duration: 0.8,
                     delay: delay,
-                    ease: [0.21, 0.47, 0.32, 0.98]
+                    ease: [0.21, 0.47, 0.32, 0.98],
                 }}
             >
                 {text}
-            </motion.p>
+            </MotionTag>
         </div>
     );
 };
@@ -101,7 +107,7 @@ const TagPill = ({ children, variant = "slate", delay = 0 }: { children: React.R
         green: "bg-emerald-500/10 text-emerald-300 border-emerald-400/20 hover:border-emerald-400/50 hover:bg-emerald-500/20",
         purple: "bg-purple-500/10 text-purple-300 border-purple-400/20 hover:border-purple-400/50 hover:bg-purple-500/20",
         orange: "bg-orange-500/10 text-orange-300 border-orange-400/20 hover:border-orange-400/50 hover:bg-orange-500/20",
-        slate: "bg-white/5 text-gray-300 border-white/10 hover:border-white/30 hover:bg-white/10",
+        slate: "bg-red-500/10  text-red-300 border-red-400/20 hover:border-red-400/50 hover:bg-red-500/20",
         indigo: "bg-indigo-500/10 text-indigo-300 border-indigo-400/20 hover:border-indigo-400/50 hover:bg-indigo-500/20",
     };
 
@@ -191,7 +197,7 @@ const AnimatedValueIcon = ({ type, label, delay = 0 }: { type: "excellence" | "r
             </div>
             <RevealText 
                 text={label} 
-                className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E5E4E2]" 
+                className="text-[10px] font-bold uppercase tracking-[0.3em] text-black" 
                 delay={delay + 0.2}
             />
         </motion.div>
@@ -200,21 +206,21 @@ const AnimatedValueIcon = ({ type, label, delay = 0 }: { type: "excellence" | "r
 
 export default function Solutions() {
     return (
-        <main className="min-h-screen bg-[#73272D] selection:bg-white/20">
+        <main className="min-h-screen bg-[#E5E4E2] selection:bg-black/10">
             {/* Apple Glass Nav */}
             <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-auto">
                 <div className="relative">
-                    <AppleGlassNav items={NAV_LINKS} theme="dark" />
+                    <AppleGlassNav items={NAV_LINKS} theme="light" />
                 </div>
             </div>
 
             {/* Container 1: Header & Service Grid */}
             <div className="max-w-7xl mx-auto px-6 pt-24 pb-12">
                 {/* Header */}
-                <div className="border-b border-white/10 pb-4 mb-10">
+                <div className="border-b border-black/100 pb-4 mb-10">
                     <RevealText
                         text="Trending Solutions"
-                        className="text-3xl md:text-4xl font-extrabold text-black tracking-tight"
+                        className="text-3xl font-semibold uppercase tracking-tight text-black sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05]"
                     />
                 </div>
 
@@ -246,7 +252,7 @@ export default function Solutions() {
                                 </div>
                                 <RevealText 
                                     text="2PL is designed for businesses that need reliable movement of goods from supplier to customer. MAS Logistics supports essential transportation requirements with structured execution, clear coordination, and dependable delivery."
-                                    className="text-[#E5E4E2] text-lg leading-relaxed max-w-xl"
+                                    className="text-[#2A2A2A] text-lg leading-relaxed max-w-xl"
                                     delay={0.3}
                                 />
                             </div>
@@ -275,7 +281,7 @@ export default function Solutions() {
                                 </div>
                                 <RevealText 
                                     text="Structured global logistics solutions with reliable trade and compliance support and efficient cargo movement across international markets with operational transparency, Trusted supply chain coordination backed by industry expertise and global connectivity."
-                                    className="text-[#E5E4E2] text-lg leading-relaxed max-w-xl"
+                                    className="text-black text-lg leading-relaxed max-w-xl"
                                     delay={0.1}
                                 />
                             </div>
@@ -307,7 +313,7 @@ export default function Solutions() {
                                 </div>
                                 <RevealText 
                                     text="3PL suits growing businesses that need more than transport alone. MAS Logistics manages freight forwarding, shipment coordination, warehousing, and distribution to help simplify operations."
-                                    className="text-[#E5E4E2] text-base leading-relaxed"
+                                    className="text-black text-base leading-relaxed"
                                     delay={0.1}
                                 />
                             </div>
@@ -336,7 +342,7 @@ export default function Solutions() {
                                 </div>
                                 <RevealText 
                                     text="4PL is built for businesses that want a fully managed logistics model. MAS Logistics handles planning, execution, and visibility across the supply chain."
-                                    className="text-[#E5E4E2] text-base leading-relaxed"
+                                    className="text-black text-base leading-relaxed"
                                     delay={0.1}
                                 />
                             </div>
@@ -346,10 +352,10 @@ export default function Solutions() {
             </div>
 
             {/* Container 2: Mission Section */}
-            <div className="max-w-7xl mx-auto px-6 py-24 border-t border-white/10 flex flex-col items-center">
+            <div className="max-w-7xl mx-auto px-6 py-24 border-t border-black/100 flex flex-col items-center">
                 <div className="max-w-4xl w-full flex flex-col items-center text-center space-y-16">
                     {/* Animated Icons Section */}
-                    <div className="flex justify-center items-end divide-x divide-white/10">
+                    <div className="flex justify-center items-end divide-x divide-black/100">
                         <AnimatedValueIcon type="excellence" label="Excellence" delay={0.1} />
                         <AnimatedValueIcon type="reliability" label="Reliability" delay={0.2} />
                         <AnimatedValueIcon type="innovation" label="Innovation" delay={0.3} />
@@ -362,7 +368,7 @@ export default function Solutions() {
                         />
                         <RevealText 
                             text="We engineer sophisticated logistics frameworks that transform supply chains into competitive advantages, ensuring connectivity and compliance across global borders."
-                            className="text-[#E5E4E2] text-base md:text-lg leading-relaxed font-light max-w-2xl mx-auto"
+                            className="text-black text-base md:text-lg leading-relaxed font-light max-w-2xl mx-auto"
                             delay={0.1}
                         />
                     </div>
@@ -373,7 +379,7 @@ export default function Solutions() {
             <footer className="py-10 border-t border-white/10 text-center bg-black/10">
                 <RevealText 
                     text={`\u00A9 ${new Date().getFullYear()} MAS Logistics. Engineering Global Movement.`}
-                    className="text-[#E5E4E2] text-[10px] font-bold tracking-[0.2em] uppercase"
+                    className="text-black text-[10px] font-bold tracking-[0.2em] uppercase"
                     delay={0.1}
                 />
             </footer>

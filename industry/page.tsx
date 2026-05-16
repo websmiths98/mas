@@ -24,72 +24,74 @@ const globalStyles = `
   }
 `;
 
-// ─── Cinematic Bidirectional Scroll Reveal Hook ──────────────────────────────
+// ─── Cinematic Scroll-Reveal Hook ────────────────────────────────────────────
 function useScrollReveal(threshold = 0.1) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+    const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Bidirectional: updates state on both enter and exit
-        setVisible(entry.isIntersecting);
-      },
-      { threshold, rootMargin: "50px" }
-    );
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setVisible(true);
+                    observer.unobserve(el);
+                }
+            },
+            { threshold, rootMargin: "50px" }
+        );
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [threshold]);
 
-  return { ref, visible };
+    return { ref, visible };
 }
 
 // ─── Cinematic Reveal Component ──────────────────────────────────────────────
 interface RevealProps {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-  direction?: "up" | "down" | "left" | "right" | "scale" | "none";
+    children: React.ReactNode;
+    delay?: number;
+    className?: string;
+    direction?: "up" | "down" | "left" | "right" | "scale" | "none";
 }
 
 function Reveal({
-  children,
-  delay = 0,
-  className = "",
-  direction = "up",
+    children,
+    delay = 0,
+    className = "",
+    direction = "up",
 }: RevealProps) {
-  const { ref, visible } = useScrollReveal(0.1);
+    const { ref, visible } = useScrollReveal(0.1);
 
-  const dirMap = {
-    up: "translateY(40px)",
-    down: "translateY(-40px)",
-    left: "translateX(-40px)",
-    right: "translateX(40px)",
-    scale: "scale(0.95)",
-    none: "translate(0,0)",
-  };
+    const dirMap = {
+        up: "translateY(40px)",
+        down: "translateY(-40px)",
+        left: "translateX(-40px)",
+        right: "translateX(40px)",
+        scale: "scale(0.95)",
+        none: "translate(0,0)",
+    };
 
-  const transformValue = visible 
-    ? (direction === "scale" ? "scale(1)" : "translate(0,0)") 
-    : dirMap[direction];
+    const transformValue = visible
+        ? (direction === "scale" ? "scale(1)" : "translate(0,0)")
+        : dirMap[direction];
 
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: transformValue,
-        transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
-      }}
-    >
-      {children}
-    </div>
-  );
+    return (
+        <div
+            ref={ref}
+            className={className}
+            style={{
+                opacity: visible ? 1 : 0,
+                transform: transformValue,
+                transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
+            }}
+        >
+            {children}
+        </div>
+    );
 }
 
 // ─── Bright Text Highlight Component ─────────────────────────────────────────
@@ -124,7 +126,6 @@ const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Solutions", href: "/solutions" },
-    { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },
 ];
@@ -189,16 +190,16 @@ const INDUSTRIES = [
 ];
 
 // ─── Individual Snapping Text Block ──────────────────────────────────────────
-function ScrollSection({ 
-    industry, 
-    index, 
-    isActive, 
-    setActiveIndex 
-}: { 
-    industry: any, 
-    index: number, 
-    isActive: boolean, 
-    setActiveIndex: (i: number) => void 
+function ScrollSection({
+    industry,
+    index,
+    isActive,
+    setActiveIndex
+}: {
+    industry: any,
+    index: number,
+    isActive: boolean,
+    setActiveIndex: (i: number) => void
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -218,34 +219,29 @@ function ScrollSection({
     }, [index, setActiveIndex]);
 
     return (
-        <div 
-            ref={ref} 
+        <div
+            ref={ref}
             // VERY IMPORTANT: snap-always snap-center forces the auto-align the user wants. 
             // h-screen ensures exactly one block fits on the screen at a time.
-            className={`snap-always snap-center h-screen flex flex-col justify-center transition-all duration-700 ease-in-out p-6 md:p-12 lg:bg-transparent ${
-                isActive 
-                ? 'opacity-100 scale-100 bg-[#0B1120]/80 backdrop-blur-xl border border-white/10 lg:border-none rounded-[2rem] lg:rounded-none' 
-                : 'opacity-0 scale-95 translate-y-8 pointer-events-none bg-transparent'
-            }`}
+            className={`snap-always snap-center h-screen flex flex-col justify-center transition-all duration-500 ease-out p-6 md:p-12 lg:bg-transparent ${isActive
+                    ? 'opacity-100 scale-100 bg-[#0B1120]/80 backdrop-blur-xl border border-white/10 lg:border-none rounded-[2rem] lg:rounded-none'
+                    : 'opacity-10 scale-90 pointer-events-none bg-transparent'
+                }`}
         >
-            <h3 className={`text-3xl md:text-4xl font-bold tracking-tight mb-4 drop-shadow-xl transition-all duration-700 delay-100 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 drop-shadow-2xl">
                 <HighlightTitle text={industry.name} gradient={industry.gradient} />
             </h3>
-            <p className={`text-zinc-300 text-lg leading-relaxed mb-6 drop-shadow-md transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <p className="text-zinc-200 text-lg md:text-2xl font-light leading-relaxed mb-8 drop-shadow-md">
                 {industry.description}
             </p>
-            <div className={`flex flex-wrap gap-3 transition-all duration-700 delay-300 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <div className="flex flex-wrap gap-3">
                 {industry.features.map((f: string) => (
-                    <div 
-                        key={f} 
-                        className={`p-[1px] rounded-full bg-gradient-to-r ${industry.gradient} shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform duration-300 ease-out cursor-default`}
+                    <span
+                        key={f}
+                        className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-medium text-sm md:text-base shadow-lg backdrop-blur-md"
                     >
-                        <div className="px-4 py-1.5 rounded-full bg-[#0B1120]/90 backdrop-blur-md w-full h-full flex items-center justify-center">
-                            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${industry.gradient} font-bold text-sm tracking-wide`}>
-                                {f}
-                            </span>
-                        </div>
-                    </div>
+                        {f}
+                    </span>
                 ))}
             </div>
         </div>
@@ -263,43 +259,37 @@ export default function Industry() {
             {/* Apple Glass Nav */}
             <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
                 <div className="relative">
-                    <AppleGlassNav items={NAV_LINKS} theme="dark" />
+                    <AppleGlassNav items={NAV_LINKS} theme="light" />
                 </div>
             </div>
 
-            {/* Compact Centered Header */}
-            <section className="snap-start pt-32 pb-4 px-4 flex flex-col items-center justify-center text-center shrink-0">
+            {/* Hero Section (Snaps to start) */}
+            <section className="snap-start min-h-[60vh] pt-32 pb-10 px-6 flex flex-col items-center justify-center text-center">
                 <Reveal direction="down">
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 mt-8">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 animate-gradient-x inline-block pr-2">
+                    <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-black uppercase tracking-tighter leading-none mb-6 mt-12">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 animate-gradient-x block pb-2">
                             Industry
                         </span>
                         <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">Solutions</span>
                     </h1>
                 </Reveal>
                 <Reveal direction="up" delay={0.1}>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
-                        Dedicated supply chain management and specialized logistics for the world's most demanding sectors.
+                    <p className="text-zinc-400 text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed">
+                        Scroll down to discover our dedicated supply chain management and specialized logistics for the world's most demanding sectors.
                     </p>
-                </Reveal>
-                <Reveal direction="up" delay={0.2}>
-                    <div className="flex flex-col items-center mt-8">
-                        <span className="text-xs tracking-[0.2em] text-zinc-500 uppercase mb-3 animate-pulse">Scroll to Explore</span>
-                        <div className="w-[1px] h-12 bg-gradient-to-b from-zinc-500 to-transparent" />
-                    </div>
                 </Reveal>
             </section>
 
             {/* Auto-Align Sticky Scroll Sequence */}
             <section className="relative max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-start pb-[20vh]">
-                
+
                 {/* Left: Sticky Image Viewer */}
                 {/* h-screen so it stays in the viewport perfectly. */}
                 <div className="w-full lg:w-1/2 sticky top-0 h-screen flex flex-col justify-center lg:py-24 z-0 pointer-events-none">
                     {/* The image container */}
                     <div className="w-full h-full lg:h-[85%] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative border border-white/5">
                         <AnimatePresence mode="wait">
-                            <motion.img 
+                            <motion.img
                                 key={activeIndex}
                                 src={INDUSTRIES[activeIndex].image}
                                 initial={{ opacity: 0, scale: 1.05 }}
@@ -318,12 +308,12 @@ export default function Industry() {
                 {/* We use negative margin on mobile so it slides over the sticky image perfectly */}
                 <div className="w-full lg:w-1/2 flex flex-col z-10 relative -mt-[100vh] lg:mt-0">
                     {INDUSTRIES.map((industry, index) => (
-                        <ScrollSection 
-                            key={industry.name} 
-                            index={index} 
-                            industry={industry} 
+                        <ScrollSection
+                            key={industry.name}
+                            index={index}
+                            industry={industry}
                             isActive={activeIndex === index}
-                            setActiveIndex={setActiveIndex} 
+                            setActiveIndex={setActiveIndex}
                         />
                     ))}
                 </div>
@@ -332,4 +322,3 @@ export default function Industry() {
         </main>
     );
 }
-

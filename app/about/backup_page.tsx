@@ -14,9 +14,8 @@ import {
     type LucideIcon,
 } from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
-import aboutTeamHero from "../../images_frontend/about-team-logistics.webp";
-import officeSpace from "../../images_frontend/new/office_space.webp";
-import masLogo from "../../images_frontend/mas_logo.webp";
+import aboutTeamHero from "../../images_frontend/about-team-logistics.png";
+import officeSpace from "../../images_frontend/new/office_space.jpeg";
 import UiloraInsights from "@/src/components/ContentBlocks/FeatureSections/tsx/UiloraInsights";
 
 const PARTNER_ACCENT = "#1a1a1a";
@@ -45,43 +44,43 @@ const STEPS: {
     image: string;
     icon: LucideIcon;
 }[] = [
-        {
-            title: "Global freight network",
-            desc: "Air, ocean, and multimodal options matched to your lanes, volumes, and timelines.",
-            image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop",
-            icon: Plane,
-        },
-        {
-            title: "Warehousing & distribution",
-            desc: "Flexible storage and fulfillment so you can scale without fixed infrastructure overhead.",
-            image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop",
-            icon: Warehouse,
-        },
-        {
-            title: "Customs & compliance",
-            desc: "Clear classification, documentation, and regulatory alignment across borders.",
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1200&auto=format&fit=crop",
-            icon: Shield,
-        },
-        {
-            title: "Project & oversized cargo",
-            desc: "Engineering-led moves for heavy, out-of-gauge, and time-critical project freight.",
-            image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop",
-            icon: Package,
-        },
-        {
-            title: "Visibility & coordination",
-            desc: "Single point of contact with proactive updates from origin to final delivery.",
-            image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop",
-            icon: Activity,
-        },
-        {
-            title: "Partnership at scale",
-            desc: "Long-term relationships built on reliability—whether you ship weekly or seasonally.",
-            image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1200&auto=format&fit=crop",
-            icon: Heart,
-        },
-    ];
+    {
+        title: "Global freight network",
+        desc: "Air, ocean, and multimodal options matched to your lanes, volumes, and timelines.",
+        image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop",
+        icon: Plane,
+    },
+    {
+        title: "Warehousing & distribution",
+        desc: "Flexible storage and fulfillment so you can scale without fixed infrastructure overhead.",
+        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop",
+        icon: Warehouse,
+    },
+    {
+        title: "Customs & compliance",
+        desc: "Clear classification, documentation, and regulatory alignment across borders.",
+        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1200&auto=format&fit=crop",
+        icon: Shield,
+    },
+    {
+        title: "Project & oversized cargo",
+        desc: "Engineering-led moves for heavy, out-of-gauge, and time-critical project freight.",
+        image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop",
+        icon: Package,
+    },
+    {
+        title: "Visibility & coordination",
+        desc: "Single point of contact with proactive updates from origin to final delivery.",
+        image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop",
+        icon: Activity,
+    },
+    {
+        title: "Partnership at scale",
+        desc: "Long-term relationships built on reliability—whether you ship weekly or seasonally.",
+        image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1200&auto=format&fit=crop",
+        icon: Heart,
+    },
+];
 
 
 
@@ -91,10 +90,10 @@ const STEPS: {
 
 const SignalIcon = () => (
     <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
-        <rect x="0" y="9" width="3" height="3" rx="0.6" fill="#111" />
-        <rect x="5" y="6" width="3" height="6" rx="0.6" fill="#111" />
-        <rect x="10" y="3" width="3" height="9" rx="0.6" fill="#111" />
-        <rect x="15" y="0" width="3" height="12" rx="0.6" fill="#111" />
+        <rect x="0"    y="9"   width="3" height="3"  rx="0.6" fill="#111" />
+        <rect x="5"    y="6"   width="3" height="6"  rx="0.6" fill="#111" />
+        <rect x="10"   y="3"   width="3" height="9"  rx="0.6" fill="#111" />
+        <rect x="15"   y="0"   width="3" height="12" rx="0.6" fill="#111" />
     </svg>
 );
 const WifiIcon = () => (
@@ -107,8 +106,8 @@ const WifiIcon = () => (
 const BatteryIcon = () => (
     <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
         <rect x="0.5" y="0.5" width="22" height="12" rx="3" stroke="#111" strokeWidth="1.1" />
-        <rect x="23" y="4" width="2" height="5" rx="1" fill="#111" />
-        <rect x="2" y="2" width="17" height="9" rx="2" fill="#111" />
+        <rect x="23"  y="4"   width="2"  height="5"  rx="1" fill="#111" />
+        <rect x="2"   y="2"   width="17" height="9"  rx="2" fill="#111" />
     </svg>
 );
 
@@ -116,21 +115,21 @@ const GradientPen = () => (
     <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
         <defs>
             <linearGradient id="pg" x1="0.2" y1="0" x2="0.8" y2="1">
-                <stop offset="0%" stopColor="#a8d8f8" />
-                <stop offset="40%" stopColor="#5ba6e8" />
+                <stop offset="0%"   stopColor="#a8d8f8" />
+                <stop offset="40%"  stopColor="#5ba6e8" />
                 <stop offset="100%" stopColor="#2176c8" />
             </linearGradient>
             <linearGradient id="pg2" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#d0ecff" />
+                <stop offset="0%"  stopColor="#d0ecff" />
                 <stop offset="100%" stopColor="#aad0f0" />
             </linearGradient>
         </defs>
         <g transform="rotate(-38 26 26)">
-            <rect x="21" y="4" width="10" height="5" rx="4" fill="url(#pg2)" />
-            <rect x="21" y="8" width="10" height="26" rx="2" fill="url(#pg)" />
-            <polygon points="21,34 26,40 31,34" fill="#4a8fd8" />
-            <polygon points="23.5,40 26,48 28.5,40" fill="#c0cdd8" />
-            <rect x="22" y="9" width="3" height="20" rx="1.5" fill="white" opacity="0.25" />
+            <rect x="21" y="4"  width="10" height="5"  rx="4"   fill="url(#pg2)" />
+            <rect x="21" y="8"  width="10" height="26" rx="2"   fill="url(#pg)" />
+            <polygon points="21,34 26,40 31,34"             fill="#4a8fd8" />
+            <polygon points="23.5,40 26,48 28.5,40"          fill="#c0cdd8" />
+            <rect x="22" y="9"  width="3"  height="20" rx="1.5" fill="white" opacity="0.25" />
         </g>
     </svg>
 );
@@ -165,8 +164,8 @@ const PhoneMockup = ({ accent }: { accent: string }) => (
                 </button>
                 <button className="w-8 h-8 flex items-center justify-center rounded-full text-gray-500">
                     <svg width="18" height="5" viewBox="0 0 18 5" fill="none">
-                        <circle cx="2.5" cy="2.5" r="2.2" fill="#555" />
-                        <circle cx="9" cy="2.5" r="2.2" fill="#555" />
+                        <circle cx="2.5"  cy="2.5" r="2.2" fill="#555" />
+                        <circle cx="9"    cy="2.5" r="2.2" fill="#555" />
                         <circle cx="15.5" cy="2.5" r="2.2" fill="#555" />
                     </svg>
                 </button>
@@ -175,7 +174,7 @@ const PhoneMockup = ({ accent }: { accent: string }) => (
 
         <div className="px-6 pt-1 pb-3">
             <h3 className="text-[19px] font-bold text-gray-900 leading-snug">
-                MAS Logistics Culture
+                MAS Logistics Culture v2
             </h3>
         </div>
 
@@ -194,11 +193,8 @@ const PhoneMockup = ({ accent }: { accent: string }) => (
                     <span className="text-[11px] font-medium text-blue-500">Values</span>
                 </div>
                 <div className="flex-[1.7] bg-gray-50 rounded-2xl p-3 flex flex-col items-center justify-center gap-1 border border-gray-100">
-                    <Image
-                        src={masLogo}
-                        alt="MAS Logo"
-                        className="h-30 w-auto object-contain mb-1"
-                    />
+                    <span className="text-[40px] font-serif leading-none text-gray-800">MAS</span>
+                    <span className="text-[11px] font-medium text-gray-500">Integrity</span>
                 </div>
             </div>
 
@@ -278,37 +274,37 @@ const FeatureCard = ({
 
 const IconList = () => (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <line x1="7" y1="6" x2="18" y2="6" stroke="#555" strokeWidth="1.8" strokeLinecap="round" />
+        <line x1="7" y1="6"  x2="18" y2="6"  stroke="#555" strokeWidth="1.8" strokeLinecap="round" />
         <line x1="7" y1="11" x2="18" y2="11" stroke="#555" strokeWidth="1.8" strokeLinecap="round" />
         <line x1="7" y1="16" x2="18" y2="16" stroke="#555" strokeWidth="1.8" strokeLinecap="round" />
-        <circle cx="3.5" cy="6" r="1.4" fill="#555" />
+        <circle cx="3.5" cy="6"  r="1.4" fill="#555" />
         <circle cx="3.5" cy="11" r="1.4" fill="#555" />
         <circle cx="3.5" cy="16" r="1.4" fill="#555" />
     </svg>
 );
 const IconGrid = () => (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect x="2" y="2" width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
-        <rect x="12" y="2" width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
-        <rect x="2" y="12" width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
+        <rect x="2"  y="2"  width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
+        <rect x="12" y="2"  width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
+        <rect x="2"  y="12" width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
         <rect x="12" y="12" width="8" height="8" rx="2" stroke="#555" strokeWidth="1.7" />
     </svg>
 );
 const IconLink = () => (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <path d="M9,12 Q7,14 8,17 Q9,20 12,20 L14,20 Q18,20 19,16 Q20,12 16,11 L14,11"
-            stroke="#555" strokeWidth="1.7" strokeLinecap="round" fill="none" />
+              stroke="#555" strokeWidth="1.7" strokeLinecap="round" fill="none" />
         <path d="M13,10 Q15,8 14,5 Q13,2 10,2 L8,2 Q4,2 3,6 Q2,10 6,11 L8,11"
-            stroke="#555" strokeWidth="1.7" strokeLinecap="round" fill="none" />
+              stroke="#555" strokeWidth="1.7" strokeLinecap="round" fill="none" />
         <line x1="8" y1="13.5" x2="14" y2="8.5" stroke="#555" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
 );
 const IconTable = () => (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <rect x="2" y="2" width="18" height="18" rx="3" stroke="#555" strokeWidth="1.7" />
-        <line x1="2" y1="8" x2="20" y2="8" stroke="#555" strokeWidth="1.4" />
+        <line x1="2" y1="8"  x2="20" y2="8"  stroke="#555" strokeWidth="1.4" />
         <line x1="2" y1="14" x2="20" y2="14" stroke="#555" strokeWidth="1.4" />
-        <line x1="8" y1="2" x2="8" y2="20" stroke="#555" strokeWidth="1.4" />
+        <line x1="8" y1="2"  x2="8"  y2="20" stroke="#555" strokeWidth="1.4" />
     </svg>
 );
 
@@ -340,8 +336,8 @@ const CLIENT_LOGOS = [
     { name: "Mindray", svg: <svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><text x="0" y="44" fontFamily="Arial Black, sans-serif" fontWeight="900" fontSize="34" fill="#E60012">mindray</text></svg> },
     { name: "Renault Nissan", svg: <svg viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><text x="0" y="42" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="28" fill="#555">RENAULT NISSAN</text></svg> },
     { name: "Huawei", svg: <svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><text x="0" y="44" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="36" fill="#E60012">HUAWEI</text></svg> },
-    { name: "General Electric", svg: <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><circle cx="50" cy="30" r="26" fill="#0F62FE" /><text x="50" y="40" textAnchor="middle" fontFamily="Georgia, serif" fontWeight="900" fontSize="28" fill="#FFF">GE</text></svg> },
-    { name: "GAP", svg: <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><rect x="10" y="10" width="100" height="40" fill="#002A5E" /><text x="60" y="40" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="24" fill="#FFF" letterSpacing="2">GAP</text></svg> },
+    { name: "General Electric", svg: <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><circle cx="50" cy="30" r="26" fill="#0F62FE"/><text x="50" y="40" textAnchor="middle" fontFamily="Georgia, serif" fontWeight="900" fontSize="28" fill="#FFF">GE</text></svg> },
+    { name: "GAP", svg: <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto"><rect x="10" y="10" width="100" height="40" fill="#002A5E"/><text x="60" y="40" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="24" fill="#FFF" letterSpacing="2">GAP</text></svg> },
 ];
 
 function useParallax(value: any, distance: number) {
@@ -354,89 +350,89 @@ function useParallax(value: any, distance: number) {
 }
 
 interface AnimatedTextProps {
-    text: string;
-    className?: string;
-    animationType?: "letters" | "words";
-    duration?: number;
-    delay?: number;
-    staggerDelay?: number;
-    initialY?: number | string;
-    initialOpacity?: number;
-    animateY?: number | string;
-    animateOpacity?: number;
-    direction?: "up" | "down";
+  text: string;
+  className?: string;
+  animationType?: "letters" | "words";
+  duration?: number;
+  delay?: number;
+  staggerDelay?: number;
+  initialY?: number | string;
+  initialOpacity?: number;
+  animateY?: number | string;
+  animateOpacity?: number;
+  direction?: "up" | "down";
 }
 
 const AnimatedText = ({
-    text,
-    className = "text-4xl font-bold",
-    animationType = "words",
-    duration = 0.6,
-    delay = 0,
-    staggerDelay = 0.05,
-    initialY = "100%",
-    initialOpacity = 0,
-    animateY = "0%",
-    animateOpacity = 1,
-    direction = "up"
+  text,
+  className = "text-4xl font-bold",
+  animationType = "words",
+  duration = 0.6,
+  delay = 0,
+  staggerDelay = 0.05,
+  initialY = "100%",
+  initialOpacity = 0,
+  animateY = "0%",
+  animateOpacity = 1,
+  direction = "up"
 }: AnimatedTextProps) => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: staggerDelay,
-                delayChildren: delay
-            }
-        }
-    };
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: staggerDelay,
+        delayChildren: delay
+      }
+    }
+  };
 
-    const itemVariants = {
-        hidden: {
-            y: direction === "up" ? initialY : "-100%",
-            opacity: initialOpacity
-        },
-        visible: {
-            y: animateY,
-            opacity: animateOpacity,
-            transition: {
-                duration: duration,
-                ease: "easeOut"
-            }
-        }
-    };
+  const itemVariants = {
+    hidden: {
+      y: direction === "up" ? initialY : "-100%",
+      opacity: initialOpacity
+    },
+    visible: {
+      y: animateY,
+      opacity: animateOpacity,
+      transition: {
+        duration: duration,
+        ease: "easeOut"
+      }
+    }
+  };
 
-    const renderLetters = () => {
-        return text.split("").map((char, index) => (
-            <motion.span
-                key={`letter-${index}`}
-                variants={itemVariants}
-                className="inline-block"
-                style={{ whiteSpace: char === " " ? "pre" : "normal" }}>
-                {char}
-            </motion.span>
-        ));
-    };
+  const renderLetters = () => {
+    return text.split("").map((char, index) => (
+      <motion.span
+        key={`letter-${index}`}
+        variants={itemVariants}
+        className="inline-block"
+        style={{ whiteSpace: char === " " ? "pre" : "normal" }}>
+        {char}
+      </motion.span>
+    ));
+  };
 
-    const renderWords = () => {
-        return text.split(" ").map((word, index) => (
-            <motion.span key={`word-${index}`} variants={itemVariants} className="mr-2 inline-block">
-                {word}
-            </motion.span>
-        ));
-    };
+  const renderWords = () => {
+    return text.split(" ").map((word, index) => (
+      <motion.span key={`word-${index}`} variants={itemVariants} className="mr-2 inline-block">
+        {word}
+      </motion.span>
+    ));
+  };
 
-    return (
-        <motion.div
-            className={cn("overflow-hidden leading-[1.1] pb-1", className)}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.1 }}
-        >
-            {animationType === "letters" ? renderLetters() : renderWords()}
-        </motion.div>
-    );
+  return (
+    <motion.div
+      className={cn("overflow-hidden leading-[1.1] pb-1", className)}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.1 }}
+    >
+      {animationType === "letters" ? renderLetters() : renderWords()}
+    </motion.div>
+  );
 };
 
 export default function About() {
@@ -455,7 +451,7 @@ export default function About() {
     const zHeroText = useTransform(scrollYProgress, [0, 0.3], [0, 200]);
     const rotateXHeroText = useTransform(scrollYProgress, [0, 0.3], [0, 15]);
     const opacityHeroText = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-
+    
     // Scroll-Driven 3D Parallax using custom hook
     const col1Parallax = useParallax(scrollYProgress, -60);
     const col2Parallax = useParallax(scrollYProgress, 80);
@@ -465,7 +461,7 @@ export default function About() {
         const handleScroll = () => {
             const sections = document.querySelectorAll("section[data-theme]");
             const navbarPosition = 100; // Point where we check for theme change
-
+            
             let currentTheme: "light" | "dark" = "light";
 
             sections.forEach((section) => {
@@ -492,7 +488,7 @@ export default function About() {
             </div>
 
             {/* Hero — mission (Shiprocket-style lead) */}
-            <section data-theme="light" className="relative flex min-h-[60vh] items-center justify-center border-b border-zinc-200/80 px-6 py-32 md:py-40 overflow-hidden" style={{ perspective: "1000px" }}>
+            <section data-theme="dark" className="relative flex min-h-[60vh] items-center justify-center border-b border-zinc-200/80 px-6 py-32 md:py-40 overflow-hidden" style={{ perspective: "1000px" }}>
                 <motion.div style={{ y: yHeroBg }} className="absolute inset-0 z-0">
                     <Image
                         src={officeSpace}
@@ -503,23 +499,23 @@ export default function About() {
                     />
                     <div className="absolute inset-0 bg-zinc-900/75" />
                 </motion.div>
-
-                <motion.div
-                    style={{ y: yHeroText, z: zHeroText, rotateX: rotateXHeroText, opacity: opacityHeroText, transformStyle: "preserve-3d" }}
+                
+                <motion.div 
+                    style={{ y: yHeroText, z: zHeroText, rotateX: rotateXHeroText, opacity: opacityHeroText, transformStyle: "preserve-3d" }} 
                     className="relative z-10 mx-auto max-w-3xl text-center flex flex-col items-center"
                 >
-                    <AnimatedText
+                    <AnimatedText 
                         text="We're on a mission to make complex logistics feel simple, reliable, and human"
-                        className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]"
+                        className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]" 
                     />
-                    <AnimatedText
+                    <AnimatedText 
                         text="MAS connects businesses to dependable freight, warehousing, and customs expertise—so you can focus on products and customers, not paperwork and unknowns"
-                        className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-200 md:text-lg"
+                        className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-200 md:text-lg" 
                         delay={0.2}
                     />
-                    <AnimatedText
+                    <AnimatedText 
                         text="Our work sits at the intersection of data, relationships, and execution: one coordinated team from first mile to final delivery"
-                        className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg"
+                        className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg" 
                         delay={0.4}
                     />
                 </motion.div>
@@ -578,19 +574,19 @@ export default function About() {
                     subtitle="How we help"
                     accentColor={PARTNER_ACCENT}
                     bgColor="linear-gradient(135deg, #020617 0%, #0f172a 40%, #1e293b 100%)"
-                    features={STEPS.map((step) => ({
-                        icon: step.icon,
-                        title: step.title,
-                        description: step.desc,
-                        visual: (
-                            <img
-                                src={step.image}
-                                alt={step.title}
-                                className="w-full h-full object-cover"
-                            />
-                        ),
-                    }))}
-                />
+                features={STEPS.map((step) => ({
+                    icon: step.icon,
+                    title: step.title,
+                    description: step.desc,
+                    visual: (
+                        <img
+                            src={step.image}
+                            alt={step.title}
+                            className="w-full h-full object-cover"
+                        />
+                    ),
+                }))}
+            />
             </section>
 
             {/* Culture — Value grid redesigned with Uilora Phone Feature Layout */}
@@ -701,7 +697,7 @@ export default function About() {
             {/* Vision & Mission — Collage Grid */}
             <section data-theme="light" className="bg-white px-6 py-16 md:py-24 overflow-hidden">
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 items-start" style={{ perspective: "1200px" }}>
-
+                    
                     {/* Column 1: Vision Text + Image */}
                     <motion.div style={{ ...col1Parallax, transformStyle: "preserve-3d" }} className="flex flex-col">
                         <div className="mb-10 md:mb-16">
@@ -709,11 +705,11 @@ export default function About() {
                             <AnimatedText text="To establish a strong presence as a trusted logistics partner originating from Asia, delivering consistent value across global supply chains." className="text-base leading-relaxed text-[#4a4a4a]" delay={0.1} />
                         </div>
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop"
-                                alt="Team collaborating"
-                                fill
-                                className="object-cover"
+                            <Image 
+                                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop" 
+                                alt="Team collaborating" 
+                                fill 
+                                className="object-cover" 
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
@@ -722,29 +718,29 @@ export default function About() {
                     {/* Column 2: 3 Images staggered */}
                     <motion.div style={{ ...col2Parallax, transformStyle: "preserve-3d" }} className="flex flex-col gap-4 md:gap-6 md:pt-16">
                         <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop"
-                                alt="Working together"
-                                fill
-                                className="object-cover"
+                            <Image 
+                                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop" 
+                                alt="Working together" 
+                                fill 
+                                className="object-cover" 
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
                         <div className="relative w-full aspect-square overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop"
-                                alt="Focused work"
-                                fill
-                                className="object-cover"
+                            <Image 
+                                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop" 
+                                alt="Focused work" 
+                                fill 
+                                className="object-cover" 
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 hidden md:block rounded-2xl shadow-xl">
-                            <Image
-                                src={aboutTeamHero}
-                                alt="MAS Team"
-                                fill
-                                className="object-cover"
+                            <Image 
+                                src={aboutTeamHero} 
+                                alt="MAS Team" 
+                                fill 
+                                className="object-cover" 
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
@@ -753,27 +749,27 @@ export default function About() {
                     {/* Column 3: 2 Images + Mission Text */}
                     <motion.div style={{ ...col3Parallax, transformStyle: "preserve-3d" }} className="flex flex-col gap-4 md:gap-6 md:pt-8">
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop"
-                                alt="Discussion"
-                                fill
-                                className="object-cover"
+                            <Image 
+                                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop" 
+                                alt="Discussion" 
+                                fill 
+                                className="object-cover" 
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
                         <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
-                                alt="Meeting"
-                                fill
-                                className="object-cover"
+                            <Image 
+                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop" 
+                                alt="Meeting" 
+                                fill 
+                                className="object-cover" 
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
                         <div className="mt-6 md:mt-10">
                             <AnimatedText text="Our Mission" className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-4" direction="down" />
                             <AnimatedText text="Driven by our strategic base in Asia, we focus on enabling seamless logistics across key international trade routes. Our goal is to deliver dependable, efficient, and tailored solutions that support our clients’ growth and long-term success." className="text-base leading-relaxed text-[#4a4a4a] mb-4" delay={0.1} direction="down" />
-                            <AnimatedText text='"Every detail matters" is our motto"' className="text-[15px] font-semibold text-[#1a1a1a]" delay={0.2} direction="down" />
+                            <AnimatedText text='"Every detail matters" is our motto' className="text-[15px] font-semibold text-[#1a1a1a]" delay={0.2} direction="down" />
                         </div>
                     </motion.div>
 
