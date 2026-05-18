@@ -22,7 +22,7 @@ import { ShieldCheck, Globe2, Activity } from "lucide-react";
 const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Solutions", href: "/solutions" },
+  // { name: "Solutions", href: "/solutions" },
   { name: "Network", href: "/network" },
   { name: "Industries", href: "/industry" },
   { name: "About us", href: "/about" },
@@ -126,10 +126,10 @@ function ScrollRevealText({ children, className, delay = 0 }: { children: React.
     offset: ["start 0.9", "end 0.1"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.98, 1, 1, 0.98]);
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [30, 0, 0, -30]);
-  const blur = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], ["blur(12px)", "blur(0px)", "blur(0px)", "blur(12px)"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.98, 1, 1, 0.98]);
+  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [30, 0, 0, -30]);
+  const blur = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["blur(12px)", "blur(0px)", "blur(0px)", "blur(12px)"]);
 
   return (
     <motion.div
@@ -173,7 +173,7 @@ function CinematicText({ text, delay = 0, className, spanClassName }: { text: st
 // MAIN VISUAL COMPONENTS
 // ============================================================================
 
-function Globe() {
+function Globe({ isMobile }: { isMobile?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -224,17 +224,17 @@ function Globe() {
       devicePixelRatio: 2,
       width: 1000,
       height: 1000,
-      phi: phiRef.current,
+      phi: 3.89,
       theta: 0.50,
-      dark: 1, 
-      diffuse: 2,
-      scale: 0.9, 
+      dark: 0.96, 
+      diffuse: 3.0,
+      scale: 0.85, 
       mapSamples: 25000, 
       mapBrightness: 6.0, 
       baseColor:  [0.05, 0.1, 0.25], 
       markerColor: [0.2, 0.5, 1],
       glowColor: [0.05, 0.1, 0.2], 
-      offset: [0, 100],
+      offset: isMobile ? [0, 150] : [-100, 200],
       markers,
       arcs,
       arcColor: [0.8, 0.8, 0.8],
@@ -340,19 +340,19 @@ export default function NetworkPage() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 40,
+    damping: 25,
     restDelta: 0.001
   });
 
-  const globeX = useTransform(smoothProgress, [0, 0.15], ["0%", isMobile ? "0%" : "28%"]);
-  const globeY = useTransform(smoothProgress, [0, 0.15], ["0%", isMobile ? "-20%" : "0%"]);
-  const globeScale = useTransform(smoothProgress, [0, 0.15], [1.1, isMobile ? 0.7 : 0.85]);
-  const heroOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
-  const contentOpacity = useTransform(smoothProgress, [0.1, 0.2], [0, 1]);
+  const globeX = useTransform(smoothProgress, [0, 0.25], ["0vw", isMobile ? "0vw" : "32vw"]);
+  const globeY = useTransform(smoothProgress, [0, 0.25], ["0vh", isMobile ? "-15vh" : "0vh"]);
+  const globeScale = useTransform(smoothProgress, [0, 0.25], [isMobile ? 0.9 : 1.1, isMobile ? 0.6 : 0.75]);
+  const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  const contentOpacity = useTransform(smoothProgress, [0.15, 0.25], [0, 1]);
 
   return (
-    <main ref={containerRef} className="relative min-h-[220vh] bg-[#020617] text-white selection:bg-blue-500/30 overflow-x-hidden">
+    <main ref={containerRef} className="relative min-h-[350vh] bg-[#020617] text-white selection:bg-blue-500/30 overflow-x-hidden">
       {/* Background Decor */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]" />
@@ -382,27 +382,27 @@ export default function NetworkPage() {
       <div className="fixed inset-0 h-screen w-full overflow-hidden pointer-events-none z-20">
         <motion.div
           style={{ x: globeX, y: globeY, scale: globeScale }}
-          className="absolute inset-0 flex items-center justify-center translate-y-4"
+          className="absolute inset-0 flex items-center justify-center translate-y-8 sm:translate-y-4"
         >
           <div className="w-full max-w-[800px] pointer-events-auto">
-            <Globe />
+            <Globe isMobile={isMobile} />
           </div>
         </motion.div>
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 translate-y-4"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 translate-y-8 sm:translate-y-4"
         >
           <div className="overflow-hidden mb-6">
             <CinematicText 
               text="GLOBAL" 
               delay={1.2}
-              className="text-6xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+              className="text-5xl sm:text-6xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
             />
             <CinematicText 
               text="LOGISTICS GRID" 
               delay={1.6}
-              className="text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+              className="text-5xl sm:text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
               spanClassName="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-700"
             />
           </div>
@@ -411,7 +411,7 @@ export default function NetworkPage() {
       </div>
 
       {/* 2. SCROLLING CONTENT LAYER */}
-      <div className="relative z-30 pt-[70vh]">
+      <div className="relative z-30 pt-[100vh]">
         <motion.div 
           style={{ opacity: contentOpacity }}
           className="w-full lg:w-[50%] px-6 md:px-12 lg:px-20 pb-20 space-y-24"

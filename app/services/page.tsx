@@ -4,6 +4,8 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import Image from "next/image";
+import Link from "next/link";
 
 // Static Image Asset Imports for 1/3, 2/3, and 3/3 Carousels
 import imageTruck from "@/images_frontend/loading_container_truck.webp";
@@ -184,8 +186,23 @@ export default function ServicesPage() {
       `}</style>
 
       {/* Absolute Navbar Component */}
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-full max-w-max">
-        <AppleGlassNav items={NAV_LINKS} theme="light" />
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
+        <AppleGlassNav 
+          items={NAV_LINKS} 
+          theme="light"
+          logo={
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/mas_logo.webp"
+                alt="Logo"
+                width={200}
+                height={50}
+                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                priority
+              />
+            </Link>
+          }
+        />
       </div>
 
       {/* HEADER SECTION */}

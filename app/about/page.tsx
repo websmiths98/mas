@@ -314,12 +314,12 @@ const IconTable = () => (
 );
 
 const CULTURE = [
-    { title: "Get it done", desc: "Clear ownership from quote to delivery—no hand-offs into silence.", icon: <IconList /> },
-    { title: "Challenge the norm", desc: "We look for simpler routes, safer handling, and better outcomes.", icon: <IconGrid /> },
-    { title: "Commit to quality", desc: "Details in documentation and execution define trust.", icon: <IconLink /> },
-    { title: "Stay humble", desc: "Respect for clients, carriers, and teammates in every interaction.", icon: <IconTable /> },
-    { title: "Deliver clarity", desc: "Plain language, honest timelines, and predictable follow-through.", icon: <IconList /> },
-    { title: "Think long-term", desc: "We optimize for relationships and repeat business, not one-off wins.", icon: <IconGrid /> },
+    { title: "Value Creation", desc: "Creating long-term business value through reliable logistics solutions and efficient supply chain execution", icon: <IconList /> },
+    { title: "Openness", desc: "Promoting transparent communication and collaborative logistics operations across every stage of service", icon: <IconGrid /> },
+    { title: "Commitment", desc: "Delivering quality-driven logistics solutions focused on client success, operational excellence, and continuous growth", icon: <IconLink /> },
+    { title: "Integrity", desc: "Maintaining ethical business practices and accountability in global freight and logistics management", icon: <IconTable /> },
+    { title: "Quality Standards", desc: "ISO 9001:2015 certified logistics services ensuring consistent quality, operational efficiency, and reliable supply chain performance", icon: <IconList /> },
+    { title: "Compliance", desc: "Ensuring regulatory compliance, cargo security, and responsible supply chain management standards", icon: <IconGrid /> },
 ];
 
 
@@ -420,16 +420,20 @@ const AnimatedText = ({
     };
 
     const renderWords = () => {
-        return text.split(" ").map((word, index) => (
-            <motion.span key={`word-${index}`} variants={itemVariants} className="mr-2 inline-block">
-                {word}
-            </motion.span>
+        const words = text.split(" ");
+        return words.map((word, index) => (
+            <React.Fragment key={`word-${index}`}>
+                <motion.span variants={itemVariants} className="inline-block">
+                    {word}
+                </motion.span>
+                {index < words.length - 1 && " "}
+            </React.Fragment>
         ));
     };
 
     return (
         <motion.div
-            className={cn("overflow-hidden leading-[1.1] pb-1", className)}
+            className={className}
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -522,20 +526,20 @@ export default function About() {
 
                 <motion.div
                     style={{ y: yHeroText, z: zHeroText, rotateX: rotateXHeroText, opacity: opacityHeroText, transformStyle: "preserve-3d" }}
-                    className="relative z-10 mx-auto max-w-3xl text-center flex flex-col items-center"
+                    className="relative z-10 mx-auto max-w-4xl text-center flex flex-col items-center px-4 md:px-8"
                 >
                     <AnimatedText
                         text="We're on a mission to make complex logistics feel simple, reliable, and human"
-                        className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]"
+                        className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.1]"
                     />
                     <AnimatedText
-                        text="MAS connects businesses to dependable freight, warehousing, and customs expertise—so you can focus on products and customers, not paperwork and unknowns"
-                        className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-200 md:text-lg"
+                        text="MAS connects businesses to dependable freight, warehousing, and customs expertise—so you can focus on products and customers, not paperwork and unknowns."
+                        className="mt-8 max-w-2xl text-lg leading-relaxed text-zinc-200 md:text-xl"
                         delay={0.2}
                     />
                     <AnimatedText
-                        text="Our work sits at the intersection of data, relationships, and execution: one coordinated team from first mile to final delivery"
-                        className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg"
+                        text="MAS Logistics operates with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements"
+                        className="mt-6 max-w-3xl text-base leading-relaxed text-zinc-300 md:text-lg"
                         delay={0.4}
                     />
                 </motion.div>
@@ -543,13 +547,13 @@ export default function About() {
 
 
 
-            {/* Trust line */}
+            {/* Trust line
             <section data-theme="light" className="border-b border-zinc-200/80 bg-white px-6 py-14 md:py-20">
                 <div className="mx-auto max-w-3xl text-center flex flex-col items-center">
                     <AnimatedText text="Supporting teams who move goods across borders every day" className="text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl" direction="down" />
                     <AnimatedText text="From growing brands to industrial shippers, we align service to how you actually operate." className="mt-4 max-w-xl text-base leading-relaxed text-zinc-500" delay={0.1} />
                 </div>
-            </section>
+            </section> */}
 
             {/* Our Clients — infinite marquee logo cloud (inline SVGs — zero CDN dependency) */}
             <section data-theme="light" className="overflow-hidden border-b border-zinc-200/80 bg-[#fafbfc] py-14 md:py-20">
@@ -631,7 +635,9 @@ export default function About() {
                             </span>
                         </h2>
                         <p className="text-[15px] text-gray-400 leading-relaxed">
-                            Our work sits at the intersection of data, relationships, and execution: one coordinated team from first mile to final delivery.
+                            At MAS Logistics, our values shape the way we work, build relationships, and deliver results. They
+                            reflect our commitment to operational excellence, customer satisfaction, and long-term partnerships
+                            across the global logistics and supply chain industry
                         </p>
                     </motion.div>
 

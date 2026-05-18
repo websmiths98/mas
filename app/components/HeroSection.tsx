@@ -99,8 +99,8 @@ export default function HeroSection() {
         {/* ─ Subtitle ─ */}
         <Reveal delay={1.0}>
           <h2 className="hero-h2 max-w-2xl">
-            MAS Logistics delivers reliable global cargo transportation, warehousing, and end-to-end logistics solutions designed
-            for smooth and efficient international trade operations.
+            MAS Logistics is a trusted international freight forwarding and supply chain management company in India
+            delivering reliable air, sea, warehousing, and global logistics solutions tailored for seamless cross-border trade
 
           </h2>
         </Reveal>

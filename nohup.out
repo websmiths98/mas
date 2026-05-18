@@ -10552,3 +10552,47 @@ Import traces:
  GET / 200 in 95ms (next.js: 21ms, application-code: 74ms)
  GET / 200 in 101ms (next.js: 13ms, application-code: 88ms)
  GET / 200 in 104ms (next.js: 8ms, application-code: 97ms)
+
+> mas@0.1.0 dev
+> next dev -p 4089
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:4089
+- Network:       http://165.101.250.39:4089
+✓ Ready in 626ms
+
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET /about 200 in 2.1s (next.js: 1575ms, application-code: 558ms)
+[browser] ⨯ unhandledRejection: ChunkLoadError: Failed to load chunk /_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_0yjw1oe._.js from module [turbopack]/browser/dev/hmr-client/hmr-client.ts [app-client] (ecmascript, async loader)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET /network 200 in 75ms (next.js: 37ms, application-code: 38ms)
+ GET /industry 200 in 1476ms (next.js: 1415ms, application-code: 61ms)
+ GET / 200 in 84ms (next.js: 36ms, application-code: 48ms)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:4089
+- Network:       http://165.101.250.39:4089
+✓ Ready in 417ms
+
+ GET / 200 in 1061ms (next.js: 720ms, application-code: 341ms)
+ GET /industry 200 in 76ms (next.js: 36ms, application-code: 40ms)
+ GET /about 200 in 60ms (next.js: 32ms, application-code: 28ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:4089
+- Network:       http://165.101.250.39:4089
+✓ Ready in 489ms
+
+ GET /about 200 in 1347ms (next.js: 851ms, application-code: 496ms)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:4089
+- Network:       http://165.101.250.39:4089
+✓ Ready in 495ms
+
+ GET /about 200 in 867ms (next.js: 260ms, application-code: 608ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET /industry 200 in 142ms (next.js: 84ms, application-code: 58ms)
+ GET /network 200 in 80ms (next.js: 40ms, application-code: 40ms)
+ GET / 200 in 77ms (next.js: 33ms, application-code: 44ms)

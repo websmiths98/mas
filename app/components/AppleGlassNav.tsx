@@ -35,7 +35,7 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
 
     return (
         <nav className={cn(
-                "flex items-center justify-between p-2 px-4 gap-1 backdrop-blur-[24px] rounded-[22px] transition-all duration-500 w-full",
+                "flex items-center justify-between p-1 sm:p-2 px-2 sm:px-4 gap-0 sm:gap-1 backdrop-blur-[24px] rounded-[18px] sm:rounded-[22px] transition-all duration-500 w-[96vw] sm:w-full max-w-fit mx-auto",
                 "shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] border border-white/20",
                 isLight
                     ? "bg-white/40 ring-1 ring-black/5"
@@ -45,13 +45,13 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
                 
                 {/* ── Logo Section ── */}
                 {logo && (
-                    <div className="pl-3 pr-2 flex items-center mr-1">
+                    <div className="pl-1 sm:pl-3 pr-1 sm:pr-2 flex items-center mr-0 sm:mr-1 shrink-0 scale-90 sm:scale-100 origin-left">
                         {logo}
                     </div>
                 )}
 
                 {/* ── Nav Links ── */}
-                <div className="flex gap-1 overflow-x-auto hide-scrollbar scroll-smooth px-1">
+                <div className="flex gap-0.5 sm:gap-1 overflow-x-auto hide-scrollbar scroll-smooth px-0.5 sm:px-1 w-full justify-between sm:justify-start">
                     {items.map((item) => {
                         const isActive = active === item.name;
                         return (
@@ -60,7 +60,7 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
                                 href={item.href}
                                 onClick={() => setActive(item.name)}
                                 className={cn(
-                                    "relative px-3 sm:px-5 py-2.5 text-[11px] sm:text-[13px] font-semibold tracking-tight transition-all duration-300 rounded-[16px] whitespace-nowrap",
+                                    "relative px-1.5 sm:px-5 py-2 sm:py-2.5 text-[10px] sm:text-[13px] font-semibold tracking-tight transition-all duration-300 rounded-[12px] sm:rounded-[16px] whitespace-nowrap",
                                     isActive
                                         ? (isLight ? "text-white" : "text-black")
                                         : isLight
