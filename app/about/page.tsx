@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -24,7 +25,7 @@ const PARTNER_ACCENT = "#1a1a1a";
 const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    { name: "Solutions", href: "/solutions" },
+    // { name: "Solutions", href: "/solutions" },
     { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },
@@ -488,7 +489,22 @@ export default function About() {
     return (
         <main ref={containerRef} className="min-h-screen bg-[#f6f7f9] text-zinc-900 antialiased overflow-x-hidden">
             <div className="fixed top-8 left-1/2 z-[100] w-auto -translate-x-1/2">
-                <AppleGlassNav items={NAV_LINKS} theme={navTheme} />
+                <AppleGlassNav 
+                    items={NAV_LINKS} 
+                    theme={navTheme} 
+                    logo={
+                        <Link href="/" className="flex items-center">
+                            <Image
+                                src="/mas_logo.webp"
+                                alt="Logo"
+                                width={200}
+                                height={50}
+                                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                                priority
+                            />
+                        </Link>
+                    }
+                />
             </div>
 
             {/* Hero — mission (Shiprocket-style lead) */}

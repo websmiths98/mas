@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 // Static imports for images located outside public/
 import Image2PL from "@/images_frontend/solutions_logistics_page/2PL.webp";
@@ -14,7 +15,7 @@ import ImageSupplyChain from "@/images_frontend/solutions_logistics_page/supply_
 const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    { name: "Solutions", href: "/solutions" },
+    // { name: "Solutions", href: "/solutions" },
     { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },
@@ -210,7 +211,22 @@ export default function Solutions() {
             {/* Apple Glass Nav */}
             <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-auto">
                 <div className="relative">
-                    <AppleGlassNav items={NAV_LINKS} theme="light" />
+                    <AppleGlassNav 
+                        items={NAV_LINKS} 
+                        theme="light" 
+                        logo={
+                            <Link href="/" className="flex items-center">
+                                <Image
+                                    src="/mas_logo.webp"
+                                    alt="Logo"
+                                    width={200}
+                                    height={50}
+                                    className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                                    priority
+                                />
+                            </Link>
+                        }
+                    />
                 </div>
             </div>
 

@@ -7,7 +7,7 @@ import { AppleGlassNav } from "./components/AppleGlassNav";
 const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    { name: "Solutions", href: "/solutions" },
+    // { name: "Solutions", href: "/solutions" },
     { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },

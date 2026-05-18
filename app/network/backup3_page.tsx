@@ -11,7 +11,13 @@ import {
   useInView,
 } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import Image from "next/image";
+import Link from "next/link";
 import { ShieldCheck, Globe2, Activity } from "lucide-react";
+
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
 
 const NAV_LINKS = [
   { name: "Home", href: "/" },
@@ -38,6 +44,61 @@ const ROUTES = [
   { id: "chennai-singapore", label: "Chennai ↔ Singapore", from: [13.0827, 80.2707], to: [1.3521, 103.8198] },
   { id: "chennai-dubai", label: "Chennai ↔ Dubai", from: [13.0827, 80.2707], to: [25.2048, 55.2708] },
 ];
+
+const SECTIONS = [
+  {
+    tag: "Network Architecture",
+    title: "Global Freight Grid",
+    desc: "A high-performance tapestry of strategic airline partnerships and intercontinental hubs, engineered for surgical precision.",
+    blocks: [
+      { title: "Air Freight", text: "Fast, time-sensitive cargo solutions through strategic airline partnerships." },
+      { title: "Ocean Freight", text: "Efficient FCL and LCL movement through major global seaports." },
+    ]
+  },
+  {
+    tag: "Intelligence",
+    title: "Designed for Velocity",
+    desc: "We connect strategic freight corridors through intelligent routing and operational precision.",
+    blocks: [
+      { title: "Asia Network", text: "Strong connectivity across Asian manufacturing and sourcing markets." },
+      { title: "Middle East Hubs", text: "Strategic freight support connecting India with GCC trade hubs." },
+    ]
+  },
+  {
+    tag: "Global Operations",
+    title: "Strategic Routes",
+    desc: "Our primary intercontinental lanes connecting Chennai to the world's most vital economic centers.",
+    blocks: ROUTES.map(r => ({ 
+      title: r.label.split(' ↔ ')[1], 
+      text: `Direct operational lane: ${r.label}` 
+    }))
+  }
+];
+
+const CAPABILITIES = [
+  "Air Freight", 
+  "Ocean Freight", 
+  "Customs Brokerage", 
+  "Project Cargo", 
+  "Warehousing", 
+  "Distribution"
+];
+
+const NETWORK_STATS = [
+  { value: 80, suffix: "+", label: "Global Destinations" },
+  { value: 58, suffix: "+", label: "Operational Members" },
+  { value: 270, suffix: "+", label: "Group Strength" },
+];
+
+const NETWORK_HIGHLIGHTS = [
+  { label: "Multi-Industry Support", icon: Activity, detail: "Sector-Specific Logistics" },
+  { label: "ISO 9001:2015 Certified", icon: ShieldCheck, detail: "Quality Management System" },
+  { label: "India & International", icon: Globe2, detail: "Global Operations Network" },
+];
+
+// ============================================================================
+// HELPER COMPONENTS
+// ============================================================================
 
 function Counter({ to }: { to: number }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
@@ -107,6 +168,10 @@ function CinematicText({ text, delay = 0, className, spanClassName }: { text: st
     </div>
   );
 }
+
+// ============================================================================
+// MAIN VISUAL COMPONENTS
+// ============================================================================
 
 function Globe() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -253,37 +318,11 @@ function Globe() {
   );
 }
 
-const SECTIONS = [
-  {
-    tag: "Network Architecture",
-    title: "Global Freight Grid",
-    desc: "A high-performance tapestry of strategic airline partnerships and intercontinental hubs, engineered for surgical precision.",
-    blocks: [
-      { title: "Air Freight", text: "Fast, time-sensitive cargo solutions through strategic airline partnerships." },
-      { title: "Ocean Freight", text: "Efficient FCL and LCL movement through major global seaports." },
-    ]
-  },
-  {
-    tag: "Intelligence",
-    title: "Designed for Velocity",
-    desc: "We connect strategic freight corridors through intelligent routing and operational precision.",
-    blocks: [
-      { title: "Asia Network", text: "Strong connectivity across Asian manufacturing and sourcing markets." },
-      { title: "Middle East Hubs", text: "Strategic freight support connecting India with GCC trade hubs." },
-    ]
-  },
-  {
-    tag: "Global Operations",
-    title: "Strategic Routes",
-    desc: "Our primary intercontinental lanes connecting Chennai to the world's most vital economic centers.",
-    blocks: ROUTES.map(r => ({ 
-      title: r.label.split(' ↔ ')[1], 
-      text: `Direct operational lane: ${r.label}` 
-    }))
-  }
-];
 
-const CAPABILITIES = ["Air Freight", "Ocean Freight", "Customs Brokerage", "Project Cargo", "Warehousing", "Distribution"];
+
+// ============================================================================
+// MAIN PAGE COMPONENT
+// ============================================================================
 
 export default function NetworkPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -312,18 +351,6 @@ export default function NetworkPage() {
   const heroOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
   const contentOpacity = useTransform(smoothProgress, [0.1, 0.2], [0, 1]);
 
-  const stats = [
-    { value: 80, suffix: "+", label: "Global Destinations" },
-    { value: 58, suffix: "+", label: "Operational Members" },
-    { value: 270, suffix: "+", label: "Group Strength" },
-  ];
-
-  const highlights = [
-    { label: "Multi-Industry Support", icon: Activity, detail: "Sector-Specific Logistics" },
-    { label: "ISO 9001:2015 Certified", icon: ShieldCheck, detail: "Quality Management System" },
-    { label: "India & International", icon: Globe2, detail: "Global Operations Network" },
-  ];
-
   return (
     <main ref={containerRef} className="relative min-h-[220vh] bg-[#020617] text-white selection:bg-blue-500/30 overflow-x-hidden">
       {/* Background Decor */}
@@ -333,7 +360,22 @@ export default function NetworkPage() {
       </div>
 
       <div className="fixed left-1/2 top-8 z-50 -translate-x-1/2">
-        <AppleGlassNav items={NAV_LINKS} theme="light" />
+        <AppleGlassNav 
+          items={NAV_LINKS} 
+          theme="light" 
+          logo={
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/mas_logo.webp"
+                alt="Logo"
+                width={200}
+                height={50}
+                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                priority
+              />
+            </Link>
+          }
+        />
       </div>
 
       {/* 1. STICKY VISUAL LAYER */}
@@ -361,25 +403,10 @@ export default function NetworkPage() {
               text="LOGISTICS GRID" 
               delay={1.6}
               className="text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-              spanClassName="text-transparent bg-clip-text bg-gradient-to-b from-blue-400 to-blue-600"
+              spanClassName="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-700"
             />
           </div>
 
-          <div className="relative">
-            <div className="absolute inset-0 blur-3xl bg-blue-500/10 -z-10" />
-            <div className="flex flex-col gap-3">
-              <ScrollRevealText delay={2.2}>
-                <p className="text-lg md:text-2xl font-light text-zinc-400 max-w-2xl leading-relaxed">
-                  Orchestrating intercontinental velocity through
-                </p>
-              </ScrollRevealText>
-              <ScrollRevealText delay={2.4}>
-                <p className="text-lg md:text-2xl font-light text-zinc-400 max-w-2xl leading-relaxed">
-                  <span className="text-zinc-400">strategic hubs and intelligent routings</span>
-                </p>
-              </ScrollRevealText>
-            </div>
-          </div>
         </motion.div>
       </div>
 
@@ -450,7 +477,7 @@ export default function NetworkPage() {
                       <div className="hidden md:block absolute inset-y-0 left-1/3 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
                       <div className="hidden md:block absolute inset-y-0 left-2/3 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
-                      {stats.map((stat, i) => (
+                      {NETWORK_STATS.map((stat, i) => (
                           <div key={i} className="text-center group px-8">
                               <div className="relative inline-block mb-4">
                                 <div className="absolute -inset-4 bg-blue-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -468,7 +495,7 @@ export default function NetworkPage() {
 
                   {/* Highlights Grid - Redesigned 6-column layout with motion and luxury gradients */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-                      {highlights.map((item, i) => (
+                      {NETWORK_HIGHLIGHTS.map((item, i) => (
                         <ScrollRevealText key={i} delay={i * 0.05} className="lg:col-span-2">
                           <div 
                               className="relative overflow-hidden group p-8 rounded-3xl border border-white/5 bg-white/[0.01] transition-all duration-700 hover:-translate-y-2 hover:border-blue-500/30 h-full"

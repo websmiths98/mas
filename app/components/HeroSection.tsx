@@ -73,7 +73,7 @@ export default function HeroSection() {
         <Reveal delay={0.2}>
           <div className="hero-badge">
             <span className="hero-badge-dot" />
-            Trusted logistics partner across India & global markets
+            Seamless Logistics Across Continents | Your Trusted Partner in Global Logistics
           </div>
         </Reveal>
 
@@ -99,9 +99,9 @@ export default function HeroSection() {
         {/* ─ Subtitle ─ */}
         <Reveal delay={1.0}>
           <h2 className="hero-h2 max-w-2xl">
-            MAS Logistics is an India-based international logistics company
-            delivering reliable freight forwarding and supply chain solutions
-            across global markets
+            MAS Logistics delivers reliable global cargo transportation, warehousing, and end-to-end logistics solutions designed
+            for smooth and efficient international trade operations.
+
           </h2>
         </Reveal>
 
@@ -124,7 +124,7 @@ export default function HeroSection() {
 
             {/* Explore Services Button (Existing Design, New Size) */}
             <a
-              href="#services"
+              href="/services"
               className={`${btnStyle} group relative overflow-hidden border-2 border-[#E5E4E2]/20 bg-[#E5E4E2]/10 backdrop-blur-md text-[#E5E4E2] isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700`}
             >
               Explore Services

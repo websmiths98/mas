@@ -125,7 +125,7 @@ const HighlightTitle = ({ text, gradient, className = "" }: { text: string, grad
 const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    // { name: "Solutions", href: "/solutions" },
+    { name: "Solutions", href: "/solutions" },
     { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },

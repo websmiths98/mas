@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import Image from "next/image";
 import Link from "next/link";
@@ -94,25 +94,75 @@ function Reveal({
   );
 }
 
-// ─── Bright Text Highlight Component ─────────────────────────────────────────
-const HighlightTitle = ({ text, gradient, className = "" }: { text: string, gradient: string, className?: string }) => {
-    const words = text.split(" ");
+// ─── Letter Stream Typography Component ──────────────────────────────────────
+const LetterStream = ({ text, isActive, delay = 0, stagger = 0.008, className = "", gradient = "" }: { 
+    text: string, 
+    isActive: boolean, 
+    delay?: number, 
+    stagger?: number, 
+    className?: string,
+    gradient?: string
+}) => {
+    const chars = text.split("");
     return (
-        <span className={`inline-block ${className}`}>
+        <span className={className}>
+            {chars.map((char, i) => (
+                <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                    animate={isActive ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 10, filter: "blur(4px)" }}
+                    transition={{
+                        duration: 0.4,
+                        delay: delay + (i * stagger),
+                        ease: [0.215, 0.61, 0.355, 1]
+                    }}
+                    className={`inline-block ${gradient ? `bg-clip-text text-transparent bg-gradient-to-r ${gradient}` : ""}`}
+                    style={{ 
+                        whiteSpace: char === " " ? "pre" : "normal",
+                        // Continuous gradient logic: stretch background and offset it per character
+                        backgroundSize: gradient ? `${chars.length * 100}% 100%` : undefined,
+                        backgroundPosition: gradient ? `${(i / Math.max(chars.length - 1, 1)) * 100}% 50%` : undefined
+                    }}
+                >
+                    {char}
+                </motion.span>
+            ))}
+        </span>
+    );
+};
+
+// ─── First-Letter Highlight Component with Letter Stream ───────────────────
+const HighlightTitle = ({ text, gradient, isActive, className = "" }: { text: string, gradient: string, isActive: boolean, className?: string }) => {
+    const words = text.split(" ");
+    let charCount = 0;
+
+    return (
+        <span className={className}>
             {words.map((word, wIdx) => {
                 const firstChar = word.charAt(0);
                 const rest = word.slice(1);
+                const firstCharIndex = charCount;
+                charCount += word.length + 1;
+
                 return (
                     <React.Fragment key={wIdx}>
                         <span className="inline-block relative">
-                            {/* Super bright colored first letter */}
-                            <span className={`bg-clip-text text-transparent bg-gradient-to-br ${gradient} font-black drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]`}>
-                                {firstChar}
-                            </span>
-                            {/* Pure white rest of the word */}
-                            <span className="text-black drop-shadow-md">
-                                {rest}
-                            </span>
+                            {/* Colorful "Ping" for the first letter */}
+                            <LetterStream 
+                                text={firstChar} 
+                                isActive={isActive} 
+                                gradient={gradient} 
+                                delay={firstCharIndex * 0.02} 
+                                className="font-black"
+                            />
+                            {/* Professional black for the rest of the word */}
+                            <LetterStream 
+                                text={rest} 
+                                isActive={isActive} 
+                                delay={firstCharIndex * 0.02 + 0.1} 
+                                stagger={0.015}
+                                className="text-black"
+                            />
                         </span>
                         {wIdx < words.length - 1 && <span className="inline-block w-[0.25em]" />}
                     </React.Fragment>
@@ -125,7 +175,7 @@ const HighlightTitle = ({ text, gradient, className = "" }: { text: string, grad
 const NAV_LINKS = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    // { name: "Solutions", href: "/solutions" },
+    { name: "Solutions", href: "/solutions" },
     { name: "Network", href: "/network" },
     { name: "Industries", href: "/industry" },
     { name: "About us", href: "/about" },
@@ -226,16 +276,19 @@ function ScrollSection({
             // h-screen ensures exactly one block fits on the screen at a time.
             className={`snap-always snap-center h-screen flex flex-col justify-center transition-all duration-700 ease-in-out p-6 md:p-12 lg:bg-transparent ${
                 isActive 
-                ? 'opacity-100 scale-100 bg-white/80 backdrop-blur-xl border border-black/10 lg:border-none rounded-[2rem] lg:rounded-none' 
+                ? 'opacity-100 scale-100 bg-[#E5E4E2]/80 backdrop-blur-xl border border-black/10 lg:border-none rounded-[2rem] lg:rounded-none' 
                 : 'opacity-0 scale-95 translate-y-8 pointer-events-none bg-transparent'
             }`}
         >
-            <h3 className={`text-3xl md:text-4xl font-bold tracking-tight mb-4 drop-shadow-xl transition-all duration-700 delay-100 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                <HighlightTitle text={industry.name} gradient={industry.gradient} />
-            </h3>
-            <p className={`text-zinc-600 text-lg leading-relaxed mb-6 drop-shadow-md transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                {industry.description}
-            </p>
+            <HighlightTitle 
+                text={industry.name} 
+                gradient={industry.gradient} 
+                isActive={isActive} 
+                className="text-3xl md:text-4xl font-bold tracking-tight mb-4 drop-shadow-sm" 
+            />
+            <div className={`text-zinc-600 text-lg leading-relaxed mb-6 drop-shadow-sm min-h-[6em]`}>
+                <LetterStream text={industry.description} isActive={isActive} delay={0.3} stagger={0.005} />
+            </div>
             <div className={`flex flex-wrap gap-3 transition-all duration-700 delay-300 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                 {industry.features.map((f: string) => (
                     <div 
@@ -256,10 +309,21 @@ function ScrollSection({
 
 export default function Industry() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    
+    // Create a continuous parallax flow based on total scroll progress
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
 
+    // Subtle up/down flow for the entire image window
+    const imageFlowY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
     return (
-        // Changed main to the primary scroll container with CSS Scroll Snapping enabled
-        <main className="h-screen w-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory hide-scrollbar bg-white text-black selection:bg-blue-500 selection:text-white scroll-smooth relative">
+        <main 
+            ref={containerRef}
+            className="h-screen w-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory hide-scrollbar bg-[#E5E4E2] text-black selection:bg-blue-500 selection:text-white scroll-smooth relative"
+        >
             <style>{globalStyles}</style>
 
             {/* Apple Glass Nav */}
@@ -286,19 +350,29 @@ export default function Industry() {
 
             {/* Compact Centered Header */}
             <section className="snap-start pt-32 pb-4 px-4 flex flex-col items-center justify-center text-center shrink-0">
-                <Reveal direction="down">
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 mt-8">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-gradient-x inline-block pr-2">
-                            Industry
-                        </span>
-                        <span className="text-black drop-shadow-[0_0_20px_rgba(0,0,0,0.1)]">Solutions</span>
-                    </h1>
-                </Reveal>
-                <Reveal direction="up" delay={0.1}>
-                    <p className="text-zinc-600 text-lg max-w-2xl mx-auto leading-relaxed">
-                        Dedicated supply chain management and specialized logistics for the world's most demanding sectors.
-                    </p>
-                </Reveal>
+                <div className="text-4xl md:text-5xl font-bold tracking-tight mb-4 mt-8 flex justify-center items-center gap-2">
+                    <LetterStream 
+                        text="Industry" 
+                        isActive={true} 
+                        delay={0.3} 
+                        gradient="from-blue-500 via-purple-500 to-red-500 animate-gradient-x" 
+                        className="pr-2"
+                    />
+                    <LetterStream 
+                        text="Solutions" 
+                        isActive={true} 
+                        delay={0.8} 
+                        className="text-black drop-shadow-[0_0_20px_rgba(0,0,0,0.1)]" 
+                    />
+                </div>
+                <div className="max-w-2xl text-zinc-500 text-lg md:text-xl font-medium leading-relaxed mb-8">
+                    <LetterStream 
+                        text="Specialized supply chain expertise across core sectors, moving everything from heavy machinery to high-fashion collections with precision." 
+                        isActive={true} 
+                        delay={1.5} 
+                        stagger={0.005}
+                    />
+                </div>
                 <Reveal direction="up" delay={0.2}>
                     <div className="flex flex-col items-center mt-8">
                         <span className="text-xs tracking-[0.2em] text-zinc-500 uppercase mb-3 animate-pulse">Scroll to Explore</span>
@@ -313,22 +387,34 @@ export default function Industry() {
                 {/* Left: Sticky Image Viewer */}
                 {/* h-screen so it stays in the viewport perfectly. */}
                 <div className="w-full lg:w-1/2 sticky top-0 h-screen flex flex-col justify-center lg:py-24 z-0 pointer-events-none">
-                    {/* The image container */}
-                    <div className="w-full h-full lg:h-[85%] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative border border-white/5">
-                        <AnimatePresence mode="wait">
+                    {/* The image container - transformed to a "flowing" window without thick borders */}
+                    {/* The image container - transformed to a "flowing" window without thick borders */}
+                    <motion.div 
+                        style={{
+                            y: imageFlowY,
+                            maskImage: 'linear-gradient(to bottom, transparent, black 8%, black 92%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 8%, black 92%, transparent)'
+                        }}
+                        className="w-full h-full lg:h-[90%] overflow-hidden relative"
+                    >
+                        <AnimatePresence initial={false}>
                             <motion.img 
                                 key={activeIndex}
                                 src={INDUSTRIES[activeIndex].image}
-                                initial={{ opacity: 0, scale: 1.05 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                initial={{ opacity: 0, y: 150, scale: 1.1 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: -150, scale: 1.05 }}
+                                transition={{ 
+                                    duration: 1.2, 
+                                    ease: [0.16, 1, 0.3, 1], // Cinematic ease-out
+                                    opacity: { duration: 0.8 }
+                                }}
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
                         </AnimatePresence>
-                        {/* Subtle aesthetic gradient overlay at bottom for blending */}
-                        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white/90 to-transparent" />
-                    </div>
+                        {/* Soft ambient glow instead of hard shadow */}
+                        <div className="absolute inset-0 pointer-events-none ring-1 ring-white/10" />
+                    </motion.div>
                 </div>
 
                 {/* Right: Snap Scrolling Content */}

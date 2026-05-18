@@ -51,7 +51,7 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
                 )}
 
                 {/* ── Nav Links ── */}
-                <div className="flex gap-1">
+                <div className="flex gap-1 overflow-x-auto hide-scrollbar scroll-smooth px-1">
                     {items.map((item) => {
                         const isActive = active === item.name;
                         return (
@@ -60,7 +60,7 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
                                 href={item.href}
                                 onClick={() => setActive(item.name)}
                                 className={cn(
-                                    "relative px-5 py-2.5 text-[13px] font-semibold tracking-tight transition-all duration-300 rounded-[16px]",
+                                    "relative px-3 sm:px-5 py-2.5 text-[11px] sm:text-[13px] font-semibold tracking-tight transition-all duration-300 rounded-[16px] whitespace-nowrap",
                                     isActive
                                         ? (isLight ? "text-white" : "text-black")
                                         : isLight

@@ -11,7 +11,9 @@ import {
   useInView,
 } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
-import { ShieldCheck, Globe2, Activity, Plane, Ship, Truck, Train, Package, MapPin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ShieldCheck, Globe2, Activity } from "lucide-react";
 
 // ============================================================================
 // DATA & CONSTANTS
@@ -20,7 +22,7 @@ import { ShieldCheck, Globe2, Activity, Plane, Ship, Truck, Train, Package, MapP
 const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Solutions", href: "/solutions" },
+  // { name: "Solutions", href: "/solutions" },
   { name: "Network", href: "/network" },
   { name: "Industries", href: "/industry" },
   { name: "About us", href: "/about" },
@@ -124,10 +126,10 @@ function ScrollRevealText({ children, className, delay = 0 }: { children: React.
     offset: ["start 0.9", "end 0.1"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.98, 1, 1, 0.98]);
-  const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [30, 0, 0, -30]);
-  const blur = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], ["blur(12px)", "blur(0px)", "blur(0px)", "blur(12px)"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.98, 1, 1, 0.98]);
+  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [30, 0, 0, -30]);
+  const blur = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["blur(12px)", "blur(0px)", "blur(0px)", "blur(12px)"]);
 
   return (
     <motion.div
@@ -171,7 +173,7 @@ function CinematicText({ text, delay = 0, className, spanClassName }: { text: st
 // MAIN VISUAL COMPONENTS
 // ============================================================================
 
-function Globe() {
+function Globe({ isMobile }: { isMobile?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -222,17 +224,17 @@ function Globe() {
       devicePixelRatio: 2,
       width: 1000,
       height: 1000,
-      phi: phiRef.current,
+      phi: 3.89,
       theta: 0.50,
-      dark: 1, 
-      diffuse: 2,
-      scale: 0.9, 
+      dark: 0.96, 
+      diffuse: 3.0,
+      scale: 0.85, 
       mapSamples: 25000, 
       mapBrightness: 6.0, 
       baseColor:  [0.05, 0.1, 0.25], 
       markerColor: [0.2, 0.5, 1],
       glowColor: [0.05, 0.1, 0.2], 
-      offset: [0, -200],
+      offset: isMobile ? [0, 150] : [-100, 200],
       markers,
       arcs,
       arcColor: [0.8, 0.8, 0.8],
@@ -316,36 +318,7 @@ function Globe() {
   );
 }
 
-// function InteractiveIconFlow() {
-//   const icons = [Plane, Ship, Truck, Train, Package, MapPin, ShieldCheck, Globe2, Activity];
-//   const scrollIcons = [...icons, ...icons, ...icons, ...icons];
 
-//   return (
-//     <div className="relative w-full max-w-3xl overflow-hidden py-8 mt-4 mx-auto">
-//       <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#020617] to-transparent z-10 pointer-events-none" />
-//       <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#020617] to-transparent z-10 pointer-events-none" />
-      
-//       <div className="absolute inset-0 blur-3xl bg-blue-500/10 -z-10" />
-      
-//       <motion.div
-//         className="flex gap-12 items-center w-max px-6"
-//         animate={{ x: ["0%", "-50%"] }}
-//         transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-//       >
-//         {scrollIcons.map((Icon, idx) => (
-//           <motion.div
-//             key={idx}
-//             className="group relative flex items-center justify-center p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-500 cursor-pointer"
-//             whileHover={{ scale: 1.15, rotate: 5, y: -5 }}
-//           >
-//             <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-//             <Icon size={28} className="text-zinc-600 group-hover:text-blue-400 transition-colors duration-500 relative z-10" strokeWidth={1.5} />
-//           </motion.div>
-//         ))}
-//       </motion.div>
-//     </div>
-//   );
-// }
 
 // ============================================================================
 // MAIN PAGE COMPONENT
@@ -367,19 +340,19 @@ export default function NetworkPage() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 40,
+    damping: 25,
     restDelta: 0.001
   });
 
-  const globeX = useTransform(smoothProgress, [0, 0.15], ["0%", isMobile ? "0%" : "28%"]);
-  const globeY = useTransform(smoothProgress, [0, 0.15], ["0%", isMobile ? "-20%" : "0%"]);
-  const globeScale = useTransform(smoothProgress, [0, 0.15], [1.0, isMobile ? 0.65 : 0.8]);
-  const heroOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
-  const contentOpacity = useTransform(smoothProgress, [0.1, 0.2], [0, 1]);
+  const globeX = useTransform(smoothProgress, [0, 0.25], ["0vw", isMobile ? "0vw" : "32vw"]);
+  const globeY = useTransform(smoothProgress, [0, 0.25], ["0vh", isMobile ? "-15vh" : "0vh"]);
+  const globeScale = useTransform(smoothProgress, [0, 0.25], [isMobile ? 0.9 : 1.1, isMobile ? 0.6 : 0.75]);
+  const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  const contentOpacity = useTransform(smoothProgress, [0.15, 0.25], [0, 1]);
 
   return (
-    <main ref={containerRef} className="relative min-h-[220vh] bg-[#020617] text-white selection:bg-blue-500/30 overflow-x-hidden">
+    <main ref={containerRef} className="relative min-h-[350vh] bg-[#020617] text-white selection:bg-blue-500/30 overflow-x-hidden">
       {/* Background Decor */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]" />
@@ -387,44 +360,58 @@ export default function NetworkPage() {
       </div>
 
       <div className="fixed left-1/2 top-8 z-50 -translate-x-1/2">
-        <AppleGlassNav items={NAV_LINKS} theme="light" />
+        <AppleGlassNav 
+          items={NAV_LINKS} 
+          theme="light" 
+          logo={
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/mas_logo.webp"
+                alt="Logo"
+                width={200}
+                height={50}
+                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                priority
+              />
+            </Link>
+          }
+        />
       </div>
 
       {/* 1. STICKY VISUAL LAYER */}
       <div className="fixed inset-0 h-screen w-full overflow-hidden pointer-events-none z-20">
         <motion.div
           style={{ x: globeX, y: globeY, scale: globeScale }}
-          className="absolute inset-0 flex items-center justify-center translate-y-16 md:translate-y-24"
+          className="absolute inset-0 flex items-center justify-center translate-y-8 sm:translate-y-4"
         >
           <div className="w-full max-w-[800px] pointer-events-auto">
-            <Globe />
+            <Globe isMobile={isMobile} />
           </div>
         </motion.div>
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 translate-y-16 md:translate-y-24"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 translate-y-8 sm:translate-y-4"
         >
           <div className="overflow-hidden mb-6">
             <CinematicText 
               text="GLOBAL" 
               delay={1.2}
-              className="text-6xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+              className="text-5xl sm:text-6xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
             />
             <CinematicText 
               text="LOGISTICS GRID" 
               delay={1.6}
-              className="text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+              className="text-5xl sm:text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
               spanClassName="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-700"
             />
           </div>
 
-          {/* <InteractiveIconFlow /> */}
         </motion.div>
       </div>
 
       {/* 2. SCROLLING CONTENT LAYER */}
-      <div className="relative z-30 pt-[70vh]">
+      <div className="relative z-30 pt-[100vh]">
         <motion.div 
           style={{ opacity: contentOpacity }}
           className="w-full lg:w-[50%] px-6 md:px-12 lg:px-20 pb-20 space-y-24"
