@@ -10596,3 +10596,168 @@ Import traces:
  GET /industry 200 in 142ms (next.js: 84ms, application-code: 58ms)
  GET /network 200 in 80ms (next.js: 40ms, application-code: 40ms)
  GET / 200 in 77ms (next.js: 33ms, application-code: 44ms)
+ GET /services 200 in 1966ms (next.js: 1891ms, application-code: 74ms)
+ GET /network 200 in 53ms (next.js: 9ms, application-code: 44ms)
+ GET /industry 200 in 42ms (next.js: 11ms, application-code: 31ms)
+ GET /about 200 in 43ms (next.js: 4ms, application-code: 39ms)
+ GET / 200 in 202ms (next.js: 8ms, application-code: 195ms)
+ GET /network 200 in 47ms (next.js: 19ms, application-code: 28ms)
+ GET /network 200 in 96ms (next.js: 27ms, application-code: 69ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 618ms
+✓ Compiled in 196ms
+ GET /network 200 in 134ms (next.js: 80ms, application-code: 54ms)
+[browser] ./app/network/page.tsx:28:259
+Expected ',', got 'ident'
+  26 | ...
+  27 | ...
+> 28 | ..., Panama, Philippines, Singapore, South Africa, Sri Lanka, Switzerland, Taiwan, Thailan...
+     |                                            ^^^^^^
+  29 | ...
+  30 | ...
+  31 | ...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/network/page.tsx [Client Component Browser]
+    ./app/network/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/network/page.tsx [Client Component SSR]
+    ./app/network/page.tsx [Server Component] 
+[browser] ./app/network/page.tsx:28:259
+Expected ',', got 'ident'
+  26 | ...
+  27 | ...
+> 28 | ..., Panama, Philippines, Singapore, South Africa, Sri Lanka, Switzerland, Taiwan, Thailan...
+     |                                            ^^^^^^
+  29 | ...
+  30 | ...
+  31 | ...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/network/page.tsx [Client Component Browser]
+    ./app/network/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/network/page.tsx [Client Component SSR]
+    ./app/network/page.tsx [Server Component] 
+✓ Compiled in 217ms
+✓ Compiled in 172ms
+✓ Compiled in 147ms
+✓ Compiled in 90ms
+✓ Compiled in 87ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /network 200 in 315ms (next.js: 63ms, application-code: 252ms)
+✓ Compiled in 106ms
+✓ Compiled in 94ms
+✓ Compiled in 110ms
+✓ Compiled in 106ms
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 119ms
+✓ Compiled in 178ms
+[browser] Uncaught ReferenceError: CAPABILITIES is not defined
+    at NetworkPage (app/network/page.tsx:442:18)
+    at Set.forEach (<anonymous>)
+  440 |             <ScrollRevealText>
+  441 |               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+> 442 |                 {CAPABILITIES.map(cap => (
+      |                  ^
+  443 |                   <div key={cap} className="px-6 py-4 rounded-xl border border-white/5 bg...
+  444 |                     <span className="text-[10px] font-bold tracking-widest uppercase text...
+  445 |                   </div>
+✓ Compiled in 159ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /network 200 in 198ms (next.js: 13ms, application-code: 186ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 203ms
+✓ Compiled in 277ms
+✓ Compiled in 125ms
+✓ Compiled in 148ms
+✓ Compiled in 91ms
+✓ Compiled in 88ms
+✓ Compiled in 79ms
+✓ Compiled in 115ms
+✓ Compiled in 77ms
+✓ Compiled in 654ms
+✓ Compiled in 511ms
+ GET /network 200 in 280ms (next.js: 214ms, application-code: 66ms)
+ GET /network 200 in 121ms (next.js: 68ms, application-code: 53ms)
+ GET / 200 in 426ms (next.js: 44ms, application-code: 382ms)
+ GET /services 200 in 90ms (next.js: 39ms, application-code: 51ms)
+ GET /network 200 in 48ms (next.js: 8ms, application-code: 40ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 637ms
+✓ Compiled in 247ms
+ GET /network 200 in 312ms (next.js: 12ms, application-code: 300ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 402ms
+ GET /about 200 in 90ms (next.js: 45ms, application-code: 44ms)
+ GET /industry 200 in 63ms (next.js: 30ms, application-code: 33ms)
+ GET /services 200 in 31ms (next.js: 7ms, application-code: 24ms)
+ GET / 200 in 77ms (next.js: 10ms, application-code: 67ms)
+ GET / 200 in 122ms (next.js: 5ms, application-code: 117ms)
+ GET / 200 in 69ms (next.js: 7ms, application-code: 62ms)
+ GET / 200 in 75ms (next.js: 7ms, application-code: 68ms)
+ GET / 200 in 137ms (next.js: 8ms, application-code: 130ms)
+ GET / 200 in 80ms (next.js: 15ms, application-code: 66ms)
+ GET / 200 in 66ms (next.js: 4ms, application-code: 61ms)
+ GET / 200 in 56ms (next.js: 6ms, application-code: 50ms)
+ GET / 200 in 107ms (next.js: 6ms, application-code: 101ms)
+ GET / 200 in 52ms (next.js: 7ms, application-code: 45ms)
+ GET / 200 in 76ms (next.js: 5ms, application-code: 71ms)
+ GET / 200 in 79ms (next.js: 5ms, application-code: 73ms)
+ GET / 200 in 87ms (next.js: 7ms, application-code: 79ms)
+ GET / 200 in 67ms (next.js: 6ms, application-code: 61ms)
+ GET / 200 in 90ms (next.js: 6ms, application-code: 84ms)
+[browser] ⨯ unhandledRejection: ChunkLoadError: Failed to load chunk /_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_0yjw1oe._.js from module [turbopack]/browser/dev/hmr-client/hmr-client.ts [app-client] (ecmascript, async loader)
+ GET / 200 in 69ms (next.js: 5ms, application-code: 64ms)
+ GET / 200 in 186ms (next.js: 8ms, application-code: 178ms)
+ GET / 200 in 69ms (next.js: 5ms, application-code: 63ms)
+ GET / 200 in 56ms (next.js: 5ms, application-code: 51ms)
+✓ Compiled in 575ms
+ GET / 200 in 120ms (next.js: 15ms, application-code: 105ms)
+ GET / 200 in 88ms (next.js: 11ms, application-code: 78ms)
+ GET / 200 in 64ms (next.js: 4ms, application-code: 61ms)
+ GET / 200 in 88ms (next.js: 10ms, application-code: 78ms)
+ GET /services 200 in 46ms (next.js: 11ms, application-code: 35ms)
+ GET /services 200 in 45ms (next.js: 5ms, application-code: 40ms)
+ GET /network 200 in 45ms (next.js: 8ms, application-code: 37ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET /services 200 in 41ms (next.js: 6ms, application-code: 35ms)
+✓ Compiled in 483ms
+⨯ ReferenceError: a is not defined
+    at Module.eval (app/services/page.tsx:23:3)
+  21 |     {children}
+  22 |   </svg>
+> 23 | );a
+     |   ^
+  24 |
+  25 | const IconBox = ({ className }: { className?: string }) => (
+  26 |   <IconWrap className={className}> {
+  digest: '559614714'
+}
+ GET /services 500 in 1983ms (next.js: 93ms, application-code: 1889ms)
+✓ Compiled in 225ms
+✓ Compiled in 454ms
+ GET /services 200 in 328ms (next.js: 273ms, application-code: 55ms)
+ GET /services 200 in 467ms (next.js: 353ms, application-code: 113ms)
+ GET /services 200 in 394ms (next.js: 8ms, application-code: 386ms)
+✓ Compiled in 415ms
+ GET /services 200 in 160ms (next.js: 19ms, application-code: 140ms)
+ GET /network 200 in 90ms (next.js: 49ms, application-code: 41ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET /industry 200 in 99ms (next.js: 51ms, application-code: 49ms)
+ GET /industry 200 in 50ms (next.js: 16ms, application-code: 34ms)
+ GET /about 200 in 67ms (next.js: 38ms, application-code: 29ms)
+ GET / 200 in 238ms (next.js: 56ms, application-code: 182ms)
+ GET /services 200 in 69ms (next.js: 13ms, application-code: 56ms)
+ GET /network 200 in 34ms (next.js: 3ms, application-code: 31ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET /industry 200 in 33ms (next.js: 4ms, application-code: 28ms)
+✓ Compiled in 980ms

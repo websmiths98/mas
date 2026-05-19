@@ -4,6 +4,8 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import Image from "next/image";
+import Link from "next/link";
 
 // Static Image Asset Imports for 1/3, 2/3, and 3/3 Carousels
 import imageTruck from "@/images_frontend/loading_container_truck.webp";
@@ -35,6 +37,25 @@ const IconGlobal = ({ className }: { className?: string }) => (
     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
   </IconWrap>
 );
+
+function CascadingText({ text, delay = 0, className = "" }: { text: string; delay?: number; className?: string }) {
+  return (
+    <span className={className}>
+      {text.split(" ").map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.6, delay: delay + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: false, amount: "some" }}
+          className="inline-block mr-[0.25em]"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
 
 const SECTIONS = [
   {
@@ -184,17 +205,32 @@ export default function ServicesPage() {
       `}</style>
 
       {/* Absolute Navbar Component */}
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-full max-w-max">
-        <AppleGlassNav items={NAV_LINKS} theme="light" />
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
+        <AppleGlassNav 
+          items={NAV_LINKS} 
+          theme="light"
+          logo={
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/mas_logo.webp"
+                alt="Logo"
+                width={200}
+                height={50}
+                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                priority
+              />
+            </Link>
+          }
+        />
       </div>
 
       {/* HEADER SECTION */}
       <div className="w-full pt-22 px-12 pb-2 max-w-7xl mx-auto flex flex-col gap-1.5 shrink-0 z-20">
         <h1 className="text-3xl font-bold tracking-tight text-[#1c2434] max-w-4xl leading-tight">
-          Core Services
+          <CascadingText text="Core Services" />
         </h1>
         <p className="text-xs text-[#5a6578] max-w-4xl leading-relaxed font-normal">
-          At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems.
+          <CascadingText delay={0.2} text="At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems." />
         </p>
       </div>
 
@@ -220,7 +256,7 @@ export default function ServicesPage() {
                 <SectionIcon className="h-4 w-4" />
               </div>
               <h2 className="text-lg font-bold tracking-tight text-[#1c2434]">
-                {currentSection.title}
+                <CascadingText text={currentSection.title} />
               </h2>
             </div>
 
@@ -408,17 +444,66 @@ export default function ServicesPage() {
         </AnimatePresence>
       </div>
 
-      {/* PAGINATION DOTS INDICATORS */}
-      <div className="w-full text-center pb-4 shrink-0 z-50">
+      {/* SCROLL INDICATOR & PAGINATION */}
+      <div className="w-full flex flex-col items-center gap-3 pb-5 shrink-0 z-50">
+
+        {/* Pagination Dots */}
         <div className="inline-flex items-center gap-2">
           {SECTIONS.map((_, dotIdx) => (
             <button
               key={dotIdx}
               onClick={() => { if (!isAnimating.current) setActiveIdx(dotIdx); }}
-              className={`h-1.5 transition-all duration-300 rounded-full ${activeIdx === dotIdx ? "w-6 bg-[#3b82f6]" : "w-1.5 bg-slate-300"}`}
+              className={`h-1.5 transition-all duration-300 rounded-full ${activeIdx === dotIdx ? "w-6 bg-[#3b82f6]" : "w-1.5 bg-slate-300 hover:bg-slate-400"}`}
             />
           ))}
         </div>
+
+        {/* Animated Scroll Hint */}
+        <div className="flex items-center gap-3 select-none">
+          {/* Up arrow (visible when not on first slide) */}
+          <motion.button
+            onClick={() => { if (!isAnimating.current && activeIdx > 0) setActiveIdx(prev => prev - 1); }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: activeIdx > 0 ? 1 : 0.25 }}
+            className="w-7 h-7 rounded-full border border-slate-300 bg-white/60 backdrop-blur-sm flex items-center justify-center text-slate-500 hover:border-blue-400 hover:text-blue-500 transition-all duration-300"
+            disabled={activeIdx === 0}
+          >
+            <motion.svg
+              animate={{ y: activeIdx > 0 ? [0, -2, 0] : 0 }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              width="12" height="12" viewBox="0 0 12 12" fill="none"
+            >
+              <path d="M2 8L6 4L10 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+          </motion.button>
+
+          {/* Pulsing label */}
+          <motion.span
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="text-[10px] font-semibold tracking-[0.15em] uppercase text-slate-400"
+          >
+            Scroll to explore
+          </motion.span>
+
+          {/* Down arrow (visible when not on last slide) */}
+          <motion.button
+            onClick={() => { if (!isAnimating.current && activeIdx < SECTIONS.length - 1) setActiveIdx(prev => prev + 1); }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: activeIdx < SECTIONS.length - 1 ? 1 : 0.25 }}
+            className="w-7 h-7 rounded-full border border-slate-300 bg-white/60 backdrop-blur-sm flex items-center justify-center text-slate-500 hover:border-blue-400 hover:text-blue-500 transition-all duration-300"
+            disabled={activeIdx === SECTIONS.length - 1}
+          >
+            <motion.svg
+              animate={{ y: activeIdx < SECTIONS.length - 1 ? [0, 2, 0] : 0 }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              width="12" height="12" viewBox="0 0 12 12" fill="none"
+            >
+              <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+          </motion.button>
+        </div>
+
       </div>
     </main>
   );

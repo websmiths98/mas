@@ -9,6 +9,7 @@ import {
   useSpring,
   animate,
   useInView,
+  useMotionValue,
 } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import Image from "next/image";
@@ -30,59 +31,45 @@ const NAV_LINKS = [
 
 const HUBS = [
   { id: "chennai", label: "Chennai", location: [13.0827, 80.2707] },
-  { id: "nyc", label: "New York", location: [40.7128, -74.006] },
-  { id: "london", label: "London", location: [51.5074, -0.1278] },
-  { id: "tokyo", label: "Tokyo", location: [35.6762, 139.6503] },
+  { id: "australia", label: "Australia", location: [-25.2744, 133.7751] },
+  { id: "bangladesh", label: "Bangladesh", location: [23.6850, 90.3563] },
+  { id: "belgium", label: "Belgium", location: [50.5039, 4.4699] },
+  { id: "cambodia", label: "Cambodia", location: [12.5657, 104.9910] },
+  { id: "canada", label: "Canada", location: [56.1304, -106.3468] },
+  { id: "china", label: "China", location: [35.8617, 104.1954] },
+  { id: "colombia", label: "Colombia", location: [4.5709, -74.2973] },
+  { id: "france", label: "France", location: [46.2276, 2.2137] },
+  { id: "germany", label: "Germany", location: [51.1657, 10.4515] },
+  { id: "iran", label: "Iran", location: [32.4279, 53.6880] },
+  { id: "iraq", label: "Iraq", location: [33.2232, 43.6793] },
+  { id: "indonesia", label: "Indonesia", location: [-0.7893, 113.9213] },
+  { id: "japan", label: "Japan", location: [36.2048, 138.2529] },
+  { id: "korea", label: "Korea", location: [35.9078, 127.7669] },
+  { id: "malaysia", label: "Malaysia", location: [4.2105, 101.9758] },
+  { id: "mauritius", label: "Mauritius", location: [-20.3484, 57.5522] },
+  { id: "morocco", label: "Morocco", location: [31.7917, -7.0926] },
+  { id: "netherlands", label: "Netherlands", location: [52.1326, 5.2913] },
+  { id: "pakistan", label: "Pakistan", location: [30.3753, 69.3451] },
+  { id: "panama", label: "Panama", location: [8.5380, -80.7821] },
+  { id: "philippines", label: "Philippines", location: [12.8797, 121.7740] },
   { id: "singapore", label: "Singapore", location: [1.3521, 103.8198] },
-  { id: "dubai", label: "Dubai", location: [25.2048, 55.2708] },
+  { id: "south-africa", label: "South Africa", location: [-30.5595, 22.9375] },
+  { id: "sri-lanka", label: "Sri Lanka", location: [7.8731, 80.7718] },
+  { id: "switzerland", label: "Switzerland", location: [46.8182, 8.2275] },
+  { id: "taiwan", label: "Taiwan", location: [23.6978, 120.9605] },
+  { id: "thailand", label: "Thailand", location: [15.8700, 100.9925] },
+  { id: "turkey", label: "Turkey", location: [38.9637, 35.2433] },
+  { id: "uk", label: "UK", location: [55.3781, -3.4360] },
+  { id: "usa", label: "USA", location: [37.0902, -95.7129] },
+  { id: "vietnam", label: "Vietnam", location: [14.0583, 108.2772] },
 ];
 
-const ROUTES = [
-  { id: "chennai-nyc", label: "Chennai ↔ New York", from: [13.0827, 80.2707], to: [40.7128, -74.006] },
-  { id: "chennai-london", label: "Chennai ↔ London", from: [13.0827, 80.2707], to: [51.5074, -0.1278] },
-  { id: "chennai-tokyo", label: "Chennai ↔ Tokyo", from: [13.0827, 80.2707], to: [35.6762, 139.6503] },
-  { id: "chennai-singapore", label: "Chennai ↔ Singapore", from: [13.0827, 80.2707], to: [1.3521, 103.8198] },
-  { id: "chennai-dubai", label: "Chennai ↔ Dubai", from: [13.0827, 80.2707], to: [25.2048, 55.2708] },
-];
-
-const SECTIONS = [
-  {
-    tag: "Network Architecture",
-    title: "Global Freight Grid",
-    desc: "A high-performance tapestry of strategic airline partnerships and intercontinental hubs, engineered for surgical precision.",
-    blocks: [
-      { title: "Air Freight", text: "Fast, time-sensitive cargo solutions through strategic airline partnerships." },
-      { title: "Ocean Freight", text: "Efficient FCL and LCL movement through major global seaports." },
-    ]
-  },
-  {
-    tag: "Intelligence",
-    title: "Designed for Velocity",
-    desc: "We connect strategic freight corridors through intelligent routing and operational precision.",
-    blocks: [
-      { title: "Asia Network", text: "Strong connectivity across Asian manufacturing and sourcing markets." },
-      { title: "Middle East Hubs", text: "Strategic freight support connecting India with GCC trade hubs." },
-    ]
-  },
-  {
-    tag: "Global Operations",
-    title: "Strategic Routes",
-    desc: "Our primary intercontinental lanes connecting Chennai to the world's most vital economic centers.",
-    blocks: ROUTES.map(r => ({ 
-      title: r.label.split(' ↔ ')[1], 
-      text: `Direct operational lane: ${r.label}` 
-    }))
-  }
-];
-
-const CAPABILITIES = [
-  "Air Freight", 
-  "Ocean Freight", 
-  "Customs Brokerage", 
-  "Project Cargo", 
-  "Warehousing", 
-  "Distribution"
-];
+const ROUTES = HUBS.filter(hub => hub.id !== "chennai").map(hub => ({
+  id: `chennai-${hub.id}`,
+  label: `Chennai ↔ ${hub.label}`,
+  from: [13.0827, 80.2707] as [number, number],
+  to: hub.location as [number, number],
+}));
 
 const NETWORK_STATS = [
   { value: 80, suffix: "+", label: "Global Destinations" },
@@ -94,6 +81,42 @@ const NETWORK_HIGHLIGHTS = [
   { label: "Multi-Industry Support", icon: Activity, detail: "Sector-Specific Logistics" },
   { label: "ISO 9001:2015 Certified", icon: ShieldCheck, detail: "Quality Management System" },
   { label: "India & International", icon: Globe2, detail: "Global Operations Network" },
+];
+
+const WORKFLOW_STEPS = [
+  {
+    num: "01",
+    title: "End-to-End Supply Chain Support",
+    sub: "Complete logistics coordination from origin to final destination with streamlined cargo movement and operational control.",
+  },
+  {
+    num: "02",
+    title: "Efficient Planning & Execution",
+    sub: "Structured shipment planning and coordinated execution designed to meet timelines and operational requirements.",
+  },
+  {
+    num: "03",
+    title: "Integrated Warehousing & Dispatch",
+    sub: "Optimized warehousing, storage, and dispatch operations ensuring efficient inventory flow and timely cargo movement.",
+  },
+  {
+    num: "04",
+    title: "Real-Time Process Visibility",
+    sub: "Transparent logistics workflows and coordinated systems providing better shipment visibility and operational tracking.",
+  },
+  {
+    num: "05",
+    title: "Consistent & Timely Delivery",
+    sub: "Reliable freight execution focused on safe cargo handling, timely delivery, and consistent logistics performance.",
+  },
+];
+
+const WHY_POINTS = [
+  "Global Freight Expertise",
+  "Reliable International Network",
+  "Industry-Compliant Operations",
+  "Experienced Logistics Professionals",
+  "Scalable Supply Chain Solutions",
 ];
 
 // ============================================================================
@@ -169,6 +192,53 @@ function CinematicText({ text, delay = 0, className, spanClassName }: { text: st
   );
 }
 
+function Hover3DCard({ children, className, delay = 0, initialX = 0, initialY = 0 }: { children: React.ReactNode, className?: string, delay?: number, initialX?: number, initialY?: number }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: initialX, y: initialY }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className={`[perspective:1000px] ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 // ============================================================================
 // MAIN VISUAL COMPONENTS
 // ============================================================================
@@ -224,16 +294,16 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
       devicePixelRatio: 2,
       width: 1000,
       height: 1000,
-      phi: 3.89,
+      phi: 3.25,
       theta: 0.50,
-      dark: 0.96, 
+      dark: 0.96,
       diffuse: 3.0,
-      scale: 0.85, 
-      mapSamples: 25000, 
-      mapBrightness: 6.0, 
-      baseColor:  [0.05, 0.1, 0.25], 
+      scale: 0.85,
+      mapSamples: 25000,
+      mapBrightness: 6.0,
+      baseColor: [0.05, 0.1, 0.25],
       markerColor: [0.2, 0.5, 1],
-      glowColor: [0.05, 0.1, 0.2], 
+      glowColor: [0.05, 0.1, 0.2],
       offset: isMobile ? [0, 150] : [-100, 200],
       markers,
       arcs,
@@ -360,9 +430,9 @@ export default function NetworkPage() {
       </div>
 
       <div className="fixed left-1/2 top-8 z-50 -translate-x-1/2">
-        <AppleGlassNav 
-          items={NAV_LINKS} 
-          theme="light" 
+        <AppleGlassNav
+          items={NAV_LINKS}
+          theme="light"
           logo={
             <Link href="/" className="flex items-center">
               <Image
@@ -370,7 +440,7 @@ export default function NetworkPage() {
                 alt="Logo"
                 width={200}
                 height={50}
-                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                className="h-9 w-30 object-contain transform scale-225 origin-centre"
                 priority
               />
             </Link>
@@ -394,136 +464,237 @@ export default function NetworkPage() {
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 translate-y-8 sm:translate-y-4"
         >
           <div className="overflow-hidden mb-6">
-            <CinematicText 
-              text="GLOBAL" 
+            <CinematicText
+              text="GLOBAL"
               delay={1.2}
               className="text-5xl sm:text-6xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
             />
-            <CinematicText 
-              text="LOGISTICS GRID" 
+            <CinematicText
+              text="LOGISTICS NETWORK"
               delay={1.6}
               className="text-5xl sm:text-6xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
               spanClassName="text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-blue-700"
             />
           </div>
-
         </motion.div>
       </div>
 
       {/* 2. SCROLLING CONTENT LAYER */}
       <div className="relative z-30 pt-[100vh]">
-        <motion.div 
+        <motion.div
           style={{ opacity: contentOpacity }}
-          className="w-full lg:w-[50%] px-6 md:px-12 lg:px-20 pb-20 space-y-24"
+          className="w-full lg:w-[50%] px-6 md:px-12 lg:px-20 pb-20 space-y-32"
         >
-          {/* Sections */}
-          {SECTIONS.map((sec) => (
-            <section key={sec.title} className="space-y-12">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="h-px w-8 bg-blue-500" />
-                  <span className="text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase">{sec.tag}</span>
-                </div>
-                <ScrollRevealText>
-                  <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">{sec.title}</h2>
-                </ScrollRevealText>
-                <ScrollRevealText delay={0.1}>
-                  <p className="text-zinc-500 text-base md:text-lg max-w-lg font-light leading-relaxed">{sec.desc}</p>
-                </ScrollRevealText>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {sec.blocks.map(block => (
-                  <div key={block.title} className="p-8 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors group">
-                    <h4 className="text-white font-bold text-lg mb-3 group-hover:text-blue-400 transition-colors">{block.title}</h4>
-                    <p className="text-sm text-zinc-500 leading-relaxed">{block.text}</p>
-                  </div>
+          {/* ── SECTION 1: GLOBAL REACH MAP ── */}
+          <section className="pt-16 space-y-10">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-px w-8 bg-blue-500" />
+                <span className="text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase">Global Reach Map</span>
+              </div>
+              <ScrollRevealText>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+                  Connected Across{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Global Trade Routes</span>
+                </h2>
+              </ScrollRevealText>
+              <ScrollRevealText delay={0.1}>
+                <p className="text-zinc-400 text-base max-w-lg font-light leading-relaxed">
+                  Our international network enables seamless cargo movement and supply chain coordination across key global markets.
+                </p>
+              </ScrollRevealText>
+            </div>
+
+            {/* Country Pills */}
+            <ScrollRevealText delay={0.2}>
+              <div className="flex flex-wrap gap-2">
+                {HUBS.filter(h => h.id !== "chennai").map((hub, i) => (
+                  <motion.div
+                    key={hub.id}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: i * 0.03 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.06, y: -2 }}
+                    className="cursor-default group relative px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300"
+                  >
+                    <span className="text-[11px] font-semibold tracking-wide text-zinc-400 group-hover:text-blue-300 transition-colors duration-300">
+                      {hub.label}
+                    </span>
+                  </motion.div>
                 ))}
               </div>
-            </section>
-          ))}
+            </ScrollRevealText>
 
-          {/* Capabilities */}
-          <section className="space-y-12">
-            <div className="h-px w-full bg-white/5" />
-            <ScrollRevealText>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {CAPABILITIES.map(cap => (
-                  <div key={cap} className="px-6 py-4 rounded-xl border border-white/5 bg-white/[0.01] text-center">
-                    <span className="text-[10px] font-bold tracking-widest uppercase text-zinc-400">{cap}</span>
-                  </div>
-                ))}
+            {/* Animated route count badge */}
+            <ScrollRevealText delay={0.3}>
+              <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl border border-blue-500/20 bg-blue-500/5">
+                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                <span className="text-sm font-semibold text-blue-300 tracking-wide">31 Active Trade Corridors from Chennai</span>
               </div>
             </ScrollRevealText>
           </section>
 
-          {/* Luxury Metrics Dashboard */}
-          <section className="py-24 relative overflow-hidden">
-              <div className="max-w-7xl w-full">
-                  <div className="text-left mb-16 relative">
-                      <div className="h-px w-24 mb-6 bg-gradient-to-r from-blue-500 to-transparent" />
-                      <h2 className="uppercase tracking-[0.4em] text-[10px] font-extrabold mb-4 text-blue-500/80">Global Logistics Infrastructure</h2>
-                      <ScrollRevealText>
-                        <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-[#E5E4E2] leading-tight">
-                          Global Network <br />
-                          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Strength</span>
-                        </h3>
-                      </ScrollRevealText>
-                  </div>
-
-                  {/* Primary Stats Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 relative mb-20 border-b border-white/5 pb-20">
-                      {/* Vertical Dividers */}
-                      <div className="hidden md:block absolute inset-y-0 left-1/3 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-                      <div className="hidden md:block absolute inset-y-0 left-2/3 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-
-                      {NETWORK_STATS.map((stat, i) => (
-                          <div key={i} className="text-center group px-8">
-                              <div className="relative inline-block mb-4">
-                                <div className="absolute -inset-4 bg-blue-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                                <div className="text-5xl md:text-6xl font-bold opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out bg-clip-text text-transparent bg-gradient-to-b from-[#E5E4E2] via-blue-100 to-blue-400 tracking-tight">
-                                    <Counter to={stat.value} />
-                                    <span className="text-2xl md:text-3xl ml-1 align-top mt-1 inline-block font-medium">{stat.suffix}</span>
-                                </div>
-                              </div>
-                              <p className="uppercase tracking-[0.2em] text-[10px] font-bold transition-colors text-zinc-500 group-hover:text-blue-400">
-                                  {stat.label}
-                              </p>
-                          </div>
-                      ))}
-                  </div>
-
-                  {/* Highlights Grid - Redesigned 6-column layout with motion and luxury gradients */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-                      {NETWORK_HIGHLIGHTS.map((item, i) => (
-                        <ScrollRevealText key={i} delay={i * 0.05} className="lg:col-span-2">
-                          <div 
-                              className="relative overflow-hidden group p-8 rounded-3xl border border-white/5 bg-white/[0.01] transition-all duration-700 hover:-translate-y-2 hover:border-blue-500/30 h-full"
-                          >
-                              {/* Multi-linear Gradient Background on Hover */}
-                              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.05),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                              
-                              <div className="relative z-10 flex flex-col gap-8">
-                                  <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/5 text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 group-hover:border-blue-500/30 group-hover:text-white transition-all duration-700 shadow-xl">
-                                      <item.icon size={26} strokeWidth={1.5} />
-                                  </div>
-                                  <div>
-                                      <h4 className="text-[#E5E4E2] font-bold text-xl tracking-tight mb-3 group-hover:text-white transition-colors duration-500">{item.label}</h4>
-                                      <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500 font-bold leading-relaxed group-hover:text-zinc-300 transition-colors duration-500">{item.detail}</p>
-                                  </div>
-                              </div>
-
-                              {/* Corner Glow Effect */}
-                              <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                          </div>
-                        </ScrollRevealText>
-                      ))}
-                  </div>
+          {/* ── SECTION 2: OUR WORKING APPROACH ── */}
+          <section className="space-y-10">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-px w-8 bg-blue-500" />
+                <span className="text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase">Our Working Approach</span>
               </div>
+              <ScrollRevealText>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+                  How We{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Work</span>
+                </h2>
+              </ScrollRevealText>
+              <ScrollRevealText delay={0.1}>
+                <p className="text-zinc-400 text-base max-w-lg font-light leading-relaxed">
+                  We follow a structured logistics process focused on operational efficiency, shipment visibility, and dependable execution across every stage of the supply chain.
+                </p>
+              </ScrollRevealText>
+            </div>
+
+            {/* Workflow Cards */}
+            <div className="space-y-4 [perspective:1000px]">
+              {WORKFLOW_STEPS.map((step, i) => (
+                <Hover3DCard
+                  key={step.num}
+                  initialX={-24}
+                  delay={i * 0.08}
+                  className="group relative flex gap-5 p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-blue-500/25 transition-colors duration-500 cursor-default"
+                >
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  {/* Left accent bar */}
+                  <div className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-blue-500/0 group-hover:bg-blue-500/60 transition-colors duration-500" />
+
+                  {/* Step number */}
+                  <div className="relative shrink-0 w-11 h-11 flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] group-hover:border-blue-500/40 group-hover:bg-blue-500/10 transition-all duration-500 group-hover:[transform:translateZ(40px)]">
+                    <span className="text-[11px] font-black tracking-widest text-zinc-500 group-hover:text-blue-400 transition-colors duration-500">{step.num}</span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative flex-1 min-w-0 transition-all duration-500 group-hover:[transform:translateZ(30px)]">
+                    <h4 className="text-white font-bold text-base mb-1.5 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-indigo-300 transition-all duration-400 leading-snug">{step.title}</h4>
+                    <p className="text-zinc-500 text-sm font-light leading-relaxed group-hover:text-zinc-300 transition-colors duration-400">{step.sub}</p>
+                  </div>
+
+                  {/* Arrow indicator */}
+                  <div className="relative shrink-0 self-center text-zinc-700 group-hover:text-blue-500 transition-all duration-500 translate-x-0 group-hover:translate-x-1 group-hover:[transform:translateZ(50px)]">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                </Hover3DCard>
+              ))}
+            </div>
           </section>
 
-          
+          {/* ── SECTION 3: WHY MAS LOGISTICS ── */}
+          <section className="space-y-10">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-px w-8 bg-blue-500" />
+                <span className="text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase">Why MAS Logistics</span>
+              </div>
+              <ScrollRevealText>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+                  Why Businesses Choose{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">MAS Logistics</span>
+                </h2>
+              </ScrollRevealText>
+            </div>
+
+            <div className="space-y-3 [perspective:1000px]">
+              {WHY_POINTS.map((point, i) => (
+                <Hover3DCard
+                  key={point}
+                  initialY={16}
+                  delay={i * 0.07}
+                  className="group flex items-center gap-4 p-5 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-blue-500/30 hover:bg-blue-500/5 transition-colors duration-400 cursor-default"
+                >
+                  {/* Check icon */}
+                  <div className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10 group-hover:bg-blue-500/20 group-hover:border-blue-500/60 transition-all duration-400 group-hover:[transform:translateZ(30px)]">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M2.5 7.5l3 3 6-6" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <span className="text-zinc-300 font-semibold text-sm tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-indigo-300 transition-all duration-400 group-hover:[transform:translateZ(20px)]">{point}</span>
+                  {/* Subtle number */}
+                  <span className="ml-auto text-[10px] font-black tracking-widest text-zinc-700 group-hover:text-blue-600/60 transition-all duration-400 group-hover:[transform:translateZ(40px)]">0{i + 1}</span>
+                </Hover3DCard>
+              ))}
+            </div>
+          </section>
+
+          {/* ── LUXURY METRICS DASHBOARD ── */}
+          <section className="py-10 relative overflow-hidden">
+            <div className="max-w-7xl w-full">
+              <div className="text-left mb-16 relative">
+                <div className="h-px w-24 mb-6 bg-gradient-to-r from-blue-500 to-transparent" />
+                <h2 className="uppercase tracking-[0.4em] text-[10px] font-extrabold mb-4 text-blue-500/80">Global Presence</h2>
+                <ScrollRevealText>
+                  <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-[#E5E4E2] leading-tight">
+                    A Strong Network Built for{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Global Logistics</span>
+                  </h3>
+                </ScrollRevealText>
+                <ScrollRevealText delay={0.15}>
+                  <p className="mt-5 text-zinc-400 text-base md:text-lg max-w-xl font-light leading-relaxed">
+                    With an established operational base in India and a growing international logistics network, MAS Logistics delivers reliable supply chain solutions supported by industry expertise and trusted global partnerships.
+                  </p>
+                </ScrollRevealText>
+              </div>
+
+              {/* Primary Stats Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 relative mb-20 border-b border-white/5 pb-20">
+                <div className="hidden md:block absolute inset-y-0 left-1/3 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+                <div className="hidden md:block absolute inset-y-0 left-2/3 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+
+                {NETWORK_STATS.map((stat, i) => (
+                  <div key={i} className="text-center group px-8">
+                    <div className="relative inline-block mb-4">
+                      <div className="absolute -inset-4 bg-blue-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      <div className="text-5xl md:text-6xl font-bold opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out bg-clip-text text-transparent bg-gradient-to-b from-[#E5E4E2] via-blue-100 to-blue-400 tracking-tight">
+                        <Counter to={stat.value} />
+                        <span className="text-2xl md:text-3xl ml-1 align-top mt-1 inline-block font-medium">{stat.suffix}</span>
+                      </div>
+                    </div>
+                    <p className="uppercase tracking-[0.2em] text-[10px] font-bold transition-colors text-zinc-500 group-hover:text-blue-400">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Highlights Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+                {NETWORK_HIGHLIGHTS.map((item, i) => (
+                  <ScrollRevealText key={i} delay={i * 0.05} className="lg:col-span-2">
+                    <div className="relative overflow-hidden group p-8 rounded-3xl border border-white/5 bg-white/[0.01] transition-all duration-700 hover:-translate-y-2 hover:border-blue-500/30 h-full">
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.05),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                      <div className="relative z-10 flex flex-col gap-8">
+                        <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/5 text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 group-hover:border-blue-500/30 group-hover:text-white transition-all duration-700 shadow-xl">
+                          <item.icon size={26} strokeWidth={1.5} />
+                        </div>
+                        <div>
+                          <h4 className="text-[#E5E4E2] font-bold text-xl tracking-tight mb-3 group-hover:text-white transition-colors duration-500">{item.label}</h4>
+                          <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500 font-bold leading-relaxed group-hover:text-zinc-300 transition-colors duration-500">{item.detail}</p>
+                        </div>
+                      </div>
+
+                      <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    </div>
+                  </ScrollRevealText>
+                ))}
+              </div>
+            </div>
+          </section>
+
         </motion.div>
       </div>
     </main>

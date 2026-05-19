@@ -41,9 +41,14 @@ export default function HeroSection() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
-          src="/hero-video.webm"
-        />
+          preload="auto"
+          // @ts-ignore
+          fetchPriority="high"
+          className="w-full h-full object-cover will-change-transform transform-gpu"
+        >
+          <source src="/hero-video.webm" type="video/webm" />
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* ── Dark overlay ── */}

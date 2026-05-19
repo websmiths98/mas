@@ -201,7 +201,7 @@ export default function Industry() {
                 <section className="relative w-full py-16 md:py-24 overflow-visible carousel-container flex flex-col items-center">
                     
                     {/* Background layer separated from 3D context to prevent clipping */}
-                    <div className="absolute inset-0 w-full h-full bg-black rounded-[3rem] md:rounded-[4rem] border border-zinc-800 shadow-2xl pointer-events-none -z-10" />
+                    <div className="absolute inset-0 w-full h-full bg-slate-50 rounded-[3rem] md:rounded-[4rem] border border-slate-200 shadow-sm pointer-events-none -z-10" />
 
                     <style>{`
                     .carousel-container { --carousel-tz: 300px; }
@@ -366,36 +366,36 @@ export default function Industry() {
 
             {/* Proven Track Record Section */}
             <div className="px-4 md:px-8 max-w-[1400px] mx-auto mb-20 md:mb-32 relative">
-                <section className="relative w-full py-20 md:py-32 bg-black rounded-[3rem] md:rounded-[4rem] border border-zinc-800 shadow-2xl overflow-hidden">
+                <section className="relative w-full py-20 md:py-32 bg-slate-50 rounded-[3rem] md:rounded-[4rem] border border-slate-200 shadow-sm overflow-hidden">
                     <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <div>
                         <Reveal direction="left" delay={0.1}>
-                            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 pb-2">
+                            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 pb-2">
                                 Proven Track Record
                             </h2>
                         </Reveal>
                         
                         <div className="space-y-8">
                             <Reveal direction="up" delay={0.2}>
-                                <div className="p-6 bg-zinc-900/80 rounded-2xl border border-zinc-800 shadow-lg backdrop-blur-sm">
-                                    <h4 className="text-xl font-bold text-emerald-300 mb-3 flex items-center gap-3">
-                                        <span className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm border border-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.2)]">✓</span>
+                                <div className="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm backdrop-blur-sm">
+                                    <h4 className="text-xl font-bold text-emerald-700 mb-3 flex items-center gap-3">
+                                        <span className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">✓</span>
                                         Global Expertise
                                     </h4>
-                                    <p className="text-zinc-300 leading-relaxed font-light text-lg">
-                                        We treat each single project as a unique assignment with special attention to every detail, from design and planning to <span className="text-emerald-100 font-medium">execution and delivery</span>. Our dedicated global project cargo teams plan and coordinate entire logistics networks.
+                                    <p className="text-slate-600 leading-relaxed font-medium text-lg">
+                                        We treat each single project as a unique assignment with special attention to every detail, from design and planning to <span className="text-emerald-700 font-bold">execution and delivery</span>. Our dedicated global project cargo teams plan and coordinate entire logistics networks.
                                     </p>
                                 </div>
                             </Reveal>
 
                             <Reveal direction="up" delay={0.3}>
-                                <div className="p-6 bg-zinc-900/80 rounded-2xl border border-zinc-800 shadow-lg backdrop-blur-sm">
-                                    <h4 className="text-xl font-bold text-amber-300 mb-3 flex items-center gap-3">
-                                        <span className="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm border border-amber-500/30 shadow-[0_0_10px_rgba(251,191,36,0.2)]">★</span>
+                                <div className="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm backdrop-blur-sm">
+                                    <h4 className="text-xl font-bold text-amber-700 mb-3 flex items-center gap-3">
+                                        <span className="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-sm">★</span>
                                         Specialized Project Cargo
                                     </h4>
-                                    <p className="text-zinc-300 leading-relaxed font-light text-lg">
-                                        We have the ability to handle your complex transport logistics, whether it is cargo shipped as <span className="text-amber-100 font-medium">Break Bulk (BB), Heavy Lift (HL)</span> or Out of Gauge (OOG). With dedicated teams of professionals attending to your industrial needs, be assured that your cargo will be safely transported globally.
+                                    <p className="text-slate-600 leading-relaxed font-medium text-lg">
+                                        We have the ability to handle your complex transport logistics, whether it is cargo shipped as <span className="text-amber-700 font-bold">Break Bulk (BB), Heavy Lift (HL)</span> or Out of Gauge (OOG). With dedicated teams of professionals attending to your industrial needs, be assured that your cargo will be safely transported globally.
                                     </p>
                                 </div>
                             </Reveal>
@@ -403,7 +403,7 @@ export default function Industry() {
                     </div>
 
                     <Reveal direction="right" delay={0.4}>
-                        <div className="relative rounded-[2rem] overflow-hidden aspect-square lg:aspect-[4/5] bg-zinc-900 shadow-2xl group">
+                        <div className="relative rounded-[2rem] overflow-hidden aspect-square lg:aspect-[4/5] bg-slate-100 shadow-2xl group">
                             <motion.div
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ duration: 1.2, ease: "easeOut" }}
