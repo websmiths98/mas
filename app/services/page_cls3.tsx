@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 /* ---------------- Icons ---------------- */
 const IconWrap = ({ children, className }: { children: React.ReactNode; className?: string }) => (
@@ -17,12 +19,12 @@ const IconBoxes = ({ className }: { className?: string }) => <IconWrap className
 const IconContainer = ({ className }: { className?: string }) => <IconWrap className={className}><path d="M22 7.7c0-.6-.4-1.2-.8-1.5l-6.3-3.9a1.72 1.72 0 0 0-1.7 0l-10.3 6c-.5.2-.9.8-.9 1.4v6.6c0 .5.4 1.2.8 1.5l6.3 3.9a1.72 1.72 0 0 0 1.7 0l10.3-6c.5-.3.9-1 .9-1.5Z"/><path d="M10 21.9V14L2.1 9.1"/><path d="m10 14 11.9-6.9"/><path d="M14 19.5V8.5"/><path d="M18 17V7"/></IconWrap>;
 
 const SERVICES = [
-  { id: "1", title: "Air Freight", image: "/air_freight_service.png", icon: IconPlane, highlights: ["Express & Charter", "200+ Destinations"], description: `We provide fast and reliable air freight services through strong partnerships with leading global carriers. Our network enables smooth handling of time-sensitive shipments across international destinations.\n\n➤ Priority and express shipments\n➤ Global carrier network\n➤ Secure cargo handling\n➤ Time-critical delivery support` },
-  { id: "2", title: "Sea Freight", image: "/sea_freight_services.jpeg", icon: IconShip, highlights: ["FCL & LCL", "Global Carriers"], description: `Our sea freight solutions are designed for flexibility and cost efficiency. Whether it is full container loads or smaller shipments, we ensure reliable movement through our global partner network.\n\n➤ FCL and LCL shipments\n➤ Competitive global routing\n➤ Strong port connectivity\n➤ End-to-end shipment visibility` },
-  { id: "3", title: "Warehousing & Distribution", image: "/warehousing__Distribution_logistics_service.jpeg", icon: IconWarehouse, highlights: ["Bonded Storage", "Last-Mile"], description: `MAS warehousing services are specifically designed for your requirement; gives flexibility and scalability to cater to your business growth and overall needs.\n\nMAS offer shared warehouse, if you have low volumes, uncertain demand or seasonal operational fluctuations, operating in a shared warehousing allows you to enjoy the benefits at significantly low cost.` },
-  { id: "4", title: "Project & ODC Cargo", image: "/project___ODC_Cargo_services.jpeg", icon: IconBoxes, highlights: ["Heavy Lift", "Route Surveys"], description: `We specialize in handling oversized, heavy-lift, and complex cargo that requires careful planning and execution. Our team ensures safe handling and timely delivery of critical shipments.\n\n➤ Heavy and oversized cargo handling\n➤ Route planning and coordination\n➤ Specialized equipment support\n➤ End-to-end project execution` },
-  { id: "5", title: "Break-Bulk Shipping", image: "/Break-Bulk_Cargo_services.jpeg", icon: IconContainer, highlights: ["Charter Vessels", "Port Ops"], description: `MAS Logistics break-bulk services are designed to meet your shipping needs of over-sized, odd-sized or over-weight cargoes.\n\nApart from regular sailings, We also provide entire transportation solutions for general cargo, project cargo, steel products, etc. Our add-on options include packing, crating and rigging.` },
-  { id: "6", title: "Customs Brokerage", image: "/customs_brokerage_specialized_services.jpeg", icon: IconFile, highlights: ["HS Classification", "Compliance"], description: `Our highly efficient customs brokerage, clearance and compliance service is designed to take the complexity out of the customs process.\n\nTo ensure the complete security of your goods, even in challenging environments, our personnel serve as the first point of contact with both customs authorities and receiving customers.` },
+  { id: "1", title: "Air Freight", image: "/air_freight_service.webp", icon: IconPlane, highlights: ["Express & Charter", "200+ Destinations"], description: `We provide fast and reliable air freight services through strong partnerships with leading global carriers. Our network enables smooth handling of time-sensitive shipments across international destinations.\n\n➤ Priority and express shipments\n➤ Global carrier network\n➤ Secure cargo handling\n➤ Time-critical delivery support` },
+  { id: "2", title: "Sea Freight", image: "/sea_freight_services.webp", icon: IconShip, highlights: ["FCL & LCL", "Global Carriers"], description: `Our sea freight solutions are designed for flexibility and cost efficiency. Whether it is full container loads or smaller shipments, we ensure reliable movement through our global partner network.\n\n➤ FCL and LCL shipments\n➤ Competitive global routing\n➤ Strong port connectivity\n➤ End-to-end shipment visibility` },
+  { id: "3", title: "Warehousing & Distribution", image: "/warehousing__Distribution_logistics_service.webp", icon: IconWarehouse, highlights: ["Bonded Storage", "Last-Mile"], description: `MAS warehousing services are specifically designed for your requirement; gives flexibility and scalability to cater to your business growth and overall needs.\n\nMAS offer shared warehouse, if you have low volumes, uncertain demand or seasonal operational fluctuations, operating in a shared warehousing allows you to enjoy the benefits at significantly low cost.` },
+  { id: "4", title: "Project & ODC Cargo", image: "/project___ODC_Cargo_services.webp", icon: IconBoxes, highlights: ["Heavy Lift", "Route Surveys"], description: `We specialize in handling oversized, heavy-lift, and complex cargo that requires careful planning and execution. Our team ensures safe handling and timely delivery of critical shipments.\n\n➤ Heavy and oversized cargo handling\n➤ Route planning and coordination\n➤ Specialized equipment support\n➤ End-to-end project execution` },
+  { id: "5", title: "Break-Bulk Shipping", image: "/Break-Bulk_Cargo_services.webp", icon: IconContainer, highlights: ["Charter Vessels", "Port Ops"], description: `MAS Logistics break-bulk services are designed to meet your shipping needs of over-sized, odd-sized or over-weight cargoes.\n\nApart from regular sailings, We also provide entire transportation solutions for general cargo, project cargo, steel products, etc. Our add-on options include packing, crating and rigging.` },
+  { id: "6", title: "Customs Brokerage", image: "/customs_brokerage_specialized_services.webp", icon: IconFile, highlights: ["HS Classification", "Compliance"], description: `Our highly efficient customs brokerage, clearance and compliance service is designed to take the complexity out of the customs process.\n\nTo ensure the complete security of your goods, even in challenging environments, our personnel serve as the first point of contact with both customs authorities and receiving customers.` },
 ];
 
 const NAV_LINKS = [
@@ -35,140 +37,131 @@ const NAV_LINKS = [
 ];
 
 export default function ServicesPage() {
-  const [active, setActive] = useState(0);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  // Calculate sliding. 6 cards, we map scroll to horizontal shift
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
+
+  // Fade out and translate the left title during the first 15% of the scroll
+  const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const textX = useTransform(scrollYProgress, [0, 0.15], ["0%", "-20%"]);
 
   return (
-    <main className="relative flex h-screen w-full flex-col overflow-hidden bg-[#030608] text-[#E5E4E2]">
-      {/* Background Decor */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] right-[-10%] h-[60%] w-[60%] rounded-full bg-cyan-600/10 blur-[160px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full bg-blue-900/10 blur-[140px]" />
+    <main className="relative bg-[#030608] text-[#E5E4E2] selection:bg-cyan-500/30">
+      {/* Navigation */}
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
+        <AppleGlassNav 
+          items={NAV_LINKS} 
+          theme="dark" 
+          logo={
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/mas_logo.webp"
+                alt="Logo"
+                width={200}
+                height={50}
+                className="h-9 w-30 object-contain transform scale-225 origin-centre brightness-0 invert" 
+                priority
+              />
+            </Link>
+          }
+        />
       </div>
 
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100]">
-        <AppleGlassNav items={NAV_LINKS} theme="dark" />
-      </div>
-
-      <div className="relative z-10 flex flex-1 pt-32 px-10 pb-10 gap-8 overflow-hidden">
-        
-        {/* LEFT COLUMN */}
-        <div className="flex w-[320px] flex-col gap-8 shrink-0 overflow-y-auto no-scrollbar border-r border-white/5 pr-8">
-          <div className="space-y-2 shrink-0">
+      {/* Intro hero spacer */}
+      <section className="h-[50vh] flex flex-col justify-end px-12 md:px-24 pb-20">
+         <div className="space-y-2">
             <span className="text-[10px] font-black tracking-[0.4em] uppercase text-cyan-500">Logistics Excellence</span>
-            <h1 className="text-4xl font-black tracking-tighter uppercase text-white leading-none">Our<br />Services</h1>
-          </div>
+            <h1 className="text-6xl font-black tracking-tighter uppercase text-white leading-none">Our<br />Services</h1>
+         </div>
+      </section>
 
-          <div className="flex flex-col gap-2">
-            {SERVICES.map((item, i) => {
-              const Icon = item.icon;
-              const isActive = active === i;
-              return (
-                <div
-                  key={item.id}
-                  onMouseEnter={() => setActive(i)}
-                  className={cn(
-                    "relative flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 cursor-pointer",
-                    isActive 
-                      ? "border-cyan-500/30 bg-white/5 shadow-[0_0_20px_rgba(6,182,212,0.05)] translate-x-2" 
-                      : "border-transparent hover:bg-white/[0.02]"
-                  )}
-                >
-                  <div className={cn(
-                    "flex h-8 w-8 items-center justify-center transition-colors",
-                    isActive ? "text-cyan-400" : "text-white/20"
-                  )}>
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  
-                  <h3 className={cn("text-xs font-bold uppercase tracking-widest transition-all", isActive ? "text-white" : "text-white/30")}>
-                    {item.title}
-                  </h3>
+      {/* The Shiprocket-Style Trusted Partner Sliding Section */}
+      <section ref={targetRef} className="relative h-[600vh]">
+        <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+          
+          {/* Left Title: Sticky Info Panel (Fades out on scroll) */}
+          <motion.div 
+            style={{ opacity: textOpacity, x: textX }} 
+            className="absolute left-12 md:left-24 top-1/2 -translate-y-1/2 w-[90%] md:w-[450px] z-10 pointer-events-none"
+          >
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight uppercase leading-[1.1] text-white mb-6 drop-shadow-2xl">
+              Why is MAS Logistics the <br/><span className="text-cyan-400">Trusted Partner</span> for Scaling Businesses?
+            </h2>
+            <div className="h-1 w-16 bg-cyan-500 mb-6" />
+            <p className="text-lg text-white/80 font-light leading-relaxed drop-shadow-md">
+              From end-to-end shipping to complex global scaling, we handle the logistics so you can focus on pursuing bigger goals. Swipe through our unified suite of services.
+            </p>
+          </motion.div>
 
-                  {isActive && (
-                    <motion.div 
-                      layoutId="nav-glow" 
-                      className="absolute right-3 h-1 w-1 bg-cyan-500 rounded-full shadow-[0_0_8px_#06b6d4]" 
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN */}
-        <div className="relative flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-black">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 overflow-hidden"
-            >
-              {/* This inner div handles the slow drift to prevent exit stuttering */}
-              <motion.div
-                initial={{ scale: 1.15, x: "1%" }}
-                animate={{ scale: 1.05, x: "-1%" }}
-                transition={{ duration: 10, ease: "linear" }}
-                className="absolute inset-0"
+          {/* Right Sliding Cards Container */}
+          <motion.div style={{ x }} className="flex pl-[100vw] md:pl-[45vw] gap-12 md:gap-20 pr-[20vw] items-center h-[85vh]">
+            {SERVICES.map((service) => (
+              <div 
+                key={service.id} 
+                className="relative h-[70vh] md:h-[80vh] min-h-[450px] w-[85vw] md:w-[80vw] shrink-0 rounded-[3rem] border border-white/10 overflow-hidden group bg-black shadow-2xl"
               >
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${SERVICES[active].image})` }}
+                {/* Background Image */}
+                <Image 
+                  src={service.image} 
+                  alt={service.title} 
+                  fill 
+                  className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 opacity-50 group-hover:opacity-70" 
+                  priority={service.id === "1" || service.id === "2"}
                 />
-              </motion.div>
-              
-              {/* Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 opacity-90" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
-            </motion.div>
-          </AnimatePresence>
+                
+                {/* Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-cyan-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 mix-blend-color-dodge pointer-events-none" />
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-10 md:p-16 flex flex-col justify-between">
+                   
+                   {/* Top: Icon & Highlights */}
+                   <div>
+                     <div className="h-16 w-16 md:h-20 md:w-20 rounded-2xl md:rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md mb-8 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-500">
+                        <service.icon className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-cyan-400 transition-colors" />
+                     </div>
+                     <div className="flex gap-4 flex-wrap">
+                       {service.highlights.map(h => (
+                         <span key={h} className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-cyan-400 bg-cyan-400/10 px-3 py-1.5 rounded-sm border border-cyan-400/20">
+                           {h}
+                         </span>
+                       ))}
+                     </div>
+                   </div>
 
-          {/* Details */}
-          <div className="relative h-full flex flex-col justify-end p-20">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active + "desc"}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-2xl"
-              >
-                <div className="flex gap-4 mb-6">
-                  {SERVICES[active].highlights.map((h) => (
-                    <span key={h} className="text-[9px] font-black uppercase tracking-[0.3em] text-cyan-500">
-                      {h}
-                    </span>
-                  ))}
+                   {/* Bottom: Title & Desc */}
+                   <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out max-w-4xl">
+                     <h3 className="text-5xl md:text-7xl font-extrabold uppercase tracking-widest text-white mb-6 leading-tight drop-shadow-xl">{service.title}</h3>
+                     
+                     <div className="relative pl-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-gradient-to-b from-cyan-400 to-transparent" />
+                        <p className="text-white/80 text-base md:text-xl leading-relaxed whitespace-pre-line drop-shadow-md">
+                          {service.description}
+                        </p>
+                     </div>
+                   </div>
+
                 </div>
 
-                <h2 className="text-6xl font-extrabold uppercase tracking-[0.15em] leading-[1.1] mb-10 text-white drop-shadow-2xl">
-                  {SERVICES[active].title}
-                </h2>
-
-                <div className="relative pl-10">
-                  <div className="absolute left-0 top-1 bottom-1 w-[1px] bg-gradient-to-b from-transparent via-cyan-500/60 to-transparent" />
-                  <p className="text-base font-light leading-relaxed text-white/90 whitespace-pre-line tracking-wide drop-shadow-lg">
-                    {SERVICES[active].description}
-                  </p>
+                {/* Number Watermark */}
+                <div className="absolute top-12 right-12 text-8xl md:text-[12rem] font-black text-white/5 pointer-events-none select-none leading-none">
+                  0{service.id}
                 </div>
+              </div>
+            ))}
+          </motion.div>
 
-                <div className="mt-12 flex items-center gap-6">
-                   <div className="h-[1px] w-16 bg-cyan-500/50" />
-                   <span className="text-[9px] font-bold text-white/30 uppercase tracking-[0.5em]">System Archive 0{active + 1}</span>
-                   <div className="flex-1 h-[1px] bg-white/5" />
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="absolute top-12 right-12 opacity-5 pointer-events-none select-none">
-             <span className="text-9xl font-black tracking-tighter text-white">0{active + 1}</span>
-          </div>
         </div>
+      </section>
+
+      {/* Spacer or Footer */}
+      <div className="h-[30vh] flex flex-col justify-center items-center text-center opacity-30">
+        <span className="text-[10px] font-black tracking-[0.4em] uppercase text-white">End of Services</span>
       </div>
     </main>
   );

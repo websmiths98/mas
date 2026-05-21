@@ -444,7 +444,11 @@ const AnimatedText = ({
     );
 };
 
-export default function About() {
+interface AboutProps {
+    isEmbedded?: boolean;
+}
+
+export default function About({ isEmbedded = false }: AboutProps) {
     const [navTheme, setNavTheme] = useState<"light" | "dark">("dark");
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -492,24 +496,26 @@ export default function About() {
 
     return (
         <main ref={containerRef} className="min-h-screen bg-[#f6f7f9] text-zinc-900 antialiased overflow-x-hidden">
-            <div className="fixed top-8 left-1/2 z-[100] w-auto -translate-x-1/2">
-                <AppleGlassNav 
-                    items={NAV_LINKS} 
-                    theme={navTheme} 
-                    logo={
-                        <Link href="/" className="flex items-center">
-                            <Image
-                                src="/mas_logo.webp"
-                                alt="Logo"
-                                width={200}
-                                height={50}
-                                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
-                                priority
-                            />
-                        </Link>
-                    }
-                />
-            </div>
+            {!isEmbedded && (
+                <div className="fixed top-8 left-1/2 z-[100] w-auto -translate-x-1/2">
+                    <AppleGlassNav 
+                        items={NAV_LINKS} 
+                        theme={navTheme} 
+                        logo={
+                            <Link href="/" className="flex items-center">
+                                <Image
+                                    src="/mas_logo.webp"
+                                    alt="Logo"
+                                    width={200}
+                                    height={50}
+                                    className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                                    priority
+                                />
+                            </Link>
+                        }
+                    />
+                </div>
+            )}
 
             {/* Hero — mission (Shiprocket-style lead) */}
             <section data-theme="light" className="relative flex min-h-[60vh] items-center justify-center border-b border-zinc-200/80 px-6 py-32 md:py-40 overflow-hidden" style={{ perspective: "1000px" }}>

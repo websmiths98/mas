@@ -6,16 +6,15 @@ import {
   motion,
   useScroll,
   useTransform,
+  useSpring,
   animate,
   useInView,
+  useMotionValue,
 } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Globe2, Activity } from "lucide-react";
-
-// Inline fallback for conditional class joining
-const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
 
 // ============================================================================
 // DATA & CONSTANTS
@@ -24,6 +23,7 @@ const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
 const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
+  // { name: "Solutions", href: "/solutions" },
   { name: "Network", href: "/network" },
   { name: "Industries", href: "/industry" },
   { name: "About us", href: "/about" },
@@ -86,34 +86,37 @@ const NETWORK_HIGHLIGHTS = [
 const WORKFLOW_STEPS = [
   {
     num: "01",
-    shortLabel: "E2E Support",
     title: "End-to-End Supply Chain Support",
     sub: "Complete logistics coordination from origin to final destination with streamlined cargo movement and operational control.",
   },
   {
     num: "02",
-    shortLabel: "Planning",
     title: "Efficient Planning & Execution",
     sub: "Structured shipment planning and coordinated execution designed to meet timelines and operational requirements.",
   },
   {
     num: "03",
-    shortLabel: "Warehousing",
     title: "Integrated Warehousing & Dispatch",
     sub: "Optimized warehousing, storage, and dispatch operations ensuring efficient inventory flow and timely cargo movement.",
   },
   {
     num: "04",
-    shortLabel: "Visibility",
     title: "Real-Time Process Visibility",
     sub: "Transparent logistics workflows and coordinated systems providing better shipment visibility and operational tracking.",
   },
   {
     num: "05",
-    shortLabel: "Delivery",
     title: "Consistent & Timely Delivery",
     sub: "Reliable freight execution focused on safe cargo handling, timely delivery, and consistent logistics performance.",
   },
+];
+
+const WHY_POINTS = [
+  "Global Freight Expertise",
+  "Reliable International Network",
+  "Industry-Compliant Operations",
+  "Experienced Logistics Professionals",
+  "Scalable Supply Chain Solutions",
 ];
 
 // ============================================================================
@@ -159,6 +162,77 @@ function ScrollRevealText({ children, className, delay = 0 }: { children: React.
       style={{ opacity, scale, y, filter: blur }}
       transition={{ duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function CinematicText({ text, delay = 0, className, spanClassName }: { text: string; delay?: number; className?: string; spanClassName?: string }) {
+  return (
+    <div className={className}>
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{
+            duration: 0.8,
+            delay: delay + (i * 0.02),
+            ease: [0.2, 0.65, 0.3, 0.9]
+          }}
+          viewport={{ once: true }}
+          className={`inline-block ${spanClassName || ""}`}
+          style={{ whiteSpace: char === " " ? "pre" : "normal" }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </div>
+  );
+}
+
+function Hover3DCard({ children, className, delay = 0, initialX = 0, initialY = 0 }: { children: React.ReactNode, className?: string, delay?: number, initialX?: number, initialY?: number }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: initialX, y: initialY }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className={`[perspective:1000px] ${className}`}
     >
       {children}
     </motion.div>
@@ -227,13 +301,13 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
       scale: 0.75,
       mapSamples: 25000,
       mapBrightness: 8.0,
-      baseColor: [0.05, 0.1, 0.25], 
-      markerColor: [0.8, 0.4, 1.0], 
-      glowColor: [0.1, 0.3, 0.8], 
-      offset: isMobile ? [0, 150] : [100, 0], 
+      baseColor: [0.05, 0.1, 0.25], // deep blue
+      markerColor: [0.8, 0.4, 1.0], // purple/pink glow
+      glowColor: [0.1, 0.3, 0.8], // bright blue aura
+      offset: isMobile ? [0, 150] : [100, 0], // shift globe right on desktop
       markers,
       arcs,
-      arcColor: [0.9, 0.6, 1.0], 
+      arcColor: [0.9, 0.6, 1.0], // purple arcs
       arcWidth: 1.0,
       arcHeight: 0.5,
       markerElevation: 0.04,
@@ -247,7 +321,7 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
     let raf = 0;
     const animateRaf = () => {
       if (!dragging.current) {
-        phiRef.current += 0.002; 
+        phiRef.current += 0.002; // slightly slower rotation
       }
       phiRef.current += velocity.current;
       velocity.current *= 0.92;
@@ -265,7 +339,7 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
       globe?.destroy();
       globe = null;
     };
-  }, [markers, arcs, isMobile]);
+  }, [markers, arcs]);
 
   return (
     <div ref={containerRef} className="relative aspect-square w-full select-none">
@@ -320,7 +394,6 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
 
 export default function NetworkPage() {
   const [isMobile, setIsMobile] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -332,20 +405,20 @@ export default function NetworkPage() {
 
   return (
     <div ref={containerRef} className="relative min-h-screen bg-[#020617] text-white overflow-hidden selection:bg-indigo-500/30">
-
+      
       {/* Absolute Background Decor */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px]" />
         <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
       </div>
 
-      {/* Hero Section */}
+      {/* GitHub-style Hero Section */}
       <section className="relative min-h-[90vh] flex items-center pt-24 pb-32 z-10">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col lg:flex-row items-center">
-
+          
           {/* Left Text Content */}
           <div className="w-full lg:w-1/2 space-y-6 z-20 text-center lg:text-left pt-12 lg:pt-0">
-            <motion.h1
+            <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -353,11 +426,11 @@ export default function NetworkPage() {
             >
               Where the world <br className="hidden lg:block"/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
-                build supply chains
+                builds supply chains
               </span>
             </motion.h1>
-
-            <motion.p
+            
+            <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -369,7 +442,7 @@ export default function NetworkPage() {
 
           {/* Right Globe */}
           <div className="w-full lg:w-1/2 absolute lg:static right-0 top-1/4 lg:top-auto z-10 opacity-30 lg:opacity-100 mix-blend-screen lg:mix-blend-normal">
-            <motion.div
+            <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
@@ -382,20 +455,20 @@ export default function NetworkPage() {
 
         {/* Floating Metrics Bar at Bottom */}
         <div className="absolute bottom-0 left-0 w-full border-t border-white/5 bg-black/40 backdrop-blur-xl z-30 hidden md:block">
-          <div className="max-w-7xl mx-auto px-6 py-6 flex justify-center items-center gap-24 lg:gap-36">
+          <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center lg:justify-start lg:gap-32">
             {NETWORK_STATS.map((stat, i) => (
-              <motion.div
+              <motion.div 
                 key={stat.label}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                className="text-center"
+                className="text-left"
               >
-                <div className="text-3xl md:text-4xl font-extrabold text-white flex items-baseline justify-center gap-1">
+                <div className="text-2xl font-bold text-white flex items-baseline gap-1">
                   <Counter to={stat.value} />
                   <span className="text-blue-400">{stat.suffix}</span>
                 </div>
-                <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 mt-2">{stat.label}</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -404,7 +477,7 @@ export default function NetworkPage() {
 
       {/* Subsequent Content Sections */}
       <div className="relative z-30 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 py-20 space-y-40">
-
+        
         {/* ── SECTION 1: GLOBAL REACH MAP ── */}
         <section className="space-y-10">
           <div className="space-y-4">
@@ -461,118 +534,50 @@ export default function NetworkPage() {
             </ScrollRevealText>
           </div>
 
-          {/* Elastic accordion container wrapper */}
-          <div className="flex flex-col md:flex-row gap-4 w-full h-auto md:h-[450px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 [perspective:1000px]">
             {WORKFLOW_STEPS.map((step, i) => (
-              <motion.div
+              <Hover3DCard
                 key={step.num}
-                layout
-                onClick={() => setActiveStep(i)}
-                onHoverStart={() => setActiveStep(i)}
-                className={cn(
-                  "relative overflow-hidden rounded-3xl border transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer min-h-[140px] md:min-h-0",
-                  "activeStep" === i || activeStep === i 
-                    ? "flex-[8] border-blue-500/40 shadow-2xl shadow-blue-500/5" 
-                    : "flex-[1] border-white/5 hover:border-white/10"
-                )}
+                initialY={24}
+                delay={i * 0.08}
+                className="group relative flex flex-col gap-5 p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-blue-500/30 transition-colors duration-500 cursor-default"
               >
-                {/* ── LOGO BACKGROUND IMAGE FILL ── */}
-                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-                  <Image
-                    src="/mas_logo.webp"
-                    alt="MAS Background Logo"
-                    fill
-                    sizes="(max-w-768px) 100vw, 50vw"
-                    priority
-                    className={cn(
-                      "object-cover object-center transition-all duration-700 ease-out",
-                      activeStep === i 
-                        ? "scale-105 opacity-40 blur-0" 
-                        : "scale-100 opacity-10 blur-[2px]"
-                    )}
-                  />
-                  {/* Dark gradient overlay layers ensuring clear typography contrast over the image */}
-                  <div className="absolute inset-0 bg-neutral-950/40 mix-blend-multiply" />
-                  <div className={cn(
-                    "absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/20 transition-all duration-500",
-                    activeStep === i ? "opacity-90" : "opacity-95"
-                  )} />
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
+                
+                <div className="relative w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-colors duration-500">
+                  <span className="text-lg font-black text-zinc-500 group-hover:text-blue-400">{step.num}</span>
                 </div>
 
-                {/* 1. COLLAPSED VERTICAL LABEL LAYER (Visible only on desktop when card is inactive) */}
-                <div className={cn(
-                  "absolute inset-0 hidden md:flex items-center justify-center transition-opacity duration-300 z-20",
-                  activeStep === i ? "opacity-0 pointer-events-none" : "opacity-100"
-                )}>
-                  <div className="flex flex-col items-center gap-4 transform -rotate-90 whitespace-nowrap">
-                    <span className="text-lg font-black text-zinc-500">{step.num}</span>
-                    <h4 className="text-zinc-300 font-bold tracking-wide uppercase text-xs">
-                      {step.shortLabel}
-                    </h4>
-                  </div>
+                <div className="relative">
+                  <h4 className="text-white font-bold text-xl mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-indigo-300 transition-all duration-400">{step.title}</h4>
+                  <p className="text-zinc-400 text-sm font-light leading-relaxed group-hover:text-zinc-300">{step.sub}</p>
                 </div>
-
-                {/* 2. EXPANDED CONTENT / MOBILE STACK LAYER (Positioned directly over logo background) */}
-                <div className={cn(
-                  "relative h-full w-full flex flex-col justify-between p-6 md:p-8 transition-all duration-500 z-20",
-                  activeStep === i ? "opacity-100 scale-100" : "md:opacity-0 md:scale-95 md:pointer-events-none"
-                )}>
-                  {/* Step Badge */}
-                  <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 border border-white/10 text-blue-400 flex-shrink-0 backdrop-blur-md">
-                    <span className="text-lg font-black tracking-tight">{step.num}</span>
-                  </div>
-
-                  {/* Text details directly overlaid on top of the logo image asset */}
-                  <div className="mt-6 md:mt-0 max-w-xl overflow-hidden w-full">
-                    <div className={cn(
-                      "transition-all duration-300",
-                      activeStep === i ? "" : "md:whitespace-nowrap"
-                    )}>
-                      <motion.h4 
-                        layout="position" 
-                        className="text-white font-extrabold text-xl md:text-2xl mb-3 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-blue-200 drop-shadow-md truncate"
-                      >
-                        {step.title}
-                      </motion.h4>
-                      <motion.p 
-                        layout="position" 
-                        className={cn(
-                          "text-zinc-200 text-sm md:text-base font-normal leading-relaxed drop-shadow transition-opacity duration-200",
-                          activeStep === i ? "opacity-100" : "md:opacity-0"
-                        )}
-                      >
-                        {step.sub}
-                      </motion.p>
-                    </div>
-                  </div>
-                </div>
-
-              </motion.div>
+              </Hover3DCard>
             ))}
           </div>
         </section>
 
         {/* Highlights Grid */}
         <section className="py-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {NETWORK_HIGHLIGHTS.map((item, i) => (
-              <ScrollRevealText key={i} delay={i * 0.05}>
-                <div className="relative overflow-hidden group p-8 rounded-3xl border border-white/5 bg-white/[0.02] transition-all duration-700 hover:-translate-y-2 hover:border-purple-500/30 h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                  <div className="relative z-10 flex flex-col gap-6">
-                    <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] text-purple-400 group-hover:bg-purple-500/20 group-hover:text-white transition-all duration-700 shadow-xl">
-                      <item.icon size={26} strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-bold text-xl tracking-tight mb-2 group-hover:text-purple-300 transition-colors duration-500">{item.label}</h4>
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500 font-bold group-hover:text-zinc-400 transition-colors duration-500">{item.detail}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {NETWORK_HIGHLIGHTS.map((item, i) => (
+                <ScrollRevealText key={i} delay={i * 0.05}>
+                  <div className="relative overflow-hidden group p-8 rounded-3xl border border-white/5 bg-white/[0.02] transition-all duration-700 hover:-translate-y-2 hover:border-purple-500/30 h-full">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    
+                    <div className="relative z-10 flex flex-col gap-6">
+                      <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] text-purple-400 group-hover:bg-purple-500/20 group-hover:text-white transition-all duration-700 shadow-xl">
+                        <item.icon size={26} strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xl tracking-tight mb-2 group-hover:text-purple-300 transition-colors duration-500">{item.label}</h4>
+                        <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500 font-bold group-hover:text-zinc-400 transition-colors duration-500">{item.detail}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </ScrollRevealText>
-            ))}
-          </div>
+                </ScrollRevealText>
+              ))}
+            </div>
         </section>
 
       </div>

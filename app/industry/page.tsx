@@ -137,7 +137,11 @@ const INDUSTRIES = [
     }
 ];
 
-export default function Industry() {
+interface IndustryProps {
+    isEmbedded?: boolean;
+}
+
+export default function Industry({ isEmbedded = false }: IndustryProps) {
     const [selectedIndustry, setSelectedIndustry] = useState<typeof INDUSTRIES[0] | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [carouselHovered, setCarouselHovered] = useState(false);
@@ -164,24 +168,26 @@ export default function Industry() {
     return (
         <main className="min-h-screen bg-white text-zinc-900 selection:bg-black selection:text-white">
             
-            <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
-                <AppleGlassNav 
-                    items={NAV_LINKS} 
-                    theme="light" 
-                    logo={
-                        <Link href="/" className="flex items-center">
-                            <Image
-                                src="/mas_logo.webp"
-                                alt="Logo"
-                                width={200}
-                                height={50}
-                                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
-                                priority
-                            />
-                        </Link>
-                    }
-                />
-            </div>
+            {!isEmbedded && (
+                <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
+                    <AppleGlassNav 
+                        items={NAV_LINKS} 
+                        theme="light" 
+                        logo={
+                            <Link href="/" className="flex items-center">
+                                <Image
+                                    src="/mas_logo.webp"
+                                    alt="Logo"
+                                    width={200}
+                                    height={50}
+                                    className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                                    priority
+                                />
+                            </Link>
+                        }
+                    />
+                </div>
+            )}
 
             <div className="max-w-7xl mx-auto px-6 pt-40 pb-12 text-center">
                 <Reveal direction="down" delay={0.1}>
