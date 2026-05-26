@@ -5,86 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
-import {
-    Plane,
-    Warehouse,
-    Shield,
-    Package,
-    Activity,
-    Heart,
-    type LucideIcon,
-} from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import aboutTeamHero from "../../images_frontend/about-team-logistics.webp";
 import officeSpace from "../../images_frontend/new/office_space.webp";
-import masLogo from "../../images_frontend/mas_logo.webp";
-import UiloraInsights from "@/src/components/ContentBlocks/FeatureSections/tsx/UiloraInsights";
-
-const PARTNER_ACCENT = "#1a1a1a";
+import masLogo from "../../images_frontend/mas_without_wording.png";
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
+    { name: "Services", href: "/#section-services" },
     // { name: "Solutions", href: "/solutions" },
-    { name: "Network", href: "/network" },
-    { name: "Industries", href: "/industry" },
-    { name: "About us", href: "/about" },
+    { name: "Network", href: "/#section-network" },
+    { name: "Industries", href: "/#section-industry" },
+    { name: "About us", href: "/#section-about" },
 ];
-
-const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] },
-    }),
-};
-
-const STEPS: {
-    title: string;
-    desc: string;
-    image: string;
-    icon: LucideIcon;
-}[] = [
-        {
-            title: "Global freight network",
-            desc: "Air, ocean, and multimodal options matched to your lanes, volumes, and timelines.",
-            image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop",
-            icon: Plane,
-        },
-        {
-            title: "Warehousing & distribution",
-            desc: "Flexible storage and fulfillment so you can scale without fixed infrastructure overhead.",
-            image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop",
-            icon: Warehouse,
-        },
-        {
-            title: "Customs & compliance",
-            desc: "Clear classification, documentation, and regulatory alignment across borders.",
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1200&auto=format&fit=crop",
-            icon: Shield,
-        },
-        {
-            title: "Project & oversized cargo",
-            desc: "Engineering-led moves for heavy, out-of-gauge, and time-critical project freight.",
-            image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop",
-            icon: Package,
-        },
-        {
-            title: "Visibility & coordination",
-            desc: "Single point of contact with proactive updates from origin to final delivery.",
-            image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop",
-            icon: Activity,
-        },
-        {
-            title: "Partnership at scale",
-            desc: "Long-term relationships built on reliability—whether you ship weekly or seasonally.",
-            image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1200&auto=format&fit=crop",
-            icon: Heart,
-        },
-    ];
-
-
 
 // ─────────────────────────────────────────────────────────────────────────────
 // UI Components for the Phone Feature Section
@@ -182,10 +115,10 @@ const PhoneMockup = ({ accent }: { accent: string }) => (
 
         <div className="mx-6 h-px bg-gray-100 mb-4" />
 
-        <div className="px-6 space-y-2.5 mb-5">
-            <div className="h-2.5 bg-gray-100 rounded-full w-4/5" />
-            <div className="h-2.5 bg-gray-100 rounded-full w-full" />
-            <div className="h-2.5 bg-gray-100 rounded-full w-2/3" />
+        <div className="px-6 mb-5">
+            <p className="text-[13px] text-gray-500 leading-relaxed">
+                Empowering businesses worldwide through innovative logistics, unwavering trust, and supply chain excellence.
+            </p>
         </div>
 
         <div className="mx-3 mb-3">
@@ -194,11 +127,11 @@ const PhoneMockup = ({ accent }: { accent: string }) => (
                     <GradientPen />
                     <span className="text-[11px] font-medium text-blue-500">Values</span>
                 </div>
-                <div className="flex-[1.7] bg-gray-50 rounded-2xl p-3 flex flex-col items-center justify-center gap-1 border border-gray-100">
+                <div className="flex-[1.7] bg-gray-50 rounded-2xl overflow-hidden p-3 flex flex-col items-center justify-center border border-gray-100">
                     <Image
                         src={masLogo}
                         alt="MAS Logo"
-                        className="h-30 w-auto object-contain mb-1"
+                        className="w-[130px] h-auto object-contain scale-[1.3] translate-y-2"
                     />
                 </div>
             </div>
@@ -312,16 +245,91 @@ const IconTable = () => (
         <line x1="8" y1="2" x2="8" y2="20" stroke="#555" strokeWidth="1.4" />
     </svg>
 );
+const IconGem = () => (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#555" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 3h10l4 5-9 11L2 8l4-5z" />
+        <path d="M2 8h18" />
+        <path d="M11 19V8" />
+        <path d="M6 3l5 5 5-5" />
+    </svg>
+);
+
+const IconEye = () => (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#555" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 11c2.5-5.5 15.5-5.5 18 0-2.5 5.5-15.5 5.5-18 0z" />
+        <circle cx="11" cy="11" r="3" />
+    </svg>
+);
 
 const CULTURE = [
-    { title: "Value Creation", desc: "Creating long-term business value through reliable logistics solutions and efficient supply chain execution", icon: <IconList /> },
-    { title: "Openness", desc: "Promoting transparent communication and collaborative logistics operations across every stage of service", icon: <IconGrid /> },
+    { title: "Value Creation", desc: "Creating long-term business value through reliable logistics solutions and efficient supply chain execution", icon: <IconGem /> },
+    { title: "Openness", desc: "Promoting transparent communication and collaborative logistics operations across every stage of service", icon: <IconEye /> },
     { title: "Commitment", desc: "Delivering quality-driven logistics solutions focused on client success, operational excellence, and continuous growth", icon: <IconLink /> },
     { title: "Integrity", desc: "Maintaining ethical business practices and accountability in global freight and logistics management", icon: <IconTable /> },
     { title: "Quality Standards", desc: "ISO 9001:2015 certified logistics services ensuring consistent quality, operational efficiency, and reliable supply chain performance", icon: <IconList /> },
     { title: "Compliance", desc: "Ensuring regulatory compliance, cargo security, and responsible supply chain management standards", icon: <IconGrid /> },
 ];
 
+const LOGOS_ROW_1 = [
+    { file: "198-1984070_philips-logo-philips-healthcare-logo-vector-hd-png.png", bg: "#0B5EAA" },
+    { file: "Fuji Logo PNG Vector (EPS) Free Download.jpeg", bg: "#E31A22", scale: 1.6 },
+    { file: "Raymond_logo.jpg", bg: "#222222" },
+    { file: "addidas_logo.jpg", bg: "#000000" },
+    { file: "alcatel_new.svg", bg: "#1F275C" },
+    { file: "alstom_new.svg", bg: "#004890" },
+    { file: "bosch-logo-png_seeklogo-21523.png", bg: "#E20015", scale: 1.6 },
+    { file: "c-r-i-pumps-logo-png_seeklogo-288586.png", bg: "#00558C", scale: 1.8 },
+    { file: "cisco-logo-png_seeklogo-30674.png", bg: "#00BCEB" },
+    { file: "clarks_logo.jpg", bg: "#005C42" },
+    { file: "cmc_logo.png", bg: "#2A2A2A", scale: 1.6 },
+    { file: "daewoo_logo.png", bg: "#003E7E" },
+    { file: "danfoss-logo-png_seeklogo-38448.png", bg: "#DF1400", scale: 1.6 },
+    { file: "dg-logo-png_seeklogo-37861.png", bg: "#000000" },
+    { file: "diesel-logo-png_seeklogo-41153.png", bg: "#C11F25" },
+    { file: "doosan_logo.png", bg: "#0051A2" },
+    { file: "ecco_logo.png", bg: "#000000" },
+    { file: "emerson-logo-png_seeklogo-300567.png", bg: "#004B87", scale: 1.4 },
+    { file: "essar-logo.png", bg: "#E31837", scale: 1.6 },
+    { file: "essar-steel-logo-png_seeklogo-227961.png", bg: "#E31837", scale: 1.6 },
+    { file: "gap_new.svg", bg: "#002A5E", noFilter: true },
+    { file: "general_electric_logo.jpg", bg: "#0F62FE" },
+    { file: "hella_logo.png", bg: "#222222" },
+    { file: "huawei_logo.png", bg: "#E60012" },
+];
+
+const LOGOS_ROW_2 = [
+    { file: "hyosung_logo.png", bg: "#00529B" },
+    { file: "hyundai_with_text.svg", bg: "#002C5F", scale: 1.6 },
+    { file: "infiniti-logo-png_seeklogo-249498.png", bg: "#111111" },
+    { file: "ion_exchange_new.png", bg: "#00519E" },
+    { file: "ishwari_logo.png", bg: "#222222" },
+    { file: "jsw_logo.jpg", bg: "#D52B1E" },
+    { file: "kcc_logo.jpg", bg: "#E60000" },
+    { file: "kia-motors-logo-png_seeklogo-78337.png", bg: "#05141F" },
+    { file: "lotus_logo.webp", bg: "#E8488B" },
+    { file: "mahindra-logo-png_seeklogo-289100.png", bg: "#E31837" },
+    { file: "mindray_logo.svg", bg: "#E60012", scale: 1.6 },
+    { file: "nec-logo-png_seeklogo-97885 (1).png", bg: "#131A95" },
+    { file: "olympus-logo-png_seeklogo-482717.png", bg: "#003366", scale: 1.6 },
+    { file: "p&g_logo.jpg", bg: "#003DA5" },
+    { file: "puma-logo-png_seeklogo-113791.png", bg: "#000000" },
+    { file: "renault_logo.png", bg: "#333333" },
+    { file: "samsung_new.svg", bg: "#1428A0" },
+    { file: "schneider-electric-logo-png_seeklogo-123509.png", bg: "#3DCD58" },
+    { file: "siemens_logo.png", bg: "#009999" },
+    { file: "siyaram-silk-mills-ltd-logo-png_seeklogo-653187.png", bg: "#163A70", scale: 1.6 },
+    { file: "sk-networks-logo-png_seeklogo-391428.png", bg: "#E4002B", scale: 1.6 },
+    { file: "ssang-yong-logo-png_seeklogo-131212.png", bg: "#005596", scale: 1.6 },
+    { file: "star_logo.jpg", bg: "#222222" },
+    { file: "suntech_logo.jpg", bg: "#14355F" },
+    { file: "tangson_logo.png", bg: "#CC0000" },
+    { file: "tata_steel_logo.png", bg: "#005CA8" },
+    { file: "tommy_new_2.svg", bg: "#00174F", scale: 1.6 },
+    { file: "toyota-logo-png_seeklogo-141406.png", bg: "#EB0A1E" },
+    { file: "trivitron-healthcare_logo.webp", bg: "#0054A4" },
+    { file: "woory_logo.jpg", bg: "#222222" },
+    { file: "yingli_logo.jpg", bg: "#00843D", scale: 1.6 },
+];
 
 
 const CLIENT_LOGOS = [
@@ -495,7 +503,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
     }, []);
 
     return (
-        <main ref={containerRef} className="min-h-screen bg-[#f6f7f9] text-zinc-900 antialiased overflow-x-hidden">
+        <main ref={containerRef} className="relative min-h-screen bg-[#f6f7f9] text-zinc-900 antialiased overflow-x-hidden">
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 z-[100] w-auto -translate-x-1/2">
                     <AppleGlassNav 
@@ -561,19 +569,30 @@ export default function About({ isEmbedded = false }: AboutProps) {
                 </div>
             </section> */}
 
-            {/* Our Clients — infinite marquee logo cloud (inline SVGs — zero CDN dependency) */}
+            {/* Our Clients — infinite marquee logo cloud (Shiprocket-style) */}
             <section data-theme="light" className="overflow-hidden border-b border-zinc-200/80 bg-[#fafbfc] py-14 md:py-20">
                 <style>{`
-                    @keyframes mas-marquee {
+                    @keyframes mas-marquee-left {
                         0%   { transform: translateX(0); }
                         100% { transform: translateX(-50%); }
                     }
-                    .mas-marquee-track {
+                    @keyframes mas-marquee-right {
+                        0%   { transform: translateX(-50%); }
+                        100% { transform: translateX(0); }
+                    }
+                    .mas-marquee-track-left {
                         display: flex;
                         width: max-content;
-                        animation: mas-marquee 60s linear infinite;
+                        animation: mas-marquee-left 60s linear infinite;
                     }
-                    .mas-marquee-track:hover { animation-play-state: paused; }
+                    .mas-marquee-track-right {
+                        display: flex;
+                        width: max-content;
+                        animation: mas-marquee-right 60s linear infinite;
+                    }
+                    .mas-marquee-track-left:hover, .mas-marquee-track-right:hover {
+                        animation-play-state: paused;
+                    }
                 `}</style>
 
                 <div className="mx-auto mb-10 max-w-3xl px-6 text-center flex flex-col items-center">
@@ -581,43 +600,61 @@ export default function About({ isEmbedded = false }: AboutProps) {
                     <AnimatedText text="Trusted by leading companies" className="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl" delay={0.1} direction="up" />
                 </div>
 
-                <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#fafbfc] to-transparent" />
-                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#fafbfc] to-transparent" />
+                <div className="relative flex flex-col gap-6">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 md:w-48 bg-gradient-to-r from-[#fafbfc] to-transparent" />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 md:w-48 bg-gradient-to-l from-[#fafbfc] to-transparent" />
 
-                    <div className="mas-marquee-track">
-                        {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
+                    {/* Row 1 - Moves Left */}
+                    <div className="mas-marquee-track-left hover-pause">
+                        {[...LOGOS_ROW_1, ...LOGOS_ROW_1].map((logo, idx) => (
                             <div
-                                key={`${logo.name}-${idx}`}
-                                className="mx-10 flex h-14 w-[160px] flex-shrink-0 cursor-default items-center justify-center opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 hover:scale-110"
+                                key={`row1-${idx}`}
+                                className="mx-3 flex h-[80px] w-[180px] flex-shrink-0 cursor-default items-center justify-center rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-105 overflow-hidden relative"
+                                style={{ backgroundColor: logo.bg }}
                             >
-                                {logo.svg}
+                                <img
+                                    src={`/logo_mas/${logo.file}`}
+                                    alt={`Partner Logo ${idx}`}
+                                    className="max-h-[55%] max-w-[75%] object-contain transition-all duration-300 hover:opacity-100"
+                                    style={{
+                                        filter: logo.noFilter ? "none" : "grayscale(1) invert(1) brightness(4) contrast(1.5)",
+                                        mixBlendMode: logo.noFilter ? "normal" : "screen",
+                                        opacity: 0.95,
+                                        transform: `scale(${logo.scale || 1}) translateZ(0)`,
+                                        willChange: "transform"
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Row 2 - Moves Right */}
+                    <div className="mas-marquee-track-right hover-pause">
+                        {[...LOGOS_ROW_2, ...LOGOS_ROW_2].map((logo, idx) => (
+                            <div
+                                key={`row2-${idx}`}
+                                className="mx-3 flex h-[80px] w-[180px] flex-shrink-0 cursor-default items-center justify-center rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-105 overflow-hidden relative"
+                                style={{ backgroundColor: logo.bg }}
+                            >
+                                <img
+                                    src={`/logo_mas/${logo.file}`}
+                                    alt={`Partner Logo ${idx}`}
+                                    className="max-h-[55%] max-w-[75%] object-contain transition-all duration-300 hover:opacity-100"
+                                    style={{
+                                        filter: logo.noFilter ? "none" : "grayscale(1) invert(1) brightness(4) contrast(1.5)",
+                                        mixBlendMode: logo.noFilter ? "normal" : "screen",
+                                        opacity: 0.95,
+                                        transform: `scale(${logo.scale || 1}) translateZ(0)`,
+                                        willChange: "transform"
+                                    }}
+                                />
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section data-theme="dark">
-                <UiloraInsights
-                    title="One partner for the full journey"
-                    subtitle="How we help"
-                    accentColor={PARTNER_ACCENT}
-                    bgColor="linear-gradient(135deg, #020617 0%, #0f172a 40%, #1e293b 100%)"
-                    features={STEPS.map((step) => ({
-                        icon: step.icon,
-                        title: step.title,
-                        description: step.desc,
-                        visual: (
-                            <img
-                                src={step.image}
-                                alt={step.title}
-                                className="w-full h-full object-cover"
-                            />
-                        ),
-                    }))}
-                />
-            </section>
+
 
             {/* Culture — Value grid redesigned with Uilora Phone Feature Layout */}
             <section data-theme="light" className="relative min-h-screen flex items-center justify-center bg-white py-20 px-6 font-sans overflow-hidden border-y border-zinc-200/80">
@@ -647,10 +684,10 @@ export default function About({ isEmbedded = false }: AboutProps) {
                         </p>
                     </motion.div>
 
-                    {/* ── Phone + absolute cards layout ── */}
-                    <div className="relative w-full max-w-[920px]" style={{ minHeight: 640 }}>
+                    {/* ── Phone + grid cards layout ── */}
+                    <div className="w-full max-w-[1040px] grid grid-cols-1 lg:grid-cols-[250px_1fr_250px] gap-10 items-center relative z-10">
                         {/* Left cards — 3 items */}
-                        <div className="absolute left-0 top-0 flex flex-col gap-4 w-[240px]">
+                        <div className="flex flex-col gap-4">
                             {CULTURE.slice(0, 3).map((item, idx) => (
                                 <FeatureCard
                                     key={item.title}
@@ -662,21 +699,8 @@ export default function About({ isEmbedded = false }: AboutProps) {
                             ))}
                         </div>
 
-                        {/* Right cards — 3 items */}
-                        <div className="absolute right-0 top-0 flex flex-col gap-4 w-[240px]">
-                            {CULTURE.slice(3, 6).map((item, idx) => (
-                                <FeatureCard
-                                    key={item.title}
-                                    icon={item.icon}
-                                    title={item.title}
-                                    desc={item.desc}
-                                    delay={0.14 + idx * 0.08}
-                                />
-                            ))}
-                        </div>
-
                         {/* Phone — centered */}
-                        <div className="flex justify-center">
+                        <div className="flex justify-center relative order-first lg:order-none z-10">
                             <div className="relative w-[380px]">
                                 {/* Floating "700" counter tweaked for MAS */}
                                 <motion.div
@@ -716,6 +740,19 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 </motion.div>
                             </div>
                         </div>
+
+                        {/* Right cards — 3 items */}
+                        <div className="flex flex-col gap-4">
+                            {CULTURE.slice(3, 6).map((item, idx) => (
+                                <FeatureCard
+                                    key={item.title}
+                                    icon={item.icon}
+                                    title={item.title}
+                                    desc={item.desc}
+                                    delay={0.14 + idx * 0.08}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
 
@@ -731,10 +768,14 @@ export default function About({ isEmbedded = false }: AboutProps) {
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 items-start" style={{ perspective: "1200px" }}>
 
                     {/* Column 1: Vision Text + Image */}
-                    <motion.div style={{ ...col1Parallax, transformStyle: "preserve-3d" }} className="flex flex-col">
+                    <motion.div style={{ ...col1Parallax, transformStyle: "preserve-3d" }} className="flex flex-col text-left">
                         <div className="mb-10 md:mb-16">
-                            <AnimatedText text="Our Vision" className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-4" />
-                            <AnimatedText text="To establish a strong presence as a trusted logistics partner originating from Asia, delivering consistent value across global supply chains." className="text-base leading-relaxed text-[#4a4a4a]" delay={0.1} />
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
+                                Our Vision
+                            </h2>
+                            <p className="text-base leading-relaxed text-gray-500">
+                                To establish a strong presence as a trusted logistics partner originating from Asia, delivering consistent value across global supply chains.
+                            </p>
                         </div>
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
                             <Image
@@ -798,10 +839,16 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
-                        <div className="mt-6 md:mt-10">
-                            <AnimatedText text="Our Mission" className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a1a] mb-4" direction="down" />
-                            <AnimatedText text="Driven by our strategic base in Asia, we focus on enabling seamless logistics across key international trade routes. Our goal is to deliver dependable, efficient, and tailored solutions that support our clients’ growth and long-term success." className="text-base leading-relaxed text-[#4a4a4a] mb-4" delay={0.1} direction="down" />
-                            <AnimatedText text='"Every detail matters" is our motto"' className="text-[15px] font-semibold text-[#1a1a1a]" delay={0.2} direction="down" />
+                        <div className="mt-6 md:mt-10 text-left">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
+                                Our Mission
+                            </h2>
+                            <p className="text-base leading-relaxed text-gray-500 mb-4">
+                                Driven by our strategic base in Asia, we focus on enabling seamless logistics across key international trade routes. Our goal is to deliver dependable, efficient, and tailored solutions that support our clients’ growth and long-term success.
+                            </p>
+                            <p className="text-[15px] font-semibold text-gray-900">
+                                "Every detail matters" is our motto
+                            </p>
                         </div>
                     </motion.div>
 
@@ -836,7 +883,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                         />
                     </div>
                 </div> */}
-                <div className="border-t border-zinc-200/80 bg-[#f0f2f5] px-6 py-14 text-center md:py-20">
+                {/* <div className="border-t border-zinc-200/80 bg-[#f0f2f5] px-6 py-14 text-center md:py-20">
                     <h2 className="text-xl font-semibold tracking-tight text-zinc-900 md:text-2xl">
                         Let&apos;s help you move with confidence
                     </h2>
@@ -850,7 +897,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                     >
                         Explore services
                     </a>
-                </div>
+                </div> */}
             </section>
         </main>
     );

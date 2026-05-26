@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import type { ComponentType, ReactNode } from "react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
@@ -83,6 +84,13 @@ const IconGlobal = ({ className }: { className?: string }) => (
   </IconWrap>
 );
 
+const IconTrendingUp = ({ className }: { className?: string }) => (
+  <IconWrap className={className}>
+    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+    <polyline points="16 7 22 7 22 13" />
+  </IconWrap>
+);
+
 type StackServiceItem = {
   title: string;
   detail: ReactNode;
@@ -137,9 +145,13 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/90 text-slate-950 shadow-sm">
+            <motion.span 
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/90 text-slate-950 shadow-sm"
+            >
               <SectionIcon className="h-8 w-8" />
-            </span>
+            </motion.span>
             <h2 className={`max-w-5xl text-[24px] font-semibold leading-[1.06] tracking-[-0.02em] sm:text-3xl lg:text-[40px] ${section.imageBgSrc ? 'text-white' : 'text-slate-950'}`}>
               {section.title}
             </h2>
@@ -337,10 +349,10 @@ function StickyStackSection({ sections }: { sections: StackSectionData[] }) {
 
 const NAV_LINKS = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Network", href: "/network" },
-  { name: "Industries", href: "/industry" },
-  { name: "About us", href: "/about" },
+  { name: "Services", href: "/#section-services" },
+  { name: "Network", href: "/#section-network" },
+  { name: "Industries", href: "/#section-industry" },
+  { name: "About us", href: "/#section-about" },
 ];
 
 const STACK_SECTIONS: StackSectionData[] = [
@@ -358,7 +370,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Transport Logistics",
         eyebrow: "Surface Network",
         detail: (
-          <>Reliable transport logistics supported by a <span className="font-bold text-blue-600">strong carrier network</span>, <span className="font-bold text-blue-600">efficient route planning</span>, and consistent cargo movement.</>
+          <>We provide reliable transport logistics solutions supported by a<span className="font-bold text-blue-600"> Our transportation services are designed to ensure the smooth movement of cargo across locations</span>while maintaining safety, consistency, and timely delivery</>
         ),
         imageSrc: imageTruck,
         features: ["Route planning", "Carrier network", "Cargo safety", "Timed dispatch"],
@@ -420,7 +432,7 @@ const STACK_SECTIONS: StackSectionData[] = [
     counter: "3/3",
     kicker: "Fulfillment & Projects",
     title: "Advanced warehousing & ODC fulfillment",
-    Icon: IconBox,
+    Icon: IconTrendingUp,
     accent: "text-[#78350f]",
     gradient: "bg-[linear-gradient(135deg,#fcd34d_0%,#fbbf24_50%,#f59e0b_100%)]",
     imageBgSrc: bgFulfillment,

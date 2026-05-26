@@ -24,11 +24,11 @@ const PARTNER_ACCENT = "#1a1a1a";
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
+    { name: "Services", href: "/#section-services" },
     { name: "Solutions", href: "/solutions" },
-    { name: "Network", href: "/network" },
-    { name: "Industries", href: "/industry" },
-    { name: "About us", href: "/about" },
+    { name: "Network", href: "/#section-network" },
+    { name: "Industries", href: "/#section-industry" },
+    { name: "About us", href: "/#section-about" },
 ];
 
 const fadeUp = {

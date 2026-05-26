@@ -1,89 +1,162 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, useAnimationFrame } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import Image from "next/image";
 import Link from "next/link";
 
 // ─── Cinematic Scroll-Reveal Hook ────────────────────────────────────────────
 function useScrollReveal(threshold = 0.15) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+    const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect(); // Optimize: Only reveal once to prevent flickering or disappearing when scrolling
-        }
-      },
-      { threshold }
-    );
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setVisible(entry.isIntersecting);
+            },
+            { threshold }
+        );
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [threshold]);
 
-  return { ref, visible };
+    return { ref, visible };
 }
 
 // ─── Cinematic Reveal Component ──────────────────────────────────────────────
 interface RevealProps {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-  direction?: "up" | "down" | "left" | "right" | "scale" | "none";
+    children: React.ReactNode;
+    delay?: number;
+    className?: string;
+    direction?: "up" | "down" | "left" | "right" | "scale" | "none";
 }
 
 function Reveal({
-  children,
-  delay = 0,
-  className = "",
-  direction = "up",
+    children,
+    delay = 0,
+    className = "",
+    direction = "up",
 }: RevealProps) {
-  const { ref, visible } = useScrollReveal(0.1);
+    const { ref, visible } = useScrollReveal(0.1);
 
-  const dirMap = {
-    up: "translateY(40px)",
-    down: "translateY(-40px)",
-    left: "translateX(-40px)",
-    right: "translateX(40px)",
-    scale: "scale(0.95)",
-    none: "translate(0,0)",
-  };
+    const dirMap = {
+        up: "translateY(40px)",
+        down: "translateY(-40px)",
+        left: "translateX(-40px)",
+        right: "translateX(40px)",
+        scale: "scale(0.95)",
+        none: "translate(0,0)",
+    };
 
-  const transformValue = visible 
-    ? (direction === "scale" ? "scale(1)" : "translate(0,0)") 
-    : dirMap[direction];
+    const transformValue = visible
+        ? (direction === "scale" ? "scale(1)" : "translate(0,0)")
+        : dirMap[direction];
 
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: transformValue,
-        filter: visible ? "blur(0px)" : "blur(8px)",
-        transition: `all 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
-        willChange: "opacity, transform, filter",
-      }}
-    >
-      {children}
-    </div>
-  );
+    return (
+        <div
+            ref={ref}
+            className={className}
+            style={{
+                opacity: visible ? 1 : 0,
+                transform: transformValue,
+                filter: visible ? "blur(0px)" : "blur(8px)",
+                transition: `all 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
+                willChange: "opacity, transform, filter",
+            }}
+        >
+            {children}
+        </div>
+    );
+}
+
+// ─── Fancy Spotlight Card ──────────────────────────────────────────────────
+function SpotlightCard({ children, className = "" }: { children: React.ReactNode, className?: string }) {
+    const divRef = useRef<HTMLDivElement>(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [opacity, setOpacity] = useState(0);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!divRef.current) return;
+        const rect = divRef.current.getBoundingClientRect();
+        setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    };
+
+    return (
+        <div
+            ref={divRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setOpacity(1)}
+            onMouseLeave={() => setOpacity(0)}
+            className={`relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:shadow-emerald-500/10 ${className}`}
+        >
+            <div
+                className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+                style={{
+                    opacity,
+                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(120,119,255,0.15), transparent 40%)`,
+                }}
+            />
+            <div className="relative z-10 h-full p-6">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+// ─── 3D Tilt Card Component ───────────────────────────────────────────────
+function TiltCard({ children, className = "" }: { children: React.ReactNode, className?: string }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    
+    // Smooth out the spring animation
+    const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
+    const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
+    
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        x.set(mouseX / width - 0.5);
+        y.set(mouseY / height - 0.5);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
+    return (
+        <motion.div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            className={`relative w-full h-full cursor-pointer ${className}`}
+        >
+            {children}
+        </motion.div>
+    );
 }
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Network", href: "/network" },
-    { name: "Industries", href: "/industry" },
-    { name: "About us", href: "/about" },
+    { name: "Services", href: "/#section-services" },
+    { name: "Network", href: "/#section-network" },
+    { name: "Industries", href: "/#section-industry" },
+    { name: "About us", href: "/#section-about" },
 ];
 
 const INDUSTRIES = [
@@ -101,7 +174,7 @@ const INDUSTRIES = [
     },
     {
         name: "Medical Supplies",
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop",
         description: "Precision temperature-controlled environments, cold-chain logistics, and highly secure transport networks dedicated to critical healthcare.",
         className: "md:col-span-1 md:row-span-1"
     },
@@ -137,23 +210,149 @@ const INDUSTRIES = [
     }
 ];
 
+const PROVEN_TRACK_SLIDES = [
+    {
+        title: "Proven Industry Experience",
+        description: "MAS Logistics has extensive experience in handling project cargo across industries such as Oil & Gas, Construction, Energy, Maritime, Mining, and Heavy Machinery. Our team is equipped to manage highly complex transport requirements involving Break Bulk (BB), Heavy Lift (HL), and Out of Gauge (OOG) cargo.",
+        capabilities: [
+            "Break Bulk (BB) cargo handling",
+            "Heavy Lift (HL) cargo management",
+            "Out of Gauge (OOG) transportation",
+            "Industry-focused logistics support",
+            "Safe and secure oversized cargo handling"
+        ],
+        image: "/images_frontend/overall_logistic.webp",
+        imagePosition: "object-center"
+    },
+    {
+        title: "Warehousing Services",
+        description: "MAS Logistics offers both Dedicated Warehousing and Multi-User Warehousing Solutions, designed to meet different operational and storage requirements. Our dedicated warehouse solutions align with your specific business requirements, offering greater flexibility and scalability to support growth.",
+        capabilities: [
+            "Dedicated storage solutions",
+            "Flexible and scalable operations",
+            "Inventory and distribution support",
+            "Reduced operational costs",
+            "Improved process efficiency"
+        ],
+        image: "/images/ai/modern_warehouse_interior.png"
+    },
+    {
+        title: "Break-Bulk Services",
+        description: "Our break-bulk logistics solutions are designed to handle oversized, heavy, and unconventional cargo that requires specialized transportation arrangements. Beyond standard shipping services, we provide complete logistics support, including pre-carriage, on-carriage, packaging, crating, and rigging.",
+        capabilities: [
+            "Oversized and overweight cargo handling",
+            "Heavy and odd-sized shipment support",
+            "Packing, crating, and rigging services",
+            "Pre-carriage and on-carriage logistics",
+            "Global shipping and carrier network"
+        ],
+        image: "/images_frontend/loading_container_truck.webp",
+        imagePosition: "object-bottom"
+    }
+];
+
+function MorphCarousel() {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+
+    useEffect(() => {
+        if (isHovered) return;
+        
+        const interval = setInterval(() => {
+            setActiveIndex((prev) => (prev + 1) % PROVEN_TRACK_SLIDES.length);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [isHovered]);
+
+    return (
+        <div 
+            className="relative w-full h-[80vh] md:h-[90vh] rounded-[3rem] overflow-hidden bg-black border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Morphing Images */}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={activeIndex}
+                    initial={{ filter: "blur(20px) brightness(0.5)", opacity: 0, scale: 1.1 }}
+                    animate={{ filter: "blur(0px) brightness(1)", opacity: 1, scale: 1 }}
+                    exit={{ filter: "blur(20px) brightness(0.5)", opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                >
+                    <Image src={PROVEN_TRACK_SLIDES[activeIndex].image} fill sizes="100vw" className={`object-cover opacity-80 ${PROVEN_TRACK_SLIDES[activeIndex].imagePosition || 'object-center'}`} alt="Carousel Background" />
+                </motion.div>
+            </AnimatePresence>
+
+            {/* Gradient Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+            {/* Content Overlay */}
+            <div className="absolute top-0 left-0 right-0 bottom-[120px] md:bottom-[150px] flex flex-col justify-center px-4 md:px-16 lg:px-24 pt-12 pointer-events-none overflow-y-auto hide-scrollbar">
+                <div className="max-w-2xl relative z-10">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeIndex}
+                            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="pointer-events-auto"
+                        >
+                            <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 pb-2">
+                                {PROVEN_TRACK_SLIDES[activeIndex].title}
+                            </h3>
+                            <p className="text-zinc-200 text-lg md:text-xl font-light leading-relaxed mb-8 drop-shadow-lg">
+                                {PROVEN_TRACK_SLIDES[activeIndex].description}
+                            </p>
+                            
+                            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl inline-block w-full">
+                                <h4 className="text-emerald-400 font-medium mb-4 text-lg">Service Capabilities:</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6">
+                                    {PROVEN_TRACK_SLIDES[activeIndex].capabilities.map((item, i) => (
+                                        <div key={i} className="flex items-center gap-3 text-zinc-100">
+                                            <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)] shrink-0"></span>
+                                            <span className="text-sm md:text-base font-medium">{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </div>
+
+            {/* Thumbnails Navigation (Bottom Center) */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 md:gap-5 z-20 pointer-events-auto">
+                {PROVEN_TRACK_SLIDES.map((slide, i) => (
+                    <button
+                        key={i}
+                        onClick={() => setActiveIndex(i)}
+                        className={`relative w-24 h-16 md:w-36 md:h-24 rounded-xl overflow-hidden transition-all duration-500 cursor-pointer ${
+                            activeIndex === i 
+                                ? "ring-2 ring-white scale-110 shadow-2xl z-10" 
+                                : "opacity-40 hover:opacity-100 hover:scale-105 saturate-50 hover:saturate-100"
+                        }`}
+                    >
+                        <Image src={slide.image} fill sizes="(max-width: 768px) 96px, 144px" className={`object-cover ${slide.imagePosition || 'object-center'}`} alt={`Thumbnail ${i}`} />
+                        {activeIndex === i && (
+                            <motion.div layoutId="active-thumb-glow" className="absolute inset-0 bg-white/10 mix-blend-overlay pointer-events-none" />
+                        )}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 interface IndustryProps {
     isEmbedded?: boolean;
 }
 
 export default function Industry({ isEmbedded = false }: IndustryProps) {
     const [selectedIndustry, setSelectedIndustry] = useState<typeof INDUSTRIES[0] | null>(null);
-    const [isDragging, setIsDragging] = useState(false);
-    const [carouselHovered, setCarouselHovered] = useState(false);
-
-    const x = useMotionValue(0);
-    const rotation = useTransform(x, (val) => val * 0.25);
-
-    useAnimationFrame((t, delta) => {
-        if (!carouselHovered && !isDragging && !selectedIndustry) {
-            x.set(x.get() - delta * 0.03);
-        }
-    });
 
     // Lock body scroll when modal is open
     useEffect(() => {
@@ -166,13 +365,13 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
     }, [selectedIndustry]);
 
     return (
-        <main className="min-h-screen bg-white text-zinc-900 selection:bg-black selection:text-white">
-            
+        <main className="min-h-screen bg-[#050505] text-white selection:bg-white selection:text-black">
+
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
-                    <AppleGlassNav 
-                        items={NAV_LINKS} 
-                        theme="light" 
+                    <AppleGlassNav
+                        items={NAV_LINKS}
+                        theme="dark"
                         logo={
                             <Link href="/" className="flex items-center">
                                 <Image
@@ -180,7 +379,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                     alt="Logo"
                                     width={200}
                                     height={50}
-                                    className="h-9 w-30 object-contain transform scale-225 origin-centre" 
+                                    className="h-9 w-30 object-contain transform scale-225 origin-centre brightness-0 invert"
                                     priority
                                 />
                             </Link>
@@ -189,129 +388,168 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                 </div>
             )}
 
-            <div className="max-w-7xl mx-auto px-6 pt-40 pb-12 text-center">
-                <Reveal direction="down" delay={0.1}>
-                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 drop-shadow-sm pb-2">
-                        Industry Solutions
-                    </h1>
-                </Reveal>
-                <Reveal direction="up" delay={0.2}>
-                    <p className="text-lg md:text-2xl text-zinc-500 max-w-3xl mx-auto font-light leading-relaxed">
-                        Delivering dedicated supply chain management and specialized logistics for the world&apos;s most demanding and dynamic sectors.
-                    </p>
-                </Reveal>
-            </div>
+            {/* 3D Wheel Hero Section */}
+            <div
+                className="relative w-full h-[100vh] min-h-[900px] overflow-hidden bg-[#050505] flex items-center justify-center"
+            >
+                <style>{`
+                    @keyframes autoRun3d {
+                        from { transform: rotateY(360deg); }
+                        to { transform: rotateY(0deg); }
+                    }
 
-            {/* 3D 360-Degree Carousel Section */}
-            <div className="px-4 md:px-8 max-w-[1400px] mx-auto mb-20 md:mb-32 relative z-30">
-                <section className="relative w-full py-16 md:py-24 overflow-visible carousel-container flex flex-col items-center">
-                    
-                    {/* Background layer separated from 3D context to prevent clipping */}
-                    <div className="absolute inset-0 w-full h-full bg-slate-50 rounded-[3rem] md:rounded-[4rem] border border-slate-200 shadow-sm pointer-events-none -z-10" />
+                    @keyframes animateBrightness {
+                        0%, 100% { filter: brightness(1); }
+                        50% { filter: brightness(0.2); }
+                    }
 
-                    <style>{`
-                    .carousel-container { --carousel-tz: 300px; }
+                    .spin-container {
+                        transform-style: preserve-3d;
+                        animation: autoRun3d 25s linear infinite;
+                        will-change: transform;
+                    }
+
+                    .spin-container:hover, .spin-container:hover .wheel-card-inner {
+                        animation-play-state: paused !important;
+                    }
+
+                    .wheel-card {
+                        position: absolute;
+                        inset: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transform: rotateY(var(--card-angle)) translateZ(65vw);
+                    }
+                    @media (min-width: 640px) {
+                        .wheel-card { transform: rotateY(var(--card-angle)) translateZ(55vw); }
+                    }
                     @media (min-width: 768px) {
-                        .carousel-container { --carousel-tz: 450px; }
+                        .wheel-card { transform: rotateY(var(--card-angle)) translateZ(50vw); }
+                    }
+                    @media (min-width: 1024px) {
+                        .wheel-card { transform: rotateY(var(--card-angle)) translateZ(480px); }
+                    }
+                    @media (min-width: 1280px) {
+                        .wheel-card { transform: rotateY(var(--card-angle)) translateZ(600px); }
+                    }
+                    .wheel-card-inner {
+                        animation: animateBrightness 25s linear infinite;
+                        animation-delay: calc(-25s * (1 - var(--angle-ratio)));
+                        will-change: transform, filter;
                     }
                 `}</style>
-                
-                
 
-                <div 
-                    className="relative w-full h-[600px] md:h-[800px] flex items-center justify-center cursor-grab active:cursor-grabbing mt-10 md:mt-16"
-                    style={{ perspective: '2000px', transformStyle: 'preserve-3d' }}
-                    onMouseEnter={() => setCarouselHovered(true)}
-                    onMouseLeave={() => setCarouselHovered(false)}
-                    onMouseDown={() => setIsDragging(true)}
-                    onMouseUp={() => setIsDragging(false)}
-                    onTouchStart={() => setIsDragging(true)}
-                    onTouchEnd={() => setIsDragging(false)}
+                {/* 3D Wheel Background */}
+                <div
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+                    style={{ perspective: '2000px' }}
                 >
-                    <motion.div
-                        className="relative w-[240px] h-[340px] md:w-[320px] md:h-[460px]"
-                        style={{
-                            transformStyle: 'preserve-3d',
-                            rotateY: rotation
-                        }}
-                        drag="x"
-                        dragElastic={0}
-                        dragMomentum={false}
+                    {/* Tilt Container separated to ensure rotation axes behave correctly */}
+                    <div
+                        className="relative w-full h-full flex items-center justify-center"
+                        style={{ transformStyle: 'preserve-3d', transform: 'rotateX(-24deg) translateY(-10%)' }}
                     >
-                        {INDUSTRIES.map((industry, index) => {
-                            const angle = index * 45;
-                            const isSelected = selectedIndustry?.name === industry.name;
+                        {/* Center Static Content - EXACT DESIGN AND PLACEMENT */}
+                        <div 
+                            className="absolute flex flex-col items-center justify-center text-center px-4 pointer-events-auto"
+                            style={{ transform: 'translateZ(100px) translateY(-60px) rotateX(24deg)' }}
+                        >
+                            <div className="max-w-xl flex flex-col items-center gap-4">
+                                {/* Title */}
+                                <h1 className="text-3xl sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 leading-[1.1] tracking-tight drop-shadow-2xl pb-2">
+                                    Industry Solutions
+                                </h1>
+                                
+                                {/* Description */}
+                                <p className="text-zinc-300 text-xs sm:text-sm md:text-base lg:text-lg font-medium max-w-lg mx-auto leading-relaxed drop-shadow-lg text-center mt-1">
+                                    We deliver <span className="text-blue-400 font-semibold">industry-focused logistics</span> to support complex global supply chains
+                                    <br className="hidden md:block mb-2" />
+                                    From transportation to customs coordination, we provide <span className="text-emerald-400 font-semibold">reliable support</span> tailored to your business needs
+                                </p>
+                            </div>
+                        </div>
 
-                            return (
-                                <div 
-                                    key={industry.name}
-                                    className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${isSelected ? 'opacity-0' : 'opacity-100'}`}
-                                    style={{
-                                        transform: `rotateY(${angle}deg) translateZ(var(--carousel-tz))`,
-                                        backfaceVisibility: 'hidden',
-                                        WebkitBackfaceVisibility: 'hidden',
-                                    }}
-                                >
-                                    <motion.div 
-                                        layoutId={`card-${industry.name}`}
-                                        className="relative w-full h-full overflow-hidden rounded-[2rem] bg-zinc-900 shadow-2xl cursor-pointer group"
-                                        onClick={() => setSelectedIndustry(industry)}
+                        <div
+                            className="spin-container relative w-[40vw] h-[40vw] sm:w-[28vw] sm:h-[28vw] md:w-[24vw] md:h-[24vw] lg:w-[200px] lg:h-[200px] xl:w-[250px] xl:h-[250px]"
+                        >
+                            {INDUSTRIES.map((industry, index) => {
+                                const angle = index * (360 / INDUSTRIES.length);
+                                const angleRatio = index / INDUSTRIES.length;
+                                const isSelected = selectedIndustry?.name === industry.name;
+                                return (
+                                    <div
+                                        key={industry.name}
+                                        className="wheel-card"
+                                        style={{
+                                            '--card-angle': `${angle}deg`,
+                                            '--angle-ratio': angleRatio,
+                                        } as React.CSSProperties}
                                     >
-                                        <motion.img 
-                                            layoutId={`image-${industry.name}`}
-                                            src={industry.image} 
-                                            alt={`Logistics for ${industry.name}`}
-                                            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
-                                        
-                                        <div className="absolute inset-0 z-20 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
-                                            <motion.h3 
-                                                layoutId={`title-${industry.name}`}
-                                                className="text-2xl md:text-3xl font-bold text-white tracking-tight relative z-30 mb-2"
-                                            >
-                                                {industry.name}
-                                            </motion.h3>
-                                            <p className="text-zinc-300 text-sm md:text-base line-clamp-2 font-light">
-                                                {industry.description}
-                                            </p>
-                                        </div>
-                                    </motion.div>
-                                </div>
-                            );
-                        })}
-                    </motion.div>
+                                        <motion.div
+                                            layoutId={`card-${industry.name}`}
+                                            className={`wheel-card-inner relative w-full h-full overflow-hidden rounded-[2rem] bg-zinc-900 pointer-events-auto cursor-pointer transition-all duration-300 group ${isSelected ? 'opacity-0' : 'opacity-100'}`}
+                                            onClick={() => setSelectedIndustry(industry)}
+                                        >
+                                            <motion.img
+                                                layoutId={`image-${industry.name}`}
+                                                src={industry.image}
+                                                alt={industry.name}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            
+                                            {/* Card Overlay Content */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                            
+                                            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 flex flex-col items-center justify-end text-center pointer-events-none transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                                                <h3 className="text-white font-bold text-xl md:text-2xl mb-2 drop-shadow-lg shadow-black">
+                                                    {industry.name}
+                                                </h3>
+                                                <div className="flex items-center gap-2 text-white/80 text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                                    <span>Read more</span>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
-            </section>
-        </div>
+
+
+            </div>
 
             {/* Cinematic Modal Expansion */}
             <AnimatePresence>
                 {selectedIndustry && (
                     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 pointer-events-auto">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4 }}
                             onClick={() => setSelectedIndustry(null)}
-                            className="absolute inset-0 bg-white/70 backdrop-blur-xl cursor-zoom-out"
+                            className="absolute inset-0 bg-black/80 backdrop-blur-xl cursor-zoom-out"
                         />
-                        
-                        <motion.div 
-                            layoutId={`card-${selectedIndustry.name}`}
-                            className="relative w-full max-w-5xl h-[85vh] md:h-[90vh] bg-zinc-900 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl flex flex-col"
+
+                        <motion.div
+                            layoutId={`card-${selectedIndustry!.name}`}
+                            className="relative w-full max-w-5xl h-[85vh] md:h-[90vh] bg-zinc-950 border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl flex flex-col"
                         >
                             <div className="relative w-full h-[35%] md:h-[45%] shrink-0">
-                                <motion.img 
-                                    layoutId={`image-${selectedIndustry.name}`}
-                                    src={selectedIndustry.image} 
-                                    alt={selectedIndustry.name}
+                                <motion.img
+                                    layoutId={`image-${selectedIndustry!.name}`}
+                                    src={selectedIndustry!.image}
+                                    alt={selectedIndustry!.name}
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent" />
-                                
-                                <button 
+
+                                <button
                                     onClick={() => setSelectedIndustry(null)}
                                     className="absolute top-6 right-6 w-12 h-12 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors z-50 border border-white/20"
                                 >
@@ -319,14 +557,14 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                 </button>
                             </div>
 
-                            <div className="relative p-6 md:p-10 flex flex-col justify-start flex-1 bg-zinc-900 z-10 overflow-y-auto">
-                                <motion.h3 
-                                    layoutId={`title-${selectedIndustry.name}`}
+                            <div className="relative p-6 md:p-10 flex flex-col justify-start flex-1 bg-zinc-950 z-10 overflow-y-auto">
+                                <motion.h3
+                                    layoutId={`title-${selectedIndustry!.name}`}
                                     className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400"
                                 >
-                                    {selectedIndustry.name}
+                                    {selectedIndustry!.name}
                                 </motion.h3>
-                                
+
                                 <motion.div
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -335,9 +573,9 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                     className="space-y-6"
                                 >
                                     <p className="text-lg md:text-xl text-blue-100/90 font-light leading-relaxed max-w-4xl">
-                                        {selectedIndustry.description}
+                                        {selectedIndustry!.description}
                                     </p>
-                                    
+
                                     <div className="pt-6 border-t border-zinc-800/50 grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <div>
                                             <h5 className="text-emerald-300 font-medium text-base md:text-lg mb-3">Key Logistics Offerings</h5>
@@ -359,7 +597,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                         <div>
                                             <h5 className="text-amber-300 font-medium text-base md:text-lg mb-3">Service Excellence</h5>
                                             <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-                                                Our specialized teams operate around the clock to ensure your <span className="text-white font-medium">{selectedIndustry.name.toLowerCase()}</span> cargo reaches its destination safely and on schedule, minimizing operational downtime and maximizing your ROI.
+                                                Our specialized teams operate around the clock to ensure your <span className="text-white font-medium">{selectedIndustry!.name.toLowerCase()}</span> cargo reaches its destination safely and on schedule, minimizing operational downtime and maximizing your ROI.
                                             </p>
                                         </div>
                                     </div>
@@ -371,71 +609,19 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
             </AnimatePresence>
 
             {/* Proven Track Record Section */}
-            <div className="px-4 md:px-8 max-w-[1400px] mx-auto mb-20 md:mb-32 relative">
-                <section className="relative w-full py-20 md:py-32 bg-slate-50 rounded-[3rem] md:rounded-[4rem] border border-slate-200 shadow-sm overflow-hidden">
-                    <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    <div>
-                        <Reveal direction="left" delay={0.1}>
-                            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 pb-2">
-                                Proven Track Record
-                            </h2>
-                        </Reveal>
-                        
-                        <div className="space-y-8">
-                            <Reveal direction="up" delay={0.2}>
-                                <div className="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm backdrop-blur-sm">
-                                    <h4 className="text-xl font-bold text-emerald-700 mb-3 flex items-center gap-3">
-                                        <span className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">✓</span>
-                                        Global Expertise
-                                    </h4>
-                                    <p className="text-slate-600 leading-relaxed font-medium text-lg">
-                                        We treat each single project as a unique assignment with special attention to every detail, from design and planning to <span className="text-emerald-700 font-bold">execution and delivery</span>. Our dedicated global project cargo teams plan and coordinate entire logistics networks.
-                                    </p>
-                                </div>
-                            </Reveal>
-
-                            <Reveal direction="up" delay={0.3}>
-                                <div className="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm backdrop-blur-sm">
-                                    <h4 className="text-xl font-bold text-amber-700 mb-3 flex items-center gap-3">
-                                        <span className="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-sm">★</span>
-                                        Specialized Project Cargo
-                                    </h4>
-                                    <p className="text-slate-600 leading-relaxed font-medium text-lg">
-                                        We have the ability to handle your complex transport logistics, whether it is cargo shipped as <span className="text-amber-700 font-bold">Break Bulk (BB), Heavy Lift (HL)</span> or Out of Gauge (OOG). With dedicated teams of professionals attending to your industrial needs, be assured that your cargo will be safely transported globally.
-                                    </p>
-                                </div>
-                            </Reveal>
-                        </div>
-                    </div>
-
-                    <Reveal direction="right" delay={0.4}>
-                        <div className="relative rounded-[2rem] overflow-hidden aspect-square lg:aspect-[4/5] bg-slate-100 shadow-2xl group">
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 1.2, ease: "easeOut" }}
-                                className="absolute inset-0 w-full h-full"
-                            >
-                                <img 
-                                    src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1400&auto=format&fit=crop" 
-                                    alt="Project Cargo Logistics"
-                                    className="w-full h-full object-cover"
-                                />
-                            </motion.div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-                            
-                            <div className="absolute bottom-10 left-10 right-10 pointer-events-none">
-                                <div className="backdrop-blur-2xl bg-white/10 border border-white/20 p-8 rounded-3xl shadow-2xl">
-                                    <h5 className="text-xl font-semibold text-white mb-3">People on the ground</h5>
-                                    <p className="text-white/90 font-light leading-relaxed">
-                                        Our local Project Cargo experts are present in key centers around the world to ensure footprint in emerging markets is unmatched.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+            <div className="px-4 md:px-8 max-w-[1400px] mx-auto pb-20 md:pb-32 relative z-30">
+                {/* <div className="mb-12 text-center">
+                    <Reveal direction="down" delay={0.1}>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 pb-2">
+                            Proven Track Record
+                        </h2>
                     </Reveal>
-                </div>
-            </section>
-        </div>
+                </div> */}
+
+                <Reveal direction="up" delay={0.2}>
+                    <MorphCarousel />
+                </Reveal>
+            </div>
         </main>
     );
 }

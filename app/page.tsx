@@ -6,14 +6,17 @@ import ServicesPage from "./services/page";
 import NetworkPage from "./network/page";
 import IndustryPage from "./industry/page";
 import AboutPage from "./about/page";
+import ReviewPage from "./review/page";
+import FAQPage from "./FAQ/page";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 
 const NAV_LINKS = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Network", href: "/network" },
-  { name: "Industries", href: "/industry" },
-  { name: "About us", href: "/about" },
+  { name: "Services", href: "/#section-services" },
+  { name: "Network", href: "/#section-network" },
+  { name: "Industries", href: "/#section-industry" },
+  { name: "About us", href: "/#section-about" },
+  { name: "FAQ", href: "/#section-FAQ" },
 ];
 
 export default function Home() {
@@ -40,24 +43,32 @@ export default function Home() {
         />
       </div>
 
-      <div className="w-full">
+      <div id="section-home" className="w-full">
         <HeroSection />
       </div>
 
-      <div className="w-full relative z-10">
+      <div id="section-services" className="w-full relative z-10">
         <ServicesPage isEmbedded={true} />
       </div>
 
-      <div className="w-full relative z-10">
+      <div id="section-network" className="w-full relative z-10">
         <NetworkPage />
       </div>
 
-      <div className="w-full relative z-10">
+      <div id="section-industry" className="w-full relative z-10">
         <IndustryPage isEmbedded={true} />
       </div>
 
-      <div className="w-full relative z-10">
+      <div id="section-about" className="w-full relative z-10">
         <AboutPage isEmbedded={true} />
+      </div>
+
+      <div id="section-review" className="w-full relative z-10">
+        <ReviewPage />
+      </div>
+
+      <div id="section-FAQ" className="w-full relative z-10">
+        <FAQPage isEmbedded={true} />
       </div>
 
     </main>

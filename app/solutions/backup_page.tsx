@@ -13,11 +13,11 @@ import ImageSupplyChain from "@/images_frontend/solutions_logistics_page/supply_
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
+    { name: "Services", href: "/#section-services" },
     { name: "Solutions", href: "/solutions" },
-    { name: "Network", href: "/network" },
-    { name: "Industries", href: "/industry" },
-    { name: "About us", href: "/about" },
+    { name: "Network", href: "/#section-network" },
+    { name: "Industries", href: "/#section-industry" },
+    { name: "About us", href: "/#section-about" },
 ];
 
 /**

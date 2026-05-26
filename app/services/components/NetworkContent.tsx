@@ -218,7 +218,7 @@ export function NetworkContent() {
               <div className="relative mb-7">
                 <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/40 to-cyan-600/10 p-[1.5px]">
                   <div className="flex h-full w-full items-center justify-center rounded-2xl bg-[#06081a]/95 backdrop-blur-xl">
-                    {React.cloneElement(block.icon as React.ReactElement, { className: "w-7 h-7 text-cyan-200" })}
+                    {React.cloneElement(block.icon as React.ReactElement<any>, { className: "w-7 h-7 text-cyan-200" })}
                   </div>
                 </div>
                 <motion.div

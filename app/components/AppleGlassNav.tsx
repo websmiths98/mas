@@ -22,12 +22,50 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
     const [active, setActive] = useState("");
 
     useEffect(() => {
-        const currentItem = items.find(item => item.href === pathname);
-        if (currentItem) {
-            setActive(currentItem.name);
-        } else if (pathname === "/") {
-            const homeItem = items.find(item => item.href === "/");
-            if (homeItem) setActive(homeItem.name);
+        if (pathname === "/") {
+            const handleScroll = () => {
+                let currentActive = items[0]?.name || "Home";
+                
+                // Create a mapping from items and check their position from bottom to top
+                for (let i = items.length - 1; i >= 0; i--) {
+                    const item = items[i];
+                    // Example: href="/" -> "section-home", href="/#section-services" -> "section-services"
+                    let id = "";
+                    if (item.href === "/") {
+                        id = "section-home";
+                    } else if (item.href.startsWith("/#")) {
+                        id = item.href.substring(2);
+                    } else {
+                        id = `section-${item.href.replace("/", "")}`;
+                    }
+                    
+                    const el = document.getElementById(id);
+                    
+                    if (el) {
+                        const rect = el.getBoundingClientRect();
+                        // If the section top is above or near the middle of the screen
+                        if (rect.top <= window.innerHeight * 0.4) {
+                            currentActive = item.name;
+                            break;
+                        }
+                    }
+                }
+                
+                setActive(currentActive);
+            };
+
+            window.addEventListener("scroll", handleScroll, { passive: true });
+            handleScroll(); // initial check
+            
+            return () => window.removeEventListener("scroll", handleScroll);
+        } else {
+            const currentItem = items.find(item => item.href === pathname || item.href === `/#section-${pathname.replace(/\//g, "")}`);
+            if (currentItem) {
+                setActive(currentItem.name);
+            } else if (pathname === "/") {
+                const homeItem = items.find(item => item.href === "/");
+                if (homeItem) setActive(homeItem.name);
+            }
         }
     }, [pathname, items]);
 

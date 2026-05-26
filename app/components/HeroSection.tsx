@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import GetQuoteForm from "./GetQuoteForm";
 
 // ─── Simple Entrance Animation Component ──────────────────────────────────────
 interface RevealProps {
@@ -28,8 +29,11 @@ function Reveal({ children, delay = 0, className = "" }: RevealProps) {
 }
 
 export default function HeroSection() {
+  // Local state to track whether the Get a Quote form pop-up is active
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+
   // Shared height and sizing to ensure both buttons look uniform
-  const btnStyle = "h-[46px] min-w-[170px] flex items-center justify-center px-6 rounded-xl transition-all duration-300 text-[13px] font-semibold";
+  const btnStyle = "h-[46px] min-w-[170px] flex items-center justify-center px-6 rounded-xl transition-all duration-300 text-[13px] font-semibold cursor-pointer";
 
   return (
     <div className="relative bg-[#E5E4E2] h-screen w-full overflow-hidden flex items-center justify-center">
@@ -106,7 +110,6 @@ export default function HeroSection() {
           <h2 className="hero-h2 max-w-2xl">
             MAS Logistics is a trusted international freight forwarding and supply chain management company in India
             delivering reliable air, sea, warehousing, and global logistics solutions tailored for seamless cross-border trade
-
           </h2>
         </Reveal>
 
@@ -114,8 +117,11 @@ export default function HeroSection() {
         <Reveal delay={1.3}>
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
 
-            {/* Get a Quote Button */}
-            <a href="#quote" className={`hero-quote-btn ${btnStyle}`}>
+            {/* Get a Quote Button - Triggers Pop-up State */}
+            <button
+              onClick={() => setIsQuoteOpen(true)}
+              className={`hero-quote-btn ${btnStyle}`}
+            >
               <div className="svg-wrapper-1">
                 <div className="svg-wrapper">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -125,11 +131,11 @@ export default function HeroSection() {
                 </div>
               </div>
               <span className="ml-2">Get a Quote</span>
-            </a>
+            </button>
 
-            {/* Explore Services Button (Existing Design, New Size) */}
+            {/* Explore Services Button */}
             <a
-              href="/services"
+              href="/#section-services"
               className={`${btnStyle} group relative overflow-hidden border-2 border-[#E5E4E2]/20 bg-[#E5E4E2]/10 backdrop-blur-md text-[#E5E4E2] isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700`}
             >
               Explore Services
@@ -148,6 +154,13 @@ export default function HeroSection() {
           </div>
         </Reveal>
       </div>
+
+      {/* ── Modal Pop-up Display Context ── */}
+      <AnimatePresence>
+        {isQuoteOpen && (
+          <GetQuoteForm onClose={() => setIsQuoteOpen(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

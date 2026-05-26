@@ -158,10 +158,10 @@ const AccordionSplit: React.FC<{ items?: ServiceItem[] }> = ({ items = SERVICES 
 export default function Services() {
   const nav = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
+    { name: "Services", href: "/#section-services" },
     { name: "Solutions", href: "/solutions" },
-    { name: "Industries", href: "/industry" },
-    { name: "About us", href: "/about" },
+    { name: "Industries", href: "/#section-industry" },
+    { name: "About us", href: "/#section-about" },
   ];
 
   return (
