@@ -146,7 +146,7 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
           </div>
 
           <div className="flex items-center gap-4">
-            <motion.span 
+            <motion.span
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/90 text-slate-950 shadow-sm"
@@ -161,10 +161,10 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
 
         <div
           className={`mt-6 grid flex-1 items-stretch gap-4 md:mt-8 lg:gap-6 ${hasIntro
-              ? "lg:grid-cols-[0.75fr_1fr_1fr]"
-              : section.items.length === 2
-                ? "lg:grid-cols-2"
-                : "lg:grid-cols-3"
+            ? "lg:grid-cols-[0.75fr_1fr_1fr]"
+            : section.items.length === 2
+              ? "lg:grid-cols-2"
+              : "lg:grid-cols-3"
             }`}
         >
           {hasIntro && (
@@ -201,7 +201,7 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
                       <p className={`text-xs font-extrabold uppercase tracking-[0.16em] ${section.accent}`}>
                         {item.eyebrow}
                       </p>
-                      <h3 
+                      <h3
                         className="mt-2 text-xl font-bold tracking-[-0.02em] text-slate-800 drop-shadow-sm"
                         style={{ textShadow: "1px 1px 0px #cbd5e1, 2px 2px 0px #94a3b8" }}
                       >
@@ -325,7 +325,7 @@ function StickyStackSection({ sections }: { sections: StackSectionData[] }) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-[#f5f7fb] px-4 py-10 sm:px-6 lg:px-10">
+    <section ref={sectionRef} className="relative min-h-screen overflow-hidden px-4 py-10 sm:px-6 lg:px-10">
       <div className="mx-auto flex h-[calc(100vh-80px)] max-w-[1760px] items-center">
         <div className="relative h-[840px] max-h-[94vh] w-full">
           {sections.map((section, index) => (
@@ -362,8 +362,8 @@ const STACK_SECTIONS: StackSectionData[] = [
     Icon: IconBox,
     accent: "text-[#1e3a8a]",
     featureClasses: "bg-blue-50 text-blue-700 ring-blue-200/60",
-    gradient: "bg-[linear-gradient(135deg,#93c5fd_0%,#60a5fa_50%,#3b82f6_100%)]",
-    imageBgSrc: bgDomestic,
+    gradient: "bg-gradient-to-b from-[#59CDE9] to-[#0A2A88]",
+    // imageBgSrc: bgDomestic, // removed to show custom gradient
     items: [
       {
         title: "Transport Logistics",
@@ -402,8 +402,8 @@ const STACK_SECTIONS: StackSectionData[] = [
     Icon: IconGlobal,
     accent: "text-[#064e3b]",
     featureClasses: "bg-emerald-50 text-emerald-700 ring-emerald-200/60",
-    gradient: "bg-[linear-gradient(135deg,#6ee7b7_0%,#34d399_50%,#10b981_100%)]",
-    imageBgSrc: bgGlobal,
+    gradient: "bg-gradient-to-t from-[#6F3FFF] from-[15%] via-[#15C0E5] via-[61%] to-[#FFE5BD] to-[86%]",
+    // imageBgSrc: bgGlobal, // removed to show custom gradient
     intro:
       "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution, helping businesses manage the movement of goods with greater control and confidence. From international freight forwarding to warehousing and specialized cargo handling, we deliver solutions tailored to meet diverse logistics and supply chain requirements.",
     items: [
@@ -435,8 +435,8 @@ const STACK_SECTIONS: StackSectionData[] = [
     Icon: IconTrendingUp,
     accent: "text-[#78350f]",
     featureClasses: "bg-amber-50 text-amber-700 ring-amber-200/60",
-    gradient: "bg-[linear-gradient(135deg,#fcd34d_0%,#fbbf24_50%,#f59e0b_100%)]",
-    imageBgSrc: bgFulfillment,
+    gradient: "bg-gradient-to-r from-[#E4E5E6] to-[#00416A]",
+    // imageBgSrc: bgFulfillment, // removed to show custom gradient
     items: [
       {
         title: "Warehousing",
@@ -463,7 +463,7 @@ const STACK_SECTIONS: StackSectionData[] = [
 export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
   return (
     <SmoothScrollProvider>
-      <main className="min-h-screen overflow-x-hidden bg-[#f5f7fb] text-slate-950">
+      <main className="min-h-screen overflow-x-hidden bg-gradient-to-t from-[#1C76D6] from-[46%] to-[#0E2A47] to-[80%] text-white">
         {!isEmbedded && (
           <div className="fixed left-1/2 top-7 z-[100] w-auto -translate-x-1/2">
             <AppleGlassNav
@@ -486,10 +486,10 @@ export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: bool
         )}
 
         <section className="mx-auto max-w-[1760px] px-5 pb-8 pt-32 sm:px-8 lg:px-10 lg:pt-36">
-          <h1 className="max-w-5xl text-[36px] font-semibold leading-[1.04] tracking-[-0.03em] text-slate-950 sm:text-6xl lg:text-[76px]">
+          <h1 className="max-w-5xl text-[36px] font-semibold leading-[1.04] tracking-[-0.03em] text-white sm:text-6xl lg:text-[76px]">
             Built to Simplify Global Logistics Operations
           </h1>
-          <p className="mt-6 max-w-7xl text-lg font-medium leading-9 text-slate-600 lg:text-xl">
+          <p className="mt-6 max-w-7xl text-lg font-medium leading-9 text-slate-200 lg:text-xl">
             At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems.
           </p>
         </section>
