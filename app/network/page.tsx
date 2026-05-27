@@ -73,9 +73,9 @@ const ROUTES = HUBS.filter(hub => hub.id !== "chennai").map(hub => ({
 }));
 
 const NETWORK_STATS = [
-  { value: 80, suffix: "+", label: "Global Destinations" },
   { value: 58, suffix: "+", label: "Operational Members" },
   { value: 270, suffix: "+", label: "Group Strength" },
+  { value: 80, suffix: "+", label: "Global Destinations" },
 ];
 
 const SIMULATED_SHIPMENTS = [
@@ -414,7 +414,7 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
   const dragging = useRef(false);
   const lastX = useRef(0);
   const velocity = useRef(0);
-  const phiRef = useRef(3.31 + (new Date().getUTCHours() / 24) * 2 * Math.PI);
+  const phiRef = useRef(1.40); // Start near Chennai
   const widthRef = useRef(0);
 
   const markers = useMemo(
@@ -458,20 +458,20 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
       devicePixelRatio: 2,
       width: 1000,
       height: 1000,
-      phi: 3.90,
-      theta: 0.50,
-      dark: 1.0,
+      phi: 1.40,
+      theta: 0.23,
+      dark: 0,
       diffuse: 1.2,
-      scale: 0.75,
-      mapSamples: 30000,
-      mapBrightness: 12.0,
-      baseColor: [0.02, 0.05, 0.15],
-      markerColor: [0.8, 0.4, 1.0],
-      glowColor: [0.2, 0.5, 1.0],
+      scale: 0.83,
+      mapSamples: 36000,
+      mapBrightness: 9.0,
+      baseColor: [0.95, 0.95, 0.95],
+      markerColor: [0.2, 0.5, 1.0],
+      glowColor: [0.8, 0.8, 0.8],
       offset: isMobile ? [0, 150] : [100, 0],
       markers,
       arcs,
-      arcColor: [0.9, 0.6, 1.0],
+      arcColor: [0.6, 0.2, 1.0],
       arcWidth: 1.0,
       arcHeight: 0.5,
       markerElevation: 0.04,
@@ -491,7 +491,7 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
       velocity.current *= 0.92;
       globe?.update({
         phi: phiRef.current,
-        theta: 0.50,
+        theta: 0.23,
       });
       raf = requestAnimationFrame(animateRaf);
     };
@@ -593,7 +593,7 @@ function ParallaxSection({ children, speed = 1, className, isMobile }: { childre
     offset: ["start end", "end start"]
   });
   const y = useTransform(scrollYProgress, [0, 1], [100 * speed, -100 * speed]);
-  
+
   return (
     <motion.div ref={ref} style={{ y: isMobile ? 0 : y }} className={className}>
       {children}
@@ -618,7 +618,7 @@ export default function NetworkPage() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-[#020617] text-white overflow-hidden selection:bg-indigo-500/30">
+    <div ref={containerRef} className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden selection:bg-indigo-500/30">
 
       {/* Absolute Background Decor with Cinematic Scroll Parallax */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -636,7 +636,7 @@ export default function NetworkPage() {
 
           {/* Left Text Content */}
           <div className="w-full lg:w-1/2 space-y-6 z-20 text-center lg:text-left pt-12 lg:pt-0">
-            <h3 aria-label="A Strong Network Built for Global Logistics" className="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.1]">
+            <h3 aria-label="A Strong Network Built for Global Logistics" className="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.1]">
               {"A Strong Network".split(" ").map((word, i) => (
                 <motion.span
                   aria-hidden="true"
@@ -668,7 +668,7 @@ export default function NetworkPage() {
                     delay: 0.4 + (3 + i) * 0.08,
                     ease: [0.22, 1, 0.36, 1]
                   }}
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600"
                 >
                   {word}
                 </motion.span>
@@ -680,14 +680,38 @@ export default function NetworkPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-zinc-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
+              className="text-slate-600 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
               With a well-established operational base in India and an expanding global logistics network, MAS Logistics combines industry experience, trusted partnerships, and proven systems to ensure consistent service delivery and supply chain efficiency
             </motion.p>
           </div>
 
           {/* Right Globe */}
-          <div className="w-full lg:w-1/2 absolute lg:static right-0 top-1/4 lg:top-auto z-10 opacity-30 lg:opacity-100 mix-blend-screen lg:mix-blend-normal">
+          <div className="w-full lg:w-1/2 absolute lg:relative right-0 top-1/4 lg:top-auto z-10 opacity-30 lg:opacity-100 mix-blend-screen lg:mix-blend-normal">
+
+            {/* Floating Network Stats Overlay */}
+            <div className="hidden lg:flex absolute -left-32 xl:-left-52 top-1/2 -translate-y-1/2 -mt-15 flex-col gap-14 z-40 w-64">
+              {NETWORK_STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + i * 0.15 }}
+                  className={cn(
+                    "px-4 py-2 flex flex-col items-center justify-center w-full",
+                    i === 0 ? "ml-8" : i === 1 ? "-ml-12" : "ml-8"
+                  )}
+                >
+                  <div className="text-4xl font-extrabold text-slate-900 flex items-baseline justify-center gap-1">
+                    <Counter to={stat.value} />
+                    <span className="text-blue-500">{stat.suffix}</span>
+                  </div>
+                  <div className="text-[10px] uppercase text-slate-500 font-bold tracking-widest mt-2 text-center">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -699,113 +723,93 @@ export default function NetworkPage() {
             </motion.div>
           </div>
         </div>
-
-        {/* Floating Metrics Bar at Bottom */}
-        <div className="absolute bottom-0 left-0 w-full border-t border-white/5 bg-black/40 backdrop-blur-xl z-30 hidden md:block">
-          <div className="max-w-7xl mx-auto px-6 py-6 flex justify-center items-center gap-24 lg:gap-36">
-            {NETWORK_STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl md:text-4xl font-extrabold text-white flex items-baseline justify-center gap-1">
-                  <Counter to={stat.value} />
-                  <span className="text-blue-400">{stat.suffix}</span>
-                </div>
-                <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 mt-2">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Subsequent Content Sections */}
       <div className="relative z-30 w-full pb-20">
 
         {/* ── SECTION 1: GLOBAL REACH MAP ── */}
-        <section className="relative w-full overflow-hidden border-y border-white/5 bg-[#020617]">
-          {/* Background Video */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover opacity-80"
-              src="/images_frontend/CSS_object-cover_property_scales…_202605221545.webm"
-            />
-            {/* Minimal gradient overlays for maximum brightness while keeping text readable */}
-            <div className="absolute inset-0 bg-neutral-950/20 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/90 via-transparent to-[#020617]/30" />
-          </div>
-
-          <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 py-24 space-y-10">
-            <div className="flex items-center gap-3">
-              <div className="h-px w-8 bg-black" />
-              <span className="text-[10px] font-bold tracking-[0.4em] text-black uppercase">Global Reach Map</span>
+        {false && (
+          <section className="relative w-full overflow-hidden border-y border-white/5 bg-[#020617]">
+            {/* Background Video */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover opacity-80"
+                src="/images_frontend/CSS_object-cover_property_scales…_202605221545.webm"
+              />
+              {/* Minimal gradient overlays for maximum brightness while keeping text readable */}
+              <div className="absolute inset-0 bg-neutral-950/20 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/90 via-transparent to-[#020617]/30" />
             </div>
-            <h2 aria-label="Connected Across Global Trade Routes" className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-              {"Connected Across".split(" ").map((word, i) => (
-                <motion.span
-                  aria-hidden="true"
-                  key={`s1w1-${i}`}
-                  style={{ display: "inline-block", marginRight: "0.25em" }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-              {"Global Trade Routes".split(" ").map((word, i) => (
-                <motion.span
-                  aria-hidden="true"
-                  key={`s1w2-${i}`}
-                  style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-black via-neutral-900 to-blue-800 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h2>
-            <ScrollRevealText delay={0.1}>
-              <p className="text-zinc-400 text-base md:text-lg max-w-2xl font-light leading-relaxed">
-                Our international network enables seamless cargo movement and supply chain coordination across key global markets.
-              </p>
-            </ScrollRevealText>
 
-            <div className="relative z-10 flex flex-wrap gap-2 md:gap-3 pt-6">
-              {HUBS.filter(h => h.id !== "chennai").map((hub, i) => (
-                <motion.div
-                  key={hub.id}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: i * 0.02 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:border-blue-800/60 hover:bg-blue-900/20 transition-all duration-300"
-                >
-                  <span className="text-xs md:text-sm font-medium tracking-wide text-zinc-400 group-hover:text-blue-400 transition-colors duration-300">
-                    {hub.label}
-                  </span>
-                </motion.div>
-              ))}
+            <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 py-24 space-y-10">
+              <div className="flex items-center gap-3">
+                <div className="h-px w-8 bg-black" />
+                <span className="text-[10px] font-bold tracking-[0.4em] text-black uppercase">Global Reach Map</span>
+              </div>
+              <h2 aria-label="Connected Across Global Trade Routes" className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+                {"Connected Across".split(" ").map((word, i) => (
+                  <motion.span
+                    aria-hidden="true"
+                    key={`s1w1-${i}`}
+                    style={{ display: "inline-block", marginRight: "0.25em" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                {"Global Trade Routes".split(" ").map((word, i) => (
+                  <motion.span
+                    aria-hidden="true"
+                    key={`s1w2-${i}`}
+                    style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-black via-neutral-900 to-blue-800 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </h2>
+              <ScrollRevealText delay={0.1}>
+                <p className="text-zinc-400 text-base md:text-lg max-w-2xl font-light leading-relaxed">
+                  Our international network enables seamless cargo movement and supply chain coordination across key global markets.
+                </p>
+              </ScrollRevealText>
+
+              <div className="relative z-10 flex flex-wrap gap-2 md:gap-3 pt-6">
+                {HUBS.filter(h => h.id !== "chennai").map((hub, i) => (
+                  <motion.div
+                    key={hub.id}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: i * 0.02 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:border-blue-800/60 hover:bg-blue-900/20 transition-all duration-300"
+                  >
+                    <span className="text-xs md:text-sm font-medium tracking-wide text-zinc-400 group-hover:text-blue-400 transition-colors duration-300">
+                      {hub.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ── SECTION 2: OUR WORKING APPROACH ── */}
-        <section className="w-full bg-[#E5E4E2] py-24 md:py-32 shadow-[0_-20px_50px_-15px_rgba(0,0,0,0.3)]">
-          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-12">
+        <section className="w-full bg-[#E5E4E2] py-10 md:py-14 shadow-[0_-20px_50px_-15px_rgba(0,0,0,0.3)]">
+          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-8">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <div className="h-px w-8 bg-blue-600" />
@@ -843,7 +847,7 @@ export default function NetworkPage() {
             </div>
 
             {/* Elastic accordion container wrapper */}
-            <div className="flex flex-col md:flex-row gap-4 w-full h-[600px] md:h-[550px]">
+            <div className="flex flex-col md:flex-row gap-4 w-full h-[500px] md:h-[450px]">
               {WORKFLOW_STEPS.map((step, i) => (
                 <motion.div
                   key={step.num}
@@ -859,7 +863,7 @@ export default function NetworkPage() {
                 >
                   {/* ── LOGO BACKGROUND IMAGE FILL ── */}
                   <ParallaxImage src={STEP_IMAGES[i]} active={activeStep === i} isMobile={isMobile} />
-                  
+
                   <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
                     {/* Dark gradient overlay layers ensuring clear typography contrast over the image */}
                     <div className="absolute inset-0 bg-neutral-950/20 mix-blend-multiply" />
@@ -942,7 +946,7 @@ export default function NetworkPage() {
                         <item.icon size={22} strokeWidth={1.5} />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold text-lg tracking-tight mb-1 transition-colors duration-500">{item.label}</h4>
+                        <h4 className="text-slate-900 font-bold text-lg tracking-tight mb-1 transition-colors duration-500">{item.label}</h4>
                         <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold transition-colors duration-500">{item.detail}</p>
                       </div>
                     </div>

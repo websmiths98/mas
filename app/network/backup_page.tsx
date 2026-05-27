@@ -73,9 +73,9 @@ const ROUTES = HUBS.filter(hub => hub.id !== "chennai").map(hub => ({
 }));
 
 const NETWORK_STATS = [
-  { value: 80, suffix: "+", label: "Global Destinations" },
   { value: 58, suffix: "+", label: "Operational Members" },
   { value: 270, suffix: "+", label: "Group Strength" },
+  { value: 80, suffix: "+", label: "Global Destinations" },
 ];
 
 const SIMULATED_SHIPMENTS = [
@@ -118,12 +118,10 @@ function TelemetryFeed() {
       </div>
       <div className="relative flex-1 flex flex-col gap-1.5">
         {events.map((event, index) => (
-          <motion.div
-            key={`${event.id}-${index}`}
-            initial={{ opacity: 0, x: -5 }}
-            animate={{ opacity: index === 0 ? 1 : index === 1 ? 0.5 : 0.25, x: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col py-1 text-[10px] border-b border-white/[0.02]"
+          <div
+            key={event.id}
+            style={{ opacity: index === 0 ? 1 : index === 1 ? 0.5 : 0.25 }}
+            className="flex flex-col py-1 text-[10px] border-b border-white/[0.02] transition-opacity duration-300"
           >
             <div className="flex items-center justify-between">
               <span className="text-zinc-400 font-bold uppercase tracking-tight">
@@ -144,7 +142,7 @@ function TelemetryFeed() {
                 {event.status.toUpperCase()}
               </span>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
@@ -388,24 +386,16 @@ function Counter({ to }: { to: number }) {
 }
 
 function ScrollRevealText({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.9", "end 0.1"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.98, 1, 1, 0.98]);
-  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [30, 0, 0, -30]);
-  const blur = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["blur(12px)", "blur(0px)", "blur(0px)", "blur(12px)"]);
-
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40, filter: "blur(15px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      style={{ opacity, scale, y, filter: blur }}
-      transition={{ duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 0.8,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className={className}
     >
       {children}
@@ -470,14 +460,14 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
       height: 1000,
       phi: 3.90,
       theta: 0.50,
-      dark: 0.98,
-      diffuse: 3.0,
-      scale: 0.75,
-      mapSamples: 25000,
-      mapBrightness: 8.0,
-      baseColor: [0.05, 0.1, 0.25],
+      dark: 1.0,
+      diffuse: 1.2,
+      scale: 0.83,
+      mapSamples: 30000,
+      mapBrightness: 12.0,
+      baseColor: [0.02, 0.05, 0.15],
       markerColor: [0.8, 0.4, 1.0],
-      glowColor: [0.1, 0.3, 0.8],
+      glowColor: [0.2, 0.5, 1.0],
       offset: isMobile ? [0, 150] : [100, 0],
       markers,
       arcs,
@@ -519,7 +509,7 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
     <div ref={containerRef} className="relative aspect-square w-full select-none">
       <canvas
         ref={canvasRef}
-        className="h-full w-full cursor-grab touch-none"
+        className="h-full w-full cursor-grab touch-none drop-shadow-[0_0_60px_rgba(59,130,246,0.25)]"
         onPointerDown={(e) => {
           dragging.current = true;
           lastX.current = e.clientX;
@@ -563,6 +553,55 @@ function Globe({ isMobile }: { isMobile?: boolean }) {
 }
 
 // ============================================================================
+// SECTION PARALLAX IMAGE COMPONENT
+// ============================================================================
+
+function ParallaxImage({ src, active, isMobile }: { src: string; active: boolean; isMobile: boolean }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  return (
+    <div ref={ref} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-slate-950">
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        style={{ y: isMobile ? "0%" : y }}
+      >
+        <Image
+          src={src}
+          alt="Workflow Background"
+          fill
+          sizes="(max-w-768px) 100vw, 50vw"
+          priority
+          className={cn(
+            "object-cover object-center transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            active ? "scale-[1.15] opacity-80 blur-0" : "scale-[1.05] opacity-20 blur-[2px]"
+          )}
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+function ParallaxSection({ children, speed = 1, className, isMobile }: { children: React.ReactNode, speed?: number, className?: string, isMobile?: boolean }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [100 * speed, -100 * speed]);
+
+  return (
+    <motion.div ref={ref} style={{ y: isMobile ? 0 : y }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+// ============================================================================
 // MAIN PAGE COMPONENT
 // ============================================================================
 
@@ -581,10 +620,14 @@ export default function NetworkPage() {
   return (
     <div ref={containerRef} className="relative min-h-screen bg-[#020617] text-white overflow-hidden selection:bg-indigo-500/30">
 
-      {/* Absolute Background Decor */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px]" />
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
+      {/* Absolute Background Decor with Cinematic Scroll Parallax */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <ParallaxSection speed={0.4} isMobile={isMobile} className="absolute w-full h-full">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px]" />
+        </ParallaxSection>
+        <ParallaxSection speed={-0.2} isMobile={isMobile} className="absolute w-full h-full">
+          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
+        </ParallaxSection>
       </div>
 
       {/* Hero Section */}
@@ -593,21 +636,49 @@ export default function NetworkPage() {
 
           {/* Left Text Content */}
           <div className="w-full lg:w-1/2 space-y-6 z-20 text-center lg:text-left pt-12 lg:pt-0">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.1]"
-            >
-              A Strong Network <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
-                Built for Global Logistics
-              </span>
-            </motion.h3>
+            <h3 aria-label="A Strong Network Built for Global Logistics" className="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.1]">
+              {"A Strong Network".split(" ").map((word, i) => (
+                <motion.span
+                  aria-hidden="true"
+                  key={`w1-${i}`}
+                  style={{ display: "inline-block", marginRight: "0.25em" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.4 + i * 0.08,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+              <br className="hidden lg:block" />
+              {"Built for Global Logistics".split(" ").map((word, i) => (
+                <motion.span
+                  aria-hidden="true"
+                  key={`w2-${i}`}
+                  style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.4 + (3 + i) * 0.08,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h3>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="text-zinc-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
@@ -616,116 +687,167 @@ export default function NetworkPage() {
           </div>
 
           {/* Right Globe */}
-          <div className="w-full lg:w-1/2 absolute lg:static right-0 top-1/4 lg:top-auto z-10 opacity-30 lg:opacity-100 mix-blend-screen lg:mix-blend-normal">
+          <div className="w-full lg:w-1/2 absolute lg:relative right-0 top-1/4 lg:top-auto z-10 opacity-30 lg:opacity-100 mix-blend-screen lg:mix-blend-normal">
+
+            {/* Floating Network Stats Overlay */}
+            <div className="hidden lg:flex absolute -left-32 xl:-left-52 top-1/2 -translate-y-1/2 -mt-15 flex-col gap-14 z-40 w-64">
+              {NETWORK_STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + i * 0.15 }}
+                  className={cn(
+                    "px-4 py-2 flex flex-col items-center justify-center w-full",
+                    i === 0 ? "ml-8" : i === 1 ? "-ml-12" : "ml-8"
+                  )}
+                >
+                  <div className="text-4xl font-extrabold text-white flex items-baseline justify-center gap-1">
+                    <Counter to={stat.value} />
+                    <span className="text-blue-500">{stat.suffix}</span>
+                  </div>
+                  <div className="text-[10px] uppercase text-zinc-400 font-bold tracking-widest mt-2 text-center">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
               className="w-[150%] max-w-[900px] -ml-[25%] lg:-ml-[10%] lg:w-[130%]"
             >
               <Globe isMobile={isMobile} />
             </motion.div>
           </div>
         </div>
-
-        {/* Floating Metrics Bar at Bottom */}
-        <div className="absolute bottom-0 left-0 w-full border-t border-white/5 bg-black/40 backdrop-blur-xl z-30 hidden md:block">
-          <div className="max-w-7xl mx-auto px-6 py-6 flex justify-center items-center gap-24 lg:gap-36">
-            {NETWORK_STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl md:text-4xl font-extrabold text-white flex items-baseline justify-center gap-1">
-                  <Counter to={stat.value} />
-                  <span className="text-blue-400">{stat.suffix}</span>
-                </div>
-                <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 mt-2">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Subsequent Content Sections */}
-      <div className="relative z-30 w-full pb-20 space-y-40">
+      <div className="relative z-30 w-full pb-20">
 
         {/* ── SECTION 1: GLOBAL REACH MAP ── */}
-        <section className="relative w-full overflow-hidden border-y border-white/5 bg-[#020617]">
-          {/* Background Video */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover opacity-80"
-              src="/images_frontend/CSS_object-cover_property_scales…_202605221545.webm"
-            />
-            {/* Minimal gradient overlays for maximum brightness while keeping text readable */}
-            <div className="absolute inset-0 bg-neutral-950/20 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/90 via-[#020617]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/90 via-transparent to-[#020617]/30" />
-          </div>
-
-          <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 py-24 space-y-10">
-            <div className="flex items-center gap-3">
-              <div className="h-px w-8 bg-purple-500" />
-              <span className="text-[10px] font-bold tracking-[0.4em] text-purple-500 uppercase">Global Reach Map</span>
+        {false && (
+          <section className="relative w-full overflow-hidden border-y border-white/5 bg-[#020617]">
+            {/* Background Video */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover opacity-80"
+                src="/images_frontend/CSS_object-cover_property_scales…_202605221545.webm"
+              />
+              {/* Minimal gradient overlays for maximum brightness while keeping text readable */}
+              <div className="absolute inset-0 bg-neutral-950/20 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/90 via-transparent to-[#020617]/30" />
             </div>
-            <ScrollRevealText>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-                Connected Across{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Global Trade Routes</span>
+
+            <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 py-24 space-y-10">
+              <div className="flex items-center gap-3">
+                <div className="h-px w-8 bg-black" />
+                <span className="text-[10px] font-bold tracking-[0.4em] text-black uppercase">Global Reach Map</span>
+              </div>
+              <h2 aria-label="Connected Across Global Trade Routes" className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+                {"Connected Across".split(" ").map((word, i) => (
+                  <motion.span
+                    aria-hidden="true"
+                    key={`s1w1-${i}`}
+                    style={{ display: "inline-block", marginRight: "0.25em" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                {"Global Trade Routes".split(" ").map((word, i) => (
+                  <motion.span
+                    aria-hidden="true"
+                    key={`s1w2-${i}`}
+                    style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-black via-neutral-900 to-blue-800 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </h2>
-            </ScrollRevealText>
-            <ScrollRevealText delay={0.1}>
-              <p className="text-zinc-400 text-base md:text-lg max-w-2xl font-light leading-relaxed">
-                Our international network enables seamless cargo movement and supply chain coordination across key global markets.
-              </p>
-            </ScrollRevealText>
-          </div>
+              <ScrollRevealText delay={0.1}>
+                <p className="text-zinc-400 text-base md:text-lg max-w-2xl font-light leading-relaxed">
+                  Our international network enables seamless cargo movement and supply chain coordination across key global markets.
+                </p>
+              </ScrollRevealText>
 
-          <div className="relative z-10 flex flex-wrap gap-2 md:gap-3">
-            {HUBS.filter(h => h.id !== "chennai").map((hub, i) => (
-              <motion.div
-                key={hub.id}
-                initial={{ opacity: 0, scale: 0.85 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: i * 0.02 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:border-purple-500/50 hover:bg-purple-500/20 transition-all duration-300"
-              >
-                <span className="text-xs md:text-sm font-medium tracking-wide text-zinc-300 group-hover:text-purple-200 transition-colors duration-300">
-                  {hub.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+              <div className="relative z-10 flex flex-wrap gap-2 md:gap-3 pt-6">
+                {HUBS.filter(h => h.id !== "chennai").map((hub, i) => (
+                  <motion.div
+                    key={hub.id}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: i * 0.02 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:border-blue-800/60 hover:bg-blue-900/20 transition-all duration-300"
+                  >
+                    <span className="text-xs md:text-sm font-medium tracking-wide text-zinc-400 group-hover:text-blue-400 transition-colors duration-300">
+                      {hub.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
-        <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-40">
-          {/* ── SECTION 2: OUR WORKING APPROACH ── */}
-          <section className="space-y-10">
+        {/* ── SECTION 2: OUR WORKING APPROACH ── */}
+        <section className="w-full bg-[#E5E4E2] py-10 md:py-14 shadow-[0_-20px_50px_-15px_rgba(0,0,0,0.3)]">
+          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-8">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="h-px w-8 bg-blue-500" />
-                <span className="text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase">Our Working Approach</span>
+                <div className="h-px w-8 bg-blue-600" />
+                <span className="text-[10px] font-bold tracking-[0.4em] text-blue-600 uppercase">Our Working Approach</span>
               </div>
-              <ScrollRevealText>
-                <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-                  How We{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Work</span>
-                </h2>
-              </ScrollRevealText>
+              <h2 aria-label="How We Work" className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+                {"How We".split(" ").map((word, i) => (
+                  <motion.span
+                    aria-hidden="true"
+                    key={`s2w1-${i}`}
+                    style={{ display: "inline-block", marginRight: "0.25em" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                {"Work".split(" ").map((word, i) => (
+                  <motion.span
+                    aria-hidden="true"
+                    key={`s2w2-${i}`}
+                    style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </h2>
             </div>
 
             {/* Elastic accordion container wrapper */}
-            <div className="flex flex-col md:flex-row gap-4 w-full h-auto md:h-[450px]">
+            <div className="flex flex-col md:flex-row gap-4 w-full h-[500px] md:h-[450px]">
               {WORKFLOW_STEPS.map((step, i) => (
                 <motion.div
                   key={step.num}
@@ -736,24 +858,13 @@ export default function NetworkPage() {
                     "relative overflow-hidden rounded-3xl border transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer min-h-[140px] md:min-h-0",
                     activeStep === i
                       ? "flex-[8] border-blue-500/40 shadow-2xl shadow-blue-500/5"
-                      : "flex-[1] border-white/5 hover:border-white/10"
+                      : "flex-[1] border-slate-300 hover:border-slate-400"
                   )}
                 >
                   {/* ── LOGO BACKGROUND IMAGE FILL ── */}
+                  <ParallaxImage src={STEP_IMAGES[i]} active={activeStep === i} isMobile={isMobile} />
+
                   <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-                    <Image
-                      src={STEP_IMAGES[i]}
-                      alt="MAS Background Logo"
-                      fill
-                      sizes="(max-w-768px) 100vw, 50vw"
-                      priority
-                      className={cn(
-                        "object-cover object-center transition-all duration-700 ease-out",
-                        activeStep === i
-                          ? "scale-105 opacity-80 blur-0"
-                          : "scale-100 opacity-20 blur-[2px]"
-                      )}
-                    />
                     {/* Dark gradient overlay layers ensuring clear typography contrast over the image */}
                     <div className="absolute inset-0 bg-neutral-950/20 mix-blend-multiply" />
                     <div className={cn(
@@ -813,8 +924,10 @@ export default function NetworkPage() {
                 </motion.div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
+        <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-40 mt-32">
           {/* Immersive Borderless Highlights (Clean & Realistic Motion) */}
           <section className="py-14 relative overflow-hidden">
             {/* Ambient Horizontal slow-breathing lighting glow */}
@@ -822,8 +935,12 @@ export default function NetworkPage() {
 
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
               {NETWORK_HIGHLIGHTS.map((item, i) => (
-                <ScrollRevealText key={i} delay={i * 0.05}>
-                  <div className="flex flex-col justify-between h-full group">
+                <ScrollRevealText key={i} delay={i * 0.05} className="h-full">
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="relative flex flex-col justify-between h-full group p-6 -m-6 rounded-3xl hover:bg-white/[0.02] hover:shadow-[0_10px_40px_-10px_rgba(168,85,247,0.15)] transition-all duration-500"
+                  >
                     <div className="flex flex-col gap-5">
                       <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/[0.02] text-purple-400 group-hover:bg-purple-500/10 group-hover:text-purple-300 transition-all duration-500 shadow-md">
                         <item.icon size={22} strokeWidth={1.5} />
@@ -839,7 +956,7 @@ export default function NetworkPage() {
                       {i === 1 && <QualityRadar />}
                       {i === 2 && <PingMonitor />}
                     </div>
-                  </div>
+                  </motion.div>
                 </ScrollRevealText>
               ))}
             </div>

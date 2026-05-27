@@ -267,7 +267,7 @@ function MorphCarousel() {
 
     return (
         <div 
-            className="relative w-full h-[80vh] md:h-[90vh] rounded-[3rem] overflow-hidden bg-black border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] group"
+            className="relative w-full h-[650px] md:h-[750px] rounded-[3rem] overflow-hidden bg-black border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -609,7 +609,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
             </AnimatePresence>
 
             {/* Proven Track Record Section */}
-            <div className="px-4 md:px-8 max-w-[1400px] mx-auto pb-20 md:pb-32 relative z-30">
+            <div className="px-4 md:px-6 w-full max-w-[96vw] mx-auto pb-20 md:pb-32 relative z-30">
                 {/* <div className="mb-12 text-center">
                     <Reveal direction="down" delay={0.1}>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 pb-2">
