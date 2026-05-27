@@ -106,6 +106,7 @@ type StackSectionData = {
   kicker: string;
   intro?: string;
   accent: string;
+  featureClasses?: string;
   gradient: string;
   Icon: ComponentType<{ className?: string }>;
   imageBgSrc?: StaticImageData;
@@ -207,12 +208,9 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
                         {item.title}
                       </h3>
                     </div>
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-50 text-slate-500 ring-1 ring-slate-200">
-                      <ArrowUpRight className="h-5 w-5" />
-                    </span>
                   </div>
 
-                  <p className="line-clamp-3 text-sm font-medium leading-6 text-slate-600">
+                  <p className="text-sm font-medium leading-6 text-slate-600">
                     {item.detail}
                   </p>
                 </div>
@@ -221,7 +219,7 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
                   {(item.features ?? ["Managed network", "Secure handling", "Live coordination", "On-time movement"]).map((feature) => (
                     <span
                       key={feature}
-                      className="rounded-full bg-slate-50 px-3 py-2 text-[11px] font-bold text-slate-600 ring-1 ring-slate-100"
+                      className={`rounded-full px-3 py-2 text-[11px] font-bold ring-1 ${section.featureClasses ?? "bg-slate-50 text-slate-600 ring-slate-100"}`}
                     >
                       {feature}
                     </span>
@@ -360,9 +358,10 @@ const STACK_SECTIONS: StackSectionData[] = [
     id: "domestic",
     counter: "1/3",
     kicker: "Domestic Cargo",
-    title: "Unified domestic shipping",
+    title: "Our Core Logistics Services",
     Icon: IconBox,
     accent: "text-[#1e3a8a]",
+    featureClasses: "bg-blue-50 text-blue-700 ring-blue-200/60",
     gradient: "bg-[linear-gradient(135deg,#93c5fd_0%,#60a5fa_50%,#3b82f6_100%)]",
     imageBgSrc: bgDomestic,
     items: [
@@ -370,7 +369,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Transport Logistics",
         eyebrow: "Surface Network",
         detail: (
-          <>We provide reliable transport logistics solutions supported by a<span className="font-bold text-blue-600"> Our transportation services are designed to ensure the smooth movement of cargo across locations</span>while maintaining safety, consistency, and timely delivery</>
+          <>We provide reliable transport logistics solutions supported by a strong carrier network and efficient route planning. Our transportation services are designed to ensure the <span className="font-bold text-blue-600">smooth movement of cargo across locations</span> while maintaining safety, consistency, and timely delivery.</>
         ),
         imageSrc: imageTruck,
         features: ["Route planning", "Carrier network", "Cargo safety", "Timed dispatch"],
@@ -379,7 +378,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Procurement Logistics",
         eyebrow: "Supplier Flow",
         detail: (
-          <>Seamless movement of goods from suppliers to destinations with <span className="font-bold text-blue-600">coordinated procurement</span> and <span className="font-bold text-blue-600">internal transportation</span>.</>
+          <>Our procurement logistics solutions focus on managing the <span className="font-bold text-blue-600">seamless flow of goods</span> from suppliers to final destinations. We oversee planning, execution, and monitoring of logistics activities to ensure smooth coordination across <span className="font-bold text-blue-600">procurement, warehousing, storage, and internal transportation</span>.</>
         ),
         imageSrc: imagePort,
         features: ["Supplier pickup", "Storage control", "Flow planning", "Live tracking"],
@@ -388,7 +387,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Outbound Logistics",
         eyebrow: "Market Delivery",
         detail: (
-          <>Warehouse dispatch to final market delivery managed with <span className="font-bold text-blue-600">reliability</span>, <span className="font-bold text-blue-600">operational control</span>, and timely movement.</>
+          <>We manage outbound logistics with a strong focus on <span className="font-bold text-blue-600">reliability, timely delivery, and operational control</span>. From warehouse dispatch to final market delivery, we ensure finished goods reach their intended destinations efficiently and without unnecessary delays.</>
         ),
         imageSrc: imageWarehouse,
         features: ["Dispatch control", "Final delivery", "SLA focus", "Proof updates"],
@@ -399,31 +398,32 @@ const STACK_SECTIONS: StackSectionData[] = [
     id: "global",
     counter: "2/3",
     kicker: "Global Cargo",
-    title: "Freight & supply chain solutions",
+    title: "Freight & Supply Chain Solutions",
     Icon: IconGlobal,
     accent: "text-[#064e3b]",
+    featureClasses: "bg-emerald-50 text-emerald-700 ring-emerald-200/60",
     gradient: "bg-[linear-gradient(135deg,#6ee7b7_0%,#34d399_50%,#10b981_100%)]",
     imageBgSrc: bgGlobal,
     intro:
-      "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution.",
+      "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution, helping businesses manage the movement of goods with greater control and confidence. From international freight forwarding to warehousing and specialized cargo handling, we deliver solutions tailored to meet diverse logistics and supply chain requirements.",
     items: [
       {
         title: "Air Freight",
         eyebrow: "Time Critical",
         detail: (
-          <>Air freight for <span className="font-bold text-emerald-600">time-sensitive</span> and <span className="font-bold text-emerald-600">high-priority shipments</span> through global carrier partnerships and coordinated handling.</>
+          <>Our air freight services are designed to support <span className="font-bold text-emerald-600">time-sensitive and high-priority shipments</span> across international markets. Through strong partnerships with leading global carriers, we ensure <span className="font-bold text-emerald-600">fast, secure, and reliable cargo movement</span> with smooth coordination at every stage. Whether it is urgent deliveries or scheduled freight operations, we focus on maintaining speed, accuracy, and operational efficiency.</>
         ),
         imageSrc: imageAir,
-        features: ["Express freight", "Global carriers", "Secure handling", "Priority lanes"],
+        features: ["Priority & express shipments", "Global carrier network", "Secure cargo handling", "Time-critical delivery support"],
       },
       {
         title: "Sea Freight",
         eyebrow: "Ocean Network",
         detail: (
-          <>Dependable sea freight solutions for <span className="font-bold text-emerald-600">FCL and LCL cargo</span> with trusted shipping partners and <span className="font-bold text-emerald-600">established port networks</span>.</>
+          <>We offer dependable sea freight solutions that combine <span className="font-bold text-emerald-600">flexibility, cost efficiency, and global connectivity</span>. Whether handling Full Container Load (FCL) or Less than Container Load (LCL) shipments, our team ensures smooth cargo movement through trusted shipping partners and established port networks. Our focus remains on <span className="font-bold text-emerald-600">timely coordination, shipment visibility, and reliable delivery</span> across international trade routes.</>
         ),
         imageSrc: imageSea,
-        features: ["FCL / LCL", "Port network", "Cost routing", "Shipment visibility"],
+        features: ["FCL and LCL shipments", "Competitive global routing", "Strong port connectivity", "End-to-end shipment visibility"],
       },
     ],
   },
@@ -434,6 +434,7 @@ const STACK_SECTIONS: StackSectionData[] = [
     title: "Advanced warehousing & ODC fulfillment",
     Icon: IconTrendingUp,
     accent: "text-[#78350f]",
+    featureClasses: "bg-amber-50 text-amber-700 ring-amber-200/60",
     gradient: "bg-[linear-gradient(135deg,#fcd34d_0%,#fbbf24_50%,#f59e0b_100%)]",
     imageBgSrc: bgFulfillment,
     items: [
@@ -441,19 +442,19 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Warehousing",
         eyebrow: "Inventory Control",
         detail: (
-          <>Scalable warehousing and distribution solutions that support <span className="font-bold text-amber-600">efficient inventory management</span> and <span className="font-bold text-amber-600">smooth dispatch operations</span>.</>
+          <>Our warehousing and distribution solutions are designed to support <span className="font-bold text-amber-600">efficient inventory management and smooth supply chain operations</span>. With scalable warehousing capabilities and structured storage systems, we help businesses <span className="font-bold text-amber-600">improve operational efficiency, streamline dispatch activities</span>, and reduce logistics-related costs.</>
         ),
         imageSrc: imageWarehouse,
-        features: ["Inventory support", "Dispatch handling", "Scalable storage", "Cost control"],
+        features: ["Inventory management support", "Distribution and dispatch handling", "Scalable storage solutions", "Cost-efficient operations"],
       },
       {
         title: "Project / ODC Cargo",
         eyebrow: "Heavy Lift",
         detail: (
-          <>Specialized handling for <span className="font-bold text-amber-600">oversized, heavy-lift</span>, and complex cargo with <span className="font-bold text-amber-600">precision planning</span> and careful execution.</>
+          <>MAS Logistics specializes in handling <span className="font-bold text-amber-600">oversized, heavy-lift, and complex cargo</span> that demands precision planning and specialized logistics expertise. Our project and ODC cargo services are carefully designed to <span className="font-bold text-amber-600">manage critical shipments safely and efficiently</span>, ensuring smooth coordination from planning to execution and final delivery.</>
         ),
         imageSrc: imageODC,
-        features: ["Heavy cargo", "Route planning", "Equipment support", "Project execution"],
+        features: ["Heavy and oversized cargo handling", "Route planning and coordination", "Specialized equipment support", "End-to-end project execution"],
       },
     ],
   },
@@ -489,7 +490,7 @@ export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: bool
             Built to Simplify Global Logistics Operations
           </h1>
           <p className="mt-6 max-w-7xl text-lg font-medium leading-9 text-slate-600 lg:text-xl">
-            At MAS Logistics, we provide structured and dependable logistics solutions that support businesses across every stage of the supply chain. From transportation and procurement to warehousing and distribution, our services are designed to ensure smooth cargo movement, operational efficiency, and reliable global connectivity. With a strong focus on coordinated execution and timely delivery, we help businesses manage logistics operations with greater control, visibility, and consistency
+            At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems.
           </p>
         </section>
 

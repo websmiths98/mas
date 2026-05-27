@@ -16,7 +16,7 @@ const NAV_LINKS = [
   { name: "Network", href: "/#section-network" },
   { name: "Industries", href: "/#section-industry" },
   { name: "About us", href: "/#section-about" },
-  { name: "FAQ", href: "/#section-FAQ" },
+  // { name: "FAQ", href: "/#section-FAQ" },
 ];
 
 export default function Home() {
@@ -63,9 +63,9 @@ export default function Home() {
         <AboutPage isEmbedded={true} />
       </div>
 
-      <div id="section-review" className="w-full relative z-10">
+      {/* <div id="section-review" className="w-full relative z-10">
         <ReviewPage />
-      </div>
+      </div> */}
 
       <div id="section-FAQ" className="w-full relative z-10">
         <FAQPage isEmbedded={true} />

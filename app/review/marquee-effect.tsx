@@ -21,7 +21,7 @@ export function MarqueeEffect({
   ...props
 }: MarqueeEffectProps) {
   const duration = speed;
-  
+
   return (
     <div
       className={cn("flex overflow-hidden relative w-full", className)}

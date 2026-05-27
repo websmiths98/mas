@@ -5,14 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import masIcon from "@/images_frontend/mas_without_wording.png";
 
 const NAV_LINKS = [
-  { name: "Home", href: "/" },
-  { name: "Services", href: "/#section-services" },
-  { name: "Network", href: "/#section-network" },
-  { name: "Industries", href: "/#section-industry" },
-  { name: "About us", href: "/#section-about" },
-//   { name: "FAQ", href: "/#section-FAQ" },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/#section-services" },
+    { name: "Network", href: "/#section-network" },
+    { name: "Industries", href: "/#section-industry" },
+    { name: "About us", href: "/#section-about" },
+    //   { name: "FAQ", href: "/#section-FAQ" },
 ];
 
 interface FAQItem {
@@ -49,142 +50,162 @@ const DEFAULT_ITEMS: FAQItem[] = [
     },
 ];
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 60 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1]
+        }
+    },
+};
+
 export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
     accentColor = "#ffffff",
     items = DEFAULT_ITEMS,
     heading = "FAQ",
 }) => {
-    const [active, setActive] = useState<number | null>(null);
-    const [hovered, setHovered] = useState<number | null>(null);
+    const [active, setActive] = useState<number | null>(0);
 
     return (
-        <div
-            className="w-full max-w-2xl rounded-2xl p-8"
-            style={{ background: "#0a0a0b" }}
-        >
-            {/* Big editorial heading */}
-            <h2
-                className="font-black leading-none mb-10"
-                style={{
-                    fontSize: "clamp(4rem, 8vw, 6rem)",
-                    color: "#ffffff",
-                    letterSpacing: "-0.04em",
-                }}
-            >
+        <div className="w-full relative z-10">
+            {/* Ambient Background layer */}
+            <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden rounded-3xl">
+                <motion.div
+                    animate={{ y: [0, -40, 0], opacity: [0.1, 0.3, 0.1] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-20 -left-10 w-96 h-96 bg-zinc-800 rounded-full blur-[120px]"
+                />
+            </div>
+
+            <h2 className="text-[#e5e4e2] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-8 sm:mb-12 uppercase text-center md:text-left" style={{ WebkitTextStroke: "1px #e5e4e2" }}>
                 {heading}
             </h2>
 
-            {/* Items */}
-            <div>
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-10%" }}
+            >
                 {items.map((item, i) => {
                     const isActive = active === i;
-                    const isHovered = hovered === i;
+
                     return (
-                        <div
+                        <motion.div
                             key={i}
-                            className="border-t"
-                            style={{ borderColor: "#1f1f22" }}
+                            variants={itemVariants}
+                            className="w-full mb-4 sm:mb-6"
+                            onMouseEnter={() => setActive(i)}
+                            onMouseLeave={() => setActive(null)}
                         >
-                            <button
-                                onClick={() => setActive(isActive ? null : i)}
-                                onMouseEnter={() => setHovered(i)}
-                                onMouseLeave={() => setHovered(null)}
-                                className="w-full flex items-center justify-between py-5 text-left"
+                            {/* Question Pill */}
+                            <motion.button
+                                className="w-full flex items-center justify-between gap-4 p-4 sm:p-6 bg-[#0a0a0b] hover:bg-[#1a1a1c] border border-[#2a2a2c] rounded-[2rem] transition-colors shadow-xl group"
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.98 }}
                             >
-                                <span
-                                    className="text-sm font-semibold pr-6 leading-snug transition-colors duration-200"
-                                    style={{
-                                        color: isActive ? "#ffffff" : isHovered ? "#e4e4e7" : "#71717a",
-                                    }}
-                                >
+                                <span className="text-[#e5e4e2] font-bold text-lg sm:text-xl lg:text-2xl text-left tracking-tight leading-tight">
                                     {item.question}
                                 </span>
-                                <motion.div
-                                    animate={{ rotate: isActive ? 45 : 0 }}
-                                    transition={{ duration: 0.22, ease: "easeInOut" }}
-                                    className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
-                                    style={{
-                                        background: isActive ? accentColor : "#1a1a1e",
-                                        border: `1px solid ${isActive ? accentColor : "#2a2a2e"}`,
-                                        transition: "background 0.2s, border-color 0.2s",
-                                    }}
-                                >
-                                    <span
-                                        className="text-sm font-bold leading-none"
-                                        style={{ color: isActive ? "#000000" : "#52525b" }}
-                                    >
-                                        +
-                                    </span>
-                                </motion.div>
-                            </button>
+                            </motion.button>
 
-                            <AnimatePresence>
+                            {/* Answer Card */}
+                            <AnimatePresence mode="wait">
                                 {isActive && (
                                     <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.26, ease: [0.4, 0, 0.2, 1] }}
-                                        className="overflow-hidden"
+                                        initial={{ opacity: 0, y: 20, scale: 0.96, rotate: -0.4 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+                                        exit={{ opacity: 0, y: -10, scale: 0.98, transition: { duration: 0.2 } }}
+                                        transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                                        className="relative mt-3 ml-4 sm:ml-12 w-[calc(100%-1rem)] sm:w-[calc(100%-3rem)]"
                                     >
-                                        <div className="pb-5 pr-12">
-                                            <p className="text-sm leading-relaxed" style={{ color: "#71717a" }}>
+                                        <div className="bg-[#e5e4e2] text-black p-6 sm:p-8 rounded-[2rem] border border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] relative z-0">
+                                            <p className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">
                                                 {item.answer}
                                             </p>
-                                            <motion.button
-                                                whileHover={{ x: 3 }}
-                                                className="mt-3 text-xs font-semibold flex items-center gap-1.5 transition-opacity hover:opacity-70"
-                                                style={{ color: "#52525b" }}
-                                            >
-                                                Read more <span>→</span>
-                                            </motion.button>
                                         </div>
+
+                                        {/* Detached Rotating Badge */}
+                                        <motion.div
+                                            animate={{ rotate: [0, 10, -10, 0] }}
+                                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                            className="absolute -top-4 -right-4 w-14 h-14 bg-[#e5e4e2] rounded-full flex items-center justify-center border-[3px] border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] z-10 overflow-hidden"
+                                        >
+                                            <Image src={masIcon} alt="Icon" className="w-[65%] h-[65%] object-contain scale-125 translate-x-0.5" />
+                                        </motion.div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </div>
+                        </motion.div>
                     );
                 })}
-                <div className="border-t" style={{ borderColor: "#1f1f22" }} />
-            </div>
+            </motion.div>
         </div>
     );
 };
 
+import Testimonials from "@/app/review/page";
+
 export default function AccordionFAQBoldPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
     return (
-        <main className="w-full relative overflow-x-hidden text-gray-900" style={{ background: "#0a0a0b" }}>
+        <main className="w-full relative overflow-x-clip text-gray-900" style={{ background: "#0a0a0b" }}>
             {/* ── Fixed Header Container ── */}
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
-                <AppleGlassNav 
-                    items={NAV_LINKS} 
-                    theme="dark"
-                    logo={
-                        <Link href="/" className="flex items-center">
-                            <Image
-                                src="/mas_logo.webp"
-                                alt="Logo"
-                                width={200}
-                                height={50}
-                                className="h-9 w-30 object-contain transform scale-225 origin-centre" 
-                                priority
-                            />
-                        </Link>
-                    }
-                />
-            </div>
+                    <AppleGlassNav
+                        items={NAV_LINKS}
+                        theme="dark"
+                        logo={
+                            <Link href="/" className="flex items-center">
+                                <Image
+                                    src="/mas_logo.webp"
+                                    alt="Logo"
+                                    width={200}
+                                    height={50}
+                                    className="h-9 w-30 object-contain transform scale-225 origin-centre"
+                                    priority
+                                />
+                            </Link>
+                        }
+                    />
+                </div>
             )}
 
-            <div className="w-full flex flex-col items-center justify-center min-h-screen py-32 px-6 pt-40">
-                <AccordionFAQBold />
-                {!isEmbedded && (
-                    <div className="mt-12">
-                        <Link href="/" className="px-6 py-3 rounded-full text-sm font-semibold text-black bg-white hover:bg-zinc-200 transition-colors">
-                            Back to Home
-                        </Link>
+            <div className="w-full flex h-[100vh] min-h-[600px] relative border-b border-[#1f1f22]">
+                {/* Left side Testimonials show off */}
+                <div className="hidden md:block w-1/2 h-full relative z-0 overflow-hidden bg-[#202833]">
+                    {/* Inner wrapper to add padding to clear the fixed nav, without breaking the component's internal layout */}
+                    <div className="w-full h-full pt-32 pb-16 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                        <Testimonials />
                     </div>
-                )}
+                </div>
+
+                {/* Right side FAQ show off */}
+                <div className="w-full md:w-1/2 h-full flex flex-col items-center pt-24 pb-16 px-6 md:px-12 relative z-10 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <div className="w-full max-w-[900px] flex flex-col">
+                        <AccordionFAQBold />
+                        {!isEmbedded && (
+                            <div className="mt-16">
+                                <Link href="/" className="inline-block px-8 py-4 rounded-full text-base font-semibold text-black bg-white hover:bg-zinc-200 transition-colors shadow-lg">
+                                    Back to Home
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </main>
     );
