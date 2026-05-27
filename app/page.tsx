@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroSection from "./components/HeroSection";
 import ServicesPage from "./services/page";
-import NetworkPage from "./network/page";
+import NetworkPage from "./network/NetworkClient";
 import IndustryPage from "./industry/page";
 import AboutPage from "./about/page";
 import ReviewPage from "./review/page";

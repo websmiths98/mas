@@ -138,7 +138,94 @@ function PremiumTiltCard({ children, className = "", onClick }: { children: Reac
     );
 }
 
+// ─── 3D Global Logistics Network Background ────────────────────────────────
+function GlobalLogisticsNetwork3D() {
+    return (
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-[#020617]">
+            {/* Cinematic Lighting */}
+            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full mix-blend-screen" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-600/10 blur-[120px] rounded-full mix-blend-screen" />
+            <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-purple-600/15 blur-[120px] rounded-full mix-blend-screen" />
+            
+            {/* 3D Isometric Grid Plane */}
+            <motion.div 
+                initial={{ opacity: 0, rotateX: 60, translateY: 100 }}
+                animate={{ opacity: 1, rotateX: 65, translateY: 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                className="absolute w-[200vw] h-[200vh] border border-transparent"
+                style={{ 
+                    transformStyle: "preserve-3d",
+                    transformOrigin: "center 60%",
+                    backgroundImage: `
+                        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
+                    `,
+                    backgroundSize: "60px 60px",
+                }}
+            >
+                {/* Animated Transport Routes */}
+                <svg className="absolute inset-0 w-full h-full" overflow="visible">
+                    <defs>
+                        <linearGradient id="route-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
+                            <stop offset="50%" stopColor="#3b82f6" stopOpacity="1" />
+                            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+                        </linearGradient>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="8" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
 
+                    {/* Ship / Plane / Truck routes */}
+                    {[...Array(8)].map((_, i) => (
+                        <motion.path
+                            key={i}
+                            d={`M ${Math.random() * 2000} ${Math.random() * 2000} Q ${Math.random() * 2000} ${Math.random() * 2000} ${Math.random() * 2000} ${Math.random() * 2000}`}
+                            fill="none"
+                            stroke="url(#route-gradient)"
+                            strokeWidth="2"
+                            filter="url(#glow)"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ 
+                                pathLength: [0, 1, 1],
+                                opacity: [0, 1, 0],
+                                pathOffset: [0, 0, 1]
+                            }}
+                            transition={{ 
+                                duration: 8 + Math.random() * 5, 
+                                repeat: Infinity, 
+                                ease: "linear",
+                                delay: Math.random() * 5
+                            }}
+                        />
+                    ))}
+
+                    {/* Nodes / Ports */}
+                    {[...Array(15)].map((_, i) => (
+                        <motion.circle
+                            key={`node-${i}`}
+                            cx={Math.random() * 2000}
+                            cy={Math.random() * 2000}
+                            r="4"
+                            fill="#38bdf8"
+                            filter="url(#glow)"
+                            animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.5, 1] }}
+                            transition={{ duration: 2 + Math.random() * 2, repeat: Infinity }}
+                        />
+                    ))}
+                </svg>
+            </motion.div>
+            
+            {/* Fade out top edge */}
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#020617] to-transparent z-10" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#020617] to-transparent z-10" />
+        </div>
+    );
+}
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },
@@ -396,22 +483,9 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                 </div>
             )}
 
-            {/* ─── Cinematic Video Hero Section ─────────────────────────────────── */}
-            <section className="relative w-full min-h-[60vh] md:min-h-[70vh] flex flex-col items-center justify-center pt-40 pb-12 px-6 overflow-hidden">
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover opacity-60"
-                        src="/images_frontend/industry-hero.webm"
-                    />
-                    <div className="absolute inset-0 bg-[#020617]/50 mix-blend-multiply" />
-                    {/* Cinematic Gradient Fades */}
-                    <div className="absolute inset-x-0 top-0 h-[40%] bg-gradient-to-b from-[#020617] to-transparent z-10" />
-                    <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#020617] to-transparent z-10" />
-                </div>
+            {/* ─── 3D Cinematic Hero Section ─────────────────────────────────── */}
+            <section className="relative w-full min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6">
+                <GlobalLogisticsNetwork3D />
                 
                 <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
                     <Reveal direction="down">
@@ -431,15 +505,27 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                     </Reveal>
 
                     <Reveal direction="up" delay={0.2}>
-                        <p className="text-zinc-300 text-lg md:text-2xl font-light leading-relaxed max-w-3xl drop-shadow-lg mb-0">
+                        <p className="text-zinc-300 text-lg md:text-2xl font-light leading-relaxed max-w-3xl drop-shadow-lg mb-10">
                             We deliver <span className="text-white font-medium">industry-focused logistics</span> to support complex global supply chains. From transportation to customs coordination, we provide <span className="text-emerald-400 font-medium">reliable support</span> tailored to your business needs.
                         </p>
                     </Reveal>
                     
-
+                    <Reveal direction="up" delay={0.3}>
+                        <button className="px-8 py-4 bg-white text-black font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                            Explore Industries
+                        </button>
+                    </Reveal>
                 </div>
                 
-
+                {/* Scroll Indicator */}
+                <motion.div 
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                    <span className="text-xs uppercase tracking-widest text-white/50">Scroll</span>
+                    <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent" />
+                </motion.div>
             </section>
 
             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}

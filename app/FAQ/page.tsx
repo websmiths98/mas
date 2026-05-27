@@ -184,17 +184,17 @@ export default function AccordionFAQBoldPage({ isEmbedded = false }: { isEmbedde
                 </div>
             )}
 
-            <div className="w-full flex h-[100vh] min-h-[600px] relative border-b border-[#1f1f22]">
+            <div className="w-full flex min-h-[600px] relative border-b border-[#1f1f22]">
                 {/* Left side Testimonials show off */}
-                <div className="hidden md:block w-1/2 h-full relative z-0 overflow-hidden bg-[#202833]">
+                <div className="hidden md:block w-1/2 relative z-0 overflow-hidden bg-[#202833]">
                     {/* Inner wrapper to add padding to clear the fixed nav, without breaking the component's internal layout */}
-                    <div className="w-full h-full pt-32 pb-16 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <div className="w-full pt-8 pb-16">
                         <Testimonials />
                     </div>
                 </div>
 
                 {/* Right side FAQ show off */}
-                <div className="w-full md:w-1/2 h-full flex flex-col items-center pt-24 pb-16 px-6 md:px-12 relative z-10 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="w-full md:w-1/2 flex flex-col items-center pt-[5rem] lg:pt-[7rem] pb-16 px-6 md:px-12 relative z-10 overflow-x-hidden">
                     <div className="w-full max-w-[900px] flex flex-col">
                         <AccordionFAQBold />
                         {!isEmbedded && (
