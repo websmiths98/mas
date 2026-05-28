@@ -380,14 +380,9 @@ const AnimatedText = ({
     text,
     className = "text-4xl font-bold",
     animationType = "words",
-    duration = 0.6,
+    duration = 0.5,
     delay = 0,
-    staggerDelay = 0.05,
-    initialY = "100%",
-    initialOpacity = 0,
-    animateY = "0%",
-    animateOpacity = 1,
-    direction = "up"
+    staggerDelay = 0.03,
 }: AnimatedTextProps) => {
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -402,50 +397,57 @@ const AnimatedText = ({
 
     const itemVariants = {
         hidden: {
-            y: direction === "up" ? initialY : "-100%",
-            opacity: initialOpacity
+            y: "150%",
+            rotate: 5,
+            opacity: 0,
         },
         visible: {
-            y: animateY,
-            opacity: animateOpacity,
+            y: "0%",
+            rotate: 0,
+            opacity: 1,
             transition: {
-                duration: duration,
-                ease: "easeOut"
+                type: "spring",
+                damping: 20,
+                stiffness: 90,
+                duration: duration
             }
         }
-    };
-
-    const renderLetters = () => {
-        return text.split("").map((char, index) => (
-            <motion.span
-                key={`letter-${index}`}
-                variants={itemVariants}
-                className="inline-block"
-                style={{ whiteSpace: char === " " ? "pre" : "normal" }}>
-                {char}
-            </motion.span>
-        ));
     };
 
     const renderWords = () => {
         const words = text.split(" ");
         return words.map((word, index) => (
-            <React.Fragment key={`word-${index}`}>
-                <motion.span variants={itemVariants} className="inline-block">
+            <span key={`word-wrap-${index}`} className="inline-flex overflow-hidden mr-[0.25em] pb-[0.1em]">
+                <motion.span
+                    variants={itemVariants}
+                    className="inline-block"
+                >
                     {word}
                 </motion.span>
-                {index < words.length - 1 && " "}
-            </React.Fragment>
+            </span>
+        ));
+    };
+
+    const renderLetters = () => {
+        return text.split("").map((char, index) => (
+            <span key={`letter-wrap-${index}`} className="inline-flex overflow-hidden pb-[0.1em]">
+                <motion.span
+                    variants={itemVariants}
+                    className="inline-block"
+                    style={{ whiteSpace: char === " " ? "pre" : "normal" }}>
+                    {char}
+                </motion.span>
+            </span>
         ));
     };
 
     return (
         <motion.div
-            className={className}
+            className={cn("flex flex-wrap overflow-hidden", className)}
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.1 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
         >
             {animationType === "letters" ? renderLetters() : renderWords()}
         </motion.div>
@@ -675,7 +677,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         className="text-center max-w-xl"
                     >
-                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 mb-4">Our culture</p>
+                        <AnimatedText text="Our culture" className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 mb-4 justify-center" />
                         <h2 className="text-[2.75rem] md:text-[3.25rem] font-bold text-gray-900 leading-[1.1] tracking-tight mb-4">
                             Values that drive us <span className="relative inline-block">
                                 <span
@@ -685,11 +687,11 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 forward
                             </span>
                         </h2>
-                        <p className="text-[15px] text-gray-400 leading-relaxed">
-                            At MAS Logistics, our values shape the way we work, build relationships, and deliver results. They
-                            reflect our commitment to operational excellence, customer satisfaction, and long-term partnerships
-                            across the global logistics and supply chain industry
-                        </p>
+                        <AnimatedText 
+                            text="At MAS Logistics, our values shape the way we work, build relationships, and deliver results. They reflect our commitment to operational excellence, customer satisfaction, and long-term partnerships across the global logistics and supply chain industry"
+                            className="text-[15px] text-gray-400 leading-relaxed justify-center text-center"
+                            delay={0.1}
+                        />
                     </motion.div>
 
                     {/* ── Phone + grid cards layout ── */}
@@ -778,12 +780,12 @@ export default function About({ isEmbedded = false }: AboutProps) {
                     {/* Column 1: Vision Text + Image */}
                     <motion.div style={{ ...col1Parallax, transformStyle: "preserve-3d" }} className="flex flex-col text-left">
                         <div className="mb-10 md:mb-16">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
-                                Our Vision
-                            </h2>
-                            <p className="text-base leading-relaxed text-gray-500">
-                                To establish a strong presence as a trusted logistics partner originating from Asia, delivering consistent value across global supply chains.
-                            </p>
+                            <AnimatedText text="Our Vision" className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" />
+                            <AnimatedText 
+                                text="To establish a strong presence as a trusted logistics partner originating from Asia, delivering consistent value across global supply chains."
+                                className="text-base leading-relaxed text-gray-500"
+                                delay={0.1}
+                            />
                         </div>
                         <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
                             <Image
@@ -848,15 +850,17 @@ export default function About({ isEmbedded = false }: AboutProps) {
                             />
                         </div>
                         <div className="mt-6 md:mt-10 text-left">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
-                                Our Mission
-                            </h2>
-                            <p className="text-base leading-relaxed text-gray-500 mb-4">
-                                Driven by our strategic base in Asia, we focus on enabling seamless logistics across key international trade routes. Our goal is to deliver dependable, efficient, and tailored solutions that support our clients’ growth and long-term success.
-                            </p>
-                            <p className="text-[15px] font-semibold text-gray-900">
-                                "Every detail matters" is our motto
-                            </p>
+                            <AnimatedText text="Our Mission" className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" />
+                            <AnimatedText 
+                                text="Driven by our strategic base in Asia, we focus on enabling seamless logistics across key international trade routes. Our goal is to deliver dependable, efficient, and tailored solutions that support our clients’ growth and long-term success."
+                                className="text-base leading-relaxed text-gray-500 mb-4"
+                                delay={0.1}
+                            />
+                            <AnimatedText 
+                                text="&quot;Every detail matters&quot; is our motto"
+                                className="text-[15px] font-semibold text-gray-900"
+                                delay={0.2}
+                            />
                         </div>
                     </motion.div>
 
