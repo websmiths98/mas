@@ -1,10 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import GetQuoteForm from "./GetQuoteForm";
-
-// ─── Simple Entrance Animation Component ──────────────────────────────────────
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";// ─── Simple Entrance Animation Component ──────────────────────────────────────
 interface RevealProps {
   children: React.ReactNode;
   delay?: number;
@@ -29,9 +26,6 @@ function Reveal({ children, delay = 0, className = "" }: RevealProps) {
 }
 
 export default function HeroSection() {
-  // Local state to track whether the Get a Quote form pop-up is active
-  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
-
   // Shared height and sizing to ensure both buttons look uniform
   const btnStyle = "h-[46px] min-w-[170px] flex items-center justify-center px-6 rounded-xl transition-all duration-300 text-[13px] font-semibold cursor-pointer";
 
@@ -117,23 +111,7 @@ export default function HeroSection() {
         <Reveal delay={1.3}>
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
 
-            {/* Get a Quote Button - Triggers Pop-up State */}
-            <button
-              onClick={() => setIsQuoteOpen(true)}
-              className={`hero-quote-btn ${btnStyle}`}
-            >
-              <div className="svg-wrapper-1">
-                <div className="svg-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-                  </svg>
-                </div>
-              </div>
-              <span className="ml-2">Get a Quote</span>
-            </button>
-
-            {/* Explore Services Button */}
+            {/* Explore Services Button
             <a
               href="/#section-services"
               className={`${btnStyle} group relative overflow-hidden border-2 border-[#E5E4E2]/20 bg-[#E5E4E2]/10 backdrop-blur-md text-[#E5E4E2] isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700`}
@@ -150,17 +128,12 @@ export default function HeroSection() {
                 ></path>
               </svg>
             </a>
+            */}
 
           </div>
         </Reveal>
       </div>
 
-      {/* ── Modal Pop-up Display Context ── */}
-      <AnimatePresence>
-        {isQuoteOpen && (
-          <GetQuoteForm onClose={() => setIsQuoteOpen(false)} />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

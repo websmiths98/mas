@@ -373,7 +373,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
     }, [selectedIndustry]);
 
     return (
-        <main className="min-h-screen bg-[#020617] text-white selection:bg-emerald-500 selection:text-black overflow-x-hidden">
+        <main className="min-h-screen bg-[#020617] text-white selection:bg-emerald-500 selection:text-black overflow-x-hidden font-['Manrope'] [&_h1]:font-['Satoshi'] [&_h2]:font-['Satoshi'] [&_h3]:font-['Satoshi'] [&_h4]:font-['Satoshi'] [&_h5]:font-['Satoshi'] [&_h6]:font-['Satoshi']">
 
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">

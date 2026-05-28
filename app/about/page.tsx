@@ -540,22 +540,30 @@ export default function About({ isEmbedded = false }: AboutProps) {
 
                 <motion.div
                     style={{ y: yHeroText, z: zHeroText, rotateX: rotateXHeroText, opacity: opacityHeroText, transformStyle: "preserve-3d" }}
-                    className="relative z-10 mx-auto max-w-4xl text-center flex flex-col items-center px-4 md:px-8"
+                    className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
                 >
-                    <AnimatedText
-                        text="We're on a mission to make complex logistics feel simple, reliable, and human"
-                        className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.1]"
-                    />
-                    <AnimatedText
-                        text="MAS connects businesses to dependable freight, warehousing, and customs expertise—so you can focus on products and customers, not paperwork and unknowns."
-                        className="mt-8 max-w-2xl text-lg leading-relaxed text-zinc-200 md:text-xl"
-                        delay={0.2}
-                    />
-                    <AnimatedText
-                        text="MAS Logistics operates with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements"
-                        className="mt-6 max-w-3xl text-base leading-relaxed text-zinc-300 md:text-lg"
-                        delay={0.4}
-                    />
+                    {/* Left Side: Headline */}
+                    <div className="text-left flex flex-col justify-center">
+                        <div className="w-16 h-1 bg-[#bbf451] mb-8 rounded-full"></div>
+                        <AnimatedText
+                            text="We're on a mission to make complex logistics feel simple, reliable, and human"
+                            className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.15]"
+                        />
+                    </div>
+
+                    {/* Right Side: Descriptions */}
+                    <div className="text-left flex flex-col gap-6 lg:border-l lg:border-zinc-700/50 lg:pl-12 lg:py-4">
+                        <AnimatedText
+                            text="MAS connects businesses to dependable freight, warehousing, and customs expertise—so you can focus on products and customers, not paperwork and unknowns"
+                            className="text-xl leading-relaxed text-zinc-200"
+                            delay={0.2}
+                        />
+                        <AnimatedText
+                            text="MAS Logistics operates with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements"
+                            className="text-base leading-relaxed text-zinc-400"
+                            delay={0.4}
+                        />
+                    </div>
                 </motion.div>
             </section>
 

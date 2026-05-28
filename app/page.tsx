@@ -12,11 +12,11 @@ import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 
 const NAV_LINKS = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#section-services" },
-  { name: "Network", href: "/#section-network" },
-  { name: "Industries", href: "/#section-industry" },
-  { name: "About us", href: "/#section-about" },
-  // { name: "FAQ", href: "/#section-FAQ" },
+  { name: "Services", href: "/#services" },
+  { name: "Network", href: "/#network" },
+  { name: "Industries", href: "/#industry" },
+  { name: "About us", href: "/#about" },
+  // { name: "FAQ", href: "/#FAQ" },
 ];
 
 export default function Home() {
@@ -43,33 +43,33 @@ export default function Home() {
         />
       </div>
 
-      <div id="section-home" className="w-full">
+      <div id="home" className="w-full">
         <HeroSection />
       </div>
 
-      <div id="section-services" className="w-full relative z-10">
+      <div id="services" className="w-full relative z-10">
         <ServicesPage isEmbedded={true} />
       </div>
 
-      <div id="section-network" className="w-full relative z-10">
+      <div id="network" className="w-full relative z-10">
         <NetworkPage />
       </div>
 
-      <div id="section-industry" className="w-full relative z-10">
+      <div id="industry" className="w-full relative z-10">
         <IndustryPage isEmbedded={true} />
       </div>
 
-      <div id="section-about" className="w-full relative z-10">
+      <div id="about" className="w-full relative z-10">
         <AboutPage isEmbedded={true} />
       </div>
 
-      {/* <div id="section-review" className="w-full relative z-10">
+      {/* { <div id="section-review" className="w-full relative z-10">
         <ReviewPage />
-      </div> */}
+      </div> } */}
 
-      <div id="section-FAQ" className="w-full relative z-10">
+      { <div id="FAQ" className="w-full relative z-10">
         <FAQPage isEmbedded={true} />
-      </div>
+      </div> }
 
     </main>
   );
