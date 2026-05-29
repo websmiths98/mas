@@ -1,39 +1,25 @@
 "use client";
 
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";// ─── Simple Entrance Animation Component ──────────────────────────────────────
-interface RevealProps {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}
-
-function Reveal({ children, delay = 0, className = "" }: RevealProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.8,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+import React, { useRef } from "react";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { RevealWrapper } from "@/app/animations/RevealWrapper";
+import { useParallax } from "@/app/animations/useParallax";
 
 export default function HeroSection() {
   // Shared height and sizing to ensure both buttons look uniform
   const btnStyle = "h-[46px] min-w-[170px] flex items-center justify-center px-6 rounded-xl transition-all duration-300 text-[13px] font-semibold cursor-pointer";
+  
+  // yBg moves down 350px when scrolled 1000px down
+  const yBg = useParallax(350);
+  
+  // yText moves down 150px when scrolled 1000px down (creating 3D depth between BG and text)
+  const yText = useParallax(150);
 
   return (
     <div className="relative bg-[#E5E4E2] h-screen w-full overflow-hidden flex items-center justify-center">
 
       {/* ── Video BG ── */}
-      <div className="absolute inset-0 z-0">
+      <motion.div style={{ transform: `translateY(${yBg}px)` }} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
         <video
           autoPlay
           loop
@@ -47,7 +33,7 @@ export default function HeroSection() {
           <source src="/hero-video.webm" type="video/webm" />
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
-      </div>
+      </motion.div>
 
       {/* ── Dark overlay ── */}
       <div
@@ -70,15 +56,15 @@ export default function HeroSection() {
       />
 
       {/* ── Hero Content ── */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-16 flex flex-col items-center text-center gap-6">
+      <motion.div style={{ transform: `translateY(${yText}px)` }} className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-16 flex flex-col items-center text-center gap-6">
 
         {/* ─ Badge ─ */}
-        <Reveal delay={0.2}>
+        <RevealWrapper staggerIndex={1}>
           <div className="hero-badge">
             <span className="hero-badge-dot" />
             Seamless Logistics Across Continents | Your Trusted Partner in Global Logistics
           </div>
-        </Reveal>
+        </RevealWrapper>
 
         {/* ─ Primary Heading ─ */}
         <h1 className="hero-h1" aria-label="International Freight Forwarding & Supply Chain Solutions">
@@ -100,15 +86,15 @@ export default function HeroSection() {
         </h1>
 
         {/* ─ Subtitle ─ */}
-        <Reveal delay={1.0}>
+        <RevealWrapper staggerIndex={5}>
           <h2 className="hero-h2 max-w-2xl">
             MAS Logistics is a trusted international freight forwarding and supply chain management company in India
             delivering reliable air, sea, warehousing, and global logistics solutions tailored for seamless cross-border trade
           </h2>
-        </Reveal>
+        </RevealWrapper>
 
         {/* ─ CTAs ─ */}
-        <Reveal delay={1.3}>
+        <RevealWrapper staggerIndex={7}>
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
 
             {/* Explore Services Button
@@ -131,8 +117,8 @@ export default function HeroSection() {
             */}
 
           </div>
-        </Reveal>
-      </div>
+        </RevealWrapper>
+      </motion.div>
 
     </div>
   );

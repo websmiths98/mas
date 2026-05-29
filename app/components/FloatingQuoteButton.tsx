@@ -7,6 +7,12 @@ import GetQuoteForm from "./GetQuoteForm";
 export default function FloatingQuoteButton() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
+  React.useEffect(() => {
+    const handleOpenQuote = () => setIsQuoteOpen(true);
+    window.addEventListener("openQuoteModal", handleOpenQuote);
+    return () => window.removeEventListener("openQuoteModal", handleOpenQuote);
+  }, []);
+
   return (
     <>
       <div className="fixed bottom-6 right-6 z-50 flex items-end justify-end">

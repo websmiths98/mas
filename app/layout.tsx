@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 import Footer from "./Footer/page";
+import { SmoothScrollProvider } from "./animations/SmoothScrollProvider";
 
 export default function RootLayout({
   children,
@@ -31,11 +32,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <FloatingQuoteButton />
+        <SmoothScrollProvider>
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+          <FloatingQuoteButton />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

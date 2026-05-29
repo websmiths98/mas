@@ -368,27 +368,24 @@ const STACK_SECTIONS: StackSectionData[] = [
       {
         title: "Transport Logistics",
         eyebrow: "Surface Network",
-        detail: (
-          <>We provide reliable transport logistics solutions supported by a strong carrier network and efficient route planning. Our transportation services are designed to ensure the <span className="font-bold text-blue-600">smooth movement of cargo across locations</span> while maintaining safety, consistency, and timely delivery.</>
-        ),
+        detail:
+          "We provide reliable transport logistics solutions supported by a strong carrier network and efficient route planning. Our transportation services are designed to ensure the smooth movement of cargo across locations while maintaining safety, consistency, and timely delivery.",
         imageSrc: imageTruck,
         features: ["Route planning", "Carrier network", "Cargo safety", "Timed dispatch"],
       },
       {
         title: "Procurement Logistics",
         eyebrow: "Supplier Flow",
-        detail: (
-          <>Our procurement logistics solutions focus on managing the <span className="font-bold text-blue-600">seamless flow of goods</span> from suppliers to final destinations. We oversee planning, execution, and monitoring of logistics activities to ensure smooth coordination across <span className="font-bold text-blue-600">procurement, warehousing, storage, and internal transportation</span>.</>
-        ),
+        detail:
+          "Our procurement logistics solutions focus on managing the seamless flow of goods from suppliers to final destinations. We oversee planning, execution, and monitoring of logistics activities to ensure smooth coordination across procurement, warehousing, storage, and internal transportation.",
         imageSrc: imagePort,
         features: ["Supplier pickup", "Storage control", "Flow planning", "Live tracking"],
       },
       {
         title: "Outbound Logistics",
         eyebrow: "Market Delivery",
-        detail: (
-          <>We manage outbound logistics with a strong focus on <span className="font-bold text-blue-600">reliability, timely delivery, and operational control</span>. From warehouse dispatch to final market delivery, we ensure finished goods reach their intended destinations efficiently and without unnecessary delays.</>
-        ),
+        detail:
+          "We manage outbound logistics with a strong focus on reliability, timely delivery, and operational control. From warehouse dispatch to final market delivery, we ensure finished goods reach their intended destinations efficiently and without unnecessary delays.",
         imageSrc: imageWarehouse,
         features: ["Dispatch control", "Final delivery", "SLA focus", "Proof updates"],
       },
@@ -410,18 +407,16 @@ const STACK_SECTIONS: StackSectionData[] = [
       {
         title: "Air Freight",
         eyebrow: "Time Critical",
-        detail: (
-          <>Our air freight services are designed to support <span className="font-bold text-emerald-600">time-sensitive and high-priority shipments</span> across international markets. Through strong partnerships with leading global carriers, we ensure <span className="font-bold text-emerald-600">fast, secure, and reliable cargo movement</span> with smooth coordination at every stage. Whether it is urgent deliveries or scheduled freight operations, we focus on maintaining speed, accuracy, and operational efficiency.</>
-        ),
+        detail:
+          "Our air freight services are designed to support time-sensitive and high-priority shipments across international markets. Through strong partnerships with leading global carriers, we ensure fast, secure, and reliable cargo movement with smooth coordination at every stage. Whether it is urgent deliveries or scheduled freight operations, we focus on maintaining speed, accuracy, and operational efficiency.",
         imageSrc: imageAir,
         features: ["Priority & express shipments", "Global carrier network", "Secure cargo handling", "Time-critical delivery support"],
       },
       {
         title: "Sea Freight",
         eyebrow: "Ocean Network",
-        detail: (
-          <>We offer dependable sea freight solutions that combine <span className="font-bold text-emerald-600">flexibility, cost efficiency, and global connectivity</span>. Whether handling Full Container Load (FCL) or Less than Container Load (LCL) shipments, our team ensures smooth cargo movement through trusted shipping partners and established port networks. Our focus remains on <span className="font-bold text-emerald-600">timely coordination, shipment visibility, and reliable delivery</span> across international trade routes.</>
-        ),
+        detail:
+          "We offer dependable sea freight solutions that combine flexibility, cost efficiency, and global connectivity. Whether handling Full Container Load (FCL) or Less than Container Load (LCL) shipments, our team ensures smooth cargo movement through trusted shipping partners and established port networks. Our focus remains on timely coordination, shipment visibility, and reliable delivery across international trade routes.",
         imageSrc: imageSea,
         features: ["FCL and LCL shipments", "Competitive global routing", "Strong port connectivity", "End-to-end shipment visibility"],
       },
@@ -441,18 +436,16 @@ const STACK_SECTIONS: StackSectionData[] = [
       {
         title: "Warehousing",
         eyebrow: "Inventory Control",
-        detail: (
-          <>Our warehousing and distribution solutions are designed to support <span className="font-bold text-amber-600">efficient inventory management and smooth supply chain operations</span>. With scalable warehousing capabilities and structured storage systems, we help businesses <span className="font-bold text-amber-600">improve operational efficiency, streamline dispatch activities</span>, and reduce logistics-related costs.</>
-        ),
+        detail:
+          "Our warehousing and distribution solutions are designed to support efficient inventory management and smooth supply chain operations. With scalable warehousing capabilities and structured storage systems, we help businesses improve operational efficiency, streamline dispatch activities, and reduce logistics-related costs.",
         imageSrc: imageWarehouse,
         features: ["Inventory management support", "Distribution and dispatch handling", "Scalable storage solutions", "Cost-efficient operations"],
       },
       {
         title: "Project / ODC Cargo",
         eyebrow: "Heavy Lift",
-        detail: (
-          <>MAS Logistics specializes in handling <span className="font-bold text-amber-600">oversized, heavy-lift, and complex cargo</span> that demands precision planning and specialized logistics expertise. Our project and ODC cargo services are carefully designed to <span className="font-bold text-amber-600">manage critical shipments safely and efficiently</span>, ensuring smooth coordination from planning to execution and final delivery.</>
-        ),
+        detail:
+          "MAS Logistics specializes in handling oversized, heavy-lift, and complex cargo that demands precision planning and specialized logistics expertise. Our project and ODC cargo services are carefully designed to manage critical shipments safely and efficiently, ensuring smooth coordination from planning to execution and final delivery.",
         imageSrc: imageODC,
         features: ["Heavy and oversized cargo handling", "Route planning and coordination", "Specialized equipment support", "End-to-end project execution"],
       },
@@ -463,7 +456,7 @@ const STACK_SECTIONS: StackSectionData[] = [
 export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
   return (
     <SmoothScrollProvider>
-      <main className="min-h-screen overflow-x-hidden bg-gradient-to-t from-[#1C76D6] from-[46%] to-[#0E2A47] to-[80%] text-white">
+      <main className="min-h-screen overflow-x-hidden bg-gradient-to-t from-[#CDCCFE] from-[46%] to-[#0E2A47] to-[80%] text-white">
         {!isEmbedded && (
           <div className="fixed left-1/2 top-7 z-[100] w-auto -translate-x-1/2">
             <AppleGlassNav

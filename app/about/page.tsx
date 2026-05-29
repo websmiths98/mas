@@ -270,7 +270,14 @@ const CULTURE = [
     { title: "Compliance", desc: "Ensuring regulatory compliance, cargo security, and responsible supply chain management standards", icon: <IconGrid /> },
 ];
 
-const LOGOS_ROW_1 = [
+type LogoItem = {
+    file: string;
+    bg: string;
+    scale?: number;
+    noFilter?: boolean;
+};
+
+const LOGOS_ROW_1: LogoItem[] = [
     { file: "198-1984070_philips-logo-philips-healthcare-logo-vector-hd-png.png", bg: "#0B5EAA" },
     { file: "Fuji Logo PNG Vector (EPS) Free Download.jpeg", bg: "#E31A22", scale: 1.6 },
     { file: "Raymond_logo.jpg", bg: "#222222" },
@@ -297,7 +304,7 @@ const LOGOS_ROW_1 = [
     { file: "huawei_logo.png", bg: "#E60012" },
 ];
 
-const LOGOS_ROW_2 = [
+const LOGOS_ROW_2: LogoItem[] = [
     { file: "hyosung_logo.png", bg: "#00529B" },
     { file: "hyundai_with_text.svg", bg: "#002C5F", scale: 1.6 },
     { file: "infiniti-logo-png_seeklogo-249498.png", bg: "#111111" },
@@ -787,7 +794,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 delay={0.1}
                             />
                         </div>
-                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
+                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 shadow-xl">
                             <Image
                                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop"
                                 alt="Team collaborating"
@@ -800,7 +807,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
 
                     {/* Column 2: 3 Images staggered */}
                     <motion.div style={{ ...col2Parallax, transformStyle: "preserve-3d" }} className="flex flex-col gap-4 md:gap-6 md:pt-16">
-                        <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
+                        <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 shadow-xl">
                             <Image
                                 src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop"
                                 alt="Working together"
@@ -809,7 +816,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
-                        <div className="relative w-full aspect-square overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
+                        {/* <div className="relative w-full aspect-square overflow-hidden bg-zinc-100 shadow-xl">
                             <Image
                                 src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop"
                                 alt="Focused work"
@@ -817,8 +824,8 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 className="object-cover"
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
-                        </div>
-                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 hidden md:block rounded-2xl shadow-xl">
+                        </div> */}
+                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 hidden md:block shadow-xl">
                             <Image
                                 src={aboutTeamHero}
                                 alt="MAS Team"
@@ -829,21 +836,12 @@ export default function About({ isEmbedded = false }: AboutProps) {
                         </div>
                     </motion.div>
 
-                    {/* Column 3: 2 Images + Mission Text */}
+                    {/* Column 3: 1 Image + Mission Text */}
                     <motion.div style={{ ...col3Parallax, transformStyle: "preserve-3d" }} className="flex flex-col gap-4 md:gap-6 md:pt-8">
-                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
+                        <div className="relative w-full aspect-[3/4] overflow-hidden bg-zinc-100 shadow-xl">
                             <Image
                                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop"
                                 alt="Discussion"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 33vw"
-                            />
-                        </div>
-                        <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 rounded-2xl shadow-xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
-                                alt="Meeting"
                                 fill
                                 className="object-cover"
                                 sizes="(max-width: 768px) 100vw, 33vw"

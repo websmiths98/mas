@@ -117,7 +117,7 @@ export function TestimonialCard({ item }: { item: TestimonialCardProps }) {
 
 export default function Testimonials() {
   return (
-    <section className="py-12 lg:py-20 bg-[#202833] text-[#e5e4e2]">
+    <section className="py-12 lg:py-20 bg-[#151514] text-[#e5e4e2]">
       <div className="container mx-auto px-4">
         <header className="mx-auto mb-8 max-w-2xl text-center lg:mb-10">
           <Badge variant="outline" className="text-indigo-600">

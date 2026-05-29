@@ -29,31 +29,31 @@ interface AccordionFAQBoldProps {
 
 const DEFAULT_ITEMS: FAQItem[] = [
     {
-        question: "Why choose our trucking service?",
+        question: "WHY CHOOSE OUR TRUCKING SERVICE?",
         answer: "Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer\n\nDirected convergence without revolutionary ROI.Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions",
     },
     {
-        question: "Any facilities available on warehousing and storage service?",
+        question: "ANY FACILITIES AVAILABLE ON WAREHOUSING AND STORAGE SERVICE?",
         answer: "Professionally cultivate one-to-one customer service with robust ideas dynamically innovate resource\n\nLeveling customer service for state of the art customer service.Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis",
     },
     {
-        question: "Is it possible to logistic service providers to understand our business?",
+        question: "IS IT POSSIBLE TO LOGISTIC SERVICE PROVIDERS TO UNDERSTAND OUR BUSINESS?",
         answer: "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing\n\nHolistically pontificate installed base portals after maintainable products.Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric \"outside the box\" thinking. Completely pursue scalable customer",
     },
     {
-        question: "Any speciality in of advanced green carriers?",
+        question: "ANY SPECIALITY IN OF ADVANCED GREEN CARRIERS?",
         answer: "Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth\n\nStrategies and interoperable internal or \"organic\" sources.Credibly innovate granular internal or \"organic\" sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas",
     },
     {
-        question: "How about domestic and international deliveries of collective and partial shipments?",
+        question: "HOW ABOUT DOMESTIC AND INTERNATIONAL DELIVERIES OF COLLECTIVE AND PARTIAL SHIPMENTS?",
         answer: "Interactively procrastinate high-payoff content without backward-compatible data. Quickly cultivate optimal processes and tactical architectures. Completely iterate covalent strategic theme\n\nAreas via accurate e-markets. Globally incubate standards compliant channels before scalable benefits. Quickly disseminate superior deliverables whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change before vertical architectures",
     },
     {
-        question: "Having problems with your truck, van or any kind of transportation vehicles?",
+        question: "HAVING PROBLEMS WITH YOUR TRUCK, VAN OR ANY KIND OF TRANSPORTATION VEHICLES?",
         answer: "Credibly reintermediate backend ideas for cross-platform models. Continually reintermediate integrated processes through technically sound intellectual capital holistically foster\n\nsuperior methodologies without market-driven best practices.Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing procedures whereas bricks-and-clicks",
     },
     {
-        question: "How to get informations about our branches around the world?",
+        question: "HOW TO GET INFORMATIONS ABOUT OUR BRANCHES AROUND THE WORLD?",
         answer: "I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness\n\nNo one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that",
     },
 ];
@@ -80,18 +80,15 @@ const itemVariants = {
     },
 };
 
-import { ArrowUpRight } from "lucide-react";
-
 export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
     accentColor = "#ffffff",
     items = DEFAULT_ITEMS,
     heading = "FAQ",
 }) => {
-    const [active, setActive] = useState<number | null>(null);
-    const [hovered, setHovered] = useState<number | null>(null);
+    const [active, setActive] = useState<number | null>(0);
 
     return (
-        <div className="w-full relative z-10 flex flex-col items-start">
+        <div className="w-full relative z-10">
             {/* Ambient Background layer */}
             <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden rounded-3xl">
                 <motion.div
@@ -101,8 +98,8 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                 />
             </div>
 
-            <h2 className="text-[#e5e4e2] text-xl sm:text-xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 sm:mb-12 uppercase text-left">
-                Also asked
+            <h2 className="text-[#e5e4e2] text-xl sm:text-xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 sm:mb-10 uppercase text-center lg:text-left">
+                {heading}
             </h2>
 
             <motion.div
@@ -110,69 +107,52 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-10%" }}
-                className="flex flex-col items-start w-full gap-4"
             >
                 {items.map((item, i) => {
                     const isActive = active === i;
-                    const isHovered = hovered === i;
 
                     return (
                         <motion.div
                             key={i}
                             variants={itemVariants}
-                            className="flex flex-col items-start w-full"
+                            className="w-full mb-4 sm:mb-6"
+                            onMouseEnter={() => setActive(i)}
+                            onMouseLeave={() => setActive(null)}
                         >
                             {/* Question Pill */}
                             <motion.button
-                                onClick={() => setActive(isActive ? null : i)}
-                                onMouseEnter={() => setHovered(i)}
-                                onMouseLeave={() => setHovered(null)}
-                                className={`flex items-center gap-4 px-6 py-3.5 rounded-full border transition-all duration-300 ease-out text-left max-w-full relative z-20
-                                    ${isActive 
-                                        ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.1)]" 
-                                        : isHovered 
-                                            ? "bg-[#2a2a2c] text-white border-[#3a3a3c]" 
-                                            : "bg-transparent text-[#e5e4e2] border-[#2a2a2c] hover:border-[#3a3a3c]"
-                                    }`}
+                                className="w-full flex items-center justify-between gap-4 p-4 sm:p-6 bg-[#0a0a0b] hover:bg-[#1a1a1c] border border-[#2a2a2c] rounded-[2rem] transition-colors shadow-xl group"
+                                whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                <span className="font-medium text-sm lg:text-[15px] tracking-wide leading-snug">
+                                <span className="text-[#e5e4e2] font-normal text-sm sm:text-base lg:text-lg text-left tracking-wide leading-relaxed">
                                     {item.question}
                                 </span>
                             </motion.button>
 
-                            {/* Answer Reveal Sequence */}
-                            <AnimatePresence initial={false}>
+                            {/* Answer Card */}
+                            <AnimatePresence mode="wait">
                                 {isActive && (
                                     <motion.div
-                                        initial={{ height: 0, marginTop: 0 }}
-                                        animate={{ height: "auto", marginTop: 16 }}
-                                        exit={{ height: 0, marginTop: 0, transition: { delay: 0.4, duration: 0.6 } }}
-                                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                        className="relative w-[95%] sm:w-[85%] max-w-2xl ml-4 sm:ml-8"
+                                        initial={{ opacity: 0, y: 20, scale: 0.96, rotate: -0.4 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+                                        exit={{ opacity: 0, y: -10, scale: 0.98, transition: { duration: 0.2 } }}
+                                        transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                                        className="relative mt-3 ml-4 sm:ml-12 w-[calc(100%-1rem)] sm:w-[calc(100%-3rem)]"
                                     >
-                                        {/* The Icon (Pops first at bottom right) */}
-                                        <motion.div
-                                            initial={{ scale: 0, rotate: -45 }}
-                                            animate={{ scale: 1, rotate: 0 }}
-                                            exit={{ scale: 0, rotate: 45, transition: { duration: 0.3 } }}
-                                            transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
-                                            className="absolute -bottom-3 -right-3 z-10 w-9 h-9 rounded-full border-2 border-black bg-[#e5e4e2] flex items-center justify-center shadow-md"
-                                        >
-                                            <ArrowUpRight className="w-5 h-5 text-black" strokeWidth={2.5} />
-                                        </motion.div>
-
-                                        {/* The Answer Box (Reveals from bottom right) */}
-                                        <motion.div
-                                            initial={{ clipPath: "circle(0% at 100% 100%)" }}
-                                            animate={{ clipPath: "circle(150% at 100% 100%)" }}
-                                            exit={{ clipPath: "circle(0% at 100% 100%)", transition: { duration: 0.4 } }}
-                                            transition={{ duration: 0.85, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                                            className="bg-[#e5e4e2] text-black p-5 sm:p-6 rounded-3xl rounded-br-xl border border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] w-full relative z-0"
-                                        >
-                                            <p className="text-[14px] lg:text-[15px] font-medium text-gray-800 leading-relaxed whitespace-pre-line">
+                                        <div className="bg-[#e5e4e2] text-black p-5 sm:p-6 lg:p-8 rounded-[2rem] border border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] relative z-0">
+                                            <p className="text-sm sm:text-base font-normal leading-relaxed whitespace-pre-line">
                                                 {item.answer}
                                             </p>
+                                        </div>
+
+                                        {/* Detached Rotating Badge */}
+                                        <motion.div
+                                            animate={{ rotate: [0, 10, -10, 0] }}
+                                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                            className="absolute -top-4 -right-4 w-14 h-14 bg-[#e5e4e2] rounded-full flex items-center justify-center border-[3px] border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] z-10 overflow-hidden"
+                                        >
+                                            <Image src={masIcon} alt="Icon" className="w-[65%] h-[65%] object-contain scale-125 translate-x-0.5" />
                                         </motion.div>
                                     </motion.div>
                                 )}
@@ -189,7 +169,7 @@ import Testimonials from "@/app/review/page";
 
 export default function AccordionFAQBoldPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
     return (
-        <main className="w-full relative overflow-x-clip text-gray-900" style={{ background: "#151514" }}>
+        <main className="w-full relative overflow-x-clip text-gray-900" style={{ background: "#0a0a0b" }}>
             {/* ── Fixed Header Container ── */}
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
@@ -214,7 +194,7 @@ export default function AccordionFAQBoldPage({ isEmbedded = false }: { isEmbedde
 
             <div className="w-full flex min-h-[600px] relative border-b border-[#1f1f22]">
                 {/* Left side Testimonials show off */}
-                <div className="hidden lg:block lg:w-1/2 relative z-0 overflow-hidden bg-[#151514]">
+                <div className="hidden lg:block lg:w-1/2 relative z-0 overflow-hidden bg-[#202833]">
                     {/* Inner wrapper to add padding to clear the fixed nav, without breaking the component's internal layout */}
                     <div className="w-full pt-8 pb-16">
                         <Testimonials />

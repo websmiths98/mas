@@ -13,7 +13,7 @@ import {
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, Globe2, Activity } from "lucide-react";
+import { ShieldCheck, Globe2, Activity, Plane, Ship, Truck } from "lucide-react";
 
 // Inline fallback for conditional class joining
 const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
@@ -671,12 +671,14 @@ export default function NetworkClient() {
                   {word}
                 </motion.span>
               ))}
+
               <br className="hidden lg:block" />
-              {"Built for Global Logistics".split(" ").map((word, i) => (
+
+              {"Built for".split(" ").map((word, i, arr) => (
                 <motion.span
                   aria-hidden="true"
-                  key={`w2-${i}`}
-                  style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
+                  key={`w2a-${i}`}
+                  style={{ display: "inline-block", marginRight: i === arr.length - 1 ? "0" : "0.25em", paddingBottom: "0.1em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -690,6 +692,81 @@ export default function NetworkClient() {
                   {word}
                 </motion.span>
               ))}
+
+              <motion.span
+                initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", bounce: 0.6, delay: 0.6 }}
+                style={{ display: "inline-flex", marginLeft: "0.15em", marginRight: "0.3em", verticalAlign: "middle" }}
+                className="relative -top-1 lg:-top-2 items-center justify-center bg-blue-500 text-white rounded-lg md:rounded-xl p-1.5 md:p-2 shadow-[0_8px_16px_rgba(59,130,246,0.3),inset_0_3px_5px_rgba(255,255,255,0.4)]"
+              >
+                <Plane className="w-6 h-6 lg:w-8 lg:h-8" />
+              </motion.span>
+
+              <br className="hidden lg:block" />
+
+              {"Global".split(" ").map((word, i, arr) => (
+                <motion.span
+                  aria-hidden="true"
+                  key={`w2b-${i}`}
+                  style={{ display: "inline-block", marginRight: i === arr.length - 1 ? "0" : "0.25em", paddingBottom: "0.1em" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.4 + (5 + i) * 0.08,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
+                >
+                  {word}
+                </motion.span>
+              ))}
+
+              <motion.span
+                initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", bounce: 0.6, delay: 0.8 }}
+                style={{ display: "inline-flex", marginLeft: "0.15em", marginRight: "0.3em", verticalAlign: "middle" }}
+                className="relative -top-1 lg:-top-2 items-center justify-center bg-indigo-500 text-white rounded-lg md:rounded-xl p-1.5 md:p-2 shadow-[0_8px_16px_rgba(99,102,241,0.3),inset_0_3px_5px_rgba(255,255,255,0.4)]"
+              >
+                <Ship className="w-6 h-6 lg:w-8 lg:h-8" />
+              </motion.span>
+
+              <br className="hidden lg:block" />
+
+              {"Logistics".split(" ").map((word, i, arr) => (
+                <motion.span
+                  aria-hidden="true"
+                  key={`w2c-${i}`}
+                  style={{ display: "inline-block", marginRight: i === arr.length - 1 ? "0" : "0.25em", paddingBottom: "0.1em" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.4 + (7 + i) * 0.08,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
+                >
+                  {word}
+                </motion.span>
+              ))}
+
+              <motion.span
+                initial={{ opacity: 0, scale: 0.5, rotate: 20 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", bounce: 0.6, delay: 1.0 }}
+                style={{ display: "inline-flex", marginLeft: "0.15em", verticalAlign: "middle" }}
+                className="relative -top-1 lg:-top-2 items-center justify-center bg-purple-500 text-white rounded-lg md:rounded-xl p-1.5 md:p-2 shadow-[0_8px_16px_rgba(168,85,247,0.3),inset_0_3px_5px_rgba(255,255,255,0.4)]"
+              >
+                <Truck className="w-6 h-6 lg:w-8 lg:h-8" />
+              </motion.span>
             </h3>
 
             <motion.p
@@ -743,7 +820,7 @@ export default function NetworkClient() {
       </section>
 
       {/* Subsequent Content Sections */}
-      <div className="relative z-30 w-full pb-20">
+      <div className="relative z-30 w-full">
 
         {/* ── SECTION 1: GLOBAL REACH MAP ── */}
         {false && (
@@ -944,10 +1021,8 @@ export default function NetworkClient() {
           </div>
         </section>
 
-        <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-40 mt-32">
-          {/* Immersive Borderless Highlights (Clean & Realistic Motion) */}
+        {/* <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-20 space-y-40 mt-32">
           <section className="py-14 relative overflow-hidden">
-            {/* Ambient Horizontal slow-breathing lighting glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-cyan-500/5 blur-3xl opacity-35 pointer-events-none" />
 
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
@@ -978,7 +1053,7 @@ export default function NetworkClient() {
               ))}
             </div>
           </section>
-        </div>
+        </div> */}
       </div>
     </div>
   );

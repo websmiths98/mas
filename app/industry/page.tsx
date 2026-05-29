@@ -305,7 +305,7 @@ function MorphCarousel() {
                             
                             <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl inline-block w-full relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
-                                <h4 className="text-emerald-400 font-semibold tracking-wide uppercase text-sm mb-4">Service Capabilities</h4>
+                                <h4 className="font-manrope text-emerald-400 font-semibold tracking-wide uppercase text-sm mb-4">Service Capabilities</h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                                     {PROVEN_TRACK_SLIDES[activeIndex].capabilities.map((item, i) => (
                                         <div key={i} className="flex items-center gap-3 text-zinc-100 group/item cursor-default">
@@ -373,7 +373,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
     }, [selectedIndustry]);
 
     return (
-        <main className="min-h-screen bg-[#020617] text-white selection:bg-emerald-500 selection:text-black overflow-x-hidden font-['Manrope'] [&_h1]:font-['Satoshi'] [&_h2]:font-['Satoshi'] [&_h3]:font-['Satoshi'] [&_h4]:font-['Satoshi'] [&_h5]:font-['Satoshi'] [&_h6]:font-['Satoshi']">
+        <main className="min-h-screen bg-[#020617] text-white selection:bg-emerald-500 selection:text-black overflow-x-hidden font-manrope [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi">
 
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
@@ -547,7 +547,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
 
                                     <div className="space-y-8">
                                         <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                                            <h5 className="text-emerald-400 font-semibold tracking-wide uppercase text-sm mb-4">Key Logistics Offerings</h5>
+                                            <h5 className="font-manrope text-emerald-400 font-semibold tracking-wide uppercase text-sm mb-4">Key Logistics Offerings</h5>
                                             <ul className="text-zinc-200 space-y-3">
                                                 <li className="flex items-start gap-3">
                                                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] shrink-0"></span>
