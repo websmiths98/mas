@@ -93,11 +93,11 @@ export function TestimonialCard({ item }: { item: TestimonialCardProps }) {
       <div className="text-[#e5e4e2] space-y-4">
         <p>{item.description}</p>
         <div className="flex flex-row gap-1">
-          <Star className="size-4 fill-orange-500 text-orange-500" />
-          <Star className="size-4 fill-orange-500 text-orange-500" />
-          <Star className="size-4 fill-orange-500 text-orange-500" />
-          <Star className="size-4 fill-orange-500 text-orange-500" />
-          <Star className="size-4 fill-orange-500 text-orange-500" />
+          <Star className="size-4 fill-[#FBBC05] text-[#FBBC05]" />
+          <Star className="size-4 fill-[#FBBC05] text-[#FBBC05]" />
+          <Star className="size-4 fill-[#FBBC05] text-[#FBBC05]" />
+          <Star className="size-4 fill-[#FBBC05] text-[#FBBC05]" />
+          <Star className="size-4 fill-[#FBBC05] text-[#FBBC05]" />
         </div>
       </div>
 
@@ -120,15 +120,20 @@ export default function Testimonials() {
     <section className="py-12 lg:py-20 bg-[#151514] text-[#e5e4e2]">
       <div className="container mx-auto px-4">
         <header className="mx-auto mb-8 max-w-2xl text-center lg:mb-10">
-          <Badge variant="outline" className="text-indigo-600">
-            Testimonials
+          <Badge variant="outline" className="text-[#4285F4] border-[#4285F4]">
+            Google Reviews
           </Badge>
           <h3 className="font-heading mt-4 mb-4 text-4xl sm:text-5xl lg:text-balance">
-            Loved by Teams Worldwide
+            <span className="text-[#4285F4]">G</span>
+            <span className="text-[#EA4335]">o</span>
+            <span className="text-[#FBBC05]">o</span>
+            <span className="text-[#4285F4]">g</span>
+            <span className="text-[#34A853]">l</span>
+            <span className="text-[#EA4335]">e</span>
+            {" "}Reviews
           </h3>
           <p className="text-[#e5e4e2] text-balance lg:text-lg">
-            Don't just take our word for it. See what our customers have to say about their
-            experience.
+            See why businesses trust our seamless logistics and supply chain solutions to deliver on time, every time.
           </p>
         </header>
 

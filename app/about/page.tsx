@@ -549,23 +549,42 @@ export default function About({ isEmbedded = false }: AboutProps) {
                     <div className="text-left flex flex-col justify-center">
                         <div className="w-16 h-1 bg-[#bbf451] mb-8 rounded-full"></div>
                         <AnimatedText
-                            text="We're on a mission to make complex logistics feel simple, reliable, and human"
-                            className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.15]"
+                            text="We're on a mission to simplify logistics."
+                            className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.15] mb-4"
+                        />
+                        <AnimatedText
+                            text="make complex logistics feel simple, reliable, and human"
+                            className="text-3xl font-medium tracking-tight text-zinc-200 sm:text-4xl lg:text-[2.5rem] lg:leading-[1.15]"
+                            delay={0.1}
                         />
                     </div>
 
                     {/* Right Side: Descriptions */}
-                    <div className="text-left flex flex-col gap-6 lg:border-l lg:border-zinc-700/50 lg:pl-12 lg:py-4">
-                        <AnimatedText
-                            text="MAS connects businesses to dependable freight, warehousing, and customs expertise—so you can focus on products and customers, not paperwork and unknowns"
-                            className="text-xl leading-relaxed text-zinc-200"
-                            delay={0.2}
-                        />
-                        <AnimatedText
-                            text="MAS Logistics operates with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements"
-                            className="text-base leading-relaxed text-zinc-400"
-                            delay={0.4}
-                        />
+                    <div className="text-left flex flex-col gap-10 lg:border-l lg:border-zinc-700/50 lg:pl-12 lg:py-4">
+                        <div className="flex flex-col gap-3">
+                            <AnimatedText
+                                text="Our Approach"
+                                className="text-2xl font-semibold tracking-tight text-white"
+                                delay={0.2}
+                            />
+                            <AnimatedText
+                                text="MAS connects businesses to dependable freight, warehousing, and customs expertise — so you can focus on products and customers, not paperwork and unknowns."
+                                className="text-[17px] leading-relaxed text-zinc-200"
+                                delay={0.3}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <AnimatedText
+                                text="Network"
+                                className="text-2xl font-semibold tracking-tight text-white"
+                                delay={0.4}
+                            />
+                            <AnimatedText
+                                text="We operate with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements."
+                                className="text-[17px] leading-relaxed text-zinc-300"
+                                delay={0.5}
+                            />
+                        </div>
                     </div>
                 </motion.div>
             </section>

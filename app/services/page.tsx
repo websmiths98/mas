@@ -401,7 +401,7 @@ const STACK_SECTIONS: StackSectionData[] = [
     Icon: IconGlobal,
     accent: "text-[#064e3b]",
     featureClasses: "bg-emerald-50 text-emerald-700 ring-emerald-200/60",
-    style: { backgroundImage: "linear-gradient( 109.6deg, rgba(125, 182, 253, 1) 11.2%, rgba(226, 247, 193, 1) 91.1% )" },
+    style: { backgroundImage: "linear-gradient(120deg, #cfe2a3ff 0%, #96E6A1 100%)" },
     // imageBgSrc: bgGlobal, // removed to show custom gradient
     intro:
       "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution, helping businesses manage the movement of goods with greater control and confidence. From international freight forwarding to warehousing and specialized cargo handling, we deliver solutions tailored to meet diverse logistics and supply chain requirements",
@@ -430,16 +430,16 @@ const STACK_SECTIONS: StackSectionData[] = [
     kicker: "Fulfillment & Projects",
     title: "Advanced warehousing & ODC fulfillment",
     Icon: IconTrendingUp,
-    accent: "text-[#78350f]",
-    featureClasses: "bg-amber-50 text-amber-700 ring-amber-200/60",
-    gradient: "bg-gradient-to-r from-[#E4E5E6] to-[#00416A]",
+    accent: "text-[#9a3412]",
+    featureClasses: "bg-orange-50 text-orange-700 ring-orange-200/60",
+    style: { backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)" },
     // imageBgSrc: bgFulfillment, // removed to show custom gradient
     items: [
       {
         title: "Warehousing",
         eyebrow: "Inventory Control",
         detail:
-          "Our warehousing and distribution solutions are designed to support efficient inventory management and smooth supply chain operations. With scalable warehousing capabilities and structured storage systems, we help businesses improve operational efficiency, streamline dispatch activities, and reduce logistics-related costs.",
+          "Our warehousing and distribution solutions are designed to support efficient inventory management and smooth supply chain operations. With scalable warehousing capabilities and structured storage systems, we help businesses improve operational efficiency, streamline dispatch activities, and reduce logistics-related costs",
         imageSrc: imageWarehouse,
         features: ["Inventory management support", "Distribution and dispatch handling", "Scalable storage solutions", "Cost-efficient operations"],
       },
@@ -447,7 +447,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Project / ODC Cargo",
         eyebrow: "Heavy Lift",
         detail:
-          "MAS Logistics specializes in handling oversized, heavy-lift, and complex cargo that demands precision planning and specialized logistics expertise. Our project and ODC cargo services are carefully designed to manage critical shipments safely and efficiently, ensuring smooth coordination from planning to execution and final delivery.",
+          "MAS Logistics specializes in handling oversized, heavy-lift, and complex cargo that demands precision planning and specialized logistics expertise. Our project and ODC cargo services are carefully designed to manage critical shipments safely and efficiently, ensuring smooth coordination from planning to execution and final delivery",
         imageSrc: imageODC,
         features: ["Heavy and oversized cargo handling", "Route planning and coordination", "Specialized equipment support", "End-to-end project execution"],
       },

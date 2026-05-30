@@ -103,7 +103,7 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
             </div>
 
             <TextReveal as="h2" className="text-[#e5e4e2] text-xl sm:text-xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 sm:mb-12 uppercase text-left">
-                Also asked
+                FAQ
             </TextReveal>
 
             <motion.div
