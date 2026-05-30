@@ -462,7 +462,7 @@ export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: bool
         className="min-h-screen overflow-x-hidden text-white [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi"
         style={{
           backgroundColor: "#020024",
-          backgroundImage: "linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(239, 242, 243, 1) 100%)",
+          backgroundImage: "linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(255, 255, 255, 1) 100%)",
         }}
       >
         {!isEmbedded && (

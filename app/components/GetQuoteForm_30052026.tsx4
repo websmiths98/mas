@@ -100,8 +100,6 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   const countries = ["Algeria", "Argentina", "Bahrain", "India", "Indonesia", "United Arab Emirates", "United Kingdom", "United States"];
   const loadingPorts = ["DKAAB - AABENRAA", "DEAAH - AACHEN", "INBOM - Nhava Sheva, Mumbai"];
   const dischargePorts = ["INBLS - BALASORE CONCOR ICD", "INBNS6 - AFS Kapashera, Bijwasan Road"];
-  const loadingAirports = ["BOM - Mumbai Airport", "DEL - Delhi Airport", "LHR - London Heathrow"];
-  const dischargeAirports = ["DXB - Dubai Airport", "JFK - New York JFK", "SIN - Singapore Changi"];
 
   const isRoutingComplete = portLoading && portDischarge && shippingDate && commodity.trim();
   const isHazardComplete = isDangerous === "No" || (isDangerous === "Yes" && classification.trim() !== "" && unNo.trim() !== "" && hazardFile !== null);
@@ -210,31 +208,30 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   };
 
   const activeStep = getActiveStep();
-  const RouteIcon = transportMode === "Air" ? Plane : Anchor;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-slate-950/40 backdrop-blur-md pt-28 pb-8 px-4 overflow-hidden text-left selection:bg-emerald-500/10" data-lenis-prevent>
-      <div className="absolute inset-0 -z-10 bg-slate-950/10" onClick={onClose} />
+    <div data-lenis-prevent className="fixed inset-0 z-50 flex items-start justify-center bg-slate-900/40 backdrop-blur-md p-4 pt-24 md:pt-28 overflow-y-auto text-left selection:bg-emerald-500/20">
+      <div className="absolute inset-0 -z-10 bg-slate-900/10" onClick={onClose} />
       
       {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/4 w-[35rem] h-[35rem] bg-emerald-500/8 rounded-full blur-[120px] pointer-events-none animate-blob -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-[35rem] h-[35rem] bg-teal-500/8 rounded-full blur-[120px] pointer-events-none animate-blob animation-delay-4000 -z-10" />
+      <div className="absolute top-1/4 left-1/4 w-[35rem] h-[35rem] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none animate-blob -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[35rem] h-[35rem] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none animate-blob animation-delay-4000 -z-10" />
 
       <motion.div 
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 30, scale: 0.95 }}
         transition={springTransition}
-        className="bg-white/95 border border-slate-200/80 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.7)] w-full max-w-4xl text-slate-800 overflow-hidden flex flex-col max-h-[calc(100vh-9rem)] backdrop-blur-2xl ring-1 ring-slate-200/50"
+        className="bg-white/95 border border-slate-200/80 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] w-full max-w-4xl text-slate-800 overflow-hidden flex flex-col max-h-[calc(100vh-7.5rem)] md:max-h-[calc(100vh-8.5rem)] backdrop-blur-2xl ring-1 ring-white/20"
       >
         {/* Header Section */}
         <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 backdrop-blur-md">
-          <div className="flex items-center gap-3 group/header">
-            <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100 text-emerald-600">
-              <Compass className="w-6 h-6 animate-pulse group-hover/header:rotate-180 transition-transform duration-700 ease-in-out" />
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100/50 text-emerald-600">
+              <Compass className="w-6 h-6 animate-pulse" />
             </div>
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200/60">
                 Progressive Logistics Wizard
               </span>
               <h2 className="text-2xl font-extrabold text-slate-900 mt-1 tracking-tight">Create Quote Request</h2>
@@ -243,7 +240,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
           <button 
             type="button" 
             onClick={onClose} 
-            className="text-slate-500 hover:text-slate-800 font-medium text-lg w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all duration-200 cursor-pointer"
+            className="text-slate-400 hover:text-slate-700 font-medium text-lg w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all duration-200 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -257,7 +254,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
               <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-slate-200 -translate-y-1/2 z-0" />
               {/* Fill Line */}
               <motion.div 
-                className="absolute top-1/2 left-0 h-[2px] bg-gradient-to-r from-emerald-600 to-teal-600 -translate-y-1/2 z-0"
+                className="absolute top-1/2 left-0 h-[2px] bg-gradient-to-r from-emerald-500 to-teal-500 -translate-y-1/2 z-0"
                 initial={{ width: "0%" }}
                 animate={{ width: `${((activeStep - 1) / (steps.length - 1)) * 100}%` }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -275,7 +272,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                         backgroundColor: isCompleted ? "#10b981" : isActive ? "#ffffff" : "#f1f5f9",
                         borderColor: isCompleted ? "#10b981" : isActive ? "#10b981" : "#cbd5e1"
                       }}
-                      className={`w-9 h-9 rounded-full border-2 flex items-center justify-center font-bold text-xs shadow-sm transition-all duration-300 ${isActive ? "shadow-emerald-500/10 text-emerald-600" : isCompleted ? "text-white" : "text-slate-400"}`}
+                      className={`w-9 h-9 rounded-full border-2 flex items-center justify-center font-bold text-xs shadow-md transition-all duration-300 ${isActive ? "shadow-emerald-500/10 text-emerald-600" : isCompleted ? "text-white" : "text-slate-400"}`}
                     >
                       {isCompleted ? (
                         <Check className="w-4 h-4 text-white stroke-[3.5px]" />
@@ -296,8 +293,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
         {/* Dynamic Scrollable Form Body */}
         <div 
           ref={formContainerRef} 
-          className="p-8 overflow-y-auto text-sm max-h-full scroll-smooth"
           data-lenis-prevent
+          className="p-8 overflow-y-auto text-sm max-h-full scroll-smooth"
+          style={{ scrollbarWidth: "thin" }}
         >
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
@@ -315,35 +313,35 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                   {/* Transport Mode */}
                   <div className="space-y-3">
                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Mode of Transportation</label>
-                    <div className="flex gap-2 bg-slate-100 p-1.5 rounded-2xl w-fit border border-slate-200/80 backdrop-blur-md relative">
+                    <div className="flex gap-2 bg-slate-100 p-1.5 rounded-2xl w-fit border border-slate-200 relative">
                       <button
                         type="button" 
                         onClick={() => handleTabChange("Sea")}
-                        className={`relative flex items-center gap-2.5 py-2.5 px-6 font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer z-10 ${transportMode === "Sea" ? "text-white font-extrabold" : "text-slate-600 hover:text-slate-800"}`}
+                        className={`relative flex items-center gap-2.5 py-2.5 px-6 font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer z-10 ${transportMode === "Sea" ? "text-slate-950 font-extrabold" : "text-slate-500 hover:text-slate-800"}`}
                       >
                         {transportMode === "Sea" && (
                           <motion.div
                             layoutId="activeTransport"
-                            className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl -z-10 shadow shadow-emerald-600/10"
+                            className="absolute inset-0 bg-white rounded-xl -z-10 shadow-sm border border-slate-200/50"
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                           />
                         )}
-                        <Ship className={`w-4 h-4 ${transportMode === "Sea" ? "text-white" : "text-slate-500"}`} />
+                        <Ship className={`w-4 h-4 ${transportMode === "Sea" ? "text-emerald-600" : "text-slate-500"}`} />
                         Sea Freight
                       </button>
                       <button
                         type="button" 
                         onClick={() => handleTabChange("Air")}
-                        className={`relative flex items-center gap-2.5 py-2.5 px-6 font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer z-10 ${transportMode === "Air" ? "text-white font-extrabold" : "text-slate-600 hover:text-slate-800"}`}
+                        className={`relative flex items-center gap-2.5 py-2.5 px-6 font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer z-10 ${transportMode === "Air" ? "text-slate-950 font-extrabold" : "text-slate-500 hover:text-slate-800"}`}
                       >
                         {transportMode === "Air" && (
                           <motion.div
                             layoutId="activeTransport"
-                            className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl -z-10 shadow shadow-emerald-600/10"
+                            className="absolute inset-0 bg-white rounded-xl -z-10 shadow-sm border border-slate-200/50"
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                           />
                         )}
-                        <Plane className={`w-4 h-4 ${transportMode === "Air" ? "text-white" : "text-slate-500"}`} />
+                        <Plane className={`w-4 h-4 ${transportMode === "Air" ? "text-emerald-600" : "text-slate-500"}`} />
                         Air Freight
                       </button>
                     </div>
@@ -368,13 +366,13 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                           setIsCountryDropdownOpen(true);
                           setCountrySearch(""); 
                         }}
-                        className="w-full p-3.5 pl-11 pr-10 border border-slate-200 rounded-2xl bg-slate-50 font-semibold text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 outline-none transition-all duration-300 shadow-sm"
+                        className="w-full p-3.5 pl-11 pr-10 border border-slate-200 rounded-2xl bg-slate-50/50 font-semibold text-slate-900 placeholder:text-slate-400 focus:bg-white focus:ring-4 focus:ring-emerald-500/5 focus:border-emerald-600 outline-none transition-all duration-300 shadow-inner"
                       />
                       <div className="absolute left-4 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
                         <Search className="w-4 h-4" />
                       </div>
                       <div 
-                        className="absolute right-4 pointer-events-none text-slate-500 transition-transform duration-300"
+                        className="absolute right-4 pointer-events-none text-slate-400 transition-transform duration-300"
                         style={{ transform: isCountryDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                       >
                         <ChevronDown className="w-4 h-4" />
@@ -389,7 +387,8 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 4, scale: 0.99 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-slate-200 rounded-2xl shadow-[0_20px_40px_rgba(15,23,42,0.08)] z-[100] overflow-y-auto max-h-52 p-2 backdrop-blur-xl ring-1 ring-black/5"
+                          className="absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-slate-200 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.06)] z-[100] overflow-y-auto max-h-52 p-2 ring-1 ring-black/5"
+                          data-lenis-prevent
                         >
                           {filteredCountries.length > 0 ? (
                             filteredCountries.map((country) => (
@@ -402,7 +401,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                   setShipmentType("");
                                   setContainerLoad("");
                                 }}
-                                className={`px-4 py-2.5 text-xs font-semibold rounded-xl cursor-pointer transition-all duration-150 flex items-center justify-between ${selectedCountry === country ? "bg-emerald-55 text-emerald-700 font-bold" : "text-slate-600 hover:bg-slate-50"}`}
+                                className={`px-4 py-2.5 text-xs font-semibold rounded-xl cursor-pointer transition-all duration-150 flex items-center justify-between ${selectedCountry === country ? "bg-emerald-50 text-emerald-700 font-bold" : "text-slate-600 hover:bg-slate-50"}`}
                               >
                                 <span>{country}</span>
                                 {selectedCountry === country && (
@@ -433,9 +432,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                         {/* Containerized Cargo */}
                         <div 
                           onClick={() => { setShipmentType("Containerized"); setContainerLoad(""); }}
-                          className={`p-5 rounded-3xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 hover:scale-[1.01] ${shipmentType === "Containerized" ? "bg-emerald-50/30 border-emerald-500 shadow-[0_4px_20px_rgba(16,185,129,0.05)]" : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/50"}`}
+                          className={`p-5 rounded-3xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 hover:scale-[1.01] ${shipmentType === "Containerized" ? "bg-emerald-50/50 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.05)]" : "bg-slate-50/30 border-slate-200 hover:border-slate-300"}`}
                         >
-                          <div className={`p-3.5 rounded-2xl transition-colors ${shipmentType === "Containerized" ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"}`}>
+                          <div className={`p-3.5 rounded-2xl transition-colors ${shipmentType === "Containerized" ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-500"}`}>
                             <Boxes className="w-6 h-6" />
                           </div>
                           <div className="flex flex-col gap-1 pr-6">
@@ -443,7 +442,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                             <span className="text-xs text-slate-500 leading-normal">Standard general multi-unit container cargo logistics</span>
                           </div>
                           {shipmentType === "Containerized" && (
-                            <div className="ml-auto w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center self-center shadow shadow-emerald-500/30 shrink-0">
+                            <div className="ml-auto w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center self-center shadow shrink-0">
                               <Check className="w-3.5 h-3.5 text-white stroke-[3.5px]" />
                             </div>
                           )}
@@ -452,9 +451,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                         {/* Oversized Cargo */}
                         <div 
                           onClick={() => { setShipmentType("Oversized"); setContainerLoad("FCL"); }}
-                          className={`p-5 rounded-3xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 hover:scale-[1.01] ${shipmentType === "Oversized" ? "bg-emerald-50/30 border-emerald-500 shadow-[0_4px_20px_rgba(16,185,129,0.05)]" : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/50"}`}
+                          className={`p-5 rounded-3xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 hover:scale-[1.01] ${shipmentType === "Oversized" ? "bg-emerald-50/50 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.05)]" : "bg-slate-50/30 border-slate-200 hover:border-slate-300"}`}
                         >
-                          <div className={`p-3.5 rounded-2xl transition-colors ${shipmentType === "Oversized" ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"}`}>
+                          <div className={`p-3.5 rounded-2xl transition-colors ${shipmentType === "Oversized" ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-500"}`}>
                             <Scale className="w-6 h-6" />
                           </div>
                           <div className="flex flex-col gap-1 pr-6">
@@ -462,7 +461,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                             <span className="text-xs text-slate-500 leading-normal">Heavy equipment machinery or out of gauge operations</span>
                           </div>
                           {shipmentType === "Oversized" && (
-                            <div className="ml-auto w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center self-center shadow shadow-emerald-500/30 shrink-0">
+                            <div className="ml-auto w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center self-center shadow shrink-0">
                               <Check className="w-3.5 h-3.5 text-white stroke-[3.5px]" />
                             </div>
                           )}
@@ -478,34 +477,20 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                   {shipmentType === "Containerized" && (
                     <motion.div 
                       layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
-                      className="space-y-4 bg-slate-50/50 p-6 rounded-3xl border border-slate-200"
+                      className="space-y-4 bg-slate-50/50 p-6 rounded-3xl border border-slate-100"
                     >
                       <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Container Load Capacity</label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div 
                           onClick={() => setContainerLoad("FCL")}
-                          className={`relative p-4 rounded-2xl border-2 cursor-pointer font-bold text-xs transition-all duration-300 text-center shadow-sm z-10 ${containerLoad === "FCL" ? "border-emerald-500 text-emerald-700 font-extrabold" : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-600"}`}
+                          className={`p-4 rounded-2xl border-2 cursor-pointer font-bold text-xs transition-all duration-200 text-center shadow-sm ${containerLoad === "FCL" ? "border-emerald-500 bg-emerald-50 text-emerald-700 font-extrabold" : "border-slate-200 bg-white hover:border-slate-300 text-slate-600"}`}
                         >
-                          {containerLoad === "FCL" && (
-                            <motion.div
-                              layoutId="activeContainerLoad"
-                              className="absolute inset-0 bg-emerald-50 rounded-2xl -z-10"
-                              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            />
-                          )}
                           Full Container Load (FCL)
                         </div>
                         <div 
                           onClick={() => setContainerLoad("LCL")}
-                          className={`relative p-4 rounded-2xl border-2 cursor-pointer font-bold text-xs transition-all duration-300 text-center shadow-sm z-10 ${containerLoad === "LCL" ? "border-emerald-500 text-emerald-700 font-extrabold" : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-600"}`}
+                          className={`p-4 rounded-2xl border-2 cursor-pointer font-bold text-xs transition-all duration-200 text-center shadow-sm ${containerLoad === "LCL" ? "border-emerald-500 bg-emerald-50 text-emerald-700 font-extrabold" : "border-slate-200 bg-white hover:border-slate-300 text-slate-600"}`}
                         >
-                          {containerLoad === "LCL" && (
-                            <motion.div
-                              layoutId="activeContainerLoad"
-                              className="absolute inset-0 bg-emerald-50 rounded-2xl -z-10"
-                              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            />
-                          )}
                           Less Container Load (LCL)
                         </div>
                       </div>
@@ -520,48 +505,48 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                       layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
                       className="grid grid-cols-1 md:grid-cols-4 gap-4 border-t border-slate-100 pt-6"
                     >
-                      {/* Port/Airport of Loading */}
+                      {/* Port of Loading */}
                       <div className="flex flex-col gap-2 relative">
                         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                          <RouteIcon className="w-3.5 h-3.5 text-emerald-600" /> {transportMode === "Air" ? "Airport of Loading *" : "Port of Loading *"}
+                          <Anchor className="w-3.5 h-3.5 text-emerald-600" /> Port of Loading *
                         </label>
-                        <div className="relative flex items-center group">
+                        <div className="relative flex items-center">
                           <select 
                             value={portLoading} 
                             onChange={(e) => setPortLoading(e.target.value)} 
-                            className="w-full p-3.5 pl-10 pr-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 appearance-none cursor-pointer transition-all duration-300"
+                            className="w-full p-3.5 pl-10 pr-10 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 appearance-none cursor-pointer transition-all duration-300"
                           >
-                            <option value="" className="bg-white text-slate-400">{transportMode === "Air" ? "Select Airport" : "Select Port"}</option>
-                            {(transportMode === "Air" ? loadingAirports : loadingPorts).map(p => <option key={p} value={p} className="bg-white text-slate-800">{p}</option>)}
+                            <option value="" className="bg-white text-slate-400">Select Port</option>
+                            {loadingPorts.map(p => <option key={p} value={p} className="bg-white text-slate-800">{p}</option>)}
                           </select>
-                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
-                            <RouteIcon className="w-4 h-4 group-focus-within:rotate-12 group-focus-within:scale-110 transition-all duration-300" />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                            <Anchor className="w-4 h-4" />
                           </div>
-                          <div className="absolute right-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
-                            <ChevronDown className="w-4 h-4 group-focus-within:translate-y-0.5 transition-all duration-300" />
+                          <div className="absolute right-3.5 text-slate-400 pointer-events-none">
+                            <ChevronDown className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
 
-                      {/* Port/Airport of Discharge */}
+                      {/* Port of Discharge */}
                       <div className="flex flex-col gap-2 relative">
                         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                          <RouteIcon className="w-3.5 h-3.5 text-teal-600" /> {transportMode === "Air" ? "Airport of Discharge *" : "Port of Discharge *"}
+                          <Anchor className="w-3.5 h-3.5 text-teal-650 text-teal-600" /> Port of Discharge *
                         </label>
-                        <div className="relative flex items-center group">
+                        <div className="relative flex items-center">
                           <select 
                             value={portDischarge} 
                             onChange={(e) => setPortDischarge(e.target.value)} 
-                            className="w-full p-3.5 pl-10 pr-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 appearance-none cursor-pointer transition-all duration-300"
+                            className="w-full p-3.5 pl-10 pr-10 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 appearance-none cursor-pointer transition-all duration-300"
                           >
-                            <option value="" className="bg-white text-slate-400">{transportMode === "Air" ? "Select Airport" : "Select Port"}</option>
-                            {(transportMode === "Air" ? dischargeAirports : dischargePorts).map(p => <option key={p} value={p} className="bg-white text-slate-800">{p}</option>)}
+                            <option value="" className="bg-white text-slate-400">Select Port</option>
+                            {dischargePorts.map(p => <option key={p} value={p} className="bg-white text-slate-800">{p}</option>)}
                           </select>
-                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-teal-600 transition-colors">
-                            <RouteIcon className="w-4 h-4 group-focus-within:rotate-12 group-focus-within:scale-110 transition-all duration-300" />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                            <Anchor className="w-4 h-4" />
                           </div>
-                          <div className="absolute right-3.5 text-slate-400 pointer-events-none group-focus-within:text-teal-650 transition-colors">
-                            <ChevronDown className="w-4 h-4 group-focus-within:translate-y-0.5 transition-all duration-300" />
+                          <div className="absolute right-3.5 text-slate-400 pointer-events-none">
+                            <ChevronDown className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
@@ -571,12 +556,12 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
                           <Calendar className="w-3.5 h-3.5 text-emerald-600" /> Shipping Date *
                         </label>
-                        <div className="relative flex items-center group">
+                        <div className="relative flex items-center">
                           <input 
                             type="date" 
                             value={shippingDate} 
                             onChange={(e) => setShippingDate(e.target.value)} 
-                            className="w-full p-3 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                            className="w-full p-3.5 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
                           />
                         </div>
                       </div>
@@ -586,16 +571,16 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
                           <FileText className="w-3.5 h-3.5 text-emerald-600" /> Commodity *
                         </label>
-                        <div className="relative flex items-center group">
+                        <div className="relative flex items-center">
                           <input 
                             type="text" 
                             placeholder="Cargo description..." 
                             value={commodity} 
                             onChange={(e) => setCommodity(e.target.value)} 
-                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
                           />
-                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
-                            <FileText className="w-4 h-4 group-focus-within:scale-110 transition-all duration-300" />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                            <FileText className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
@@ -611,47 +596,54 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                       className="space-y-3 border-t border-slate-100 pt-6"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
-                        {/* Option buttons */}
+                        {/* Radio selection */}
                         <div className="md:col-span-3 flex flex-col gap-3">
                           <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block flex items-center gap-1.5">
-                            <AlertTriangle className="w-3.5 h-3.5 text-amber-600" /> Is the Commodity Dangerous / Hazardous?
+                            <AlertTriangle className="w-3.5 h-3.5 text-amber-600" /> Is the Commodity Dangerous ?
                           </label>
-                          <div className="flex gap-4 h-[46px] items-center">
-                            <button 
-                              type="button" 
-                              onClick={() => setIsDangerous("Yes")} 
-                              className={`relative flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-extrabold border-2 transition-all duration-300 cursor-pointer z-10 ${isDangerous === "Yes" ? "border-rose-500 text-rose-700 shadow-[0_4px_12px_rgba(239,68,68,0.05)]" : "bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-100"}`}
-                            >
-                              {isDangerous === "Yes" && (
-                                <motion.div
-                                  layoutId="activeDangerous"
-                                  className="absolute inset-0 bg-rose-50 rounded-2xl -z-10"
-                                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                />
-                              )}
-                              <AlertTriangle className={`w-4 h-4 transition-colors ${isDangerous === "Yes" ? "text-rose-600" : "text-rose-500"}`} />
-                              Yes
-                            </button>
-                            <button 
-                              type="button" 
-                              onClick={() => {
-                                setIsDangerous("No");
-                                setClassification("");
-                                setUnNo("");
-                                setHazardFile(null);
-                              }} 
-                              className={`relative flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-extrabold border-2 transition-all duration-300 cursor-pointer z-10 ${isDangerous === "No" ? "border-emerald-500 text-emerald-700 shadow-[0_4px_12px_rgba(16,185,129,0.05)]" : "bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-100"}`}
-                            >
-                              {isDangerous === "No" && (
-                                <motion.div
-                                  layoutId="activeDangerous"
-                                  className="absolute inset-0 bg-emerald-50 rounded-2xl -z-10"
-                                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                />
-                              )}
-                              <ShieldCheck className={`w-4 h-4 transition-colors ${isDangerous === "No" ? "text-emerald-600" : "text-emerald-500"}`} />
-                              No
-                            </button>
+                          <div className="flex items-center gap-6 h-[46px]">
+                            <label className="flex items-center gap-2.5 font-bold text-xs text-slate-700 cursor-pointer group select-none">
+                              <input 
+                                type="radio" 
+                                name="isDangerous" 
+                                checked={isDangerous === "Yes"} 
+                                onChange={() => setIsDangerous("Yes")} 
+                                className="sr-only"
+                              />
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${isDangerous === "Yes" ? "border-emerald-500 bg-emerald-50" : "border-slate-300 bg-slate-50/50"}`}>
+                                {isDangerous === "Yes" && (
+                                  <motion.div 
+                                    layoutId="dangerRadioDot"
+                                    className="w-2.5 h-2.5 rounded-full bg-emerald-600" 
+                                  />
+                                )}
+                              </div>
+                              <span>Yes</span>
+                            </label>
+                            
+                            <label className="flex items-center gap-2.5 font-bold text-xs text-slate-700 cursor-pointer group select-none">
+                              <input 
+                                type="radio" 
+                                name="isDangerous" 
+                                checked={isDangerous === "No"} 
+                                onChange={() => {
+                                  setIsDangerous("No");
+                                  setClassification("");
+                                  setUnNo("");
+                                  setHazardFile(null);
+                                }} 
+                                className="sr-only"
+                              />
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${isDangerous === "No" ? "border-emerald-500 bg-emerald-50" : "border-slate-300 bg-slate-50/50"}`}>
+                                {isDangerous === "No" && (
+                                  <motion.div 
+                                    layoutId="dangerRadioDot"
+                                    className="w-2.5 h-2.5 rounded-full bg-emerald-600" 
+                                  />
+                                )}
+                              </div>
+                              <span>No</span>
+                            </label>
                           </div>
                         </div>
 
@@ -664,7 +656,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -10 }}
-                                className="md:col-span-3 flex flex-col gap-2 relative group"
+                                className="md:col-span-3 flex flex-col gap-2"
                               >
                                 <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                                   Classification *
@@ -674,7 +666,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                   placeholder="e.g. Class 3"
                                   value={classification}
                                   onChange={(e) => setClassification(e.target.value)}
-                                  className="w-full p-3.5 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                                  className="w-full p-3.5 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
                                 />
                               </motion.div>
 
@@ -683,7 +675,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -10 }}
-                                className="md:col-span-3 flex flex-col gap-2 relative group"
+                                className="md:col-span-3 flex flex-col gap-2"
                               >
                                 <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                                   UN No *
@@ -693,7 +685,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                   placeholder="e.g. UN 1263"
                                   value={unNo}
                                   onChange={(e) => setUnNo(e.target.value)}
-                                  className="w-full p-3.5 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                                  className="w-full p-3.5 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
                                 />
                               </motion.div>
 
@@ -702,7 +694,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -10 }}
-                                className="md:col-span-3 flex flex-col gap-2 relative"
+                                className="md:col-span-3 flex flex-col gap-2"
                               >
                                 <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                                   Upload DGD/MSDS/COA/PC etc.*
@@ -716,7 +708,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                   />
                                   <label
                                     htmlFor="hazard-file-upload"
-                                    className="w-full flex items-center justify-between p-3.5 border border-slate-200 bg-slate-50 rounded-2xl focus-within:bg-white focus-within:border-emerald-500 focus-within:ring-4 focus-within:ring-emerald-500/10 cursor-pointer transition-all duration-300"
+                                    className="w-full flex items-center justify-between p-3.5 border border-slate-200 bg-slate-50/50 rounded-2xl focus-within:bg-white focus-within:border-emerald-600 focus-within:ring-4 focus-within:ring-emerald-500/5 cursor-pointer transition-all duration-300"
                                   >
                                     <span className="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-xl transition-all border border-slate-200 select-none">
                                       Choose File
@@ -749,7 +741,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                             key={term} 
                             type="button" 
                             onClick={() => setIncoTerm(term)}
-                            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl border-2 transition-all duration-200 cursor-pointer ${incoTerm === term ? "bg-emerald-50 text-emerald-700 border-emerald-500 shadow-[0_4px_12px_rgba(16,185,129,0.05)] scale-[1.03]" : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300 hover:text-slate-850 hover:bg-slate-100"}`}
+                            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl border-2 transition-all duration-200 cursor-pointer ${incoTerm === term ? "bg-emerald-50 text-emerald-700 border-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.03)] scale-[1.03]" : "bg-slate-50/50 text-slate-600 border-slate-200 hover:border-slate-300 hover:text-slate-900"}`}
                           >
                             {term}
                           </button>
@@ -764,7 +756,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                   {incoTerm && (
                     <motion.div 
                       layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
-                      className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/50 p-6 rounded-3xl border border-slate-200"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/50 p-6 rounded-3xl border border-slate-100"
                     >
                       {/* Origin Requirements */}
                       <div className="space-y-4">
@@ -777,7 +769,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                             return (
                               <label 
                                 key={req} 
-                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 cursor-pointer select-none transition-all duration-205 ${isChecked ? "bg-emerald-50 border-emerald-500 text-emerald-700" : "bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50"}`}
+                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 cursor-pointer select-none transition-all duration-200 ${isChecked ? "bg-emerald-50 border-emerald-500 text-emerald-700" : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"}`}
                               >
                                 <input 
                                   type="checkbox" 
@@ -801,7 +793,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                       {/* Destination Requirements */}
                       <div className="space-y-4">
                         <h4 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                          <Sliders className="w-4 h-4 text-teal-650" /> Destination Requirements
+                          <Sliders className="w-4 h-4 text-teal-600" /> Destination Requirements
                         </h4>
                         <div className="flex flex-wrap gap-3 text-xs font-bold text-slate-600">
                           {["trucking", "clearance", "insurance"].map((req) => {
@@ -809,7 +801,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                             return (
                               <label 
                                 key={req} 
-                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 cursor-pointer select-none transition-all duration-205 ${isChecked ? "bg-teal-50 border-teal-500 text-teal-700" : "bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50"}`}
+                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 cursor-pointer select-none transition-all duration-200 ${isChecked ? "bg-teal-50 border-teal-500 text-teal-700" : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"}`}
                               >
                                 <input 
                                   type="checkbox" 
@@ -842,36 +834,36 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                     >
                       <div className="flex flex-col gap-2 relative">
                         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 text-emerald-600 animate-pulse" /> Pickup Address *
+                          <MapPin className="w-3.5 h-3.5 text-emerald-600" /> Pickup Address *
                         </label>
-                        <div className="relative flex items-center group">
+                        <div className="relative flex items-center">
                           <input 
                             type="text" 
                             placeholder="Complete address or postal code..." 
                             value={pickupAddress} 
                             onChange={(e) => setPickupAddress(e.target.value)} 
-                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
                           />
-                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
-                            <MapPin className="w-4 h-4 group-focus-within:-translate-y-0.5 group-focus-within:scale-110 transition-all duration-300" />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                            <MapPin className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
                       
                       <div className="flex flex-col gap-2 relative">
                         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 text-teal-600 animate-pulse" /> Delivery Address *
+                          <MapPin className="w-3.5 h-3.5 text-teal-600" /> Delivery Address *
                         </label>
-                        <div className="relative flex items-center group">
+                        <div className="relative flex items-center">
                           <input 
                             type="text" 
                             placeholder="Final drop destination unloading details..." 
                             value={deliveryAddress} 
                             onChange={(e) => setDeliveryAddress(e.target.value)} 
-                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50/50 rounded-2xl focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
                           />
-                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-teal-650 transition-colors">
-                            <MapPin className="w-4 h-4 group-focus-within:-translate-y-0.5 group-focus-within:scale-110 transition-all duration-300" />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                            <MapPin className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
@@ -887,7 +879,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                       className="space-y-4 border-t border-slate-100 pt-6"
                     >
                       <label className="text-[11px] font-bold text-slate-500 uppercase block tracking-wider flex items-center gap-1.5">
-                        <Boxes className="w-4 h-4 text-emerald-600" /> {transportMode === "Air" ? "Air Cargo Unit Metrics & Load Matrix" : "Container Specification Metrics & Load Matrix"}
+                        <Boxes className="w-4 h-4 text-emerald-600" /> Container Specification Metrics & Load Matrix
                       </label>
                       
                       <div className="space-y-4">
@@ -899,50 +891,31 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                             exit={{ opacity: 0, scale: 0.98 }}
                             transition={springTransition}
                             key={row.id} 
-                            className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 relative shadow-sm hover:border-slate-300/80 transition-all duration-300"
+                            className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200/80 relative shadow-sm hover:border-slate-300/80 transition-all duration-300"
                           >
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
                               
                               {/* Type Selection */}
                               <div className="md:col-span-5 flex flex-col gap-2">
-                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                                  {transportMode === "Air" ? "Air Cargo Unit Type" : "Container Specification Type"}
-                                </span>
+                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Container Specification Type</span>
                                 <div className="relative flex items-center">
                                   <select
                                     value={row.type}
                                     onChange={(e) => handleUpdateRow(row.id, { type: e.target.value })}
-                                    className="w-full p-3.5 pl-10 pr-10 border border-slate-200 rounded-2xl text-xs bg-white text-slate-800 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none font-bold shadow-sm cursor-pointer appearance-none transition-all duration-300"
+                                    className="w-full p-3.5 pl-10 pr-10 border border-slate-200 rounded-2xl text-xs bg-white text-slate-800 focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none font-bold shadow-sm cursor-pointer appearance-none transition-all duration-300"
                                   >
-                                    {transportMode === "Air" ? (
-                                      <>
-                                        <option value="" className="bg-white text-slate-400">-- Select Air Cargo Unit --</option>
-                                        <optgroup label="Standard Air ULD Containers" className="bg-white text-emerald-600 font-extrabold">
-                                          <option value="LD3 - Standard ULD Container" className="bg-white text-slate-800 font-normal">LD3 - Standard ULD Container</option>
-                                          <option value="LD7 - Double-width ULD" className="bg-white text-slate-800 font-normal">LD7 - Double-width ULD</option>
-                                          <option value="LD11 - Semi-pallet ULD" className="bg-white text-slate-800 font-normal">LD11 - Semi-pallet ULD</option>
-                                        </optgroup>
-                                        <optgroup label="Air Cargo Pallets & Loose" className="bg-white text-teal-600 font-extrabold">
-                                          <option value="PMC - Main Deck Pallet" className="bg-white text-slate-800 font-normal">PMC - Main Deck Pallet</option>
-                                          <option value="Loose Cargo - Cartons / Boxes" className="bg-white text-slate-800 font-normal">Loose Cargo - Cartons / Boxes</option>
-                                        </optgroup>
-                                      </>
-                                    ) : (
-                                      <>
-                                        <option value="" className="bg-white text-slate-400">-- Select Structural Type --</option>
-                                        <optgroup label="Specialized Open Top & Flat Racks" className="bg-white text-emerald-600 font-extrabold">
-                                          <option value="20'OT - Open Top" className="bg-white text-slate-800 font-normal">20'OT - Open Top</option>
-                                          <option value="40'OT HC - Open Top High Cube" className="bg-white text-slate-800 font-normal">40'OT HC - Open Top High Cube</option>
-                                          <option value="20'FR - Flat Rack" className="bg-white text-slate-800 font-normal">20'FR - Flat Rack</option>
-                                          <option value="40'FR HC - Flat Rack High Cube" className="bg-white text-slate-800 font-normal">40'FR HC - Flat Rack High Cube</option>
-                                        </optgroup>
-                                        <optgroup label="Standard Logistics Equipment" className="bg-white text-teal-600 font-extrabold">
-                                          <option value="20GP - General Purpose" className="bg-white text-slate-800 font-normal">20GP - General Purpose</option>
-                                          <option value="40HC - High Cube" className="bg-white text-slate-800 font-normal">40HC - High Cube</option>
-                                          <option value="20RF - Reefer Container" className="bg-white text-slate-800 font-normal">20RF - Reefer Container</option>
-                                        </optgroup>
-                                      </>
-                                    )}
+                                    <option value="" className="bg-white text-slate-400">-- Select Structural Type --</option>
+                                    <optgroup label="Specialized Open Top & Flat Racks" className="bg-white text-emerald-600 font-extrabold">
+                                      <option value="20'OT - Open Top" className="bg-white text-slate-800 font-normal">20'OT - Open Top</option>
+                                      <option value="40'OT HC - Open Top High Cube" className="bg-white text-slate-800 font-normal">40'OT HC - Open Top High Cube</option>
+                                      <option value="20'FR - Flat Rack" className="bg-white text-slate-800 font-normal">20'FR - Flat Rack</option>
+                                      <option value="40'FR HC - Flat Rack High Cube" className="bg-white text-slate-800 font-normal">40'FR HC - Flat Rack High Cube</option>
+                                    </optgroup>
+                                    <optgroup label="Standard Logistics Equipment" className="bg-white text-teal-600 font-extrabold">
+                                      <option value="20GP - General Purpose" className="bg-white text-slate-800 font-normal">20GP - General Purpose</option>
+                                      <option value="40HC - High Cube" className="bg-white text-slate-800 font-normal">40HC - High Cube</option>
+                                      <option value="20RF - Reefer Container" className="bg-white text-slate-800 font-normal">20RF - Reefer Container</option>
+                                    </optgroup>
                                   </select>
                                   <div className="absolute left-3.5 text-slate-400 pointer-events-none">
                                     <Boxes className="w-4 h-4" />
@@ -955,15 +928,13 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
 
                               {/* Quantity */}
                               <div className="md:col-span-3 flex flex-col gap-2">
-                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                                  {transportMode === "Air" ? "No of Units *" : "No of Containers *"}
-                                </span>
+                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">No of Containers *</span>
                                 <input
                                   type="number" 
                                   min={1} 
                                   value={row.quantity}
                                   onChange={(e) => handleUpdateRow(row.id, { quantity: parseInt(e.target.value) || 1 })}
-                                  className="w-full p-3.5 border border-slate-200 rounded-2xl text-xs text-center bg-white text-slate-800 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none shadow-sm font-bold transition-all duration-300"
+                                  className="w-full p-3.5 border border-slate-200 rounded-2xl text-xs text-center bg-white text-slate-800 focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none shadow-sm font-bold transition-all duration-300"
                                 />
                               </div>
 
@@ -978,7 +949,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                     placeholder="0.00" 
                                     value={row.weight}
                                     onChange={(e) => handleUpdateRow(row.id, { weight: e.target.value })}
-                                    className="w-full p-3.5 pr-12 border border-slate-200 rounded-2xl text-xs text-right bg-white text-slate-800 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none shadow-sm font-bold transition-all duration-300"
+                                    className="w-full p-3.5 pr-12 border border-slate-200 rounded-2xl text-xs text-right bg-white text-slate-800 focus:bg-white focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/5 outline-none shadow-sm font-bold transition-all duration-300"
                                   />
                                   <div className="absolute right-3.5 text-slate-400 pointer-events-none font-bold text-[10px]">
                                     KG
@@ -992,7 +963,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                                   type="button" 
                                   disabled={containers.length === 1}
                                   onClick={() => handleRemoveRow(row.id)}
-                                  className="text-rose-500 hover:bg-rose-50 w-11 h-11 rounded-2xl flex items-center justify-center transition-all disabled:opacity-20 text-xs font-bold border border-slate-200 hover:border-rose-350 cursor-pointer disabled:cursor-not-allowed"
+                                  className="text-rose-600 hover:bg-rose-50 w-11 h-11 rounded-2xl flex items-center justify-center transition-all disabled:opacity-20 text-xs font-bold border border-slate-200 hover:border-rose-300 cursor-pointer disabled:cursor-not-allowed"
                                   title="Remove Cargo Param Row"
                                 >
                                   <Trash2 className="w-4.5 h-4.5" />
@@ -1007,9 +978,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                       <button
                         type="button" 
                         onClick={handleAddRow}
-                        className="w-full py-4 border-2 border-dashed border-slate-200 hover:border-emerald-500 text-slate-500 hover:text-emerald-600 font-extrabold text-xs rounded-3xl hover:bg-emerald-50/50 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full py-4 border-2 border-dashed border-slate-200 hover:border-emerald-500/40 text-slate-500 hover:text-emerald-600 font-extrabold text-xs rounded-3xl hover:bg-emerald-50 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                       >
-                        <Plus className="w-4 h-4" /> {transportMode === "Air" ? "Append Another Cargo Unit Row" : "Append Another Cargo Parameter Row"}
+                        <Plus className="w-4 h-4" /> Append Another Cargo Parameter Row
                       </button>
 
                       {/* Submission footer */}
@@ -1024,7 +995,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                         <button
                           type="submit"
                           disabled={!containers[0].type}
-                          className="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-xs rounded-2xl hover:from-emerald-500 hover:to-teal-500 shadow hover:shadow-md transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-40 disabled:pointer-events-none cursor-pointer"
+                          className="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs rounded-2xl hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-500/10 transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-40 disabled:pointer-events-none cursor-pointer"
                         >
                           Complete & Submit Quote ➔
                         </button>
@@ -1053,7 +1024,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
 
                 <div className="space-y-2">
                   <h3 className="text-2xl font-black text-slate-900 tracking-tight">Request Submitted!</h3>
-                  <p className="text-slate-650 leading-relaxed text-sm">
+                  <p className="text-slate-500 leading-relaxed text-sm">
                     Thank you. Your logistics quote request has been registered in our system. 
                     Our operations team is analyzing your routing parameters and will reach out with a custom quote within 2 hours.
                   </p>
@@ -1063,7 +1034,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
                   <button
                     type="button"
                     onClick={onClose}
-                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-xs rounded-2xl hover:from-emerald-500 hover:to-teal-500 shadow transition-all transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs rounded-2xl hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-500/10 transition-all transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                   >
                     Finish & Close Wizard
                   </button>
@@ -1076,4 +1047,3 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
     </div>
   );
 }
-

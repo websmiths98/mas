@@ -2,6 +2,27 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Compass, 
+  X, 
+  Ship, 
+  Plane, 
+  Search, 
+  Check, 
+  Boxes, 
+  Scale, 
+  Anchor, 
+  Calendar, 
+  FileText, 
+  AlertTriangle, 
+  ShieldCheck, 
+  Sliders, 
+  MapPin, 
+  Trash2, 
+  Plus, 
+  ChevronDown,
+  CheckCircle2
+} from "lucide-react";
 
 interface GetQuoteFormProps {
   onClose: () => void;
@@ -12,29 +33,33 @@ interface ContainerRow {
   type: string;
   quantity: number;
   weight: string;
-  length: string;
-  width: string;
-  height: string;
-  unit: string;
-  file: File | null;
 }
 
-// Apple-inspired smooth spring physics configuration matrix
 const springTransition = {
   type: "spring",
-  stiffness: 140,
-  damping: 22,
-  mass: 1
+  stiffness: 150,
+  damping: 24,
+  mass: 0.9
 };
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 16, scale: 0.99 },
   visible: { 
     opacity: 1, 
-    y: 0,
+    y: 0, 
+    scale: 1,
     transition: springTransition
-  }
+  },
+  exit: { opacity: 0, y: -8, scale: 0.99, transition: { duration: 0.15 } }
 };
+
+const steps = [
+  { id: 1, label: "Destinations" },
+  { id: 2, label: "Cargo Type" },
+  { id: 3, label: "Routing & Hazard" },
+  { id: 4, label: "Incoterms & Addons" },
+  { id: 5, label: "Addresses & Specs" }
+];
 
 export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   const formContainerRef = useRef<HTMLDivElement>(null);
@@ -54,6 +79,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   const [commodity, setCommodity] = useState("");
   
   const [isDangerous, setIsDangerous] = useState<"Yes" | "No" | "">("");
+  const [classification, setClassification] = useState("");
+  const [unNo, setUnNo] = useState("");
+  const [hazardFile, setHazardFile] = useState<File | null>(null);
   const [incoTerm, setIncoTerm] = useState("");
   const [originReqSelected, setOriginReqSelected] = useState(false);
   const [originReq, setOriginReq] = useState({ trucking: false, clearance: false, insurance: false });
@@ -62,8 +90,11 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   const [pickupAddress, setPickupAddress] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Cleaned up Row State Structure (Matching the video design items)
   const [containers, setContainers] = useState<ContainerRow[]>([
-    { id: Date.now(), type: "", quantity: 1, weight: "", length: "", width: "", height: "", unit: "CM", file: null }
+    { id: Date.now(), type: "", quantity: 1, weight: "" }
   ]);
 
   const countries = ["Algeria", "Argentina", "Bahrain", "India", "Indonesia", "United Arab Emirates", "United Kingdom", "United States"];
@@ -71,6 +102,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   const dischargePorts = ["INBLS - BALASORE CONCOR ICD", "INBNS6 - AFS Kapashera, Bijwasan Road"];
 
   const isRoutingComplete = portLoading && portDischarge && shippingDate && commodity.trim();
+  const isHazardComplete = isDangerous === "No" || (isDangerous === "Yes" && classification.trim() !== "" && unNo.trim() !== "" && hazardFile !== null);
   const isAddressesComplete = pickupAddress.trim() && deliveryAddress.trim();
 
   const displayInputValue = isCountryDropdownOpen ? countrySearch : selectedCountry;
@@ -102,6 +134,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
     setShippingDate("");
     setCommodity("");
     setIsDangerous("");
+    setClassification("");
+    setUnNo("");
+    setHazardFile(null);
     setIncoTerm("");
     setOriginReqSelected(false);
     setOriginReq({ trucking: false, clearance: false, insurance: false });
@@ -109,7 +144,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
     setPickupAddress("");
     setDeliveryAddress("");
     setContainers([
-      { id: Date.now(), type: "", quantity: 1, weight: "", length: "", width: "", height: "", unit: "CM", file: null }
+      { id: Date.now(), type: "", quantity: 1, weight: "" }
     ]);
 
     if (formContainerRef.current) {
@@ -134,6 +169,9 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
     containerLoad, 
     isRoutingComplete, 
     isDangerous, 
+    classification,
+    unNo,
+    hazardFile,
     incoTerm, 
     originReqSelected, 
     isAddressesComplete,
@@ -142,7 +180,7 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
   ]);
 
   const handleAddRow = () => {
-    setContainers([...containers, { id: Date.now(), type: "", quantity: 1, weight: "", length: "", width: "", height: "", unit: "CM", file: null }]);
+    setContainers([...containers, { id: Date.now(), type: "", quantity: 1, weight: "" }]);
   };
 
   const handleUpdateRow = (id: number, fields: Partial<ContainerRow>) => {
@@ -157,476 +195,861 @@ export default function GetQuoteForm({ onClose }: GetQuoteFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Quote Request Submitted Successfully!");
-    onClose();
+    setIsSubmitted(true);
   };
 
+  // Determine active step based on progression
+  const getActiveStep = () => {
+    if (!selectedCountry) return 1;
+    if (!containerLoad) return 2;
+    if (!isRoutingComplete || isDangerous === "" || (isDangerous === "Yes" && !isHazardComplete)) return 3;
+    if (!incoTerm || !originReqSelected) return 4;
+    return 5;
+  };
+
+  const activeStep = getActiveStep();
+
   return (
-    <div className="fixed top-[4rem] bottom-0 left-0 right-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 overflow-y-auto text-left">
-      <div className="absolute inset-0 -z-10" onClick={onClose} />
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-slate-950/40 backdrop-blur-md pt-28 pb-8 px-4 overflow-hidden text-left selection:bg-emerald-500/10" data-lenis-prevent>
+      <div className="absolute inset-0 -z-10 bg-slate-950/10" onClick={onClose} />
+      
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 left-1/4 w-[35rem] h-[35rem] bg-emerald-500/8 rounded-full blur-[120px] pointer-events-none animate-blob -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[35rem] h-[35rem] bg-teal-500/8 rounded-full blur-[120px] pointer-events-none animate-blob animation-delay-4000 -z-10" />
 
       <motion.div 
-        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+        exit={{ opacity: 0, y: 30, scale: 0.95 }}
         transition={springTransition}
-        className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl text-gray-800 overflow-hidden flex flex-col max-h-[85vh]"
+        className="bg-white/95 border border-slate-200/80 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.7)] w-full max-w-4xl text-slate-800 overflow-hidden flex flex-col max-h-[calc(100vh-9rem)] backdrop-blur-2xl ring-1 ring-slate-200/50"
       >
-        {/* Header Module */}
-        <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50 backdrop-blur-md">
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600">MAS Logistics Step Process</h3>
-            <h2 className="text-2xl font-extrabold text-gray-900 mt-0.5">Request a Quote</h2>
+        {/* Header Section */}
+        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 backdrop-blur-md">
+          <div className="flex items-center gap-3 group/header">
+            <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100 text-emerald-600">
+              <Compass className="w-6 h-6 animate-pulse group-hover/header:rotate-180 transition-transform duration-700 ease-in-out" />
+            </div>
+            <div>
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+                Progressive Logistics Wizard
+              </span>
+              <h2 className="text-2xl font-extrabold text-slate-900 mt-1 tracking-tight">Create Quote Request</h2>
+            </div>
           </div>
-          <button type="button" onClick={onClose} className="text-gray-400 hover:text-gray-600 font-bold text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all duration-200">
-            &times;
+          <button 
+            type="button" 
+            onClick={onClose} 
+            className="text-slate-500 hover:text-slate-800 font-medium text-lg w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all duration-200 cursor-pointer"
+          >
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Scroll Form Area */}
+        {/* Steps Timeline (Hidden on submission screen) */}
+        {!isSubmitted && (
+          <div className="px-8 py-5 bg-slate-50/50 border-b border-slate-100 hidden md:block select-none">
+            <div className="flex justify-between items-center relative">
+              {/* Background Line */}
+              <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-slate-200 -translate-y-1/2 z-0" />
+              {/* Fill Line */}
+              <motion.div 
+                className="absolute top-1/2 left-0 h-[2px] bg-gradient-to-r from-emerald-600 to-teal-600 -translate-y-1/2 z-0"
+                initial={{ width: "0%" }}
+                animate={{ width: `${((activeStep - 1) / (steps.length - 1)) * 100}%` }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+              
+              {steps.map((step) => {
+                const isCompleted = activeStep > step.id;
+                const isActive = activeStep === step.id;
+                return (
+                  <div key={step.id} className="flex flex-col items-center relative z-10">
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        scale: isActive ? 1.15 : 1,
+                        backgroundColor: isCompleted ? "#10b981" : isActive ? "#ffffff" : "#f1f5f9",
+                        borderColor: isCompleted ? "#10b981" : isActive ? "#10b981" : "#cbd5e1"
+                      }}
+                      className={`w-9 h-9 rounded-full border-2 flex items-center justify-center font-bold text-xs shadow-sm transition-all duration-300 ${isActive ? "shadow-emerald-500/10 text-emerald-600" : isCompleted ? "text-white" : "text-slate-400"}`}
+                    >
+                      {isCompleted ? (
+                        <Check className="w-4 h-4 text-white stroke-[3.5px]" />
+                      ) : (
+                        <span>{step.id}</span>
+                      )}
+                    </motion.div>
+                    <span className={`text-[10px] font-bold mt-2.5 uppercase tracking-wider transition-colors duration-300 ${isActive ? "text-emerald-600" : isCompleted ? "text-slate-700" : "text-slate-400"}`}>
+                      {step.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Dynamic Scrollable Form Body */}
         <div 
           ref={formContainerRef} 
-          className="p-6 overflow-y-auto text-sm max-h-full scroll-smooth"
-          style={{ scrollbarWidth: "thin" }}
+          className="p-8 overflow-y-auto text-sm max-h-full scroll-smooth"
+          data-lenis-prevent
         >
-          {/* Form wrapper acts as an coordinated layout group container */}
-          <form onSubmit={handleSubmit} className="space-y-6 pb-40">
-            
-            {/* STEP 1: Transport Mode selection links */}
-            <div className="flex gap-4 border-b border-gray-200 pb-3">
-              <button
-                type="button" 
-                onClick={() => handleTabChange("Sea")}
-                className={`flex items-center gap-2 pb-2 px-4 font-bold text-sm transition-all relative border-b-2 ${transportMode === "Sea" ? "border-emerald-600 text-emerald-600" : "border-transparent text-gray-400"}`}
+          <AnimatePresence mode="wait">
+            {!isSubmitted ? (
+              <motion.form 
+                key="quote-form"
+                onSubmit={handleSubmit} 
+                className="space-y-8 pb-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
-                🚢 Sea Freight
-              </button>
-              <button
-                type="button" 
-                onClick={() => handleTabChange("Air")}
-                className={`flex items-center gap-2 pb-2 px-4 font-bold text-sm transition-all relative border-b-2 ${transportMode === "Air" ? "border-emerald-600 text-emerald-600" : "border-transparent text-gray-400"}`}
-              >
-                ✈️ Air Freight
-              </button>
-            </div>
+                {/* STEP 1 & 2: Transport Mode & Destination Country */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                  
+                  {/* Transport Mode */}
+                  <div className="space-y-3">
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Mode of Transportation</label>
+                    <div className="flex gap-2 bg-slate-100 p-1.5 rounded-2xl w-fit border border-slate-200/80 backdrop-blur-md relative">
+                      <button
+                        type="button" 
+                        onClick={() => handleTabChange("Sea")}
+                        className={`relative flex items-center gap-2.5 py-2.5 px-6 font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer z-10 ${transportMode === "Sea" ? "text-white font-extrabold" : "text-slate-600 hover:text-slate-800"}`}
+                      >
+                        {transportMode === "Sea" && (
+                          <motion.div
+                            layoutId="activeTransport"
+                            className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl -z-10 shadow shadow-emerald-600/10"
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <Ship className={`w-4 h-4 ${transportMode === "Sea" ? "text-white" : "text-slate-500"}`} />
+                        Sea Freight
+                      </button>
+                      <button
+                        type="button" 
+                        onClick={() => handleTabChange("Air")}
+                        className={`relative flex items-center gap-2.5 py-2.5 px-6 font-bold text-xs rounded-xl transition-all duration-300 cursor-pointer z-10 ${transportMode === "Air" ? "text-white font-extrabold" : "text-slate-600 hover:text-slate-800"}`}
+                      >
+                        {transportMode === "Air" && (
+                          <motion.div
+                            layoutId="activeTransport"
+                            className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl -z-10 shadow shadow-emerald-600/10"
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <Plane className={`w-4 h-4 ${transportMode === "Air" ? "text-white" : "text-slate-500"}`} />
+                        Air Freight
+                      </button>
+                    </div>
+                  </div>
 
-            {/* STEP 2: Country Selector Input box */}
-            <div className="flex flex-col gap-1.5 relative w-full md:w-1/2" ref={countryDropdownRef}>
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Select Your Country :</label>
-              
-              <div className="relative flex items-center">
-                <input 
-                  type="text"
-                  placeholder="Start typing..."
-                  value={displayInputValue}
-                  onChange={(e) => {
-                    if (!isCountryDropdownOpen) setIsCountryDropdownOpen(true);
-                    setCountrySearch(e.target.value);
-                  }}
-                  onFocus={() => {
-                    setIsCountryDropdownOpen(true);
-                    setCountrySearch(""); 
-                  }}
-                  className="w-full p-3 pr-10 border border-gray-300 rounded-xl bg-gray-50/50 font-medium text-gray-900 placeholder:text-gray-400 focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 outline-none transition-all cursor-pointer shadow-sm"
-                />
-                
-                <div 
-                  className="absolute right-3 pointer-events-none text-gray-400 transition-transform duration-300 ease-out"
-                  style={{ transform: isCountryDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
+                  {/* Destination Country */}
+                  <div className="flex flex-col gap-2 relative" ref={countryDropdownRef}>
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <Search className="w-3.5 h-3.5 text-emerald-600" /> Target Destination Country
+                    </label>
+                    
+                    <div className="relative flex items-center group">
+                      <input 
+                        type="text"
+                        placeholder="Type to search country..."
+                        value={displayInputValue}
+                        onChange={(e) => {
+                          if (!isCountryDropdownOpen) setIsCountryDropdownOpen(true);
+                          setCountrySearch(e.target.value);
+                        }}
+                        onFocus={() => {
+                          setIsCountryDropdownOpen(true);
+                          setCountrySearch(""); 
+                        }}
+                        className="w-full p-3.5 pl-11 pr-10 border border-slate-200 rounded-2xl bg-slate-50 font-semibold text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 outline-none transition-all duration-300 shadow-sm"
+                      />
+                      <div className="absolute left-4 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
+                        <Search className="w-4 h-4" />
+                      </div>
+                      <div 
+                        className="absolute right-4 pointer-events-none text-slate-500 transition-transform duration-300"
+                        style={{ transform: isCountryDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
+                    </div>
 
-              {/* Selection Options Dropdown Overlay */}
-              <AnimatePresence>
-                {isCountryDropdownOpen && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.98, y: -4 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.98, y: -4 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="absolute left-0 right-0 top-[calc(100%+6px)] bg-white border border-gray-200 rounded-xl shadow-xl z-[100] overflow-y-auto max-h-48 py-1.5 backdrop-blur-lg"
-                  >
-                    {filteredCountries.length > 0 ? (
-                      filteredCountries.map((country) => (
-                        <div
-                          key={country}
-                          onClick={() => {
-                            setSelectedCountry(country);
-                            setCountrySearch("");
-                            setIsCountryDropdownOpen(false);
-                            setShipmentType("");
-                            setContainerLoad("");
-                          }}
-                          className={`px-4 py-2.5 text-xs font-medium cursor-pointer transition-colors duration-150 hover:bg-emerald-50 hover:text-emerald-700 flex items-center justify-between ${selectedCountry === country ? "bg-emerald-50 text-emerald-600 font-bold" : "text-gray-700"}`}
+                    {/* Floating Country List overlay dropdown */}
+                    <AnimatePresence>
+                      {isCountryDropdownOpen && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: 8, scale: 0.99 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 4, scale: 0.99 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                          className="absolute left-0 right-0 top-[calc(100%+8px)] bg-white border border-slate-200 rounded-2xl shadow-[0_20px_40px_rgba(15,23,42,0.08)] z-[100] overflow-y-auto max-h-52 p-2 backdrop-blur-xl ring-1 ring-black/5"
                         >
-                          <span>{country}</span>
-                          {selectedCountry === country && (
-                            <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                            </svg>
+                          {filteredCountries.length > 0 ? (
+                            filteredCountries.map((country) => (
+                              <div
+                                key={country}
+                                onClick={() => {
+                                  setSelectedCountry(country);
+                                  setCountrySearch("");
+                                  setIsCountryDropdownOpen(false);
+                                  setShipmentType("");
+                                  setContainerLoad("");
+                                }}
+                                className={`px-4 py-2.5 text-xs font-semibold rounded-xl cursor-pointer transition-all duration-150 flex items-center justify-between ${selectedCountry === country ? "bg-emerald-55 text-emerald-700 font-bold" : "text-slate-600 hover:bg-slate-50"}`}
+                              >
+                                <span>{country}</span>
+                                {selectedCountry === country && (
+                                  <Check className="w-4 h-4 text-emerald-600 stroke-[3px]" />
+                                )}
+                              </div>
+                            ))
+                          ) : (
+                            <div className="px-4 py-4 text-xs text-slate-400 italic text-center">No results found</div>
+                          )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                </div>
+
+                {/* STEP 3: Shipment Type selection */}
+                <AnimatePresence initial={false}>
+                  {selectedCountry && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="space-y-3 border-t border-slate-100 pt-6"
+                    >
+                      <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Shipment Type</label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        {/* Containerized Cargo */}
+                        <div 
+                          onClick={() => { setShipmentType("Containerized"); setContainerLoad(""); }}
+                          className={`p-5 rounded-3xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 hover:scale-[1.01] ${shipmentType === "Containerized" ? "bg-emerald-50/30 border-emerald-500 shadow-[0_4px_20px_rgba(16,185,129,0.05)]" : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/50"}`}
+                        >
+                          <div className={`p-3.5 rounded-2xl transition-colors ${shipmentType === "Containerized" ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"}`}>
+                            <Boxes className="w-6 h-6" />
+                          </div>
+                          <div className="flex flex-col gap-1 pr-6">
+                            <span className="font-extrabold text-slate-800 text-sm">Containerized Cargo</span>
+                            <span className="text-xs text-slate-500 leading-normal">Standard general multi-unit container cargo logistics</span>
+                          </div>
+                          {shipmentType === "Containerized" && (
+                            <div className="ml-auto w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center self-center shadow shadow-emerald-500/30 shrink-0">
+                              <Check className="w-3.5 h-3.5 text-white stroke-[3.5px]" />
+                            </div>
                           )}
                         </div>
-                      ))
-                    ) : (
-                      <div className="px-4 py-4 text-xs text-gray-400 italic text-center">
-                        No matching countries found
+
+                        {/* Oversized Cargo */}
+                        <div 
+                          onClick={() => { setShipmentType("Oversized"); setContainerLoad("FCL"); }}
+                          className={`p-5 rounded-3xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 hover:scale-[1.01] ${shipmentType === "Oversized" ? "bg-emerald-50/30 border-emerald-500 shadow-[0_4px_20px_rgba(16,185,129,0.05)]" : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/50"}`}
+                        >
+                          <div className={`p-3.5 rounded-2xl transition-colors ${shipmentType === "Oversized" ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"}`}>
+                            <Scale className="w-6 h-6" />
+                          </div>
+                          <div className="flex flex-col gap-1 pr-6">
+                            <span className="font-extrabold text-slate-800 text-sm">Oversized Cargo</span>
+                            <span className="text-xs text-slate-500 leading-normal">Heavy equipment machinery or out of gauge operations</span>
+                          </div>
+                          {shipmentType === "Oversized" && (
+                            <div className="ml-auto w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center self-center shadow shadow-emerald-500/30 shrink-0">
+                              <Check className="w-3.5 h-3.5 text-white stroke-[3.5px]" />
+                            </div>
+                          )}
+                        </div>
+
                       </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-            {/* STEP 3: Shipment Type Field */}
-            <AnimatePresence initial={false}>
-              {selectedCountry && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="space-y-6 border-t border-gray-100 pt-5"
-                >
-                  <div className="flex flex-col gap-2.5">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Shipment Type :</label>
-                    <div className="flex gap-8">
-                      <label className="flex items-center gap-2.5 font-semibold text-gray-700 cursor-pointer group">
-                        <input type="radio" name="stype" checked={shipmentType === "Containerized"} onChange={() => { setShipmentType("Containerized"); setContainerLoad(""); }} className="accent-emerald-600 w-4 h-4 transition-transform group-hover:scale-105"/> Containerized Cargo
-                      </label>
-                      <label className="flex items-center gap-2.5 font-semibold text-gray-700 cursor-pointer group">
-                        <input type="radio" name="stype" checked={shipmentType === "Oversized"} onChange={() => { setShipmentType("Oversized"); setContainerLoad("FCL"); }} className="accent-emerald-600 w-4 h-4 transition-transform group-hover:scale-105"/> Oversized Cargo
-                      </label>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 4: Container specifications Load mode switches */}
-            <AnimatePresence initial={false}>
-              {shipmentType === "Containerized" && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="flex flex-col gap-2.5 bg-gray-50 p-4 rounded-2xl border border-gray-100"
-                >
-                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Container Type :</label>
-                  <div className="flex gap-8">
-                    <label className="flex items-center gap-2.5 font-medium text-gray-700 cursor-pointer group">
-                      <input type="radio" name="cload" checked={containerLoad === "FCL"} onChange={() => setContainerLoad("FCL")} className="accent-emerald-600 w-4 h-4 transition-transform group-hover:scale-105"/> Full Container Load (FCL)
-                    </label>
-                    <label className="flex items-center gap-2.5 font-medium text-gray-700 cursor-pointer group">
-                      <input type="radio" name="cload" checked={containerLoad === "LCL"} onChange={() => setContainerLoad("LCL")} className="accent-emerald-600 w-4 h-4 transition-transform group-hover:scale-105"/> Less Container Load (LCL)
-                    </label>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 5: Port select matrices */}
-            <AnimatePresence initial={false}>
-              {containerLoad && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="grid grid-cols-1 md:grid-cols-4 gap-4 border-t border-gray-100 pt-5"
-                >
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Port of Loading *</label>
-                    <select value={portLoading} onChange={(e) => setPortLoading(e.target.value)} className="p-2.5 border border-gray-200 bg-white rounded-xl focus:border-emerald-500 outline-none shadow-sm transition-all duration-200">
-                      <option value="">Select Port</option>
-                      {loadingPorts.map(p => <option key={p} value={p}>{p}</option>)}
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Port of Discharge *</label>
-                    <select value={portDischarge} onChange={(e) => setPortDischarge(e.target.value)} className="p-2.5 border border-gray-200 bg-white rounded-xl focus:border-emerald-500 outline-none shadow-sm transition-all duration-200">
-                      <option value="">Select Port</option>
-                      {dischargePorts.map(p => <option key={p} value={p}>{p}</option>)}
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Preferred Shipping Date *</label>
-                    <input type="date" value={shippingDate} onChange={(e) => setShippingDate(e.target.value)} className="p-2.5 border border-gray-200 bg-white rounded-xl focus:border-emerald-500 outline-none shadow-sm transition-all duration-200"/>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Commodity *</label>
-                    <input type="text" placeholder="Cargo description..." value={commodity} onChange={(e) => setCommodity(e.target.value)} className="p-2.5 border border-gray-200 bg-white rounded-xl focus:border-emerald-500 outline-none shadow-sm transition-all duration-200"/>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 6: Hazard selection controls */}
-            <AnimatePresence initial={false}>
-              {isRoutingComplete && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="flex flex-col gap-2.5 border-t border-gray-100 pt-5"
-                >
-                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Is the Commodity Dangerous ?</label>
-                  <div className="flex gap-8">
-                    <label className="flex items-center gap-2.5 font-medium text-gray-700 cursor-pointer group"><input type="radio" name="haz" checked={isDangerous === "Yes"} onChange={() => setIsDangerous("Yes")} className="accent-emerald-600 w-4 h-4 transition-transform group-hover:scale-105"/> Yes</label>
-                    <label className="flex items-center gap-2.5 font-medium text-gray-700 cursor-pointer group"><input type="radio" name="haz" checked={isDangerous === "No"} onChange={() => setIsDangerous("No")} className="accent-emerald-600 w-4 h-4 transition-transform group-hover:scale-105"/> No</label>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 7: Inco Terms selection grid */}
-            <AnimatePresence initial={false}>
-              {isDangerous && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="space-y-3 border-t border-gray-100 pt-5"
-                >
-                  <label className="text-xs font-bold text-gray-500 uppercase block tracking-wide">Select Inco Term :</label>
-                  <div className="flex flex-wrap gap-2">
-                    {["EXW", "FCA", "FAS", "FOB", "CFR", "CIF", "CPT", "CIP", "DAP", "DDP"].map((term) => (
-                      <button
-                        key={term} type="button" onClick={() => setIncoTerm(term)}
-                        className={`px-4 py-2 text-xs font-bold rounded-xl border transition-all duration-200 ${incoTerm === term ? "bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-600/10 scale-[1.02]" : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:border-gray-300"}`}
-                      >
-                        {term}
-                      </button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 8: Logistics parameters checkboxes */}
-            <AnimatePresence initial={false}>
-              {incoTerm && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-gray-50/50 p-4 rounded-2xl border border-gray-100"
-                >
-                  <div className="space-y-2.5">
-                    <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wide">Origin Requirement :</h4>
-                    <div className="flex flex-wrap gap-4 text-xs text-gray-600">
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={originReq.trucking} onChange={(e) => { setOriginReq({ ...originReq, trucking: e.target.checked }); setOriginReqSelected(true); }} className="accent-emerald-600 rounded w-4 h-4"/> Trucking</label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={originReq.clearance} onChange={(e) => { setOriginReq({ ...originReq, clearance: e.target.checked }); setOriginReqSelected(true); }} className="accent-emerald-600 rounded w-4 h-4"/> Clearance</label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={originReq.insurance} onChange={(e) => { setOriginReq({ ...originReq, insurance: e.target.checked }); setOriginReqSelected(true); }} className="accent-emerald-600 rounded w-4 h-4"/> Insurance</label>
-                    </div>
-                  </div>
-                  <div className="space-y-2.5">
-                    <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wide">Destination Requirement :</h4>
-                    <div className="flex flex-wrap gap-4 text-xs text-gray-600">
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={destReq.trucking} onChange={(e) => { setDestReq({ ...destReq, trucking: e.target.checked }); setOriginReqSelected(true); }} className="accent-emerald-600 rounded w-4 h-4"/> Trucking</label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={destReq.clearance} onChange={(e) => { setDestReq({ ...destReq, clearance: e.target.checked }); setOriginReqSelected(true); }} className="accent-emerald-600 rounded w-4 h-4"/> Clearance</label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked={destReq.insurance} onChange={(e) => { setDestReq({ ...destReq, insurance: e.target.checked }); setOriginReqSelected(true); }} className="accent-emerald-600 rounded w-4 h-4"/> Insurance</label>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 9: Pickup / Destination geo fields */}
-            <AnimatePresence initial={false}>
-              {originReqSelected && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-100 pt-5"
-                >
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Pickup Address *</label>
-                    <input type="text" placeholder="Complete collection details..." value={pickupAddress} onChange={(e) => setPickupAddress(e.target.value)} className="p-3 border border-gray-200 rounded-xl focus:border-emerald-500 outline-none text-xs shadow-sm transition-all"/>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Delivery Address *</label>
-                    <input type="text" placeholder="Final drop unloading details..." value={deliveryAddress} onChange={(e) => setDeliveryAddress(e.target.value)} className="p-3 border border-gray-200 rounded-xl focus:border-emerald-500 outline-none text-xs shadow-sm transition-all"/>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* STEP 10: Matrix specification dynamic repeat arrays layout rows */}
-            <AnimatePresence initial={false}>
-              {isAddressesComplete && (
-                <motion.div 
-                  layout="position"
-                  variants={fadeUpVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="space-y-4 border-t border-gray-100 pt-5"
-                >
-                  <label className="text-xs font-bold text-gray-500 uppercase block tracking-wide">Container Specification Metrics & Load Matrix :</label>
-                  
-                  <div className="space-y-4">
-                    {containers.map((row) => (
-                      <motion.div 
-                        layout 
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        transition={springTransition}
-                        key={row.id} 
-                        className="bg-gray-50 p-4 rounded-2xl border border-gray-200/60 relative space-y-4"
-                      >
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-                          <div className="md:col-span-5 flex flex-col gap-1">
-                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Container Type</span>
-                            <select
-                              value={row.type}
-                              onChange={(e) => handleUpdateRow(row.id, { type: e.target.value })}
-                              className="p-2 border border-gray-200 rounded-xl text-xs bg-white focus:border-emerald-500 outline-none font-medium shadow-sm"
-                            >
-                              <option value="">-- Select Type --</option>
-                              <optgroup label="Specialized Open Top & Flat Racks">
-                                <option value="20'OT - Open Top">20'OT - Open Top</option>
-                                <option value="40'OT HC - Open Top High Cube">40'OT HC - Open Top High Cube</option>
-                                <option value="20'FR - Flat Rack">20'FR - Flat Rack</option>
-                                <option value="40'FR HC - Flat Rack High Cube">40'FR HC - Flat Rack High Cube</option>
-                              </optgroup>
-                              <optgroup label="Standard Logistics Equipment">
-                                <option value="20GP - General Purpose">20GP - General Purpose</option>
-                                <option value="40HC - High Cube">40HC - High Cube</option>
-                                <option value="20RF - Reefer Container">20RF - Reefer Container</option>
-                              </optgroup>
-                            </select>
-                          </div>
-
-                          <div className="md:col-span-3 flex flex-col gap-1">
-                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wide">No of Containers *</span>
-                            <input
-                              type="number" min={1} value={row.quantity}
-                              onChange={(e) => handleUpdateRow(row.id, { quantity: parseInt(e.target.value) || 1 })}
-                              className="p-2 border border-gray-200 rounded-xl text-xs text-center bg-white shadow-sm"
+                {/* STEP 4: Container Load Options */}
+                <AnimatePresence initial={false}>
+                  {shipmentType === "Containerized" && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="space-y-4 bg-slate-50/50 p-6 rounded-3xl border border-slate-200"
+                    >
+                      <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Container Load Capacity</label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div 
+                          onClick={() => setContainerLoad("FCL")}
+                          className={`relative p-4 rounded-2xl border-2 cursor-pointer font-bold text-xs transition-all duration-300 text-center shadow-sm z-10 ${containerLoad === "FCL" ? "border-emerald-500 text-emerald-700 font-extrabold" : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-600"}`}
+                        >
+                          {containerLoad === "FCL" && (
+                            <motion.div
+                              layoutId="activeContainerLoad"
+                              className="absolute inset-0 bg-emerald-50 rounded-2xl -z-10"
+                              transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             />
-                          </div>
-
-                          <div className="md:col-span-3 flex flex-col gap-1">
-                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Gross Weight (KG)</span>
-                            <input
-                              type="text" placeholder="0.00" value={row.weight}
-                              onChange={(e) => handleUpdateRow(row.id, { weight: e.target.value })}
-                              className="p-2 border border-gray-200 rounded-xl text-xs text-right bg-white shadow-sm"
+                          )}
+                          Full Container Load (FCL)
+                        </div>
+                        <div 
+                          onClick={() => setContainerLoad("LCL")}
+                          className={`relative p-4 rounded-2xl border-2 cursor-pointer font-bold text-xs transition-all duration-300 text-center shadow-sm z-10 ${containerLoad === "LCL" ? "border-emerald-500 text-emerald-700 font-extrabold" : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-600"}`}
+                        >
+                          {containerLoad === "LCL" && (
+                            <motion.div
+                              layoutId="activeContainerLoad"
+                              className="absolute inset-0 bg-emerald-50 rounded-2xl -z-10"
+                              transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             />
-                          </div>
+                          )}
+                          Less Container Load (LCL)
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                          <div className="md:col-span-1 flex justify-center pt-3 md:pt-4">
-                            <button
-                              type="button" disabled={containers.length === 1}
-                              onClick={() => handleRemoveRow(row.id)}
-                              className="text-red-500 hover:bg-red-50 w-9 h-9 rounded-xl flex items-center justify-center transition-all disabled:opacity-20 text-xs font-bold"
+                {/* STEP 5: Core Port Routing Data */}
+                <AnimatePresence initial={false}>
+                  {containerLoad && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="grid grid-cols-1 md:grid-cols-4 gap-4 border-t border-slate-100 pt-6"
+                    >
+                      {/* Port of Loading */}
+                      <div className="flex flex-col gap-2 relative">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <Anchor className="w-3.5 h-3.5 text-emerald-600" /> Port of Loading *
+                        </label>
+                        <div className="relative flex items-center group">
+                          <select 
+                            value={portLoading} 
+                            onChange={(e) => setPortLoading(e.target.value)} 
+                            className="w-full p-3.5 pl-10 pr-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 appearance-none cursor-pointer transition-all duration-300"
+                          >
+                            <option value="" className="bg-white text-slate-400">Select Port</option>
+                            {loadingPorts.map(p => <option key={p} value={p} className="bg-white text-slate-800">{p}</option>)}
+                          </select>
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
+                            <Anchor className="w-4 h-4 group-focus-within:rotate-12 group-focus-within:scale-110 transition-all duration-300" />
+                          </div>
+                          <div className="absolute right-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
+                            <ChevronDown className="w-4 h-4 group-focus-within:translate-y-0.5 transition-all duration-300" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Port of Discharge */}
+                      <div className="flex flex-col gap-2 relative">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <Anchor className="w-3.5 h-3.5 text-teal-600" /> Port of Discharge *
+                        </label>
+                        <div className="relative flex items-center group">
+                          <select 
+                            value={portDischarge} 
+                            onChange={(e) => setPortDischarge(e.target.value)} 
+                            className="w-full p-3.5 pl-10 pr-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 appearance-none cursor-pointer transition-all duration-300"
+                          >
+                            <option value="" className="bg-white text-slate-400">Select Port</option>
+                            {dischargePorts.map(p => <option key={p} value={p} className="bg-white text-slate-800">{p}</option>)}
+                          </select>
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-teal-600 transition-colors">
+                            <Anchor className="w-4 h-4 group-focus-within:rotate-12 group-focus-within:scale-110 transition-all duration-300" />
+                          </div>
+                          <div className="absolute right-3.5 text-slate-400 pointer-events-none group-focus-within:text-teal-650 transition-colors">
+                            <ChevronDown className="w-4 h-4 group-focus-within:translate-y-0.5 transition-all duration-300" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Shipping Date */}
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-emerald-600" /> Shipping Date *
+                        </label>
+                        <div className="relative flex items-center group">
+                          <input 
+                            type="date" 
+                            value={shippingDate} 
+                            onChange={(e) => setShippingDate(e.target.value)} 
+                            className="w-full p-3 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Commodity */}
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <FileText className="w-3.5 h-3.5 text-emerald-600" /> Commodity *
+                        </label>
+                        <div className="relative flex items-center group">
+                          <input 
+                            type="text" 
+                            placeholder="Cargo description..." 
+                            value={commodity} 
+                            onChange={(e) => setCommodity(e.target.value)} 
+                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                          />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
+                            <FileText className="w-4 h-4 group-focus-within:scale-110 transition-all duration-300" />
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* STEP 6: Risk Hazard verification parameters */}
+                <AnimatePresence initial={false}>
+                  {isRoutingComplete && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="space-y-3 border-t border-slate-100 pt-6"
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+                        {/* Option buttons */}
+                        <div className="md:col-span-3 flex flex-col gap-3">
+                          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block flex items-center gap-1.5">
+                            <AlertTriangle className="w-3.5 h-3.5 text-amber-600" /> Is the Commodity Dangerous / Hazardous?
+                          </label>
+                          <div className="flex gap-4 h-[46px] items-center">
+                            <button 
+                              type="button" 
+                              onClick={() => setIsDangerous("Yes")} 
+                              className={`relative flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-extrabold border-2 transition-all duration-300 cursor-pointer z-10 ${isDangerous === "Yes" ? "border-rose-500 text-rose-700 shadow-[0_4px_12px_rgba(239,68,68,0.05)]" : "bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-100"}`}
                             >
-                              ✕
+                              {isDangerous === "Yes" && (
+                                <motion.div
+                                  layoutId="activeDangerous"
+                                  className="absolute inset-0 bg-rose-50 rounded-2xl -z-10"
+                                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
+                              )}
+                              <AlertTriangle className={`w-4 h-4 transition-colors ${isDangerous === "Yes" ? "text-rose-600" : "text-rose-500"}`} />
+                              Yes
+                            </button>
+                            <button 
+                              type="button" 
+                              onClick={() => {
+                                setIsDangerous("No");
+                                setClassification("");
+                                setUnNo("");
+                                setHazardFile(null);
+                              }} 
+                              className={`relative flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-extrabold border-2 transition-all duration-300 cursor-pointer z-10 ${isDangerous === "No" ? "border-emerald-500 text-emerald-700 shadow-[0_4px_12px_rgba(16,185,129,0.05)]" : "bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-100"}`}
+                            >
+                              {isDangerous === "No" && (
+                                <motion.div
+                                  layoutId="activeDangerous"
+                                  className="absolute inset-0 bg-emerald-50 rounded-2xl -z-10"
+                                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
+                              )}
+                              <ShieldCheck className={`w-4 h-4 transition-colors ${isDangerous === "No" ? "text-emerald-600" : "text-emerald-500"}`} />
+                              No
                             </button>
                           </div>
                         </div>
 
-                        {/* Dimensions Panel */}
-                        <div className="bg-white p-3 rounded-xl border border-gray-100 space-y-2.5 shadow-sm">
-                          <span className="text-[11px] font-bold text-gray-400 uppercase block tracking-wide">Cargo Dimensions :</span>
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <div className="flex flex-col gap-1">
-                              <span className="text-[10px] text-gray-400 font-semibold">Length</span>
-                              <input type="text" placeholder="0" value={row.length} onChange={(e) => handleUpdateRow(row.id, { length: e.target.value })} className="p-2 border border-gray-200 rounded-lg text-xs text-center focus:border-emerald-500 outline-none bg-gray-50/30"/>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <span className="text-[10px] text-gray-400 font-semibold">Width</span>
-                              <input type="text" placeholder="0" value={row.width} onChange={(e) => handleUpdateRow(row.id, { width: e.target.value })} className="p-2 border border-gray-200 rounded-lg text-xs text-center focus:border-emerald-500 outline-none bg-gray-50/30"/>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <span className="text-[10px] text-gray-400 font-semibold">Height</span>
-                              <input type="text" placeholder="0" value={row.height} onChange={(e) => handleUpdateRow(row.id, { height: e.target.value })} className="p-2 border border-gray-200 rounded-lg text-xs text-center focus:border-emerald-500 outline-none bg-gray-50/30"/>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <span className="text-[10px] text-gray-400 font-semibold">Measured Unit</span>
-                              <select value={row.unit} onChange={(e) => handleUpdateRow(row.id, { unit: e.target.value })} className="p-2 border border-gray-200 rounded-lg text-xs bg-gray-50 outline-none font-bold text-gray-600">
-                                <option value="CM">CM</option>
-                                <option value="MM">MM</option>
-                                <option value="Inches">Inches</option>
-                              </select>
-                            </div>
+                        {/* Dangerous goods details fields */}
+                        <AnimatePresence>
+                          {isDangerous === "Yes" && (
+                            <>
+                              {/* Classification */}
+                              <motion.div 
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                className="md:col-span-3 flex flex-col gap-2 relative group"
+                              >
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                                  Classification *
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="e.g. Class 3"
+                                  value={classification}
+                                  onChange={(e) => setClassification(e.target.value)}
+                                  className="w-full p-3.5 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                                />
+                              </motion.div>
+
+                              {/* UN No */}
+                              <motion.div 
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                className="md:col-span-3 flex flex-col gap-2 relative group"
+                              >
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                                  UN No *
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="e.g. UN 1263"
+                                  value={unNo}
+                                  onChange={(e) => setUnNo(e.target.value)}
+                                  className="w-full p-3.5 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                                />
+                              </motion.div>
+
+                              {/* Upload DGD/MSDS/COA/PC etc. */}
+                              <motion.div 
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                className="md:col-span-3 flex flex-col gap-2 relative"
+                              >
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                                  Upload DGD/MSDS/COA/PC etc.*
+                                </label>
+                                <div className="relative flex items-center">
+                                  <input
+                                    type="file"
+                                    id="hazard-file-upload"
+                                    className="hidden"
+                                    onChange={(e) => setHazardFile(e.target.files?.[0] || null)}
+                                  />
+                                  <label
+                                    htmlFor="hazard-file-upload"
+                                    className="w-full flex items-center justify-between p-3.5 border border-slate-200 bg-slate-50 rounded-2xl focus-within:bg-white focus-within:border-emerald-500 focus-within:ring-4 focus-within:ring-emerald-500/10 cursor-pointer transition-all duration-300"
+                                  >
+                                    <span className="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-xl transition-all border border-slate-200 select-none">
+                                      Choose File
+                                    </span>
+                                    <span className="text-xs text-slate-500 truncate max-w-[100px] font-medium pr-2">
+                                      {hazardFile ? hazardFile.name : "No file chosen"}
+                                    </span>
+                                  </label>
+                                </div>
+                              </motion.div>
+                            </>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* STEP 7: Commercial Terms selection tags */}
+                <AnimatePresence initial={false}>
+                  {isDangerous && (isDangerous === "No" || isHazardComplete) && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="space-y-3 border-t border-slate-100 pt-6"
+                    >
+                      <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Commercial Shipping Inco Term</label>
+                      <div className="flex flex-wrap gap-2.5">
+                        {["EXW", "FCA", "FAS", "FOB", "CFR", "CIF", "CPT", "CIP", "DAP", "DDP"].map((term) => (
+                          <button
+                            key={term} 
+                            type="button" 
+                            onClick={() => setIncoTerm(term)}
+                            className={`px-5 py-2.5 text-xs font-extrabold rounded-xl border-2 transition-all duration-200 cursor-pointer ${incoTerm === term ? "bg-emerald-50 text-emerald-700 border-emerald-500 shadow-[0_4px_12px_rgba(16,185,129,0.05)] scale-[1.03]" : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300 hover:text-slate-850 hover:bg-slate-100"}`}
+                          >
+                            {term}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* STEP 8: Extra Requirements metrics */}
+                <AnimatePresence initial={false}>
+                  {incoTerm && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/50 p-6 rounded-3xl border border-slate-200"
+                    >
+                      {/* Origin Requirements */}
+                      <div className="space-y-4">
+                        <h4 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                          <Sliders className="w-4 h-4 text-emerald-600" /> Origin Requirements
+                        </h4>
+                        <div className="flex flex-wrap gap-3 text-xs font-bold text-slate-600">
+                          {["trucking", "clearance", "insurance"].map((req) => {
+                            const isChecked = (originReq as any)[req];
+                            return (
+                              <label 
+                                key={req} 
+                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 cursor-pointer select-none transition-all duration-205 ${isChecked ? "bg-emerald-50 border-emerald-500 text-emerald-700" : "bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50"}`}
+                              >
+                                <input 
+                                  type="checkbox" 
+                                  checked={isChecked} 
+                                  onChange={(e) => { 
+                                    setOriginReq({ ...originReq, [req]: e.target.checked }); 
+                                    setOriginReqSelected(true); 
+                                  }} 
+                                  className="hidden"
+                                />
+                                <div className={`w-4 h-4 rounded flex items-center justify-center transition-all ${isChecked ? "bg-emerald-500 text-white" : "border border-slate-300"}`}>
+                                  {isChecked && <Check className="w-3 h-3 stroke-[3.5px]" />}
+                                </div>
+                                <span className="capitalize">{req}</span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Destination Requirements */}
+                      <div className="space-y-4">
+                        <h4 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                          <Sliders className="w-4 h-4 text-teal-650" /> Destination Requirements
+                        </h4>
+                        <div className="flex flex-wrap gap-3 text-xs font-bold text-slate-600">
+                          {["trucking", "clearance", "insurance"].map((req) => {
+                            const isChecked = (destReq as any)[req];
+                            return (
+                              <label 
+                                key={req} 
+                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 cursor-pointer select-none transition-all duration-205 ${isChecked ? "bg-teal-50 border-teal-500 text-teal-700" : "bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50"}`}
+                              >
+                                <input 
+                                  type="checkbox" 
+                                  checked={isChecked} 
+                                  onChange={(e) => { 
+                                    setDestReq({ ...destReq, [req]: e.target.checked }); 
+                                    setOriginReqSelected(true); 
+                                  }} 
+                                  className="hidden"
+                                />
+                                <div className={`w-4 h-4 rounded flex items-center justify-center transition-all ${isChecked ? "bg-teal-500 text-white" : "border border-slate-300"}`}>
+                                  {isChecked && <Check className="w-3 h-3 stroke-[3.5px]" />}
+                                </div>
+                                <span className="capitalize">{req}</span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* STEP 9: Pickup & Delivery Location fields */}
+                <AnimatePresence initial={false}>
+                  {originReqSelected && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-6"
+                    >
+                      <div className="flex flex-col gap-2 relative">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-emerald-600 animate-pulse" /> Pickup Address *
+                        </label>
+                        <div className="relative flex items-center group">
+                          <input 
+                            type="text" 
+                            placeholder="Complete address or postal code..." 
+                            value={pickupAddress} 
+                            onChange={(e) => setPickupAddress(e.target.value)} 
+                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                          />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-emerald-600 transition-colors">
+                            <MapPin className="w-4 h-4 group-focus-within:-translate-y-0.5 group-focus-within:scale-110 transition-all duration-300" />
                           </div>
                         </div>
-
-                        {/* File Upload Module */}
-                        <div className="flex flex-col gap-1 pt-1">
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wide">File Upload *</span>
-                          <div className="flex items-center gap-3">
-                            <input
-                              type="file"
-                              id={`file-${row.id}`}
-                              className="hidden"
-                              onChange={(e) => handleUpdateRow(row.id, { file: e.target.files?.[0] || null })}
-                            />
-                            <label
-                              htmlFor={`file-${row.id}`}
-                              className="px-3 py-2 border border-gray-300 rounded-xl text-xs font-bold text-gray-600 bg-white shadow-sm hover:bg-gray-50 cursor-pointer transition-colors border-dashed"
-                            >
-                              Choose File
-                            </label>
-                            <span className="text-xs text-gray-400 truncate max-w-xs font-medium">
-                              {row.file ? row.file.name : "No file selected."}
-                            </span>
+                      </div>
+                      
+                      <div className="flex flex-col gap-2 relative">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-teal-600 animate-pulse" /> Delivery Address *
+                        </label>
+                        <div className="relative flex items-center group">
+                          <input 
+                            type="text" 
+                            placeholder="Final drop destination unloading details..." 
+                            value={deliveryAddress} 
+                            onChange={(e) => setDeliveryAddress(e.target.value)} 
+                            className="w-full p-3.5 pl-10 border border-slate-200 bg-slate-50 rounded-2xl focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none text-xs font-bold text-slate-800 transition-all duration-300"
+                          />
+                          <div className="absolute left-3.5 text-slate-400 pointer-events-none group-focus-within:text-teal-650 transition-colors">
+                            <MapPin className="w-4 h-4 group-focus-within:-translate-y-0.5 group-focus-within:scale-110 transition-all duration-300" />
                           </div>
                         </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                      </motion.div>
-                    ))}
+                {/* STEP 10: Clean Container Selection Rows */}
+                <AnimatePresence initial={false}>
+                  {isAddressesComplete && (
+                    <motion.div 
+                      layout="position" variants={fadeUpVariants} initial="hidden" animate="visible" exit="exit"
+                      className="space-y-4 border-t border-slate-100 pt-6"
+                    >
+                      <label className="text-[11px] font-bold text-slate-500 uppercase block tracking-wider flex items-center gap-1.5">
+                        <Boxes className="w-4 h-4 text-emerald-600" /> Container Specification Metrics & Load Matrix
+                      </label>
+                      
+                      <div className="space-y-4">
+                        {containers.map((row) => (
+                          <motion.div 
+                            layout 
+                            initial={{ opacity: 0, y: 12 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            exit={{ opacity: 0, scale: 0.98 }}
+                            transition={springTransition}
+                            key={row.id} 
+                            className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 relative shadow-sm hover:border-slate-300/80 transition-all duration-300"
+                          >
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                              
+                              {/* Type Selection */}
+                              <div className="md:col-span-5 flex flex-col gap-2">
+                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Container Specification Type</span>
+                                <div className="relative flex items-center">
+                                  <select
+                                    value={row.type}
+                                    onChange={(e) => handleUpdateRow(row.id, { type: e.target.value })}
+                                    className="w-full p-3.5 pl-10 pr-10 border border-slate-200 rounded-2xl text-xs bg-white text-slate-800 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none font-bold shadow-sm cursor-pointer appearance-none transition-all duration-300"
+                                  >
+                                    <option value="" className="bg-white text-slate-400">-- Select Structural Type --</option>
+                                    <optgroup label="Specialized Open Top & Flat Racks" className="bg-white text-emerald-600 font-extrabold">
+                                      <option value="20'OT - Open Top" className="bg-white text-slate-800 font-normal">20'OT - Open Top</option>
+                                      <option value="40'OT HC - Open Top High Cube" className="bg-white text-slate-800 font-normal">40'OT HC - Open Top High Cube</option>
+                                      <option value="20'FR - Flat Rack" className="bg-white text-slate-800 font-normal">20'FR - Flat Rack</option>
+                                      <option value="40'FR HC - Flat Rack High Cube" className="bg-white text-slate-800 font-normal">40'FR HC - Flat Rack High Cube</option>
+                                    </optgroup>
+                                    <optgroup label="Standard Logistics Equipment" className="bg-white text-teal-600 font-extrabold">
+                                      <option value="20GP - General Purpose" className="bg-white text-slate-800 font-normal">20GP - General Purpose</option>
+                                      <option value="40HC - High Cube" className="bg-white text-slate-800 font-normal">40HC - High Cube</option>
+                                      <option value="20RF - Reefer Container" className="bg-white text-slate-800 font-normal">20RF - Reefer Container</option>
+                                    </optgroup>
+                                  </select>
+                                  <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                                    <Boxes className="w-4 h-4" />
+                                  </div>
+                                  <div className="absolute right-3.5 text-slate-400 pointer-events-none">
+                                    <ChevronDown className="w-4 h-4" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Quantity */}
+                              <div className="md:col-span-3 flex flex-col gap-2">
+                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">No of Containers *</span>
+                                <input
+                                  type="number" 
+                                  min={1} 
+                                  value={row.quantity}
+                                  onChange={(e) => handleUpdateRow(row.id, { quantity: parseInt(e.target.value) || 1 })}
+                                  className="w-full p-3.5 border border-slate-200 rounded-2xl text-xs text-center bg-white text-slate-800 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none shadow-sm font-bold transition-all duration-300"
+                                />
+                              </div>
+
+                              {/* Weight */}
+                              <div className="md:col-span-3 flex flex-col gap-2">
+                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                                  <Scale className="w-3.5 h-3.5 text-emerald-600" /> Gross Weight (KG)
+                                </span>
+                                <div className="relative flex items-center">
+                                  <input
+                                    type="text" 
+                                    placeholder="0.00" 
+                                    value={row.weight}
+                                    onChange={(e) => handleUpdateRow(row.id, { weight: e.target.value })}
+                                    className="w-full p-3.5 pr-12 border border-slate-200 rounded-2xl text-xs text-right bg-white text-slate-800 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none shadow-sm font-bold transition-all duration-300"
+                                  />
+                                  <div className="absolute right-3.5 text-slate-400 pointer-events-none font-bold text-[10px]">
+                                    KG
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Remove Row Button */}
+                              <div className="md:col-span-1 flex justify-center pb-1">
+                                <button
+                                  type="button" 
+                                  disabled={containers.length === 1}
+                                  onClick={() => handleRemoveRow(row.id)}
+                                  className="text-rose-500 hover:bg-rose-50 w-11 h-11 rounded-2xl flex items-center justify-center transition-all disabled:opacity-20 text-xs font-bold border border-slate-200 hover:border-rose-350 cursor-pointer disabled:cursor-not-allowed"
+                                  title="Remove Cargo Param Row"
+                                >
+                                  <Trash2 className="w-4.5 h-4.5" />
+                                </button>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Add Row Button */}
+                      <button
+                        type="button" 
+                        onClick={handleAddRow}
+                        className="w-full py-4 border-2 border-dashed border-slate-200 hover:border-emerald-500 text-slate-500 hover:text-emerald-600 font-extrabold text-xs rounded-3xl hover:bg-emerald-50/50 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <Plus className="w-4 h-4" /> Append Another Cargo Parameter Row
+                      </button>
+
+                      {/* Submission footer */}
+                      <div className="pt-6 border-t border-slate-100 flex justify-between items-center">
+                        <button
+                          type="button" 
+                          onClick={onClose}
+                          className="px-6 py-3.5 border border-slate-200 rounded-2xl font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-50 text-xs transition-all cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={!containers[0].type}
+                          className="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-xs rounded-2xl hover:from-emerald-500 hover:to-teal-500 shadow hover:shadow-md transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-40 disabled:pointer-events-none cursor-pointer"
+                        >
+                          Complete & Submit Quote ➔
+                        </button>
+                      </div>
+
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.form>
+            ) : (
+              // STEP 11: Premium success response state rendering (replaces alert dialog)
+              <motion.div 
+                key="quote-success"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={springTransition}
+                className="py-12 px-6 flex flex-col items-center text-center max-w-lg mx-auto space-y-6"
+              >
+                <div className="relative">
+                  {/* Decorative green pulse halos */}
+                  <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-xl scale-150 animate-pulse" />
+                  <div className="w-20 h-20 rounded-full bg-emerald-50 border-2 border-emerald-500 flex items-center justify-center text-emerald-600 relative z-10">
+                    <CheckCircle2 className="w-12 h-12 stroke-[2px]" />
                   </div>
+                </div>
 
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Request Submitted!</h3>
+                  <p className="text-slate-650 leading-relaxed text-sm">
+                    Thank you. Your logistics quote request has been registered in our system. 
+                    Our operations team is analyzing your routing parameters and will reach out with a custom quote within 2 hours.
+                  </p>
+                </div>
+
+                <div className="pt-4 w-full">
                   <button
-                    type="button" onClick={handleAddRow}
-                    className="w-full py-3 border-2 border-dashed border-emerald-600/20 text-emerald-600 font-bold text-xs rounded-xl hover:bg-emerald-50/40 transition-all duration-200 flex items-center justify-center gap-1.5"
+                    type="button"
+                    onClick={onClose}
+                    className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-xs rounded-2xl hover:from-emerald-500 hover:to-teal-500 shadow transition-all transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                   >
-                    ➕ Add More
+                    Finish & Close Wizard
                   </button>
-
-                  {/* Submission Footer area */}
-                  <div className="pt-5 border-t border-gray-100 flex justify-between items-center">
-                    <button
-                      type="button" onClick={onClose}
-                      className="px-5 py-2.5 border border-gray-200 rounded-xl font-bold text-gray-500 hover:bg-gray-50 text-xs transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!containers[0].type}
-                      className="px-8 py-2.5 bg-emerald-600 text-white font-bold text-xs rounded-xl hover:bg-emerald-700 shadow-lg shadow-emerald-600/10 transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-40 disabled:hover:bg-emerald-600 disabled:scale-100"
-                    >
-                      Proceed Submission ➔
-                    </button>
-                  </div>
-
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </form>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
     </div>
   );
 }
+

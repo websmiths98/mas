@@ -549,7 +549,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                     <div className="text-left flex flex-col justify-center">
                         <div className="w-16 h-1 bg-[#bbf451] mb-8 rounded-full"></div>
                         <AnimatedText
-                            text="We're on a mission to simplify logistics."
+                            text="We're on a mission to simplify logistics"
                             className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.15] mb-4"
                         />
                         <AnimatedText
@@ -568,7 +568,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 delay={0.2}
                             />
                             <AnimatedText
-                                text="MAS connects businesses to dependable freight, warehousing, and customs expertise — so you can focus on products and customers, not paperwork and unknowns."
+                                text="MAS connects businesses to dependable freight, warehousing, and customs expertise — so you can focus on products and customers, not paperwork and unknowns"
                                 className="text-[17px] leading-relaxed text-zinc-200"
                                 delay={0.3}
                             />
@@ -580,7 +580,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 delay={0.4}
                             />
                             <AnimatedText
-                                text="We operate with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements."
+                                text="We operate with a strong logistics network across India and international markets, supported by experienced professionals, trusted partnerships, and industry-driven expertise. Our ability to manage logistics operations efficiently across regions allows us to deliver dependable freight forwarding and supply chain solutions tailored to diverse business requirements"
                                 className="text-[17px] leading-relaxed text-zinc-300"
                                 delay={0.5}
                             />
