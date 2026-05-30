@@ -7,7 +7,7 @@ import NetworkPage from "./network/NetworkClient";
 import IndustryPage from "./industry/page";
 import AboutPage from "./about/page";
 import ReviewPage from "./review/page";
-import FAQPage from "./FAQ/page";
+import FAQPage from "./faq/page";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 
 const NAV_LINKS = [
@@ -67,7 +67,7 @@ export default function Home() {
         <ReviewPage />
       </div> } */}
 
-      { <div id="FAQ" className="w-full relative z-10">
+      { <div id="faq" className="w-full relative z-10">
         <FAQPage isEmbedded={true} />
       </div> }
 

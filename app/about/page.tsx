@@ -7,9 +7,9 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import { TextReveal } from "@/app/components/TextReveal";
-import aboutTeamHero from "../../images_frontend/about-team-logistics.webp";
-import officeSpace from "../../images_frontend/new/office_space.webp";
-import masLogo from "../../images_frontend/mas_without_wording.png";
+import aboutTeamHero from "../../public/images_frontend/about-team-logistics.webp";
+import officeSpace from "../../public/images_frontend/new/office_space.webp";
+import masLogo from "../../public/images_frontend/mas_without_wording.png";
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },

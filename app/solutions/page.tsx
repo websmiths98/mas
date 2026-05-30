@@ -7,10 +7,10 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 // Static imports for images located outside public/
-import Image2PL from "@/images_frontend/solutions_logistics_page/2PL.webp";
-import Image3PL from "@/images_frontend/solutions_logistics_page/3PL.webp";
-import Image4PL from "@/images_frontend/solutions_logistics_page/end_to_end.webp";
-import ImageSupplyChain from "@/images_frontend/solutions_logistics_page/supply_chain.webp";
+import Image2PL from "@/public/images_frontend/solutions_logistics_page/2PL.webp";
+import Image3PL from "@/public/images_frontend/solutions_logistics_page/3PL.webp";
+import Image4PL from "@/public/images_frontend/solutions_logistics_page/end_to_end.webp";
+import ImageSupplyChain from "@/public/images_frontend/solutions_logistics_page/supply_chain.webp";
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },

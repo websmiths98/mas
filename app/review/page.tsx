@@ -3,7 +3,6 @@
 import { Star } from "lucide-react";
 import { MarqueeEffect } from "./marquee-effect";
 import { Avatar, AvatarImage } from "./avatar";
-import { Badge } from "./badge";
 
 export interface TestimonialCardProps {
   name: string;
@@ -120,9 +119,6 @@ export default function Testimonials() {
     <section className="py-12 lg:py-20 bg-[#151514] text-[#e5e4e2]">
       <div className="container mx-auto px-4">
         <header className="mx-auto mb-8 max-w-2xl text-center lg:mb-10">
-          <Badge variant="outline" className="text-[#4285F4] border-[#4285F4]">
-            Google Reviews
-          </Badge>
           <h3 className="font-heading mt-4 mb-4 text-4xl sm:text-5xl lg:text-balance">
             <span className="text-[#4285F4]">G</span>
             <span className="text-[#EA4335]">o</span>

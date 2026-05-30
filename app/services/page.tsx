@@ -11,8 +11,8 @@ import { ArrowUpRight } from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import { TextReveal } from "@/app/components/TextReveal";
 
-import imageTruck from "@/images_frontend/loading_container_truck.webp";
-import imagePort from "@/images_frontend/1-landscape-from-bird-eye-view-for-laem-chabang-logistic-port-anek-suwannaphoom.webp";
+import imageTruck from "@/public/images_frontend/loading_container_truck.webp";
+import imagePort from "@/public/images_frontend/1-landscape-from-bird-eye-view-for-laem-chabang-logistic-port-anek-suwannaphoom.webp";
 import imageWarehouse from "@/public/warehousing__Distribution_logistics_service.webp";
 import imageAir from "@/public/air_freight_service.webp";
 import imageSea from "@/public/sea_freight_services.webp";

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import { TextReveal } from "@/app/components/TextReveal";
-import masIcon from "@/images_frontend/mas_without_wording.png";
+import masIcon from "@/public/images_frontend/mas_without_wording.png";
 
 const NAV_LINKS = [
     { name: "Home", href: "/" },
@@ -31,31 +31,31 @@ interface AccordionFAQBoldProps {
 const DEFAULT_ITEMS: FAQItem[] = [
     {
         question: "Why choose our trucking service?",
-        answer: "Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer\n\nDirected convergence without revolutionary ROI.Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions",
+        answer: "Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer-directed convergence without revolutionary ROI.\n\ Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions",
     },
     {
         question: "Any facilities available on warehousing and storage service?",
-        answer: "Professionally cultivate one-to-one customer service with robust ideas dynamically innovate resource\n\nLeveling customer service for state of the art customer service.Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis",
+        answer: "Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.\n\ Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis.",
     },
     {
-        question: "Is it possible to logistic service providers to understand our business?",
-        answer: "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing\n\nHolistically pontificate installed base portals after maintainable products.Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric \"outside the box\" thinking. Completely pursue scalable customer",
+        question: "Is it possible for logistic service providers to understand our business?",
+        answer: "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing.\n\ Holistically pontificate installed base portals after maintainable products. Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric \"outside the box\" thinking. Completely pursue scalable customer",
     },
     {
-        question: "Any speciality in of advanced green carriers?",
-        answer: "Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth\n\nStrategies and interoperable internal or \"organic\" sources.Credibly innovate granular internal or \"organic\" sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas",
+        question: "Any speciality in our advanced green carriers?",
+        answer: "Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth strategies and interoperable internal or \"organic\" sources.\n\ Credibly innovate granular internal or \"organic\" sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas",
     },
     {
         question: "How about domestic and international deliveries of collective and partial shipments?",
-        answer: "Interactively procrastinate high-payoff content without backward-compatible data. Quickly cultivate optimal processes and tactical architectures. Completely iterate covalent strategic theme\n\nAreas via accurate e-markets. Globally incubate standards compliant channels before scalable benefits. Quickly disseminate superior deliverables whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change before vertical architectures",
+        answer: "Interactively procrastinate high-payoff content without backward-compatible data. Quickly cultivate optimal processes and tactical architectures. Completely iterate covalent strategic theme areas via accurate e-markets.\n\ Globally incubate standards compliant channels before scalable benefits. Quickly disseminate superior deliverables whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change before vertical architectures",
     },
     {
         question: "Having problems with your truck, van or any kind of transportation vehicles?",
-        answer: "Credibly reintermediate backend ideas for cross-platform models. Continually reintermediate integrated processes through technically sound intellectual capital holistically foster\n\nsuperior methodologies without market-driven best practices.Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing procedures whereas bricks-and-clicks",
+        answer: "Credibly reintermediate backend ideas for cross-platform models. Continually reintermediate integrated processes through technically sound intellectual capital. Holistically foster superior methodologies without market-driven best practices.\n\ Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing procedures whereas bricks-and-clicks",
     },
     {
         question: "How to get informations about our branches around the world?",
-        answer: "I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness\n\nNo one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that",
+        answer: "I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.\n\ No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that",
     },
 ];
 
@@ -160,7 +160,7 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                                             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
                                             className="absolute -bottom-3 -right-3 z-10 w-9 h-9 rounded-full border-2 border-black bg-[#e5e4e2] flex items-center justify-center shadow-md"
                                         >
-                                            <ArrowUpRight className="w-5 h-5 text-black" strokeWidth={2.5} />
+                                            <Image src={masIcon} alt="MAS Icon" className="w-5 h-5 object-contain opacity-80" />
                                         </motion.div>
 
                                         {/* The Answer Box (Reveals from bottom right) */}

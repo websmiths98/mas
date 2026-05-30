@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import masLogo from "../../images_frontend/mas_logo.webp";
+import masLogo from "../../public/images_frontend/mas_logo.webp";
 
 export default function Footer() {
   return (
@@ -55,7 +55,7 @@ export default function Footer() {
               <li><Link href="/" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Home</Link></li>
               <li><Link href="/#about" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>About Us</Link></li>
               {/* <li><Link href="/#FAQ" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Review</Link></li> */}
-              <li><Link href="/#FAQ" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>FAQ</Link></li>
+              <li><Link href="/#faq" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>FAQ</Link></li>
               <li><button onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openQuoteModal')); }} className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Get a Quote</button></li>
             </ul>
           </div>
