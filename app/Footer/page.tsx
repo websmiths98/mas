@@ -76,15 +76,19 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-xs mb-6 text-black uppercase tracking-widest">Reach Us At</h3>
             <div className="space-y-5 text-sm text-gray-600">
-              <a href="tel:+18001234567" className="flex items-start space-x-3 hover:text-black transition-colors group">
-                <div className="mt-0.5 p-1.5 rounded-full bg-white group-hover:bg-black group-hover:text-white transition-colors shadow-sm">
+              <div className="flex items-start space-x-3 group">
+                <div className="mt-0.5 p-1.5 rounded-full bg-white group-hover:bg-black group-hover:text-white transition-colors shadow-sm flex-shrink-0">
                   <Phone className="w-3.5 h-3.5" />
                 </div>
-                <span className="mt-1 font-medium whitespace-nowrap">+1 (800) 123-4567</span>
-              </a>
+                <div className="mt-1 font-medium flex flex-col space-y-1">
+                  <a href="tel:+914442034201" className="hover:text-black transition-colors whitespace-nowrap">+91 44 4203 4201</a>
+                  <a href="tel:+914435560700" className="hover:text-black transition-colors whitespace-nowrap">+91 44 355 60 700</a>
+                  <a href="tel:+919043555290" className="hover:text-black transition-colors whitespace-nowrap">+91 9043555290</a>
+                </div>
+              </div>
 
               <a href="mailto:support@maslogistics.com" className="flex items-start space-x-3 hover:text-black transition-colors group">
-                <div className="mt-0.5 p-1.5 rounded-full bg-white group-hover:bg-black group-hover:text-white transition-colors shadow-sm">
+                <div className="mt-0.5 p-1.5 rounded-full bg-white group-hover:bg-black group-hover:text-white transition-colors shadow-sm flex-shrink-0">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
                 <span className="mt-1 font-medium whitespace-nowrap">support@maslogistics.com</span>
@@ -96,7 +100,7 @@ export default function Footer() {
                 </div>
                 <div className="mt-1">
                   <p className="font-semibold text-black mb-1">Registered Office</p>
-                  <p className="leading-relaxed">123 Logistics Park, Main Highway Road,<br />Industrial Area, City 100001</p>
+                  <p className="leading-relaxed">#37/23A, Periyar Nagar, TVT,<br />Chennai - 600019, TN, India</p>
                 </div>
               </div>
             </div>

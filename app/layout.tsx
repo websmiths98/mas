@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 import Footer from "./Footer/page";
 import { SmoothScrollProvider } from "./animations/SmoothScrollProvider";
+import { MotionProvider } from "./components/MotionProvider";
 
 export default function RootLayout({
   children,
@@ -21,13 +22,15 @@ export default function RootLayout({
       className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col">
-        <SmoothScrollProvider>
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-          <FloatingQuoteButton />
-        </SmoothScrollProvider>
+        <MotionProvider>
+          <SmoothScrollProvider>
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+            <FloatingQuoteButton />
+          </SmoothScrollProvider>
+        </MotionProvider>
       </body>
     </html>
   );

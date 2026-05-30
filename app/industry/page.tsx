@@ -243,23 +243,25 @@ const PROVEN_TRACK_SLIDES = [
 
 function MorphCarousel() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
 
     useEffect(() => {
-        if (isHovered) return;
+        if (isPaused) return;
 
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % PROVEN_TRACK_SLIDES.length);
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [isHovered]);
+    }, [activeIndex, isPaused]);
 
     return (
         <div
             className="relative w-full h-[700px] md:h-[800px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-[#050505] border border-white/10 shadow-2xl group"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onPointerDown={() => setIsPaused(true)}
+            onPointerUp={() => setIsPaused(false)}
+            onPointerLeave={() => setIsPaused(false)}
+            onPointerCancel={() => setIsPaused(false)}
         >
             {/* Cinematic 3D Image Transitions */}
             <AnimatePresence mode="wait">
@@ -328,8 +330,8 @@ function MorphCarousel() {
                         key={i}
                         onClick={() => setActiveIndex(i)}
                         className={`relative w-16 h-12 md:w-32 md:h-20 rounded-lg md:rounded-xl overflow-hidden transition-all duration-500 cursor-pointer ${activeIndex === i
-                                ? "ring-2 ring-emerald-500 scale-105 shadow-2xl z-10"
-                                : "ring-1 ring-white/10 opacity-50 hover:opacity-100 hover:scale-100 saturate-0 hover:saturate-100"
+                            ? "ring-2 ring-emerald-500 scale-105 shadow-2xl z-10"
+                            : "ring-1 ring-white/10 opacity-50 hover:opacity-100 hover:scale-100 saturate-0 hover:saturate-100"
                             }`}
                     >
                         <Image src={slide.image} fill sizes="(max-width: 768px) 64px, 128px" className={`object-cover ${slide.imagePosition || 'object-center'}`} alt={`Thumbnail ${i}`} />
