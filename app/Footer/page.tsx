@@ -7,7 +7,7 @@ import masLogo from "../../images_frontend/mas_logo.webp";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#e5e4e2] text-black rounded-t-[40px] pt-16 pb-8 px-8 md:px-16 mt-12 font-sans relative z-10">
+    <footer className="bg-[#e5e4e2] text-black rounded-t-[40px] pt-16 pb-8 px-8 md:px-16 -mt-8 font-sans relative z-50">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
         
         {/* Brand Section */}

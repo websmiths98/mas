@@ -68,7 +68,12 @@ export default function HeroSection() {
         </RevealWrapper>
 
         {/* ─ Primary Heading ─ */}
-        <h1 className="hero-h1 flex flex-wrap justify-center text-center">
+        <h1 
+          className="hero-h1 flex flex-wrap justify-center text-center text-[#fffff5]"
+          style={{
+            textShadow: "0 0 30px rgba(255, 255, 255, 0), 0 15px 50px rgba(200, 220, 255, 0), 0 -5px 25px rgba(255, 255, 255, 0.07)"
+          }}
+        >
           {"International Freight Forwarding & Supply Chain Solutions".split(" ").map((word, i) => (
             <motion.span
               key={i}

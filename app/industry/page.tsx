@@ -84,13 +84,13 @@ function PremiumTiltCard({ children, className = "", onClick }: { children: Reac
     const ref = useRef<HTMLDivElement>(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
-    
+
     const mouseXSpring = useSpring(x, { stiffness: 100, damping: 20 });
     const mouseYSpring = useSpring(y, { stiffness: 100, damping: 20 });
-    
+
     const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
     const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
-    
+
     const glareOpacity = useTransform(mouseXSpring, [-0.5, 0.5], [0, 0.3]);
     const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
     const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
@@ -122,7 +122,7 @@ function PremiumTiltCard({ children, className = "", onClick }: { children: Reac
         >
             <div className="absolute inset-0 rounded-[2rem] border border-white/10 bg-zinc-900/50 backdrop-blur-sm shadow-2xl overflow-hidden transition-colors duration-500 group-hover:border-white/20 group-hover:bg-zinc-800/80">
                 {children}
-                
+
                 {/* Realistic Glare Effect */}
                 <motion.div
                     style={{
@@ -153,49 +153,49 @@ const INDUSTRIES = [
     {
         name: "Automotive",
         image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop",
-        description: "End-to-end supply chain integration for the global automotive sector. From Just-In-Time (JIT) parts procurement to finished vehicle distribution, we ensure production lines never halt.",
+        description: "End-to-end supply chain integration for the global automotive sector. From Just-In-Time (JIT) parts procurement to finished vehicle distribution, we ensure production lines never halt",
         className: "md:col-span-2 md:row-span-2"
     },
     {
         name: "Lifestyle & Fashions",
         image: "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop",
-        description: "Agile, fast-paced logistics tailored for seasonal retail cycles, luxury apparel, and high-volume fashion distribution.",
+        description: "Agile, fast-paced logistics tailored for seasonal retail cycles, luxury apparel, and high-volume fashion distribution",
         className: "md:col-span-1 md:row-span-1"
     },
     {
         name: "Medical Supplies",
         image: "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop",
-        description: "Precision temperature-controlled environments, cold-chain logistics, and highly secure transport networks dedicated to critical healthcare.",
+        description: "Precision temperature-controlled environments, cold-chain logistics, and highly secure transport networks dedicated to critical healthcare",
         className: "md:col-span-1 md:row-span-1"
     },
     {
         name: "Energy Generation",
         image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop",
-        description: "Specialized project cargo for massive energy infrastructure. We seamlessly move oversized turbines, renewable wind components, and heavy-duty traditional power generators across borders.",
+        description: "Specialized project cargo for massive energy infrastructure. We seamlessly move oversized turbines, renewable wind components, and heavy-duty traditional power generators across borders",
         className: "md:col-span-2 md:row-span-1"
     },
     {
         name: "Hightech",
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
-        description: "Globally compliant, ultra-secure, and agile logistics built for the fast-evolving electronics industry. We protect fragile silicon, server racks, and advanced consumer technology.",
+        description: "Globally compliant, ultra-secure, and agile logistics built for the fast-evolving electronics industry. We protect fragile silicon, server racks, and advanced consumer technology",
         className: "md:col-span-1 md:row-span-2"
     },
     {
         name: "FMCG",
         image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop",
-        description: "High-volume, rapid-turnaround distribution networks engineered for fast-moving consumer goods to optimize shelf availability.",
+        description: "High-volume, rapid-turnaround distribution networks engineered for fast-moving consumer goods to optimize shelf availability",
         className: "md:col-span-1 md:row-span-1"
     },
     {
         name: "Retail",
         image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop",
-        description: "Comprehensive retail supply chain management integrating warehousing, e-commerce fulfillment, and store replenishment to ensure products meet consumer demand instantly.",
+        description: "Comprehensive retail supply chain management integrating warehousing, e-commerce fulfillment, and store replenishment to ensure products meet consumer demand instantly",
         className: "md:col-span-2 md:row-span-1"
     },
     {
         name: "Plant & Machinery",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop",
-        description: "Expert handling of massive out-of-gauge (OOG) cargo, break-bulk, and heavy-lift industrial machinery for manufacturing plants, mining sites, and global construction projects.",
+        description: "Expert handling of massive out-of-gauge (OOG) cargo, break-bulk, and heavy-lift industrial machinery for manufacturing plants, mining sites, and global construction projects",
         className: "md:col-span-3 md:row-span-1"
     }
 ];
@@ -203,7 +203,7 @@ const INDUSTRIES = [
 const PROVEN_TRACK_SLIDES = [
     {
         title: "Proven Industry Experience",
-        description: "MAS Logistics has extensive experience in handling project cargo across industries such as Oil & Gas, Construction, Energy, Maritime, Mining, and Heavy Machinery. Our team is equipped to manage highly complex transport requirements involving Break Bulk (BB), Heavy Lift (HL), and Out of Gauge (OOG) cargo.",
+        description: "MAS Logistics has extensive experience in handling project cargo across industries such as Oil & Gas, Construction, Energy, Maritime, Mining, and Heavy Machinery. Our team is equipped to manage highly complex transport requirements involving Break Bulk (BB), Heavy Lift (HL), and Out of Gauge (OOG) cargo",
         capabilities: [
             "Break Bulk (BB) cargo handling",
             "Heavy Lift (HL) cargo management",
@@ -216,7 +216,7 @@ const PROVEN_TRACK_SLIDES = [
     },
     {
         title: "Warehousing Services",
-        description: "MAS Logistics offers both Dedicated Warehousing and Multi-User Warehousing Solutions, designed to meet different operational and storage requirements. Our dedicated warehouse solutions align with your specific business requirements, offering greater flexibility and scalability to support growth.",
+        description: "MAS Logistics offers both Dedicated Warehousing and Multi-User Warehousing Solutions, designed to meet different operational and storage requirements. Our dedicated warehouse solutions align with your specific business requirements, offering greater flexibility and scalability to support growth",
         capabilities: [
             "Dedicated storage solutions",
             "Flexible and scalable operations",
@@ -228,7 +228,7 @@ const PROVEN_TRACK_SLIDES = [
     },
     {
         title: "Break-Bulk Services",
-        description: "Our break-bulk logistics solutions are designed to handle oversized, heavy, and unconventional cargo that requires specialized transportation arrangements. Beyond standard shipping services, we provide complete logistics support, including pre-carriage, on-carriage, packaging, crating, and rigging.",
+        description: "Our break-bulk logistics solutions are designed to handle oversized, heavy, and unconventional cargo that requires specialized transportation arrangements. Beyond standard shipping services, we provide complete logistics support, including pre-carriage, on-carriage, packaging, crating, and rigging",
         capabilities: [
             "Oversized and overweight cargo handling",
             "Heavy and odd-sized shipment support",
@@ -247,7 +247,7 @@ function MorphCarousel() {
 
     useEffect(() => {
         if (isHovered) return;
-        
+
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % PROVEN_TRACK_SLIDES.length);
         }, 5000);
@@ -256,7 +256,7 @@ function MorphCarousel() {
     }, [isHovered]);
 
     return (
-        <div 
+        <div
             className="relative w-full h-[700px] md:h-[800px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-[#050505] border border-white/10 shadow-2xl group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -271,12 +271,12 @@ function MorphCarousel() {
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute inset-0 w-full h-full pointer-events-none"
                 >
-                    <Image 
-                        src={PROVEN_TRACK_SLIDES[activeIndex].image} 
-                        fill 
-                        sizes="100vw" 
-                        className={`object-cover opacity-60 mix-blend-lighten ${PROVEN_TRACK_SLIDES[activeIndex].imagePosition || 'object-center'}`} 
-                        alt="Carousel Background" 
+                    <Image
+                        src={PROVEN_TRACK_SLIDES[activeIndex].image}
+                        fill
+                        sizes="100vw"
+                        className={`object-cover opacity-60 mix-blend-lighten ${PROVEN_TRACK_SLIDES[activeIndex].imagePosition || 'object-center'}`}
+                        alt="Carousel Background"
                     />
                 </motion.div>
             </AnimatePresence>
@@ -303,7 +303,7 @@ function MorphCarousel() {
                             <TextReveal as="p" className="text-zinc-300 text-lg md:text-xl font-light leading-relaxed mb-8 drop-shadow-lg max-w-2xl">
                                 {PROVEN_TRACK_SLIDES[activeIndex].description}
                             </TextReveal>
-                            
+
                             <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl inline-block w-full relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
                                 <h4 className="font-manrope text-emerald-400 font-semibold tracking-wide uppercase text-sm mb-4">Service Capabilities</h4>
@@ -327,11 +327,10 @@ function MorphCarousel() {
                     <button
                         key={i}
                         onClick={() => setActiveIndex(i)}
-                        className={`relative w-16 h-12 md:w-32 md:h-20 rounded-lg md:rounded-xl overflow-hidden transition-all duration-500 cursor-pointer ${
-                            activeIndex === i 
-                                ? "ring-2 ring-emerald-500 scale-105 shadow-2xl z-10" 
+                        className={`relative w-16 h-12 md:w-32 md:h-20 rounded-lg md:rounded-xl overflow-hidden transition-all duration-500 cursor-pointer ${activeIndex === i
+                                ? "ring-2 ring-emerald-500 scale-105 shadow-2xl z-10"
                                 : "ring-1 ring-white/10 opacity-50 hover:opacity-100 hover:scale-100 saturate-0 hover:saturate-100"
-                        }`}
+                            }`}
                     >
                         <Image src={slide.image} fill sizes="(max-width: 768px) 64px, 128px" className={`object-cover ${slide.imagePosition || 'object-center'}`} alt={`Thumbnail ${i}`} />
                         <div className="absolute inset-0 bg-black/20" />
@@ -341,10 +340,10 @@ function MorphCarousel() {
                     </button>
                 ))}
             </div>
-            
+
             {/* Progress Bar */}
             <div className="absolute bottom-0 left-0 h-1 bg-white/10 w-full z-20">
-                <motion.div 
+                <motion.div
                     key={`progress-${activeIndex}`}
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
@@ -376,7 +375,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
     return (
         <main className="min-h-screen bg-[#020617] text-white selection:bg-emerald-500 selection:text-black overflow-x-hidden font-manrope [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi">
 
-            {!isEmbedded && (
+            {!isEmbedded && !selectedIndustry && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">
                     <AppleGlassNav
                         items={NAV_LINKS}
@@ -413,7 +412,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                     <div className="absolute inset-x-0 top-0 h-[40%] bg-gradient-to-b from-[#020617] to-transparent z-10" />
                     <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#020617] to-transparent z-10" />
                 </div>
-                
+
                 <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
                     <Reveal direction="down">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
@@ -433,13 +432,13 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
 
                     <Reveal direction="up" delay={0.2}>
                         <p className="text-zinc-300 text-lg md:text-2xl font-light leading-relaxed max-w-3xl drop-shadow-lg mb-0">
-                            We deliver <span className="text-white font-medium">industry-focused logistics</span> to support complex global supply chains. From transportation to customs coordination, we provide <span className="text-emerald-400 font-medium">reliable support</span> tailored to your business needs.
+                            We deliver <span className="text-white font-medium">industry-focused logistics</span> to support complex global supply chains. From transportation to customs coordination, we provide <span className="text-emerald-400 font-medium">reliable support</span> tailored to your business needs
                         </p>
                     </Reveal>
-                    
+
 
                 </div>
-                
+
 
             </section>
 
@@ -458,12 +457,12 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                             className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent" />
-                                        
+
                                         <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
                                             <motion.h3 layoutId={`title-${industry.name}`} className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                                 <TextReveal>{industry.name}</TextReveal>
                                             </motion.h3>
-                                            
+
                                             <div className="overflow-hidden">
                                                 <p className="text-zinc-300 text-sm md:text-base font-light line-clamp-2 transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
                                                     <TextReveal>{industry.description}</TextReveal>
@@ -473,7 +472,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                             <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
                                                 <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
                                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                                        <path d="M5 12h14M12 5l7 7-7 7" />
                                                     </svg>
                                                 </div>
                                             </div>
@@ -520,10 +519,10 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                 </button>
                             </div>
 
-                            <div className="relative w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-[#020617] z-10 overflow-y-auto hide-scrollbar">
+                            <div className="relative w-full md:w-1/2 p-6 md:p-10 lg:p-12 flex flex-col justify-start bg-[#020617] z-10 overflow-y-auto hide-scrollbar overscroll-contain">
                                 <button
                                     onClick={() => setSelectedIndustry(null)}
-                                    className="hidden md:flex absolute top-8 right-8 w-12 h-12 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full items-center justify-center text-white transition-colors z-50 border border-white/10"
+                                    className="hidden md:flex absolute top-6 right-6 w-12 h-12 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full items-center justify-center text-white transition-colors z-50 border border-white/10"
                                 >
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                                 </button>
@@ -532,24 +531,25 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                     initial={{ opacity: 0, x: 30 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+                                    className="my-auto pt-12 md:pt-0"
                                 >
                                     <motion.h3
                                         layoutId={`title-${selectedIndustry.name}`}
-                                        className="text-4xl md:text-6xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-500"
+                                        className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-500"
                                     >
                                         <TextReveal>{selectedIndustry.name}</TextReveal>
                                     </motion.h3>
 
-                                    <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mb-8 rounded-full" />
+                                    <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mb-6 rounded-full" />
 
-                                    <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed mb-10">
+                                    <p className="text-base md:text-lg text-zinc-300 font-light leading-relaxed mb-6 md:mb-8">
                                         <TextReveal>{selectedIndustry.description}</TextReveal>
                                     </p>
 
-                                    <div className="space-y-8">
-                                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                                            <h5 className="font-manrope text-emerald-400 font-semibold tracking-wide uppercase text-sm mb-4">Key Logistics Offerings</h5>
-                                            <ul className="text-zinc-200 space-y-3">
+                                    <div className="space-y-6">
+                                        <div className="p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                                            <h5 className="font-manrope text-emerald-400 font-semibold tracking-wide uppercase text-xs md:text-sm mb-3">Key Logistics Offerings</h5>
+                                            <ul className="text-zinc-200 space-y-2 text-sm md:text-base">
                                                 <li className="flex items-start gap-3">
                                                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] shrink-0"></span>
                                                     <span>Dedicated supply chain planning</span>
@@ -566,8 +566,8 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                         </div>
 
                                         <div>
-                                            <h5 className="text-white font-medium text-lg mb-3">Service Excellence</h5>
-                                            <p className="text-zinc-400 leading-relaxed font-light">
+                                            <h5 className="text-white font-medium text-base md:text-lg mb-2">Service Excellence</h5>
+                                            <p className="text-zinc-400 leading-relaxed font-light text-sm md:text-base">
                                                 Our specialized teams operate around the clock to ensure your <span className="text-white font-medium">{selectedIndustry.name.toLowerCase()}</span> cargo reaches its destination safely and on schedule, minimizing operational downtime and maximizing your ROI.
                                             </p>
                                         </div>
@@ -585,7 +585,7 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                     <MorphCarousel />
                 </Reveal>
             </div>
-            
+
         </main>
     );
 }

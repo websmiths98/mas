@@ -108,7 +108,8 @@ type StackSectionData = {
   intro?: string;
   accent: string;
   featureClasses?: string;
-  gradient: string;
+  gradient?: string;
+  style?: React.CSSProperties;
   Icon: ComponentType<{ className?: string }>;
   imageBgSrc?: StaticImageData;
   items: StackServiceItem[];
@@ -120,7 +121,8 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
 
   return (
     <article
-      className={`stack-card absolute inset-x-0 top-0 min-h-[800px] overflow-hidden rounded-[32px] md:rounded-[36px] ${section.gradient}`}
+      className={`stack-card absolute inset-x-0 top-0 min-h-[800px] overflow-hidden rounded-[32px] md:rounded-[36px] ${section.gradient || ""}`}
+      style={section.style}
       data-layer={layer}
     >
       {section.imageBgSrc && (
@@ -362,7 +364,7 @@ const STACK_SECTIONS: StackSectionData[] = [
     Icon: IconBox,
     accent: "text-[#1e3a8a]",
     featureClasses: "bg-blue-50 text-blue-700 ring-blue-200/60",
-    gradient: "bg-gradient-to-b from-[#59CDE9] to-[#0A2A88]",
+    style: { backgroundImage: "linear-gradient(90deg, #A6EDFE 0%, #9BCCFF 52%, #899FFF 100%)" },
     // imageBgSrc: bgDomestic, // removed to show custom gradient
     items: [
       {
@@ -399,7 +401,7 @@ const STACK_SECTIONS: StackSectionData[] = [
     Icon: IconGlobal,
     accent: "text-[#064e3b]",
     featureClasses: "bg-emerald-50 text-emerald-700 ring-emerald-200/60",
-    gradient: "bg-gradient-to-t from-[#6F3FFF] from-[15%] via-[#15C0E5] via-[61%] to-[#FFE5BD] to-[86%]",
+    style: { backgroundImage: "linear-gradient( 109.6deg, rgba(125, 182, 253, 1) 11.2%, rgba(226, 247, 193, 1) 91.1% )" },
     // imageBgSrc: bgGlobal, // removed to show custom gradient
     intro:
       "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution, helping businesses manage the movement of goods with greater control and confidence. From international freight forwarding to warehousing and specialized cargo handling, we deliver solutions tailored to meet diverse logistics and supply chain requirements",
@@ -456,7 +458,13 @@ const STACK_SECTIONS: StackSectionData[] = [
 export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
   return (
     <SmoothScrollProvider>
-      <main className="min-h-screen overflow-x-hidden bg-gradient-to-t from-[#CDCCFE] from-[46%] to-[#0E2A47] to-[80%] text-white [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi">
+      <main
+        className="min-h-screen overflow-x-hidden text-white [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi"
+        style={{
+          backgroundColor: "#020024",
+          backgroundImage: "linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(239, 242, 243, 1) 100%)",
+        }}
+      >
         {!isEmbedded && (
           <div className="fixed left-1/2 top-7 z-[100] w-auto -translate-x-1/2">
             <AppleGlassNav
@@ -479,10 +487,10 @@ export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: bool
         )}
 
         <section className="mx-auto max-w-[1760px] px-5 pb-8 pt-32 sm:px-8 lg:px-10 lg:pt-36">
-          <TextReveal as="h1" className="max-w-5xl text-[36px] font-semibold leading-[1.04] tracking-[-0.03em] text-white sm:text-6xl lg:text-[76px]">
+          <TextReveal as="h1" className="max-w-5xl text-[36px] font-semibold leading-[1.04] tracking-[-0.03em] bg-gradient-to-r from-[#E8E4FA] to-[#D4D4FA] bg-clip-text text-transparent sm:text-6xl lg:text-[76px]">
             Built to Simplify Global Logistics Operations
           </TextReveal>
-          <TextReveal as="p" className="mt-6 max-w-7xl text-lg font-medium leading-9 text-slate-200 lg:text-xl" delay={0.2}>
+          <TextReveal as="p" className="mt-6 max-w-7xl text-lg font-medium leading-9 bg-gradient-to-r from-[#E8E4FA] to-[#D4D4FA] bg-clip-text text-transparent lg:text-xl" delay={0.2}>
             At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems
           </TextReveal>
         </section>

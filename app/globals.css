@@ -44,6 +44,18 @@ body {
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  -webkit-user-select: none !important; /* Safari */
+  -moz-user-select: none !important; /* Firefox */
+  -ms-user-select: none !important; /* IE10+/Edge */
+  user-select: none !important; /* Standard */
+  -webkit-user-drag: none !important; /* Prevent dragging elements */
+}
+
+input, textarea {
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
 }
 
 *::-webkit-scrollbar {
@@ -112,7 +124,7 @@ body {
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: -0.015em;
-  color: rgba(229, 228, 226, 0.6);
+  color: rgba(251, 250, 248, 0.6);
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
