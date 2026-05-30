@@ -200,7 +200,7 @@ const FeatureCard = ({
     <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
+        viewport={{ once: false, margin: "-40px" }}
         transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
         className="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.06)] p-6 flex flex-col items-center text-center gap-2.5"
     >
@@ -540,7 +540,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         className="text-center max-w-xl"
                     >
@@ -596,7 +596,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 <motion.div
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
+                                    viewport={{ once: false }}
                                     transition={{ duration: 0.5, delay: 0.3 }}
                                     className="absolute -left-[72px] top-[52%] -translate-y-1/2 z-20 bg-white rounded-2xl border border-gray-100 px-4 py-3 flex flex-col items-center"
                                     style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.04)" }}
@@ -609,7 +609,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 <motion.div
                                     initial={{ opacity: 0, y: 32 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
+                                    viewport={{ once: false }}
                                     transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <PhoneMockup accent="#bbf451" />
@@ -619,7 +619,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
                                     whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                                    viewport={{ once: true }}
+                                    viewport={{ once: false }}
                                     transition={{ duration: 0.5, delay: 0.38, type: "spring", bounce: 0.4 }}
                                     className="absolute top-[6%] -right-10 w-[66px] h-[66px] bg-gray-900 rounded-[20px] flex items-center justify-center z-20"
                                     style={{ boxShadow: "0 10px 28px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.10)" }}

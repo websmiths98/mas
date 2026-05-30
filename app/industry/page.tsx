@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import { TextReveal } from "@/app/components/TextReveal";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -296,12 +297,12 @@ function MorphCarousel() {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             className="pointer-events-auto"
                         >
-                            <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 drop-shadow-2xl tracking-tight">
+                            <TextReveal as="h3" className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 drop-shadow-2xl tracking-tight">
                                 {PROVEN_TRACK_SLIDES[activeIndex].title}
-                            </h3>
-                            <p className="text-zinc-300 text-lg md:text-xl font-light leading-relaxed mb-8 drop-shadow-lg max-w-2xl">
+                            </TextReveal>
+                            <TextReveal as="p" className="text-zinc-300 text-lg md:text-xl font-light leading-relaxed mb-8 drop-shadow-lg max-w-2xl">
                                 {PROVEN_TRACK_SLIDES[activeIndex].description}
-                            </p>
+                            </TextReveal>
                             
                             <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl inline-block w-full relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
@@ -460,12 +461,12 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                         
                                         <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
                                             <motion.h3 layoutId={`title-${industry.name}`} className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                                {industry.name}
+                                                <TextReveal>{industry.name}</TextReveal>
                                             </motion.h3>
                                             
                                             <div className="overflow-hidden">
                                                 <p className="text-zinc-300 text-sm md:text-base font-light line-clamp-2 transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-                                                    {industry.description}
+                                                    <TextReveal>{industry.description}</TextReveal>
                                                 </p>
                                             </div>
 
@@ -536,13 +537,13 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
                                         layoutId={`title-${selectedIndustry.name}`}
                                         className="text-4xl md:text-6xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-500"
                                     >
-                                        {selectedIndustry.name}
+                                        <TextReveal>{selectedIndustry.name}</TextReveal>
                                     </motion.h3>
 
                                     <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mb-8 rounded-full" />
 
                                     <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed mb-10">
-                                        {selectedIndustry.description}
+                                        <TextReveal>{selectedIndustry.description}</TextReveal>
                                     </p>
 
                                     <div className="space-y-8">

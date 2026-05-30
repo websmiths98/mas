@@ -4,19 +4,20 @@ import React, { useRef } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { RevealWrapper } from "@/app/animations/RevealWrapper";
 import { useParallax } from "@/app/animations/useParallax";
+import { TextReveal } from "@/app/components/TextReveal";
 
 export default function HeroSection() {
   // Shared height and sizing to ensure both buttons look uniform
   const btnStyle = "h-[46px] min-w-[170px] flex items-center justify-center px-6 rounded-xl transition-all duration-300 text-[13px] font-semibold cursor-pointer";
-  
+
   // yBg moves down 350px when scrolled 1000px down
   const yBg = useParallax(350);
-  
+
   // yText moves down 150px when scrolled 1000px down (creating 3D depth between BG and text)
   const yText = useParallax(150);
 
   return (
-    <div className="relative bg-[#E5E4E2] h-screen w-full overflow-hidden flex items-center justify-center">
+    <div className="relative bg-[#020617] h-screen w-full overflow-hidden flex items-center justify-center">
 
       {/* ── Video BG ── */}
       <motion.div style={{ transform: `translateY(${yBg}px)` }} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
@@ -41,7 +42,7 @@ export default function HeroSection() {
         style={{
           background:
             "linear-gradient(160deg, rgba(2,6,18,0.96) 0%, rgba(3,9,28,0.88) 50%, rgba(5,12,35,0.72) 100%)",
-          opacity: 0.65,
+          opacity: 0.50,
         }}
       />
 
@@ -59,7 +60,7 @@ export default function HeroSection() {
       <motion.div style={{ transform: `translateY(${yText}px)` }} className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-16 flex flex-col items-center text-center gap-6">
 
         {/* ─ Badge ─ */}
-        <RevealWrapper staggerIndex={1}>
+        <RevealWrapper staggerIndex={0}>
           <div className="hero-badge">
             <span className="hero-badge-dot" />
             Seamless Logistics Across Continents | Your Trusted Partner in Global Logistics
@@ -67,18 +68,14 @@ export default function HeroSection() {
         </RevealWrapper>
 
         {/* ─ Primary Heading ─ */}
-        <h1 className="hero-h1" aria-label="International Freight Forwarding & Supply Chain Solutions">
+        <h1 className="hero-h1 flex flex-wrap justify-center text-center">
           {"International Freight Forwarding & Supply Chain Solutions".split(" ").map((word, i) => (
             <motion.span
               key={i}
-              style={{ display: "inline-block", marginRight: "0.3em" }}
+              className="inline-block mr-[0.25em] mb-[0.1em]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.4 + i * 0.08,
-                ease: [0.22, 1, 0.36, 1]
-              }}
+              transition={{ duration: 0.8, delay: i * 0.04 }}
             >
               {word}
             </motion.span>
@@ -86,15 +83,24 @@ export default function HeroSection() {
         </h1>
 
         {/* ─ Subtitle ─ */}
-        <RevealWrapper staggerIndex={5}>
-          <h2 className="hero-h2 max-w-2xl">
-            MAS Logistics is a trusted international freight forwarding and supply chain management company in India
-            delivering reliable air, sea, warehousing, and global logistics solutions tailored for seamless cross-border trade
+        <RevealWrapper staggerIndex={2}>
+          <h2 className="hero-h2 max-w-2xl flex flex-wrap justify-center text-center">
+            {"MAS Logistics is a trusted international freight forwarding and supply chain management company in India delivering reliable air, sea, warehousing, and global logistics solutions tailored for seamless cross-border trade".split(" ").map((word, i) => (
+              <motion.span
+                key={i}
+                className="inline-block mr-[0.25em] mb-[0.1em]"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 + i * 0.02 }}
+              >
+                {word}
+              </motion.span>
+            ))}
           </h2>
         </RevealWrapper>
 
         {/* ─ CTAs ─ */}
-        <RevealWrapper staggerIndex={7}>
+        <RevealWrapper staggerIndex={3}>
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
 
             {/* Explore Services Button

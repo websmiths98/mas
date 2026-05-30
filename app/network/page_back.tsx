@@ -302,7 +302,7 @@ export default function NetworkPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               <h1 className="text-sm font-bold tracking-[0.3em] text-blue-400 uppercase mb-4">Global Network Overview</h1>
               <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 leading-tight">
@@ -323,7 +323,7 @@ export default function NetworkPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="group p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300"
                 >
                   <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">{block.title}</h3>
@@ -338,7 +338,7 @@ export default function NetworkPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               <h1 className="text-sm font-bold tracking-[0.3em] text-blue-400 uppercase mb-4">International Connectivity</h1>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">Connected to Global Trade Markets</h2>
@@ -356,7 +356,7 @@ export default function NetworkPage() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="flex flex-col md:flex-row md:items-center gap-4 p-6 rounded-2xl border border-white/5 bg-gradient-to-r from-white/[0.02] to-transparent"
                 >
                   <div className="h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
@@ -374,7 +374,7 @@ export default function NetworkPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               <h1 className="text-sm font-bold tracking-[0.3em] text-blue-400 uppercase mb-4">Global Freight Capabilities</h1>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-8">Comprehensive Freight Management Capabilities</h2>
@@ -387,7 +387,7 @@ export default function NetworkPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="flex items-center gap-3 text-zinc-300"
                 >
                   <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -402,7 +402,7 @@ export default function NetworkPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="text-zinc-500 text-sm leading-relaxed border-l-2 border-blue-500/30 pl-6 italic"
             >
               MAS Logistics manages complex freight operations through coordinated logistics planning,
@@ -416,7 +416,7 @@ export default function NetworkPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               <h1 className="text-sm font-bold tracking-[0.3em] text-blue-400 uppercase mb-4">Network Strength Metrics</h1>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-10">Global Network Strength</h2>
@@ -429,7 +429,7 @@ export default function NetworkPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   className="text-center md:text-left"
                 >
                   <div className="text-2xl md:text-3xl font-bold text-white mb-2 tabular-nums">

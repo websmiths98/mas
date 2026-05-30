@@ -181,7 +181,7 @@ function CinematicText({ text, delay = 0, className, spanClassName }: { text: st
             delay: delay + (i * 0.02),
             ease: [0.2, 0.65, 0.3, 0.9]
           }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className={`inline-block ${spanClassName || ""}`}
           style={{ whiteSpace: char === " " ? "pre" : "normal" }}
         >
@@ -224,7 +224,7 @@ function Hover3DCard({ children, className, delay = 0, initialX = 0, initialY = 
       initial={{ opacity: 0, x: initialX, y: initialY }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -506,7 +506,7 @@ export default function NetworkPage() {
                   initial={{ opacity: 0, scale: 0.85 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: i * 0.02 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   whileHover={{ scale: 1.05, y: -2 }}
                   className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/[0.02] hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300"
                 >

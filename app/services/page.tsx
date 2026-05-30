@@ -9,6 +9,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import { TextReveal } from "@/app/components/TextReveal";
 
 import imageTruck from "@/images_frontend/loading_container_truck.webp";
 import imagePort from "@/images_frontend/1-landscape-from-bird-eye-view-for-laem-chabang-logistic-port-anek-suwannaphoom.webp";
@@ -153,9 +154,9 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
             >
               <SectionIcon className="h-8 w-8" />
             </motion.span>
-            <h2 className={`max-w-5xl text-[24px] font-semibold leading-[1.06] tracking-[-0.02em] sm:text-3xl lg:text-[40px] ${section.imageBgSrc ? 'text-white' : 'text-slate-950'}`}>
+            <TextReveal as="h2" className={`max-w-5xl text-[24px] font-semibold leading-[1.06] tracking-[-0.02em] sm:text-3xl lg:text-[40px] ${section.imageBgSrc ? 'text-white' : 'text-slate-950'}`}>
               {section.title}
-            </h2>
+            </TextReveal>
           </div>
         </div>
 
@@ -170,11 +171,11 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
           {hasIntro && (
             <div className={`flex min-h-[250px] flex-col justify-center rounded-[28px] ${section.imageBgSrc ? 'bg-white/10 ring-white/20 text-white' : 'bg-white/16 ring-white/25 text-slate-800'} p-6 backdrop-blur-sm`}>
               <span className={`mb-4 w-fit rounded-full bg-white/80 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-slate-900`}>
-                Integrated Fleet & Solutions
+                <TextReveal>Integrated Fleet & Solutions</TextReveal>
               </span>
-              <p className={`text-base font-semibold leading-8 ${section.imageBgSrc ? 'text-white' : 'text-slate-800/90'}`}>
+              <TextReveal as="p" className={`text-base font-semibold leading-8 ${section.imageBgSrc ? 'text-white' : 'text-slate-800/90'}`}>
                 {section.intro}
-              </p>
+              </TextReveal>
             </div>
           )}
 
@@ -198,21 +199,20 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
                 <div>
                   <div className="mb-4 flex items-center justify-between gap-4">
                     <div>
-                      <p className={`text-xs font-extrabold uppercase tracking-[0.16em] ${section.accent}`}>
+                      <TextReveal as="p" className={`text-xs font-extrabold uppercase tracking-[0.16em] ${section.accent}`}>
                         {item.eyebrow}
-                      </p>
+                      </TextReveal>
                       <h3
                         className="mt-2 text-xl font-bold tracking-[-0.02em] text-slate-800 drop-shadow-sm"
-                        style={{ textShadow: "1px 1px 0px #cbd5e1, 2px 2px 0px #94a3b8" }}
                       >
-                        {item.title}
+                        <TextReveal>{item.title}</TextReveal>
                       </h3>
                     </div>
                   </div>
 
-                  <p className="text-sm font-medium leading-6 text-slate-600">
+                  <TextReveal as="p" className="text-sm font-medium leading-6 text-slate-600">
                     {item.detail}
-                  </p>
+                  </TextReveal>
                 </div>
 
                 <div className="mt-5 grid grid-cols-2 gap-2">
@@ -221,7 +221,7 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
                       key={feature}
                       className={`rounded-full px-3 py-2 text-[11px] font-bold ring-1 ${section.featureClasses ?? "bg-slate-50 text-slate-600 ring-slate-100"}`}
                     >
-                      {feature}
+                      <TextReveal>{feature}</TextReveal>
                     </span>
                   ))}
                 </div>
@@ -369,7 +369,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Transport Logistics",
         eyebrow: "Surface Network",
         detail:
-          "We provide reliable transport logistics solutions supported by a strong carrier network and efficient route planning. Our transportation services are designed to ensure the smooth movement of cargo across locations while maintaining safety, consistency, and timely delivery.",
+          "We provide reliable transport logistics solutions supported by a strong carrier network and efficient route planning. Our transportation services are designed to ensure the smooth movement of cargo across locations while maintaining safety, consistency, and timely delivery",
         imageSrc: imageTruck,
         features: ["Route planning", "Carrier network", "Cargo safety", "Timed dispatch"],
       },
@@ -377,7 +377,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Procurement Logistics",
         eyebrow: "Supplier Flow",
         detail:
-          "Our procurement logistics solutions focus on managing the seamless flow of goods from suppliers to final destinations. We oversee planning, execution, and monitoring of logistics activities to ensure smooth coordination across procurement, warehousing, storage, and internal transportation.",
+          "Our procurement logistics solutions focus on managing the seamless flow of goods from suppliers to final destinations. We oversee planning, execution, and monitoring of logistics activities to ensure smooth coordination across procurement, warehousing, storage, and internal transportation",
         imageSrc: imagePort,
         features: ["Supplier pickup", "Storage control", "Flow planning", "Live tracking"],
       },
@@ -385,7 +385,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Outbound Logistics",
         eyebrow: "Market Delivery",
         detail:
-          "We manage outbound logistics with a strong focus on reliability, timely delivery, and operational control. From warehouse dispatch to final market delivery, we ensure finished goods reach their intended destinations efficiently and without unnecessary delays.",
+          "We manage outbound logistics with a strong focus on reliability, timely delivery, and operational control. From warehouse dispatch to final market delivery, we ensure finished goods reach their intended destinations efficiently and without unnecessary delays",
         imageSrc: imageWarehouse,
         features: ["Dispatch control", "Final delivery", "SLA focus", "Proof updates"],
       },
@@ -402,13 +402,13 @@ const STACK_SECTIONS: StackSectionData[] = [
     gradient: "bg-gradient-to-t from-[#6F3FFF] from-[15%] via-[#15C0E5] via-[61%] to-[#FFE5BD] to-[86%]",
     // imageBgSrc: bgGlobal, // removed to show custom gradient
     intro:
-      "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution, helping businesses manage the movement of goods with greater control and confidence. From international freight forwarding to warehousing and specialized cargo handling, we deliver solutions tailored to meet diverse logistics and supply chain requirements.",
+      "At MAS Logistics, we provide reliable and efficient logistics solutions designed to support businesses across global markets. Our services are built around flexibility, operational efficiency, and dependable execution, helping businesses manage the movement of goods with greater control and confidence. From international freight forwarding to warehousing and specialized cargo handling, we deliver solutions tailored to meet diverse logistics and supply chain requirements",
     items: [
       {
         title: "Air Freight",
         eyebrow: "Time Critical",
         detail:
-          "Our air freight services are designed to support time-sensitive and high-priority shipments across international markets. Through strong partnerships with leading global carriers, we ensure fast, secure, and reliable cargo movement with smooth coordination at every stage. Whether it is urgent deliveries or scheduled freight operations, we focus on maintaining speed, accuracy, and operational efficiency.",
+          "Our air freight services are designed to support time-sensitive and high-priority shipments across international markets. Through strong partnerships with leading global carriers, we ensure fast, secure, and reliable cargo movement with smooth coordination at every stage. Whether it is urgent deliveries or scheduled freight operations, we focus on maintaining speed, accuracy, and operational efficiency",
         imageSrc: imageAir,
         features: ["Priority & express shipments", "Global carrier network", "Secure cargo handling", "Time-critical delivery support"],
       },
@@ -416,7 +416,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         title: "Sea Freight",
         eyebrow: "Ocean Network",
         detail:
-          "We offer dependable sea freight solutions that combine flexibility, cost efficiency, and global connectivity. Whether handling Full Container Load (FCL) or Less than Container Load (LCL) shipments, our team ensures smooth cargo movement through trusted shipping partners and established port networks. Our focus remains on timely coordination, shipment visibility, and reliable delivery across international trade routes.",
+          "We offer dependable sea freight solutions that combine flexibility, cost efficiency, and global connectivity. Whether handling Full Container Load (FCL) or Less than Container Load (LCL) shipments, our team ensures smooth cargo movement through trusted shipping partners and established port networks. Our focus remains on timely coordination, shipment visibility, and reliable delivery across international trade routes",
         imageSrc: imageSea,
         features: ["FCL and LCL shipments", "Competitive global routing", "Strong port connectivity", "End-to-end shipment visibility"],
       },
@@ -456,7 +456,7 @@ const STACK_SECTIONS: StackSectionData[] = [
 export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
   return (
     <SmoothScrollProvider>
-      <main className="min-h-screen overflow-x-hidden bg-gradient-to-t from-[#CDCCFE] from-[46%] to-[#0E2A47] to-[80%] text-white">
+      <main className="min-h-screen overflow-x-hidden bg-gradient-to-t from-[#CDCCFE] from-[46%] to-[#0E2A47] to-[80%] text-white [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi">
         {!isEmbedded && (
           <div className="fixed left-1/2 top-7 z-[100] w-auto -translate-x-1/2">
             <AppleGlassNav
@@ -479,12 +479,12 @@ export default function ServicesPage({ isEmbedded = false }: { isEmbedded?: bool
         )}
 
         <section className="mx-auto max-w-[1760px] px-5 pb-8 pt-32 sm:px-8 lg:px-10 lg:pt-36">
-          <h1 className="max-w-5xl text-[36px] font-semibold leading-[1.04] tracking-[-0.03em] text-white sm:text-6xl lg:text-[76px]">
+          <TextReveal as="h1" className="max-w-5xl text-[36px] font-semibold leading-[1.04] tracking-[-0.03em] text-white sm:text-6xl lg:text-[76px]">
             Built to Simplify Global Logistics Operations
-          </h1>
-          <p className="mt-6 max-w-7xl text-lg font-medium leading-9 text-slate-200 lg:text-xl">
-            At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems.
-          </p>
+          </TextReveal>
+          <TextReveal as="p" className="mt-6 max-w-7xl text-lg font-medium leading-9 text-slate-200 lg:text-xl" delay={0.2}>
+            At MAS Logistics, we deliver structured and dependable logistics solutions designed to support businesses at every stage of the supply chain. Our core logistics services focus on ensuring smooth coordination, operational efficiency, and reliable movement of goods through carefully managed transportation, procurement, and distribution systems
+          </TextReveal>
         </section>
 
         <StickyStackSection sections={STACK_SECTIONS} />

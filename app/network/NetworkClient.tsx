@@ -11,6 +11,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import { TextReveal } from "@/app/components/TextReveal";
 import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Globe2, Activity, Plane, Ship, Truck } from "lucide-react";
@@ -390,7 +391,7 @@ function ScrollRevealText({ children, className, delay = 0 }: { children: React.
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: false, margin: "-50px" }}
       transition={{
         duration: 0.8,
         delay,
@@ -653,7 +654,7 @@ export default function NetworkClient() {
 
           {/* Left Text Content */}
           <div className="w-full lg:w-1/2 space-y-6 z-20 text-center lg:text-left pt-12 lg:pt-0">
-            <h3 aria-label="A Strong Network Built for Global Logistics" className="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+            <h3 aria-label="A Strong Network Built for Global Logistics" className="text-4xl sm:text-5xl lg:text-[4.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.1]">
               {"A Strong Network".split(" ").map((word, i) => (
                 <motion.span
                   aria-hidden="true"
@@ -661,7 +662,7 @@ export default function NetworkClient() {
                   style={{ display: "inline-block", marginRight: "0.25em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + i * 0.08,
@@ -681,7 +682,7 @@ export default function NetworkClient() {
                   style={{ display: "inline-block", marginRight: i === arr.length - 1 ? "0" : "0.25em", paddingBottom: "0.1em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + (3 + i) * 0.08,
@@ -696,7 +697,7 @@ export default function NetworkClient() {
               <motion.span
                 initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ type: "spring", bounce: 0.6, delay: 0.6 }}
                 style={{ display: "inline-flex", marginLeft: "0.15em", marginRight: "0.3em", verticalAlign: "middle" }}
                 className="relative -top-1 lg:-top-2 items-center justify-center bg-blue-500 text-white rounded-lg md:rounded-xl p-1.5 md:p-2 shadow-[0_8px_16px_rgba(59,130,246,0.3),inset_0_3px_5px_rgba(255,255,255,0.4)]"
@@ -713,7 +714,7 @@ export default function NetworkClient() {
                   style={{ display: "inline-block", marginRight: i === arr.length - 1 ? "0" : "0.25em", paddingBottom: "0.1em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + (5 + i) * 0.08,
@@ -728,7 +729,7 @@ export default function NetworkClient() {
               <motion.span
                 initial={{ opacity: 0, scale: 0.5, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ type: "spring", bounce: 0.6, delay: 0.8 }}
                 style={{ display: "inline-flex", marginLeft: "0.15em", marginRight: "0.3em", verticalAlign: "middle" }}
                 className="relative -top-1 lg:-top-2 items-center justify-center bg-indigo-500 text-white rounded-lg md:rounded-xl p-1.5 md:p-2 shadow-[0_8px_16px_rgba(99,102,241,0.3),inset_0_3px_5px_rgba(255,255,255,0.4)]"
@@ -745,7 +746,7 @@ export default function NetworkClient() {
                   style={{ display: "inline-block", marginRight: i === arr.length - 1 ? "0" : "0.25em", paddingBottom: "0.1em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + (7 + i) * 0.08,
@@ -760,7 +761,7 @@ export default function NetworkClient() {
               <motion.span
                 initial={{ opacity: 0, scale: 0.5, rotate: 20 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ type: "spring", bounce: 0.6, delay: 1.0 }}
                 style={{ display: "inline-flex", marginLeft: "0.15em", verticalAlign: "middle" }}
                 className="relative -top-1 lg:-top-2 items-center justify-center bg-purple-500 text-white rounded-lg md:rounded-xl p-1.5 md:p-2 shadow-[0_8px_16px_rgba(168,85,247,0.3),inset_0_3px_5px_rgba(255,255,255,0.4)]"
@@ -769,15 +770,13 @@ export default function NetworkClient() {
               </motion.span>
             </h3>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            <TextReveal
+              as="p"
+              delay={0.2}
               className="text-slate-600 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
               With a well-established operational base in India and an expanding global logistics network, MAS Logistics combines industry experience, trusted partnerships, and proven systems to ensure consistent service delivery and supply chain efficiency
-            </motion.p>
+            </TextReveal>
           </div>
 
           {/* Right Globe */}
@@ -790,7 +789,7 @@ export default function NetworkClient() {
                   key={stat.label}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ delay: 0.4 + i * 0.15 }}
                   className={cn(
                     "px-4 py-2 flex flex-col items-center justify-center w-full",
@@ -809,7 +808,7 @@ export default function NetworkClient() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
               className="w-[150%] max-w-[900px] -ml-[25%] lg:-ml-[10%] lg:w-[130%]"
             >
@@ -853,7 +852,7 @@ export default function NetworkClient() {
                     style={{ display: "inline-block", marginRight: "0.25em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {word}
@@ -866,7 +865,7 @@ export default function NetworkClient() {
                     style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="text-transparent bg-clip-text bg-gradient-to-r from-black via-neutral-900 to-blue-800 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]"
                   >
@@ -887,7 +886,7 @@ export default function NetworkClient() {
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: i * 0.02 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:border-blue-800/60 hover:bg-blue-900/20 transition-all duration-300"
                   >
@@ -917,7 +916,7 @@ export default function NetworkClient() {
                     style={{ display: "inline-block", marginRight: "0.25em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {word}
@@ -930,7 +929,7 @@ export default function NetworkClient() {
                     style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
                   >
@@ -973,9 +972,11 @@ export default function NetworkClient() {
                     activeStep === i ? "opacity-0 pointer-events-none" : "opacity-100"
                   )}>
                     <div className="flex flex-col items-center gap-4 transform -rotate-90 whitespace-nowrap">
-                      <span className="text-lg font-black text-zinc-500">{step.num}</span>
+                      <span className="text-lg font-black text-zinc-500">
+                        <TextReveal>{step.num}</TextReveal>
+                      </span>
                       <h4 className="text-zinc-300 font-bold tracking-wide uppercase text-xs">
-                        {step.shortLabel}
+                        <TextReveal>{step.shortLabel}</TextReveal>
                       </h4>
                     </div>
                   </div>
@@ -987,7 +988,9 @@ export default function NetworkClient() {
                   )}>
                     {/* Step Badge */}
                     <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 border border-white/10 text-blue-400 flex-shrink-0 backdrop-blur-md">
-                      <span className="text-lg font-black tracking-tight">{step.num}</span>
+                      <span className="text-lg font-black tracking-tight">
+                        <TextReveal>{step.num}</TextReveal>
+                      </span>
                     </div>
 
                     {/* Text details directly overlaid on top of the logo image asset */}
@@ -1000,7 +1003,7 @@ export default function NetworkClient() {
                           layout="position"
                           className="text-white font-extrabold text-xl md:text-2xl mb-3 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-blue-200 drop-shadow-md truncate"
                         >
-                          {step.title}
+                          <TextReveal>{step.title}</TextReveal>
                         </motion.h4>
                         <motion.p
                           layout="position"
@@ -1009,7 +1012,7 @@ export default function NetworkClient() {
                             activeStep === i ? "opacity-100" : "md:opacity-0"
                           )}
                         >
-                          {step.sub}
+                          <TextReveal>{step.sub}</TextReveal>
                         </motion.p>
                       </div>
                     </div>

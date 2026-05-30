@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
+import { TextReveal } from "@/app/components/TextReveal";
 import masIcon from "@/images_frontend/mas_without_wording.png";
 
 const NAV_LINKS = [
@@ -101,15 +102,15 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                 />
             </div>
 
-            <h2 className="text-[#e5e4e2] text-xl sm:text-xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 sm:mb-12 uppercase text-left">
+            <TextReveal as="h2" className="text-[#e5e4e2] text-xl sm:text-xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 sm:mb-12 uppercase text-left">
                 Also asked
-            </h2>
+            </TextReveal>
 
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: true, margin: "-10%" }}
+                viewport={{ once: false, margin: "-10%" }}
                 className="flex flex-col items-start w-full gap-4"
             >
                 {items.map((item, i) => {
@@ -137,7 +138,7 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                                 whileTap={{ scale: 0.98 }}
                             >
                                 <span className="font-medium text-sm lg:text-[15px] tracking-wide leading-snug">
-                                    {item.question}
+                                    <TextReveal>{item.question}</TextReveal>
                                 </span>
                             </motion.button>
 
@@ -171,7 +172,7 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                                             className="bg-[#e5e4e2] text-black p-5 sm:p-6 rounded-3xl rounded-br-xl border border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] w-full relative z-0"
                                         >
                                             <p className="text-[14px] lg:text-[15px] font-medium text-gray-800 leading-relaxed whitespace-pre-line">
-                                                {item.answer}
+                                                <TextReveal>{item.answer}</TextReveal>
                                             </p>
                                         </motion.div>
                                     </motion.div>
@@ -189,7 +190,7 @@ import Testimonials from "@/app/review/page";
 
 export default function AccordionFAQBoldPage({ isEmbedded = false }: { isEmbedded?: boolean }) {
     return (
-        <main className="w-full relative overflow-x-clip text-gray-900" style={{ background: "#151514" }}>
+        <main className="w-full relative overflow-x-clip text-gray-900 [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi" style={{ background: "#151514" }}>
             {/* ── Fixed Header Container ── */}
             {!isEmbedded && (
                 <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">

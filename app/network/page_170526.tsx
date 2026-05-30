@@ -158,7 +158,7 @@ function CinematicText({ text, delay = 0, className, spanClassName }: { text: st
             delay: delay + (i * 0.02),
             ease: [0.2, 0.65, 0.3, 0.9]
           }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className={`inline-block ${spanClassName || ""}`}
           style={{ whiteSpace: char === " " ? "pre" : "normal" }}
         >

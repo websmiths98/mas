@@ -11379,3 +11379,1048 @@ Error: ENOENT: no such file or directory, open '/home/raja/mas_logistics/mas/.ne
 [browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+✓ Compiled in 369ms
+✓ Compiled in 298ms
+✓ Compiled in 344ms
+✓ Compiled in 221ms
+✓ Compiled in 536ms
+ GET / 200 in 49ms (next.js: 26ms, application-code: 23ms)
+ GET / 200 in 33ms (next.js: 7ms, application-code: 26ms)
+✓ Compiled in 456ms
+ GET /images_frontend/luna%20bg%20sky.png 404 in 166ms (next.js: 53ms, application-code: 113ms)
+ GET / 200 in 543ms (next.js: 9ms, application-code: 534ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 312ms (next.js: 8ms, application-code: 304ms)
+ GET / 200 in 397ms (next.js: 6ms, application-code: 391ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 15ms (next.js: 5ms, application-code: 11ms)
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+✓ Compiled in 576ms
+ GET / 200 in 417ms (next.js: 13ms, application-code: 404ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 305ms (next.js: 7ms, application-code: 298ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 402ms (next.js: 7ms, application-code: 395ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 211ms
+✓ Compiled in 152ms
+ GET / 200 in 404ms (next.js: 10ms, application-code: 394ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 320ms (next.js: 8ms, application-code: 312ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 390ms (next.js: 10ms, application-code: 380ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 385ms (next.js: 5ms, application-code: 380ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 30ms (next.js: 7ms, application-code: 23ms)
+ GET / 200 in 324ms (next.js: 6ms, application-code: 318ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 311ms (next.js: 7ms, application-code: 303ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 315ms (next.js: 6ms, application-code: 309ms)
+ GET / 200 in 18ms (next.js: 10ms, application-code: 9ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 33ms (next.js: 5ms, application-code: 29ms)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 284ms (next.js: 6ms, application-code: 278ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 37ms (next.js: 6ms, application-code: 31ms)
+ GET / 200 in 17ms (next.js: 6ms, application-code: 11ms)
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 24ms (next.js: 10ms, application-code: 14ms)
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 17ms (next.js: 6ms, application-code: 11ms)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET / 200 in 20ms (next.js: 7ms, application-code: 13ms)
+ GET / 200 in 70ms (next.js: 60ms, application-code: 10ms)
+ GET / 200 in 91ms (next.js: 77ms, application-code: 14ms)
+ GET / 200 in 16ms (next.js: 6ms, application-code: 10ms)
+ GET / 200 in 34ms (next.js: 6ms, application-code: 28ms)
+ GET / 200 in 20ms (next.js: 8ms, application-code: 12ms)
+ GET / 200 in 23ms (next.js: 9ms, application-code: 14ms)
+ GET / 200 in 38ms (next.js: 5ms, application-code: 33ms)
+ GET / 200 in 13ms (next.js: 4ms, application-code: 9ms)
+ GET / 200 in 31ms (next.js: 5ms, application-code: 26ms)
+✓ Compiled in 1124ms
+ GET / 200 in 461ms (next.js: 23ms, application-code: 437ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 18ms (next.js: 7ms, application-code: 11ms)
+ GET / 200 in 11ms (next.js: 3ms, application-code: 8ms)
+ GET / 200 in 13ms (next.js: 4ms, application-code: 9ms)
+ GET / 200 in 61ms (next.js: 42ms, application-code: 18ms)
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+✓ Compiled in 128ms
+ GET / 200 in 364ms (next.js: 9ms, application-code: 356ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 279ms (next.js: 6ms, application-code: 273ms)
+ GET /hero-video.mp4 404 in 59ms (next.js: 8ms, application-code: 51ms)
+ GET / 200 in 286ms (next.js: 7ms, application-code: 278ms)
+ GET /hero-video.mp4 404 in 82ms (next.js: 7ms, application-code: 75ms)
+ GET / 200 in 377ms (next.js: 6ms, application-code: 371ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 20ms (next.js: 6ms, application-code: 14ms)
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 16ms (next.js: 7ms, application-code: 9ms)
+ GET / 200 in 17ms (next.js: 6ms, application-code: 10ms)
+ GET / 200 in 487ms (next.js: 23ms, application-code: 464ms)
+ GET / 200 in 52ms (next.js: 17ms, application-code: 35ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 86ms (next.js: 59ms, application-code: 27ms)
+ GET / 200 in 352ms (next.js: 7ms, application-code: 345ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 336ms (next.js: 7ms, application-code: 329ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 28ms (next.js: 7ms, application-code: 21ms)
+ GET / 200 in 50ms (next.js: 20ms, application-code: 30ms)
+ GET / 200 in 319ms (next.js: 7ms, application-code: 312ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+✓ Compiled in 183ms
+ GET / 200 in 395ms (next.js: 15ms, application-code: 380ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+✓ Compiled in 394ms
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /action 404 in 824ms (next.js: 8ms, application-code: 816ms)
+✓ Compiled in 1298ms
+ GET / 200 in 668ms (next.js: 487ms, application-code: 181ms)
+ GET / 200 in 417ms (next.js: 304ms, application-code: 113ms)
+ GET / 200 in 319ms (next.js: 270ms, application-code: 49ms)
+✓ Compiled in 171ms
+✓ Compiled in 158ms
+✓ Compiled in 173ms
+✓ Compiled in 132ms
+ GET / 200 in 797ms (next.js: 18ms, application-code: 779ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 17ms (next.js: 6ms, application-code: 11ms)
+ GET / 200 in 15ms (next.js: 6ms, application-code: 10ms)
+ GET / 200 in 26ms (next.js: 6ms, application-code: 21ms)
+ GET / 200 in 395ms (next.js: 9ms, application-code: 386ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 17ms (next.js: 6ms, application-code: 11ms)
+ GET / 200 in 25ms (next.js: 3ms, application-code: 23ms)
+ GET / 200 in 15ms (next.js: 5ms, application-code: 10ms)
+ GET / 200 in 14ms (next.js: 5ms, application-code: 8ms)
+ GET / 200 in 18ms (next.js: 5ms, application-code: 13ms)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 21ms (next.js: 11ms, application-code: 11ms)
+ GET / 200 in 34ms (next.js: 6ms, application-code: 28ms)
+ GET / 200 in 19ms (next.js: 5ms, application-code: 13ms)
+ GET / 200 in 41ms (next.js: 10ms, application-code: 30ms)
+ GET / 200 in 17ms (next.js: 8ms, application-code: 9ms)
+ GET / 200 in 59ms (next.js: 22ms, application-code: 37ms)
+ GET / 200 in 66ms (next.js: 42ms, application-code: 24ms)
+ GET / 200 in 441ms (next.js: 6ms, application-code: 435ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 18ms (next.js: 8ms, application-code: 10ms)
+ GET / 200 in 337ms (next.js: 6ms, application-code: 331ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 20ms (next.js: 6ms, application-code: 13ms)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET / 200 in 16ms (next.js: 7ms, application-code: 9ms)
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 17ms (next.js: 6ms, application-code: 11ms)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET / 200 in 19ms (next.js: 7ms, application-code: 12ms)
+✓ Compiled in 219ms
+✓ Compiled in 174ms
+✓ Compiled in 199ms
+✓ Compiled in 133ms
+✓ Compiled in 226ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 681ms (next.js: 58ms, application-code: 622ms)
+✓ Compiled in 134ms
+[browser] In HTML, <div> cannot be a descendant of <p>.
+This will cause a hydration error.
+
+  ...
+    <div id="network" className="w-full rel...">
+      <NetworkClient>
+        <div ref={{current:null}} className="relative m...">
+          <div>
+          <section>
+          <div className="relative z...">
+            <section className="w-full bg-...">
+              <div className="max-w-7xl ...">
+                <div>
+                <div className="flex flex-...">
+                  <motion.div layout={true} onClick={function onClick} onHoverStart={function onHoverStart} ...>
+                    <MeasureLayout>
+                    <div onClick={function onClick} className="relative o..." style={{}} ...>
+                      <ParallaxImage>
+                      <div>
+                      <div>
+                      <div className="relative h...">
+                        <div>
+                        <div className="mt-6 md:mt...">
+                          <div className="transition...">
+                            <motion.h4>
+                            <motion.p layout="position" className="text-zinc-...">
+                              <MeasureLayout>
+>                             <p
+>                               className="text-zinc-200 text-sm md:text-base font-normal leading-relaxed drop-shadow ..."
+>                               style={{}}
+>                               ref={function useMotionRef.useCallback}
+>                             >
+                                <TextReveal>
+>                                 <div className="flex flex-wrap">
+                  ...
+ 
+[browser] <p> cannot contain a nested <div>.
+See this log for the ancestor stack trace. 
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at div (<anonymous>)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 152ms
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET / 200 in 40ms (next.js: 25ms, application-code: 15ms)
+ GET / 200 in 41ms (next.js: 7ms, application-code: 34ms)
+ GET / 200 in 1254ms (next.js: 17ms, application-code: 1237ms)
+ GET / 200 in 577ms (next.js: 9ms, application-code: 567ms)
+ GET /robots.txt 404 in 93ms (next.js: 30ms, application-code: 63ms)
+ GET / 200 in 774ms (next.js: 12ms, application-code: 762ms)
+[browser] In HTML, <div> cannot be a descendant of <p>.
+This will cause a hydration error.
+
+  ...
+    <div id="network" className="w-full rel...">
+      <NetworkClient>
+        <div ref={{current:null}} className="relative m...">
+          <div>
+          <section>
+          <div className="relative z...">
+            <section className="w-full bg-...">
+              <div className="max-w-7xl ...">
+                <div>
+                <div className="flex flex-...">
+                  <motion.div layout={true} onClick={function onClick} onHoverStart={function onHoverStart} ...>
+                    <MeasureLayout>
+                    <div onClick={function onClick} className="relative o..." style={{}} ...>
+                      <ParallaxImage>
+                      <div>
+                      <div>
+                      <div className="relative h...">
+                        <div>
+                        <div className="mt-6 md:mt...">
+                          <div className="transition...">
+                            <motion.h4>
+                            <motion.p layout="position" className="text-zinc-...">
+                              <MeasureLayout>
+>                             <p
+>                               className="text-zinc-200 text-sm md:text-base font-normal leading-relaxed drop-shadow ..."
+>                               style={{}}
+>                               ref={function useMotionRef.useCallback}
+>                             >
+                                <TextReveal>
+>                                 <div className="flex flex-wrap">
+                  ...
+ 
+[browser] <p> cannot contain a nested <div>.
+See this log for the ancestor stack trace. 
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at div (<anonymous>)
+    at TextReveal (app/components/TextReveal.tsx:47:16)
+    at <unknown> (app/network/NetworkClient.tsx:1015:27)
+    at Array.map (<anonymous>)
+    at NetworkClient (app/network/NetworkClient.tsx:944:31)
+    at Home (app/page.tsx:55:9)
+  45 |   };
+  46 |
+> 47 |   return React.createElement(
+     |                ^
+  48 |     Component,
+  49 |     { className: cn("flex flex-wrap", className) },
+  50 |     <motion.span
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/_next/static/media/warehousing__Distribution_logistics_service.14linxvxkf6px.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET / 200 in 644ms (next.js: 6ms, application-code: 639ms)
+[browser] In HTML, <div> cannot be a descendant of <p>.
+This will cause a hydration error.
+
+  ...
+    <div id="network" className="w-full rel...">
+      <NetworkClient>
+        <div ref={{current:null}} className="relative m...">
+          <div>
+          <section>
+          <div className="relative z...">
+            <section className="w-full bg-...">
+              <div className="max-w-7xl ...">
+                <div>
+                <div className="flex flex-...">
+                  <motion.div layout={true} onClick={function onClick} onHoverStart={function onHoverStart} ...>
+                    <MeasureLayout>
+                    <div onClick={function onClick} className="relative o..." style={{}} ...>
+                      <ParallaxImage>
+                      <div>
+                      <div>
+                      <div className="relative h...">
+                        <div>
+                        <div className="mt-6 md:mt...">
+                          <div className="transition...">
+                            <motion.h4>
+                            <motion.p layout="position" className="text-zinc-...">
+                              <MeasureLayout>
+>                             <p
+>                               className="text-zinc-200 text-sm md:text-base font-normal leading-relaxed drop-shadow ..."
+>                               style={{}}
+>                               ref={function useMotionRef.useCallback}
+>                             >
+                                <TextReveal>
+>                                 <div className="flex flex-wrap">
+                  ...
+ 
+[browser] <p> cannot contain a nested <div>.
+See this log for the ancestor stack trace. 
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at div (<anonymous>)
+    at TextReveal (app/components/TextReveal.tsx:47:16)
+    at <unknown> (app/network/NetworkClient.tsx:1015:27)
+    at Array.map (<anonymous>)
+    at NetworkClient (app/network/NetworkClient.tsx:944:31)
+    at Home (app/page.tsx:55:9)
+  45 |   };
+  46 |
+> 47 |   return React.createElement(
+     |                ^
+  48 |     Component,
+  49 |     { className: cn("flex flex-wrap", className) },
+  50 |     <motion.span
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 210ms
+ GET / 200 in 53ms (next.js: 35ms, application-code: 19ms)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 22ms (next.js: 12ms, application-code: 10ms)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET / 200 in 19ms (next.js: 6ms, application-code: 14ms)
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 7.4s (next.js: 15ms, application-code: 7.4s)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 935ms (next.js: 19ms, application-code: 916ms)
+ GET / 200 in 760ms (next.js: 13ms, application-code: 746ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /api/server-actions 404 in 648ms (next.js: 9ms, application-code: 639ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /action 404 in 623ms (next.js: 23ms, application-code: 600ms)
+ GET / 200 in 1078ms (next.js: 14ms, application-code: 1064ms)
+ GET /.circleci/config.yml 404 in 815ms (next.js: 707ms, application-code: 108ms)
+ GET /.travis.yml 404 in 61ms (next.js: 5ms, application-code: 56ms)
+ GET / 200 in 1210ms (next.js: 126ms, application-code: 1084ms)
+ GET /gitlab-ci.yml 404 in 71ms (next.js: 6ms, application-code: 65ms)
+ GET /.pypirc 404 in 179ms (next.js: 110ms, application-code: 69ms)
+ GET /api/.env.production 404 in 121ms (next.js: 52ms, application-code: 70ms)
+ GET /.gradle/gradle.properties 404 in 103ms (next.js: 32ms, application-code: 70ms)
+ GET /.github/workflows/release.yaml 404 in 100ms (next.js: 26ms, application-code: 74ms)
+ GET /.github/workflows/main.yml 404 in 65ms (next.js: 6ms, application-code: 60ms)
+ GET /build.gradle 404 in 79ms (next.js: 4ms, application-code: 74ms)
+ GET /aws.properties 404 in 61ms (next.js: 7ms, application-code: 55ms)
+ GET / 200 in 924ms (next.js: 9ms, application-code: 915ms)
+ GET / 200 in 650ms (next.js: 8ms, application-code: 642ms)
+ GET / 200 in 546ms (next.js: 4ms, application-code: 542ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /_rsc 404 in 623ms (next.js: 10ms, application-code: 613ms)
+ GET / 200 in 929ms (next.js: 10ms, application-code: 919ms)
+ GET /..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd 400 in 215ms (next.js: 169ms, application-code: 46ms)
+ GET / 200 in 1497ms (next.js: 12ms, application-code: 1485ms)
+ GET / 200 in 601ms (next.js: 10ms, application-code: 590ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /action 404 in 603ms (next.js: 20ms, application-code: 583ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /api/server-actions 404 in 641ms (next.js: 19ms, application-code: 623ms)
+ GET / 200 in 744ms (next.js: 16ms, application-code: 728ms)
+ GET / 200 in 775ms (next.js: 18ms, application-code: 756ms)
+ GET / 200 in 789ms (next.js: 17ms, application-code: 772ms)
+ GET / 200 in 1343ms (next.js: 15ms, application-code: 1328ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /api/action 404 in 677ms (next.js: 17ms, application-code: 661ms)
+ GET /robots.txt 404 in 111ms (next.js: 11ms, application-code: 101ms)
+ GET / 200 in 622ms (next.js: 5ms, application-code: 617ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 28.2s (next.js: 10ms, application-code: 28.2s)
+ GET / 200 in 1064ms (next.js: 14ms, application-code: 1051ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /action 404 in 720ms (next.js: 8ms, application-code: 711ms)
+ GET / 200 in 796ms (next.js: 12ms, application-code: 785ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /formaction 404 in 660ms (next.js: 13ms, application-code: 646ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /formaction 404 in 682ms (next.js: 14ms, application-code: 667ms)
+ GET / 200 in 802ms (next.js: 18ms, application-code: 784ms)
+ GET / 200 in 822ms (next.js: 10ms, application-code: 812ms)
+ GET / 200 in 489ms (next.js: 5ms, application-code: 484ms)
+ GET / 200 in 541ms (next.js: 11ms, application-code: 530ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /api/action 404 in 684ms (next.js: 5ms, application-code: 678ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /server-actions 404 in 689ms (next.js: 12ms, application-code: 677ms)
+ GET / 200 in 783ms (next.js: 28ms, application-code: 755ms)
+ GET / 200 in 779ms (next.js: 5ms, application-code: 774ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /server-actions 404 in 972ms (next.js: 15ms, application-code: 957ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /_rsc 404 in 671ms (next.js: 10ms, application-code: 661ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /server-actions 404 in 737ms (next.js: 17ms, application-code: 720ms)
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /api/rsc 404 in 703ms (next.js: 23ms, application-code: 681ms)
+ GET / 200 in 43ms (next.js: 20ms, application-code: 22ms)
+ GET / 200 in 191ms (next.js: 143ms, application-code: 48ms)
+ GET / 200 in 17ms (next.js: 6ms, application-code: 11ms)
+ GET / 200 in 102ms (next.js: 62ms, application-code: 40ms)
+ GET / 200 in 121ms (next.js: 110ms, application-code: 10ms)
+ GET / 200 in 237ms (next.js: 215ms, application-code: 22ms)
+ GET / 200 in 170ms (next.js: 92ms, application-code: 79ms)
+ GET / 200 in 145ms (next.js: 115ms, application-code: 30ms)
+ GET / 200 in 147ms (next.js: 127ms, application-code: 20ms)
+ GET / 200 in 15ms (next.js: 5ms, application-code: 10ms)
+ GET / 200 in 20ms (next.js: 6ms, application-code: 14ms)
+ GET / 200 in 758ms (next.js: 7ms, application-code: 751ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 279ms
+ GET / 200 in 621ms (next.js: 14ms, application-code: 607ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 780ms (next.js: 12ms, application-code: 768ms)
+✓ Compiled in 371ms
+ GET / 200 in 760ms (next.js: 21ms, application-code: 739ms)
+✓ Compiled in 1596ms
+ GET / 200 in 321ms (next.js: 203ms, application-code: 118ms)
+✓ Compiled in 434ms
+ GET / 200 in 596ms (next.js: 544ms, application-code: 52ms)
+ GET / 200 in 95ms (next.js: 58ms, application-code: 37ms)
+ GET / 200 in 1064ms (next.js: 9ms, application-code: 1055ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 543ms (next.js: 8ms, application-code: 536ms)
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /api/formaction 404 in 694ms (next.js: 31ms, application-code: 663ms)
+✓ Compiled in 586ms
+✓ Compiled in 247ms
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+✓ Compiled in 236ms
+✓ Compiled in 200ms
+ GET / 200 in 111ms (next.js: 14ms, application-code: 98ms)
+✓ Compiled in 183ms
+[browser] ./app/industry/page.tsx:445:23
+Expected '</', got 'jsx text'
+  443 |                     
+  444 |
+> 445 |                 </div>
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |                 
+      | ^^^^^^^^^^^^^^^^
+> 447 |
+      | ^
+> 448 |             </section>
+      | ^^^^^^^^^^^^
+  449 |
+  450 |             {/* ─── Premium 3D Bento Grid Industries ───────────────────────────── */}
+  451 |             <section className="relative z-20 px-4 md:px-8 max-w-[1600px] mx-auto py-24">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./app/industry/page.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/industry/page.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+✓ Compiled in 239ms
+✓ Compiled in 339ms
+✓ Compiled in 183ms
+ GET / 200 in 744ms (next.js: 19ms, application-code: 725ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at ignore-listed frames
+ POST /submit 404 in 669ms (next.js: 7ms, application-code: 661ms)
+✓ Compiled in 198ms
+✓ Compiled in 97ms
+✓ Compiled in 139ms
+✓ Compiled in 173ms
+✓ Compiled in 160ms
+✓ Compiled in 1258ms
+ GET / 200 in 589ms (next.js: 318ms, application-code: 271ms)
+ GET / 200 in 43ms (next.js: 14ms, application-code: 30ms)
+ GET / 200 in 1325ms (next.js: 209ms, application-code: 1116ms)
+ GET / 200 in 1327ms (next.js: 172ms, application-code: 1155ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+✓ Compiled in 182ms
+✓ Compiled in 127ms
+✓ Compiled in 210ms
+✓ Compiled in 168ms
+✓ Compiled in 216ms
+✓ Compiled in 208ms
+✓ Compiled in 186ms
+✓ Compiled in 367ms
+✓ Compiled in 180ms
+✓ Compiled in 131ms
+✓ Compiled in 114ms
+✓ Compiled in 154ms
+✓ Compiled in 123ms
+[browser] Image with src "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/_next/static/media/mas_logo.107wsv77ackc1.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.

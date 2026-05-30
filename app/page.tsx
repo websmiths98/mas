@@ -21,7 +21,7 @@ const NAV_LINKS = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#E5E4E2] relative overflow-x-hidden text-gray-900">
+    <main className="min-h-screen bg-[#E5E4E2] relative overflow-x-hidden text-gray-900 [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi">
       
       {/* ── Fixed Header Container ── */}
       <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-auto">

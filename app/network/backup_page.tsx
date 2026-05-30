@@ -390,7 +390,7 @@ function ScrollRevealText({ children, className, delay = 0 }: { children: React.
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: false, margin: "-50px" }}
       transition={{
         duration: 0.8,
         delay,
@@ -644,7 +644,7 @@ export default function NetworkPage() {
                   style={{ display: "inline-block", marginRight: "0.25em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + i * 0.08,
@@ -662,7 +662,7 @@ export default function NetworkPage() {
                   style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + (3 + i) * 0.08,
@@ -678,7 +678,7 @@ export default function NetworkPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="text-zinc-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
@@ -696,7 +696,7 @@ export default function NetworkPage() {
                   key={stat.label}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ delay: 0.4 + i * 0.15 }}
                   className={cn(
                     "px-4 py-2 flex flex-col items-center justify-center w-full",
@@ -715,7 +715,7 @@ export default function NetworkPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
               className="w-[150%] max-w-[900px] -ml-[25%] lg:-ml-[10%] lg:w-[130%]"
             >
@@ -759,7 +759,7 @@ export default function NetworkPage() {
                     style={{ display: "inline-block", marginRight: "0.25em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {word}
@@ -772,7 +772,7 @@ export default function NetworkPage() {
                     style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="text-transparent bg-clip-text bg-gradient-to-r from-black via-neutral-900 to-blue-800 drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]"
                   >
@@ -793,7 +793,7 @@ export default function NetworkPage() {
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: i * 0.02 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     className="cursor-default group relative px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:border-blue-800/60 hover:bg-blue-900/20 transition-all duration-300"
                   >
@@ -823,7 +823,7 @@ export default function NetworkPage() {
                     style={{ display: "inline-block", marginRight: "0.25em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {word}
@@ -836,7 +836,7 @@ export default function NetworkPage() {
                     style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em" }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.4 + (2 + i) * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
                   >

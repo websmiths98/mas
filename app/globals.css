@@ -11,7 +11,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: 'Manrope', sans-serif;
-  --font-mono: var(--font-geist-mono);
   --font-satoshi: 'Satoshi', sans-serif;
   --font-manrope: 'Manrope', sans-serif;
 }
@@ -37,6 +36,7 @@ body {
   }
   p {
     @apply text-base leading-relaxed;
+    font-family: var(--font-manrope), sans-serif;
   }
 }
 

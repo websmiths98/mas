@@ -207,7 +207,7 @@ const AnimatedValueIcon = ({ type, label, delay = 0 }: { type: "excellence" | "r
 
 export default function Solutions() {
     return (
-        <main className="min-h-screen bg-[#E5E4E2] selection:bg-black/10">
+        <main className="min-h-screen bg-[#E5E4E2] selection:bg-black/10 [&_h1]:font-satoshi [&_h2]:font-satoshi [&_h3]:font-satoshi [&_h4]:font-satoshi [&_h5]:font-satoshi [&_h6]:font-satoshi">
             {/* Apple Glass Nav */}
             <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-auto">
                 <div className="relative">

@@ -95,7 +95,7 @@ export function NetworkContent() {
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
           transition={{ duration: 1, ease: "circOut" }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="absolute -left-6 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500 via-indigo-500 to-transparent origin-top"
         />
         
@@ -103,7 +103,7 @@ export function NetworkContent() {
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
         >
           <div className="overflow-hidden mb-4">
             <motion.h1 
@@ -145,7 +145,7 @@ export function NetworkContent() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.15, duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: false, margin: "-50px" }}
             whileHover={{ y: -8 }}
             className={`relative group ${i % 2 !== 0 ? 'md:mt-16' : ''}`}
           >
@@ -175,7 +175,7 @@ export function NetworkContent() {
       <motion.section 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         className="relative"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent -rotate-1 skew-y-1 rounded-3xl -z-10" />

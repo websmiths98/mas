@@ -106,7 +106,7 @@ export const AccordionFAQBold: React.FC<AccordionFAQBoldProps> = ({
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: true, margin: "-10%" }}
+                viewport={{ once: false, margin: "-10%" }}
             >
                 {items.map((item, i) => {
                     const isActive = active === i;

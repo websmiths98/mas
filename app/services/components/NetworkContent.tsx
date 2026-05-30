@@ -188,7 +188,7 @@ export function NetworkContent() {
               key={block.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: false, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
               whileHover={{ y: -10 }}
               className="group relative overflow-hidden rounded-3xl border border-cyan-400/10 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent p-7 backdrop-blur-2xl transition-all duration-500 hover:border-cyan-400/40"
@@ -251,7 +251,7 @@ export function NetworkContent() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
           className="relative overflow-hidden rounded-[2rem] border border-cyan-400/15 bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-transparent p-8 backdrop-blur-2xl md:p-14"
         >
@@ -320,7 +320,7 @@ export function NetworkContent() {
                 key={region.name}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ x: 6 }}
                 className="group relative flex items-center justify-between overflow-hidden rounded-2xl border border-cyan-400/10 bg-gradient-to-r from-white/[0.04] to-transparent px-6 py-5 transition-all duration-300 hover:border-cyan-400/40"

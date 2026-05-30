@@ -5,7 +5,7 @@ import React, { ElementType, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export interface TextRevealProps {
-  children: string;
+  children: ReactNode;
   as?: ElementType;
   className?: string;
   delay?: number;
@@ -15,64 +15,54 @@ export interface TextRevealProps {
 
 export const TextReveal = ({
   children,
-  as: Component = "div",
+  as: Component = "span",
   className = "",
   delay = 0,
   duration = 0.5,
   staggerChildren = 0.05,
 }: TextRevealProps) => {
-  const words = children.split(" ");
+  const textStr = children != null ? String(children) : "";
+  const words = textStr.split(" ");
 
   const container = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: (i = 1) => ({
-      opacity: 1,
       transition: { staggerChildren: staggerChildren, delayChildren: delay * i },
     }),
   };
 
   const child = {
     visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
+      y: "0%",
       transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 100,
-        duration: duration,
+        ease: [0.22, 1, 0.36, 1],
+        duration: duration || 0.8,
       },
     },
     hidden: {
-      opacity: 0,
-      y: 20,
-      filter: "blur(10px)",
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 100,
-      },
+      y: "120%",
     },
   };
 
   return React.createElement(
     Component,
-    { className: cn("overflow-hidden flex flex-wrap", className) },
+    { className: cn("flex flex-wrap", className) },
     <motion.span
       style={{ display: "inline-flex", flexWrap: "wrap" }}
       variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-10% 0px" }}
+      viewport={{ once: false, margin: "-10% 0px" }}
     >
       {words.map((word, index) => (
-        <motion.span
-          variants={child}
-          style={{ display: "inline-block", marginRight: "0.25em", paddingBottom: "0.1em", marginTop: "-0.1em" }}
-          key={index}
-        >
-          {word}
-        </motion.span>
+        <span key={index} style={{ display: "inline-flex", overflow: "hidden", marginRight: "0.25em", paddingBottom: "0.1em", marginTop: "-0.1em" }}>
+          <motion.span
+            variants={child}
+            style={{ display: "inline-block" }}
+          >
+            {word}
+          </motion.span>
+        </span>
       ))}
     </motion.span>
   );
