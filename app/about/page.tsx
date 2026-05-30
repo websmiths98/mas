@@ -731,7 +731,7 @@ export default function About({ isEmbedded = false }: AboutProps) {
 
                         {/* Phone — centered */}
                         <div className="flex justify-center relative order-first lg:order-none z-10">
-                            <div className="relative w-[380px]">
+                            <div className="relative w-full max-w-[380px]">
                                 {/* Floating "700" counter tweaked for MAS */}
                                 <motion.div
                                     initial={{ opacity: 0, x: -20 }}

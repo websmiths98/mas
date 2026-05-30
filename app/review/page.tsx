@@ -88,7 +88,7 @@ const testimonials = [
 
 export function TestimonialCard({ item }: { item: TestimonialCardProps }) {
   return (
-    <div className="bg-muted/50 hover:bg-muted mb-4 flex w-[200px] cursor-pointer flex-col items-center justify-between gap-4 rounded-lg p-4 transition-colors lg:w-[420px]">
+    <div className="bg-muted/50 hover:bg-muted mb-4 flex w-[280px] sm:w-[320px] lg:w-[420px] cursor-pointer flex-col items-center justify-between gap-4 rounded-lg p-4 transition-colors">
       <div className="text-[#e5e4e2] space-y-4">
         <p>{item.description}</p>
         <div className="flex flex-row gap-1">

@@ -441653,3 +441653,9 @@ https://nextjs.org/docs/messages/module-not-found
  GET / 200 in 475ms (next.js: 448ms, application-code: 28ms)
  GET / 200 in 405ms (next.js: 338ms, application-code: 66ms)
  GET / 200 in 1613ms (next.js: 6ms, application-code: 1608ms)
+✓ Compiled in 973ms
+✓ Compiled in 1604ms
+ GET / 200 in 58ms (next.js: 12ms, application-code: 46ms)
+ GET / 200 in 458ms (next.js: 411ms, application-code: 47ms)
+✓ Compiled in 1630ms
+ GET / 200 in 27ms (next.js: 15ms, application-code: 11ms)

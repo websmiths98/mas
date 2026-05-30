@@ -97,6 +97,7 @@ input, textarea {
 .hero-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   padding: 0.5rem 1.25rem;
   background: rgba(229, 228, 226, 0.05);
@@ -109,6 +110,9 @@ input, textarea {
   margin-bottom: 1rem;
   text-transform: uppercase;
   backdrop-filter: blur(10px);
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
 }
 
 .hero-badge-dot {
@@ -117,6 +121,7 @@ input, textarea {
   background: #10b981;
   border-radius: 50%;
   box-shadow: 0 0 12px #10b981;
+  flex-shrink: 0;
 }
 
 .hero-h2 {
