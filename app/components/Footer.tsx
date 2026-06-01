@@ -27,20 +27,20 @@ export default function Footer() {
           </p>
 
           <div className="flex space-x-4 pt-2">
-            <Link href="#" className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
-              <Facebook className="w-5 h-5" />
+            <Link href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
+              <Facebook className="w-4 h-4" />
             </Link>
-            <Link href="#" className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
-              <Twitter className="w-5 h-5" />
+            <Link href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
+              <Twitter className="w-4 h-4" />
             </Link>
-            <Link href="#" className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
-              <Instagram className="w-5 h-5" />
+            <Link href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
+              <Instagram className="w-4 h-4" />
             </Link>
-            <Link href="#" className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
-              <Youtube className="w-5 h-5" />
+            <Link href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
+              <Youtube className="w-4 h-4" />
             </Link>
-            <Link href="#" className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
-              <Linkedin className="w-5 h-5" />
+            <Link href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-700 hover:text-white hover:bg-black transition-all shadow-sm">
+              <Linkedin className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -52,10 +52,11 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-xs mb-6 text-black uppercase tracking-widest">Company</h3>
             <ul className="space-y-4 text-sm text-gray-600">
-              <li><Link href="/" className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Home</Link></li>
-              <li><Link href="/#about" className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>About Us</Link></li>
-              <li><Link href="/#faq" className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>FAQ</Link></li>
-              <li><button onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openQuoteModal')); }} className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Get a Quote</button></li>
+              <li><Link href="/" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Home</Link></li>
+              <li><Link href="/#about" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>About Us</Link></li>
+              {/* <li><Link href="/#FAQ" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Review</Link></li> */}
+              <li><Link href="/#faq" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>FAQ</Link></li>
+              <li><button onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('openQuoteModal')); }} className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Get a Quote</button></li>
             </ul>
           </div>
 
@@ -63,9 +64,9 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-xs mb-6 text-black uppercase tracking-widest">Offerings</h3>
             <ul className="space-y-4 text-sm text-gray-600">
-              <li><Link href="/services" className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Services</Link></li>
-              <li><Link href="/network" className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Network</Link></li>
-              <li><Link href="/industry" className="min-h-[44px] hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Industry Solution</Link></li>
+              <li><Link href="/#services" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Services</Link></li>
+              <li><Link href="/#network" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Network</Link></li>
+              <li><Link href="/#industry" className="hover:text-black transition-colors flex items-center group"><span className="w-0 group-hover:w-2 h-[1px] bg-black mr-0 group-hover:mr-2 transition-all duration-300"></span>Industry Solution</Link></li>
             </ul>
           </div>
 

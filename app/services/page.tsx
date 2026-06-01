@@ -11,13 +11,13 @@ import { ArrowUpRight } from "lucide-react";
 import { AppleGlassNav } from "@/app/components/AppleGlassNav";
 import { TextReveal } from "@/app/components/TextReveal";
 
-import imageTruck from "@/public/images_frontend/loading_container_truck.webp";
-import imagePort from "@/public/images_frontend/1-landscape-from-bird-eye-view-for-laem-chabang-logistic-port-anek-suwannaphoom.webp";
-import imageWarehouse from "@/public/warehousing__Distribution_logistics_service.webp";
+import imageTruck from "@/public/transport.webp";
+import imagePort from "@/public/procurement2.webp";
+import imageWarehouse from "@/public/warehouse_3.webp";
 import imageAir from "@/public/air_freight_service.webp";
 import imageSea from "@/public/sea_freight_services.webp";
 import imageODC from "@/public/project___ODC_Cargo_services.webp";
-
+import warehouseimage from "@/public/heavy_duty_warehouse.webp";
 import bgDomestic from "@/public/bg_domestic.png";
 import bgGlobal from "@/public/bg_global.png";
 import bgFulfillment from "@/public/bg_fulfillment.png";
@@ -440,7 +440,7 @@ const STACK_SECTIONS: StackSectionData[] = [
         eyebrow: "Inventory Control",
         detail:
           "Our warehousing and distribution solutions are designed to support efficient inventory management and smooth supply chain operations. With scalable warehousing capabilities and structured storage systems, we help businesses improve operational efficiency, streamline dispatch activities, and reduce logistics-related costs",
-        imageSrc: imageWarehouse,
+        imageSrc: warehouseimage,
         features: ["Inventory management support", "Distribution and dispatch handling", "Scalable storage solutions", "Cost-efficient operations"],
       },
       {

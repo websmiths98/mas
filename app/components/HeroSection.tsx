@@ -168,7 +168,7 @@ export default function HeroSection() {
           </svg>
 
           {/* Downward Indication Arrows */}
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center justify-center text-black opacity-80 drop-shadow-md">
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center justify-center text-[#E5E4E2] opacity-80 drop-shadow-md">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="animate-bounce">
               <path d="m7 6 5 5 5-5" />
               <path d="m7 13 5 5 5-5" />

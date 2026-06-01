@@ -182,7 +182,7 @@ const INDUSTRIES = [
     },
     {
         name: "FMCG",
-        image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop",
+        image: "/fmcg.webp",
         description: "High-volume, rapid-turnaround distribution networks engineered for fast-moving consumer goods to optimize shelf availability",
         className: "md:col-span-1 md:row-span-1"
     },
@@ -194,7 +194,7 @@ const INDUSTRIES = [
     },
     {
         name: "Plant & Machinery",
-        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop",
+        image: "/plant&mmachinery.webp",
         description: "Expert handling of massive out-of-gauge (OOG) cargo, break-bulk, and heavy-lift industrial machinery for manufacturing plants, mining sites, and global construction projects",
         className: "md:col-span-3 md:row-span-1"
     }
@@ -582,11 +582,11 @@ export default function Industry({ isEmbedded = false }: IndustryProps) {
             </AnimatePresence>
 
             {/* ─── Proven Track Record Section ────────────────────────────────── */}
-            <div className="px-4 md:px-8 w-full max-w-[1600px] mx-auto pb-32 relative z-30">
+            {/* <div className="px-4 md:px-8 w-full max-w-[1600px] mx-auto pb-32 relative z-30">
                 <Reveal direction="up">
                     <MorphCarousel />
                 </Reveal>
-            </div>
+            </div> */}
 
         </main>
     );

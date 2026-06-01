@@ -442446,3 +442446,59 @@ Caused by:
     3: Failed to open SST file /home/raja/mas_logistics/mas/.next/dev/cache/turbopack/e0739832/00004761.sst
     4: No such file or directory (os error 2)
 [?25h
+
+> mas@0.1.0 start
+> next start --p 4589
+
+error: unknown option '--p'
+
+> mas@0.1.0 start
+> next start -p 4589
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:4589
+- Network:       http://165.101.250.39:4589
+✓ Ready in 175ms
+
+> mas@0.1.0 start
+> next start -p 4589
+
+⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::4589
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::4589)
+    at new Promise (<anonymous>) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 4589
+}
+Killed
+
+> mas@0.1.0 start
+> next start -p 4589
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:4589
+- Network:       http://165.101.250.39:4589
+✓ Ready in 229ms
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at ignore-listed frames
+
+> mas@0.1.0 start
+> next start -p 4589
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:4589
+- Network:       http://165.101.250.39:4589
+✓ Ready in 231ms
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at ignore-listed frames
+
+> mas@0.1.0 start
+> next start -p 4589
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:4589
+- Network:       http://165.101.250.39:4589
+✓ Ready in 199ms
