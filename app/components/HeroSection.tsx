@@ -17,10 +17,10 @@ export default function HeroSection() {
   const yText = useParallax(150);
 
   return (
-    <div className="relative bg-[#020617] h-screen w-full overflow-hidden flex items-center justify-center">
+    <div className="relative bg-[#020617] min-h-[100svh] w-full overflow-hidden flex items-center justify-center">
 
       {/* ── Video BG ── */}
-      <motion.div style={{ transform: `translateY(${yBg}px)` }} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
+      <motion.div style={{ transform: `translateY(${yBg}px)` }} className="absolute inset-0 z-0 h-[120%] -top-[10%] bg-[#020617]">
         <video
           autoPlay
           loop
@@ -68,7 +68,7 @@ export default function HeroSection() {
         </RevealWrapper>
 
         {/* ─ Primary Heading ─ */}
-        <h1 
+        <h1
           className="hero-h1 flex flex-wrap justify-center text-center text-[#fffff5]"
           style={{
             textShadow: "0 0 30px rgba(255, 255, 255, 0), 0 15px 50px rgba(200, 220, 255, 0), 0 -5px 25px rgba(255, 255, 255, 0.07)"
@@ -130,6 +130,52 @@ export default function HeroSection() {
           </div>
         </RevealWrapper>
       </motion.div>
+
+      {/* ── Scroll Indicator Custom Compass ── */}
+      <motion.a
+        href="/#services"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center justify-center cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
+        initial={{ y: 0 }}
+        animate={{ y: [0, 10, 0] }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+          {/* Rotating Compass Dial */}
+          <motion.div
+            className="absolute inset-0 w-full h-full text-[#E5E4E2]/50 p-[6px]"
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md">
+              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" />
+              <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+              <path d="M50 0 L50 12 M50 88 L50 100 M0 50 L12 50 M88 50 L100 50" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+          </motion.div>
+
+          {/* Compass Needle (Red Arrow Pointing Down) */}
+          <svg className="relative z-10 w-9 h-9 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" viewBox="0 0 24 24">
+            {/* Red Bottom Half (pointing down to services) */}
+            <path d="M12 23 L16.5 12 L7.5 12 Z" fill="#ef4444" stroke="#ef4444" strokeWidth="1" strokeLinejoin="round" />
+            {/* Silver/White Top Half */}
+            <path d="M12 1 L16.5 12 L7.5 12 Z" fill="#E5E4E2" stroke="#E5E4E2" strokeWidth="1" strokeLinejoin="round" opacity="0.9" />
+            {/* Center Pin */}
+            <circle cx="12" cy="12" r="2.5" fill="#0f172a" />
+          </svg>
+
+          {/* Downward Indication Arrows */}
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center justify-center text-black opacity-80 drop-shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="animate-bounce">
+              <path d="m7 6 5 5 5-5" />
+              <path d="m7 13 5 5 5-5" />
+            </svg>
+          </div>
+        </div>
+      </motion.a>
 
     </div>
   );

@@ -455,3 +455,9 @@ html.lenis, html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
+@keyframes pendulum {
+  0% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}

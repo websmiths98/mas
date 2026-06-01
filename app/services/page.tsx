@@ -223,7 +223,7 @@ function StackCard({ section, layer }: { section: StackSectionData; layer: numbe
                       key={feature}
                       className={`rounded-full px-3 py-2 text-[11px] font-bold ring-1 ${section.featureClasses ?? "bg-slate-50 text-slate-600 ring-slate-100"}`}
                     >
-                      <TextReveal>{feature}</TextReveal>
+                      {feature}
                     </span>
                   ))}
                 </div>

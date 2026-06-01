@@ -98,7 +98,7 @@ export const AppleGlassNav = ({ items, className, theme = "light", logo }: NavPr
                                 href={item.href}
                                 onClick={() => setActive(item.name)}
                                 className={cn(
-                                    "relative px-1.5 sm:px-5 py-2 sm:py-2.5 text-[10px] sm:text-[13px] font-semibold tracking-tight transition-all duration-300 rounded-[12px] sm:rounded-[16px] whitespace-nowrap",
+                                    "relative px-1.5 sm:px-5 py-2 sm:py-2.5 text-[10px] sm:text-[13px] font-semibold tracking-tight transition-all duration-300 rounded-[12px] sm:rounded-[16px] whitespace-nowrap min-h-[44px] flex items-center justify-center",
                                     isActive
                                         ? (isLight ? "text-white" : "text-black")
                                         : isLight
